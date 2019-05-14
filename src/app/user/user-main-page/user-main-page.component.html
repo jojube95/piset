@@ -1,0 +1,49 @@
+<div *ngIf="loading">
+</div>
+<div *ngIf="!loading">
+  <nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">
+      Emepe
+    </a>
+
+    <button class="navbar-toggler" type="button">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Ofertas</a>
+        </li>
+
+        <li class="nav-item" routerLinkActive="active">
+          <a routerLink="restaurants/list" class="nav-link">Restaurantes</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pedidos</a>
+        </li>
+
+      </ul>
+
+      <ul class="navbar-nav mr-auto">
+        <p class="nav navbar-text">Crédito:</p>
+      </ul>
+
+      <div ngbDropdown placement="bottom-right" class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Cuenta</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+          <button class="dropdown-item" routerLink="account" style="cursor: pointer">Información usuario</button>
+          <button class="dropdown-item" routerLink="accountSettings/profile" style="cursor: pointer">Ajustes</button>
+          <button class="dropdown-item" (click)="logOut()" style="cursor: pointer">LogOut</button>
+        </div>
+      </div>
+
+    </div>
+
+  </nav>
+
+  <router-outlet></router-outlet>
+
+</div>

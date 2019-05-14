@@ -17,24 +17,11 @@ export class SignUpComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSignup(form: NgForm){
+  onSignup(form: NgForm) {
     const user = new UserModel(form.value.username, form.value.email,
       form.value.password, form.value.name, form.value.secondName);
 
     this.authService.signupUser(user);
-  }
-
-  onSelectFile(event) { // called each time file input changes
-    if (event.target.files && event.target.files[0]) {
-      var reader = new FileReader();
-
-      reader.onload = (event:any) => {
-        this.url = event.target.result;
-
-      }
-
-      reader.readAsDataURL(event.target.files[0]);
-    }
   }
 
 }

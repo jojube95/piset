@@ -11,6 +11,7 @@ import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { UserMainPageComponent } from './user/user-main-page/user-main-page.component';
 
 export const firebaseCredentials = {
   apiKey: ' AIzaSyCZq6n9XqQE6_rW-T-fXX8aEUTQTnu8qsk',
@@ -25,7 +26,8 @@ export const firebaseCredentials = {
     AppComponent,
     SignInComponent,
     CompareValidatorDirective,
-    SignUpComponent
+    SignUpComponent,
+    UserMainPageComponent
   ],
   imports: [
     BrowserModule,

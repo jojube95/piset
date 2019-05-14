@@ -6,21 +6,6 @@
     <form (ngSubmit)="onSignup(f)" #f="ngForm">
 
       <div class="form-group">
-
-        <label>Profile Picture</label>
-        <br>
-        <img class="img-thumbnail" [src]="url" height="200" width="200"> <br/>
-        <input type='file' (change)="onSelectFile($event)">
-      </div>
-
-
-      <div class="form-group">
-        <label>Username</label>
-        <input type="username" id="username" name="username" ngModel #username="ngModel" class="form-control" required minlength="8">
-        <span class="help-block" *ngIf="!username.valid && username.touched">Username must have more than 8 characters!</span>
-      </div>
-
-      <div class="form-group">
         <label for="email">Mail</label>
         <input type="email" id="email" name="email" #email="ngModel" ngModel class="form-control" required email>
         <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid email!</span>
