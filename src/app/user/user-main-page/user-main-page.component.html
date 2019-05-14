@@ -1,9 +1,8 @@
-<div *ngIf="loading">
-</div>
-<div *ngIf="!loading">
+
+<div>
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <a class="navbar-brand" href="#">
-      Emepe
+      Piset
     </a>
 
     <button class="navbar-toggler" type="button">
@@ -14,22 +13,29 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link" href="#">Ofertas</a>
+          <a routerLink="tasks" class="nav-link" href="#">Tareas</a>
         </li>
 
         <li class="nav-item" routerLinkActive="active">
-          <a routerLink="restaurants/list" class="nav-link">Restaurantes</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="#">Pedidos</a>
+          <a routerLink="history" class="nav-link">Historial</a>
         </li>
 
       </ul>
 
       <ul class="navbar-nav mr-auto">
-        <p class="nav navbar-text">Crédito:</p>
+        <p class="nav navbar-text">Multa mensual:</p>
       </ul>
+
+      <div ngbDropdown placement="bottom-right" class="d-inline-block" [hidden]="!userLogged.admin">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Administración</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+          <button class="dropdown-item" routerLink="admin/taskManagement" style="cursor: pointer">Gestión tareas</button>
+          <button class="dropdown-item" routerLink="admin/userManagement" style="cursor: pointer">Gestión usuarios</button>
+          <button class="dropdown-item" routerLink="admin/penaltyManagement" style="cursor: pointer">Gestión multas</button>
+          <button class="dropdown-item" routerLink="admin/groupManagement" style="cursor: pointer">Gestión grupos</button>
+
+        </div>
+      </div>
 
       <div ngbDropdown placement="bottom-right" class="d-inline-block">
         <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Cuenta</button>

@@ -33,6 +33,8 @@ export class DataStorageService {
       )
     );
 
+
+
     // this.restaurantsRef = this.af.list('restaurants');
     // this.restaurantsObservable = this.restaurantsRef.snapshotChanges().pipe(
     //   map(changes =>
@@ -57,6 +59,10 @@ export class DataStorageService {
     // this.restaurantsObservable.subscribe( restaurants => {
     //   this.restaurantList = restaurants as Restaurant[];
     // });
+  }
+
+  getUsersByMail(mail: string) {
+    return this.usersRef = this.af.list('/users', ref => ref.equalTo(mail));
   }
 
   updateUserProfile(user: UserModel) {

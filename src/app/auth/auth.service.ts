@@ -51,7 +51,8 @@ export class AuthService {
             mail: userObj.mail,
             name: userObj.name,
             password: userObj.password,
-            secondName: userObj.secondName
+            secondName: userObj.secondName,
+            admin: userObj.admin
           });
           this.signinUser(userObj.mail, userObj.password);
         }

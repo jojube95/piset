@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from 'firebase';
 import {UserModel} from '../../shared/userModel';
-import {DateUtilities} from '../../utilities/date-utilities';
 import {AuthService} from '../../auth/auth.service';
 import {DataStorageService} from '../../shared/data-storage.service';
+
 
 @Component({
   selector: 'app-user-main-page',
@@ -20,9 +20,9 @@ export class UserMainPageComponent implements OnInit {
   ngOnInit() {
     this.userAuth = this.authService.getCurrentUser();
 
-    this.dataStorageService.getObservableUsers().subscribe(users => {
-      this.userLogged = users.find(i => i.uid === this.userAuth.uid);
-      this.loading = false;
+    this.dataStorageService.getObservableUsers().subscribe(async users => {
+      this.userLogged = await users.find(i => i.uid === this.userAuth.uid);
+
     });
   }
 

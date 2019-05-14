@@ -19,7 +19,7 @@ export class SignUpComponent implements OnInit {
 
   onSignup(form: NgForm) {
     const user = new UserModel(form.value.username, form.value.email,
-      form.value.password, form.value.name, form.value.secondName);
+      form.value.password, form.value.name, form.value.secondName, false);
 
     this.authService.signupUser(user);
   }
