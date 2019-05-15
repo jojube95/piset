@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GroupStorageService} from '../../../../dao/group-storage.service';
-import {AngularFireList} from 'angularfire2/database';
+import {NgForm} from '@angular/forms';
+import {Group} from '../../../../model/group';
+import {Observable} from 'rxjs';
 
 @Component({
   selector: 'app-group-management',
@@ -8,12 +10,38 @@ import {AngularFireList} from 'angularfire2/database';
   styleUrls: ['./group-management.component.css']
 })
 export class GroupManagementComponent implements OnInit {
-  groupsList: AngularFireList<any>;
+  groupsList: Observable<any>;
+  currentGroup: Group = new Group('', []);
+  add: boolean = false;
 
   constructor(private groupStorage: GroupStorageService) { }
 
   ngOnInit() {
-    this.groupsList = this.groupStorage.getGroupsFireList();
+    this.groupsList = this.groupStorage.getObservableGroups();
+  }
+
+  onClickAdd() {
+    this.add = true;
+  }
+
+  onClickCancel(){
+    this.add = false;
+  }
+
+  onAddGroup(form: NgForm){
+    let group = new Group(form.value.name, []);
+
+    this.groupStorage.createGroup(group);
+
+  }
+
+  onClickDelete(group: Group){
+    console.log(group);
+    this.groupStorage.deleteGroup(group);
+  }
+
+  onClickGroup(group: Group){
+    this.currentGroup = group;
   }
 
 }

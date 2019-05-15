@@ -1,37 +1,62 @@
 <div class="container">
-  <p>
-    group-management works!
-  </p>
+  <div class="row">
 
-  <ul>
-    <li *ngFor="let group of (groupsList | async)">
-      {{ groupsList.toString() }}
-    </li>
-  </ul>
+    <div class="col-sm-6">
+      <h1 class="h1">
+        Grupos
+      </h1>
 
-</div>
+      <ul class="list-group">
+        <a class="list-group-item" style="cursor: pointer" *ngFor="let group of (groupsList | async)" (click)="onClickGroup(group)">
+          <div class="row">
+            <div class="col-md-10">
+              {{ group.name }}
+            </div>
 
-<div class="container">
-  <button type="button" class="btn btn-primary">Add</button>
-  <button type="button" class="btn btn-danger">Remove</button>
-</div>
+            <div class="col-md-2">
+              <button type="button" class="close" data-dismiss="alert" (click)="onClickDelete(group)">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
 
-<div class="container">
-  <h1>Add group</h1>
-  <hr>
-  <form (ngSubmit)="onSignup(f)" #f="ngForm">
-    <div class="form-group">
-      <label>Name</label>
-      <input type="name" id="name" name="name" #name="ngModel" ngModel class="form-control" required>
-      <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</span>
+          </div>
+        </a>
+
+      </ul>
+
+      <button type="button" class="btn btn-primary" (click)="onClickAdd()">Añadir</button>
+      <button type="button" class="btn btn-danger">Eliminar</button>
+
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Register</button>
-    <a routerLink="/signIn"><button type="button" class="btn" routerLinkActive="active">Back</button></a>
-  </form>
-</div>
 
-<div class="container">
-  <h1>Group users list</h1>
+    <div *ngIf="add" class="col-sm-6">
+      <h1>Añadir grupo</h1>
+      <hr>
+      <form (ngSubmit)="onAddGroup(f)" #f="ngForm">
+        <div class="form-group">
+          <label>Name</label>
+          <input type="name" id="name" name="name" #name="ngModel" ngModel class="form-control" required>
+          <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</span>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Añadir</button>
+        <button type="button" class="btn" (click)="onClickCancel()">Atrás</button>
+
+      </form>
+    </div>
+
+    <div *ngIf="!add" class="col-sm-6">
+      <h1>Usuarios</h1>
+      <ul class="list-group">
+        <li class="list-group-item" style="cursor: pointer" *ngFor="let user of (currentGroup.users)">
+          {{ user.name }}
+
+        </li>
+
+      </ul>
+
+    </div>
+  </div>
 
 </div>

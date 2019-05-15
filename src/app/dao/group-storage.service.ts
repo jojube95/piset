@@ -7,6 +7,7 @@ import {map} from 'rxjs/operators';
 import { UserStorageService} from './user-storage.service';
 import {Group} from '../model/group';
 import {UserModel} from '../model/userModel';
+import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -38,15 +39,21 @@ export class GroupStorageService {
   }
 
   updateGroup(group: Group){
-    this.af.object('groups/' + group.uid).update(group);
+    this.af.object('groups/' + group.key).update(group);
   }
 
-  createGroup(group: Group){
-    this.groupsRef.push(group);
+  createGroup(groupObj: Group){
+    this.groupsRef.push(groupObj).then(group => {
+      firebase.database().ref().child('groups').child(group.key).set({
+        name: groupObj.name,
+        users: [new UserModel('test@test.com', 'testtest', 'testname', 'testsecond', false),
+                new UserModel('test2@test.com', 'testtest2', 'testname2', 'testsecond2', false)]
+      });
+    }).catch(error => console.log(error));
   }
 
   deleteGroup(group: Group){
-    this.af.object('groups' + group.uid).remove();
+    this.af.object('groups/' + group.key).remove();
   }
 
 
