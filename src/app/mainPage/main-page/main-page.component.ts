@@ -7,10 +7,10 @@ import {DataStorageService} from '../../shared/data-storage.service';
 
 @Component({
   selector: 'app-user-main-page',
-  templateUrl: './user-main-page.component.html',
-  styleUrls: ['./user-main-page.component.css']
+  templateUrl: './main-page.component.html',
+  styleUrls: ['./main-page.component.css']
 })
-export class UserMainPageComponent implements OnInit {
+export class MainPageComponent implements OnInit {
   loading = true;
   userAuth: User;
   userLogged: UserModel;
