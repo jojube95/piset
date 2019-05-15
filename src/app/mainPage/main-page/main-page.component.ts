@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from 'firebase';
-import {UserModel} from '../../shared/userModel';
+import {UserModel} from '../../model/userModel';
 import {AuthService} from '../../auth/auth.service';
-import {DataStorageService} from '../../shared/data-storage.service';
+import {UserStorageService} from '../../dao/user-storage.service';
 
 
 @Component({
@@ -15,7 +15,7 @@ export class MainPageComponent implements OnInit {
   userAuth: User;
   userLogged: UserModel;
 
-  constructor(private authService: AuthService, private dataStorageService: DataStorageService) { }
+  constructor(private authService: AuthService, private dataStorageService: UserStorageService) { }
 
   ngOnInit() {
     this.userAuth = this.authService.getCurrentUser();

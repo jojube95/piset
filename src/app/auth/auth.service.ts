@@ -3,9 +3,9 @@ import * as firebase from 'firebase';
 import {AngularFireDatabase} from 'angularfire2/database';
 import {AngularFireAuth} from 'angularfire2/auth';
 import {Router} from '@angular/router';
-import {UserModel} from '../shared/userModel';
+import {UserModel} from '../model/userModel';
 import {AngularFireModule} from 'angularfire2';
-import {DataStorageService} from '../shared/data-storage.service';
+import {UserStorageService} from '../dao/user-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +14,7 @@ export class AuthService {
   token: string;
 
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private router: Router,
-    private af: AngularFireModule, private dataStorageService: DataStorageService) {
+    private af: AngularFireModule, private dataStorageService: UserStorageService) {
   }
 
   signOut() {

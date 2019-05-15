@@ -1,3 +1,37 @@
-<p>
-  group-management works!
-</p>
+<div class="container">
+  <p>
+    group-management works!
+  </p>
+
+  <ul>
+    <li *ngFor="let group of (groupsList | async)">
+      {{ groupsList.toString() }}
+    </li>
+  </ul>
+
+</div>
+
+<div class="container">
+  <button type="button" class="btn btn-primary">Add</button>
+  <button type="button" class="btn btn-danger">Remove</button>
+</div>
+
+<div class="container">
+  <h1>Add group</h1>
+  <hr>
+  <form (ngSubmit)="onSignup(f)" #f="ngForm">
+    <div class="form-group">
+      <label>Name</label>
+      <input type="name" id="name" name="name" #name="ngModel" ngModel class="form-control" required>
+      <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</span>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Register</button>
+    <a routerLink="/signIn"><button type="button" class="btn" routerLinkActive="active">Back</button></a>
+  </form>
+</div>
+
+<div class="container">
+  <h1>Group users list</h1>
+
+</div>
