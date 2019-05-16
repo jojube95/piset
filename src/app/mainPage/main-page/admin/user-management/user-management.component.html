@@ -1,10 +1,59 @@
-<div class="container">
-
-  <div ngbDropdown class="d-inline-block">
-    <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{currentGroup.name}}</button>
-    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-      <button class="dropdown-item" *ngFor="let group of (groupsList | async)" (click)="onGroupSelect(group)">{{group.name}}</button>
+<div *ngIf="!loadingGroup && !loadingUsers" class="container">
+  <div class="row">
+    <div class="col-sm-auto">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{currentGroup.name}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button class="dropdown-item" *ngFor="let group of (groupsList | async)" (click)="onGroupSelect(group)">{{group.name}}</button>
+        </div>
+      </div>
     </div>
+
   </div>
 
+  <div class="row">
+    <div class="col-sm-auto">
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col">Nombre</th>
+          <th scope="col">Email</th>
+          <th scope="col">Multa mes</th>
+          <th scope="col">Eliminar</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let user of currentGroup.users; index as i">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ user.name }}</td>
+          <td>{{ user.mail }}</td>
+          <td>Multa mes</td>
+          <td>x</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+
+  <!--DROPDOWN DE USUARIOS SIN GRUPO-->
+  <div class="row">
+    <div ngbDropdown class="d-inline-block col-sm-auto">
+      <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>{{currentUser.name}}</button>
+      <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+        <button class="dropdown-item" *ngFor="let user of (usersWithoutGroup | async)" (click)="onUserSelect(user)">{{user.name}}</button>
+      </div>
+    </div>
+
+    <div class="col-sm-auto">
+      <button class="btn btn-primary" (click)="onAddUser()">Añadir</button>
+    </div>
+
+  </div>
+
+</div>
+
+<div *ngIf="loadingGroup && loadingUsers">
+  <app-loading-spinner></app-loading-spinner>
 </div>

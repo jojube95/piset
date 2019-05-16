@@ -56,5 +56,17 @@ export class GroupStorageService {
     this.af.object('groups/' + group.key).remove();
   }
 
+  addUserToGroup(user: UserModel, group: Group){
+
+    firebase.database().ref().child('groups/' + group.key + '/users').child(user.uid).set({
+      admin: user.admin,
+      mail: user.mail,
+      name: user.name,
+      password: user.password,
+      secondName : user.secondName,
+      uid: user.uid
+    });
+  }
+
 
 }

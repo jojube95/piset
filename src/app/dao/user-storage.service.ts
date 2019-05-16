@@ -37,6 +37,11 @@ export class UserStorageService {
     return this.usersObservable;
   }
 
+  // getObservableUsersWithoutGroup(){
+  //   return this.usersRef = this.af.list('/users/groups', ref => ref.where);
+  //   this.af.col$('notes', ref => ref.where('user', '==', 'Jeff'));
+  // }
+
   public getCurrentUser() {
     return this.afAuth.auth.currentUser;
   }
