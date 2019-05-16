@@ -1,4 +1,4 @@
-<div class="container">
+<div *ngIf="!loading" class="container">
   <div class="row">
 
     <div class="col-sm-6">
@@ -59,4 +59,8 @@
     </div>
   </div>
 
+</div>
+
+<div *ngIf="loading">
+  <app-loading-spinner></app-loading-spinner>
 </div>

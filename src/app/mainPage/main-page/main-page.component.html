@@ -1,5 +1,5 @@
 
-<div>
+<div *ngIf="!loading">
   <nav class="navbar navbar-expand navbar-dark bg-dark">
     <a class="navbar-brand" routerLink="tasks">
       Piset
@@ -52,4 +52,8 @@
 
   <router-outlet></router-outlet>
 
+</div>
+
+<div *ngIf="loading">
+  <app-loading-spinner></app-loading-spinner>
 </div>

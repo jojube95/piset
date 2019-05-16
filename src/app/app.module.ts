@@ -20,6 +20,7 @@ import { UserInfoComponent } from './mainPage/main-page/user/user-info/user-info
 import { UserSettingsComponent } from './mainPage/main-page/user/user-settings/user-settings.component';
 import { TasksComponent } from './mainPage/main-page/tasks/tasks.component';
 import { HistoryComponent } from './mainPage/main-page/history/history.component';
+import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 
 export const firebaseCredentials = {
   apiKey: ' AIzaSyCZq6n9XqQE6_rW-T-fXX8aEUTQTnu8qsk',
@@ -43,7 +44,8 @@ export const firebaseCredentials = {
     UserInfoComponent,
     UserSettingsComponent,
     TasksComponent,
-    HistoryComponent
+    HistoryComponent,
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,

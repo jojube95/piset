@@ -22,6 +22,7 @@ export class MainPageComponent implements OnInit {
 
     this.dataStorageService.getObservableUsers().subscribe(async users => {
       this.userLogged = await users.find(i => i.uid === this.userAuth.uid);
+      this.loading = await false;
 
     });
   }

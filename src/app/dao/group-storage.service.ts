@@ -13,7 +13,7 @@ import * as firebase from 'firebase';
   providedIn: 'root'
 })
 export class GroupStorageService {
-  groupsRef: AngularFireList<any>;
+  groupsRef: AngularFireList<Group>;
 
   groupsObservable: Observable<Group[]>;
 

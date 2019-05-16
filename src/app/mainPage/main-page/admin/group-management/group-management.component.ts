@@ -10,13 +10,18 @@ import {Observable} from 'rxjs';
   styleUrls: ['./group-management.component.css']
 })
 export class GroupManagementComponent implements OnInit {
-  groupsList: Observable<any>;
+  groupsList: Observable<Group[]>;
   currentGroup: Group = new Group('', []);
   add: boolean = false;
+  loading: boolean = true;
 
   constructor(private groupStorage: GroupStorageService) { }
 
   ngOnInit() {
+    this.groupStorage.getObservableGroups().subscribe(async () => {
+      this.loading = await false;
+
+    });
     this.groupsList = this.groupStorage.getObservableGroups();
   }
 
