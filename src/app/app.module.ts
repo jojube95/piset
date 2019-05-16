@@ -10,7 +10,7 @@ import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
-import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { MainPageComponent } from './mainPage/main-page/main-page.component';
 import { GroupManagementComponent } from './mainPage/main-page/admin/group-management/group-management.component';
 import { TaskManagementComponent } from './mainPage/main-page/admin/task-management/task-management.component';
@@ -55,7 +55,8 @@ export const firebaseCredentials = {
     AngularFireModule.initializeApp(firebaseCredentials),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    NgbModule
+    NgbModule.forRoot(),
+    NgbDropdownModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]
