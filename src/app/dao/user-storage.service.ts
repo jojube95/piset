@@ -4,6 +4,7 @@ import {Observable} from 'rxjs';
 import {UserModel} from '../model/userModel';
 import {map} from 'rxjs/operators';
 import {AngularFireAuth} from 'angularfire2/auth';
+import { Group } from '../model/group';
 
 @Injectable({
   providedIn: 'root'
@@ -45,5 +46,12 @@ export class UserStorageService {
   public getCurrentUser() {
     return this.afAuth.auth.currentUser;
   }
+
+  public deleteUser(user: UserModel, group: Group){
+    this.af.object('users/' + user.uid).remove();
+    this.af.object('groups/' + group.key + '/users/' + user.uid).remove();
+  }
+
+
 
 }

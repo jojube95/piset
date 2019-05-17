@@ -17,6 +17,7 @@ export class UserManagementComponent implements OnInit {
   currentUser: UserModel = new UserModel('', '', 'Selecciona usuario', '', false);
   loadingGroup: boolean = true;
   loadingUsers: boolean = true;
+  currentUsers: UserModel[] = [];
 
   constructor(private groupStorage: GroupStorageService, private userStorage: UserStorageService) { }
 
@@ -34,7 +35,11 @@ export class UserManagementComponent implements OnInit {
   }
 
   onGroupSelect(group: Group){
+    this.currentUsers = [];
     this.currentGroup = group;
+    for(let key in this.currentGroup.users){
+      this.currentUsers.push(this.currentGroup.users[key]);
+    }
   }
 
   onUserSelect(user: UserModel){
@@ -43,6 +48,10 @@ export class UserManagementComponent implements OnInit {
 
   onAddUser(){
     this.groupStorage.addUserToGroup(this.currentUser, this.currentGroup);
+  }
+
+  onClickDelete(user: UserModel){
+    this.userStorage.deleteUser(user, this.currentGroup);
   }
 
 }

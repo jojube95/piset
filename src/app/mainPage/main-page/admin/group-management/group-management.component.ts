@@ -3,6 +3,7 @@ import { GroupStorageService} from '../../../../dao/group-storage.service';
 import {NgForm} from '@angular/forms';
 import {Group} from '../../../../model/group';
 import {Observable} from 'rxjs';
+import { UserModel } from 'src/app/model/userModel';
 
 @Component({
   selector: 'app-group-management',
@@ -14,15 +15,18 @@ export class GroupManagementComponent implements OnInit {
   currentGroup: Group = new Group('', []);
   add: boolean = false;
   loading: boolean = true;
+  currentUsers: UserModel[] = [];
 
   constructor(private groupStorage: GroupStorageService) { }
 
   ngOnInit() {
     this.groupStorage.getObservableGroups().subscribe(async () => {
+      this.groupsList = await this.groupStorage.getObservableGroups();
       this.loading = await false;
+      
 
     });
-    this.groupsList = this.groupStorage.getObservableGroups();
+    
   }
 
   onClickAdd() {
@@ -46,7 +50,14 @@ export class GroupManagementComponent implements OnInit {
   }
 
   onClickGroup(group: Group){
+    this.currentUsers = [];
     this.currentGroup = group;
+    for(let key in this.currentGroup.users){
+      this.currentUsers.push(this.currentGroup.users[key]);
+    }
+    
+    
+    
   }
 
 }
