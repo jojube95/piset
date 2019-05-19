@@ -1,3 +1,106 @@
-<p>
-  task-management works!
-</p>
+<div *ngIf="!loadingGroup" class="container">
+  <div class="container">
+    <div class="row">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{currentGroup.name}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button class="dropdown-item" *ngFor="let group of (groupsList | async)" (click)="onGroupSelect(group)">{{group.name}}</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-auto">
+          <ul class="list-group">
+            <a class="list-group-item" style="cursor: pointer" *ngFor="let task of (currentTasks | async)" (click)="onClickTask(task)"
+                [ngClass]="{'active': currentTask == task}">
+              <div class="row">
+                <div class="col-md-10">
+                  {{ task.name }}
+                </div>
+    
+                <div class="col-md-2">
+                  <button type="button" class="close" data-dismiss="alert" (click)="onClickDeleteTask(task)">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </div>
+    
+              </div>
+            </a>
+    
+          </ul>
+        <button type="button" class="btn btn-primary" (click)="onClickAdd()">Añadir</button>
+
+      </div>
+
+      <div *ngIf="add" class="col-sm-auto">
+        <form (ngSubmit)="onAddTask(f)" #f="ngForm">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="name" id="name" name="name" #name="ngModel" ngModel class="form-control" required>
+            <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</span>
+          </div>
+
+          <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Añadir</button>
+          <button type="button" class="btn" (click)="onClickCancel()">Atrás</button>
+
+        </form>
+      </div>
+
+      <div *ngIf="!add" class="col-sm-auto">
+        <div class="row">
+          <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Descripcion</th>
+                <th scope="col">Multa</th>
+                <th scope="col">Eliminar</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let subtask of (currentrSubtasks | async); index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ subtask.name }}</td>
+                <td>{{ subtask.description }}</td>
+                <td>{{ subtask.penalty}}</td>
+                <td>
+                  <button type="button" class="close" data-dismiss="alert" (click)="onClickDeleteSubtask(subtask)">
+                    <span aria-hidden="true">×</span>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          <button type="button" class="btn btn-primary" (click)="onClickAddSubtask()">Añadir</button>
+        </div>
+
+        <div *ngIf="subtaskAdd" class="row">
+          <form (ngSubmit)="onAddSubTask(f)" #f="ngForm">
+            <div class="form-group">
+              <label>Name</label>
+              <input type="name" id="name" name="name" #name="ngModel" ngModel class="form-control" required>
+              <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</span>
+              <label>Description</label>
+              <input type="description" id="description" name="description" #description="ngModel" ngModel class="form-control" required>
+              <span class="help-block" *ngIf="!description.valid && description.touched">Please enter a description!</span>
+              <label>Penalty</label>
+              <input type="penalty" id="penalty" name="penalty" #penalty="ngModel" ngModel class="form-control" required>
+              <span class="help-block" *ngIf="!penalty.valid && penalty.touched">Please enter a penalty!</span>
+            </div>
+  
+            <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Añadir</button>
+            <button type="button" class="btn" (click)="onClickCancelSubtask()">Atrás</button>
+  
+          </form>
+        </div>
+        
+      </div>
+    
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loadingGroup">
+  <app-loading-spinner></app-loading-spinner>
+</div>
