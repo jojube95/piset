@@ -22,25 +22,7 @@ export class AuthService {
       () => this.router.navigate([''])
     );
   }
-
-  signIn(email: string, password: string) {
-    let userLogged: UserModel;
-    let logged = false;
-
-    this.userStorage.getObservableUsers().subscribe(users => {
-      userLogged = users.find(i => i.mail === email);
-      logged = true;
-      if (userLogged) {
-
-        this.signinUser(email, password);
-
-      }
-
-    });
-
-
-  }
-
+  
  signupUser(userObj: UserModel) {
   firebase.auth().createUserWithEmailAndPassword(userObj.mail, userObj.password)
     .then(
@@ -68,7 +50,7 @@ export class AuthService {
 
       )
       .catch(
-        error => alert(error.message + '\n Test mail: test@test.com \n Test pass: testtest')
+        error => alert(error.code)
       );
 
   }
