@@ -51,7 +51,7 @@ export class GroupManagementComponent implements OnInit {
   }
 
   onClickGroup(group: Group){
-    this.currentUsers = this.groupStorage.getUsersFromGroup(group).valueChanges();
+    this.currentUsers = this.groupStorage.getUsersFromGroup(group);
        
   }
 

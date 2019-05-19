@@ -5,36 +5,33 @@ import {UserModel} from '../model/userModel';
 import {map} from 'rxjs/operators';
 import {AngularFireAuth} from 'angularfire2/auth';
 import { Group } from '../model/group';
-import { User } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserStorageService {
-  usersRef: AngularFireList<any>;
-
-  usersObservable: Observable<UserModel[]>;
 
   constructor(private af: AngularFireDatabase, private afAuth: AngularFireAuth) {
-    this.usersRef = this.af.list('users');
-    this.usersObservable = this.usersRef.snapshotChanges().pipe(
+  }
+
+  getUsersByMail(mail: string) {
+    return this.af.list('/users', ref => ref.equalTo(mail)).snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
       )
     );
-
-  }
-
-  getUsersByMail(mail: string) {
-    return this.usersRef = this.af.list('/users', ref => ref.equalTo(mail));
   }
 
   updateUserProfile(user: UserModel) {
     this.af.object('users/' + user.key).update(user);
   }
 
-  getObservableUsers() {
-    return this.usersObservable;
+  getObservableUsers(): Observable<UserModel[]> {
+    return <Observable<UserModel[]>> this.af.list('users').snapshotChanges().pipe(
+      map(changes =>
+        changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
+      )
+    );
   }
 
 

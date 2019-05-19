@@ -36,7 +36,7 @@ export class UserManagementComponent implements OnInit {
 
   onGroupSelect(group: Group){
     this.currentGroup = group;
-    this.currentUsers = this.groupStorage.getUsersFromGroup(group).valueChanges();
+    this.currentUsers = this.groupStorage.getUsersFromGroup(group);
   }
 
   onUserSelect(user: UserModel){
