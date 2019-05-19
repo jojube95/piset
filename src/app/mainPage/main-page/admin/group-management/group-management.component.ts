@@ -13,6 +13,7 @@ import { AngularFireList } from 'angularfire2/database';
 })
 export class GroupManagementComponent implements OnInit {
   groupsList: Observable<Group[]>;
+
   currentGroup: Group = new Group('', []);
   add: boolean = false;
   loading: boolean = true;
@@ -21,8 +22,8 @@ export class GroupManagementComponent implements OnInit {
   constructor(private groupStorage: GroupStorageService) { }
 
   ngOnInit() {
-    this.groupStorage.getObservableGroups().subscribe(async () => {
-      this.groupsList = await this.groupStorage.getObservableGroups();
+    this.groupStorage.getGroups().subscribe(async () => {
+      this.groupsList = await this.groupStorage.getGroups();
       this.loading = await false;
       
 

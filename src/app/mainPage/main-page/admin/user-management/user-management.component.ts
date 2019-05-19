@@ -22,8 +22,8 @@ export class UserManagementComponent implements OnInit {
   constructor(private groupStorage: GroupStorageService, private userStorage: UserStorageService) { }
 
   ngOnInit() {
-    this.groupStorage.getObservableGroups().subscribe(async () => {
-      this.groupsList =  await this.groupStorage.getObservableGroups();
+    this.groupStorage.getGroups().subscribe(async () => {
+      this.groupsList =  await this.groupStorage.getGroups();
       this.loadingGroup = await false;
     });
     this.userStorage.getObservableUsers().subscribe(async () => {

@@ -25,6 +25,7 @@ export class GroupStorageService {
   getCurrentUserGroup(){
     return null;
   }
+ 
 
   updateGroup(group: Group){
     this.af.object('groups/' + group.key).update(group);
