@@ -1,7 +1,7 @@
 
-<div>
+<div *ngIf="!loading">
   <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" routerLink="tasks">
       Piset
     </a>
 
@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a routerLink="tasks" class="nav-link" href="#">Tareas</a>
+          <a routerLink="tasks" class="nav-link">Tareas</a>
         </li>
 
         <li class="nav-item" routerLinkActive="active">
@@ -40,8 +40,8 @@
       <div ngbDropdown placement="bottom-right" class="d-inline-block">
         <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>Cuenta</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
-          <button class="dropdown-item" routerLink="account" style="cursor: pointer">Información usuario</button>
-          <button class="dropdown-item" routerLink="accountSettings/profile" style="cursor: pointer">Ajustes</button>
+          <button class="dropdown-item" routerLink="user/info" style="cursor: pointer">Información usuario</button>
+          <button class="dropdown-item" routerLink="user/settings" style="cursor: pointer">Ajustes</button>
           <button class="dropdown-item" (click)="logOut()" style="cursor: pointer">LogOut</button>
         </div>
       </div>
@@ -52,4 +52,8 @@
 
   <router-outlet></router-outlet>
 
+</div>
+
+<div *ngIf="loading">
+  <app-loading-spinner></app-loading-spinner>
 </div>
