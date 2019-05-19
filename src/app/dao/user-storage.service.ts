@@ -14,8 +14,8 @@ export class UserStorageService {
   constructor(private af: AngularFireDatabase, private afAuth: AngularFireAuth) {
   }
 
-  getUsersByMail(mail: string) {
-    return this.af.list('/users', ref => ref.equalTo(mail)).snapshotChanges().pipe(
+  getUsersByMail(mail: string): Observable<UserModel[]>{
+    return <Observable<UserModel[]>> this.af.list('/users', ref => ref.equalTo(mail)).snapshotChanges().pipe(
       map(changes =>
         changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
       )

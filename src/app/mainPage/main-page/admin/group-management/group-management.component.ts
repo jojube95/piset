@@ -22,8 +22,8 @@ export class GroupManagementComponent implements OnInit {
   constructor(private groupStorage: GroupStorageService) { }
 
   ngOnInit() {
-    this.groupStorage.getGroups().subscribe(async () => {
-      this.groupsList = await this.groupStorage.getGroups();
+    this.groupStorage.getObservableGroups().subscribe(async () => {
+      this.groupsList = await this.groupStorage.getObservableGroups();
       this.loading = await false;
       
 

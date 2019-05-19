@@ -20,12 +20,7 @@ export class GroupStorageService {
         changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
       )
     );
-  }
-
-  getCurrentUserGroup(){
-    return null;
-  }
- 
+  } 
 
   updateGroup(group: Group){
     this.af.object('groups/' + group.key).update(group);
