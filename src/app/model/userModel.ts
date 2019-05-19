@@ -1,10 +1,10 @@
 export class UserModel {
-  uid: string;
   mail: string;
   password: string;
   name: string;
   secondName: string;
   admin: boolean;
+  key: string;
 
   constructor(mail: string, password: string, name: string, secondName: string, admin: boolean) {
     this.mail = mail;
@@ -12,10 +12,6 @@ export class UserModel {
     this.name = name;
     this.secondName = secondName;
     this.admin = admin;
-  }
-
-  setUserId(userId: string) {
-    this.uid = userId;
   }
 
 }

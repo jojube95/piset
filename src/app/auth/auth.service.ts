@@ -14,7 +14,7 @@ export class AuthService {
   token: string;
 
   constructor(private db: AngularFireDatabase, private afAuth: AngularFireAuth, private router: Router,
-    private af: AngularFireModule, private dataStorageService: UserStorageService) {
+    private af: AngularFireModule, private userStorage: UserStorageService) {
   }
 
   signOut() {
@@ -27,7 +27,7 @@ export class AuthService {
     let userLogged: UserModel;
     let logged = false;
 
-    this.dataStorageService.getObservableUsers().subscribe(users => {
+    this.userStorage.getObservableUsers().subscribe(users => {
       userLogged = users.find(i => i.mail === email);
       logged = true;
       if (userLogged) {
@@ -41,26 +41,18 @@ export class AuthService {
 
   }
 
-  signupUser(userObj: UserModel) {
-    firebase.auth().createUserWithEmailAndPassword(userObj.mail, userObj.password)
-      .then(
-        user => {
-          userObj.setUserId(user.user.uid);
-          firebase.database().ref().child('users').child(user.user.uid).set({
-            uid: userObj.uid,
-            mail: userObj.mail,
-            name: userObj.name,
-            password: userObj.password,
-            secondName: userObj.secondName,
-            admin: userObj.admin
-          });
-          this.signinUser(userObj.mail, userObj.password);
-        }
-      )
-      .catch(
-        error => alert(error.message)
-      );
-  }
+ signupUser(userObj: UserModel) {
+  firebase.auth().createUserWithEmailAndPassword(userObj.mail, userObj.password)
+    .then(
+      user => {
+        this.userStorage.addUser(userObj);
+        this.signinUser(userObj.mail, userObj.password);
+      }
+    )
+    .catch(
+      error => alert(error.message)
+    );
+}
 
   signinUser(email: string, password: string) {
     firebase.auth().signInWithEmailAndPassword(email, password)

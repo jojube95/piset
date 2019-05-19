@@ -15,13 +15,13 @@ export class MainPageComponent implements OnInit {
   userAuth: User;
   userLogged: UserModel;
 
-  constructor(private authService: AuthService, private dataStorageService: UserStorageService) { }
+  constructor(private authService: AuthService, private userStorage: UserStorageService) { }
 
   ngOnInit() {
     this.userAuth = this.authService.getCurrentUser();
 
-    this.dataStorageService.getObservableUsers().subscribe(async users => {
-      this.userLogged = await users.find(i => i.uid === this.userAuth.uid);
+    this.userStorage.getObservableUsers().subscribe(async users => {
+      this.userLogged = await users.find(i => i.mail === this.userAuth.email);
       this.loading = await false;
 
     });

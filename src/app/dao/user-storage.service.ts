@@ -5,6 +5,7 @@ import {UserModel} from '../model/userModel';
 import {map} from 'rxjs/operators';
 import {AngularFireAuth} from 'angularfire2/auth';
 import { Group } from '../model/group';
+import { User } from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -29,28 +30,26 @@ export class UserStorageService {
   }
 
   updateUserProfile(user: UserModel) {
-    this.af.object('users/' + user.uid)
-      .update(user);
-
+    this.af.object('users/' + user.key).update(user);
   }
 
   getObservableUsers() {
     return this.usersObservable;
   }
 
-  // getObservableUsersWithoutGroup(){
-  //   return this.usersRef = this.af.list('/users/groups', ref => ref.where);
-  //   this.af.col$('notes', ref => ref.where('user', '==', 'Jeff'));
-  // }
 
   public getCurrentUser() {
     return this.afAuth.auth.currentUser;
   }
 
-  public deleteUser(user: UserModel, group: Group){
-    this.af.object('users/' + user.uid).remove();
-    this.af.object('groups/' + group.key + '/users/' + user.uid).remove();
+  public deleteUserFromGroup(user: UserModel, group: Group){
+    this.af.object('groups/' + group.key + '/users/' + user.key).remove();
   }
+
+  public addUser(user: UserModel){
+    this.af.list('users').push(user);
+  }
+
 
 
 

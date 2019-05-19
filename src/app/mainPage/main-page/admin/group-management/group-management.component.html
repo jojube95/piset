@@ -49,7 +49,7 @@
     <div *ngIf="!add" class="col-sm-6">
       <h1>Usuarios</h1>
       <ul class="list-group">
-        <li class="list-group-item" *ngFor="let user of currentUsers">
+        <li class="list-group-item" *ngFor="let user of (currentUsers | async)">
           {{ user.name }}
 
         </li>

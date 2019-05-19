@@ -1,13 +1,11 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, AngularFireList} from 'angularfire2/database'
 import {Observable} from 'rxjs';
-
-import {AngularFireAuth} from 'angularfire2/auth';
 import {map} from 'rxjs/operators';
 import { UserStorageService} from './user-storage.service';
 import {Group} from '../model/group';
 import {UserModel} from '../model/userModel';
-import * as firebase from 'firebase';
 
 @Injectable({
   providedIn: 'root'
@@ -43,13 +41,9 @@ export class GroupStorageService {
   }
 
   createGroup(groupObj: Group){
-    this.groupsRef.push(groupObj).then(group => {
-      firebase.database().ref().child('groups').child(group.key).set({
-        name: groupObj.name,
-        users: [new UserModel('test@test.com', 'testtest', 'testname', 'testsecond', false),
-                new UserModel('test2@test.com', 'testtest2', 'testname2', 'testsecond2', false)]
-      });
-    }).catch(error => console.log(error));
+    groupObj.users.push(new UserModel('test@test.com', 'testtest', 'testname', 'testsecond', false));
+    groupObj.users.push(new UserModel('test2@test.com', 'testtest2', 'testname2', 'testsecond2', false));
+    this.groupsRef.push(groupObj);
   }
 
   deleteGroup(group: Group){
@@ -57,16 +51,14 @@ export class GroupStorageService {
   }
 
   addUserToGroup(user: UserModel, group: Group){
-
-    firebase.database().ref().child('groups/' + group.key + '/users').child(user.uid).set({
-      admin: user.admin,
-      mail: user.mail,
-      name: user.name,
-      password: user.password,
-      secondName : user.secondName,
-      uid: user.uid
-    });
+    this.af.database.ref().child('groups/' + group.key + '/users/' + user.key).set(user);
   }
+
+  getUsersFromGroup(group: Group) {
+    return this.af.list('groups/' + group.key + '/users');
+  }
+
+
 
 
 }

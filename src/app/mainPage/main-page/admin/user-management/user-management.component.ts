@@ -15,9 +15,9 @@ export class UserManagementComponent implements OnInit {
   usersWithoutGroup: Observable<UserModel[]> = new Observable();
   currentGroup: Group = new Group('Selecciona grupo', []);
   currentUser: UserModel = new UserModel('', '', 'Selecciona usuario', '', false);
+  currentUsers: Observable<any>;
   loadingGroup: boolean = true;
   loadingUsers: boolean = true;
-  currentUsers: UserModel[] = [];
 
   constructor(private groupStorage: GroupStorageService, private userStorage: UserStorageService) { }
 
@@ -35,11 +35,8 @@ export class UserManagementComponent implements OnInit {
   }
 
   onGroupSelect(group: Group){
-    this.currentUsers = [];
     this.currentGroup = group;
-    for(let key in this.currentGroup.users){
-      this.currentUsers.push(this.currentGroup.users[key]);
-    }
+    this.currentUsers = this.groupStorage.getUsersFromGroup(group).valueChanges();
   }
 
   onUserSelect(user: UserModel){
@@ -51,7 +48,9 @@ export class UserManagementComponent implements OnInit {
   }
 
   onClickDelete(user: UserModel){
-    this.userStorage.deleteUser(user, this.currentGroup);
+    this.userStorage.deleteUserFromGroup(user, this.currentGroup);
   }
+
+  
 
 }
