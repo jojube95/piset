@@ -18,9 +18,15 @@ export class TaskManagementComponent implements OnInit {
   currentTasks: Observable<any>;
   currentrSubtasks: Observable<any>;
   currentTask: Task;
+  currentSubtask: SubTask;
   add: boolean = false;
+  updateSubtask: boolean = false;
+  updateSubtaskClicked: boolean = false;
+  updateTask: boolean = false;
   subtaskAdd: boolean = false;
   loadingGroup: boolean = true;
+  groupSelected: boolean = false;
+  taskSelected: boolean = false;
 
   constructor(private groupStorage: GroupStorageService, private taskStorage: TaskStorageService) { }
 
@@ -32,6 +38,10 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onClickTask(task: Task){
+    this.updateSubtaskClicked = false;
+    this.updateSubtask = false;
+    this.taskSelected = true;
+    this.add = false;
     this.currentTask = task;
     this.currentrSubtasks = this.taskStorage.getSubtasks(this.currentGroup, this.currentTask);  
   }
@@ -39,8 +49,39 @@ export class TaskManagementComponent implements OnInit {
     this.subtaskAdd = true;
   }
 
+  onClickUpdateTask(){
+    this.updateTask = true;
+  }
+
   onClickCancelSubtask(){
     this.subtaskAdd = false;
+  }
+
+  onClickCancelUpdateTask(){
+    this.updateTask = false;
+  }
+
+  onClickUpdateSubtask(){
+    this.updateSubtaskClicked = true;
+  }
+
+  onClickCancelUpdateSubtask(){
+    this.updateSubtaskClicked = false;
+  }
+
+  onSubtaskSelect(subtask: SubTask){
+    this.updateSubtask = true;
+    this.currentSubtask = subtask;
+  }
+
+  onAddUpdateTask(form: NgForm){
+    let task = new Task(form.value.name, this.currentTask.subtasks, this.currentTask.key);
+    this.taskStorage.updateGroupTask(this.currentGroup, task);
+  }
+
+  onUpdateSubTask(form: NgForm){
+    let subtask = new SubTask(form.value.name, form.value.name, form.value.name, this.currentSubtask.key);
+    this.taskStorage.updateSubTask(this.currentGroup, this.currentTask, subtask);
   }
 
   onAddSubTask(form: NgForm){
@@ -57,6 +98,13 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onGroupSelect(group: Group){
+    this.updateSubtask = false;
+    this.updateSubtaskClicked = false;
+    this.updateTask = false;
+    this.subtaskAdd = false;
+    this.add = false;
+    this.taskSelected = false;
+    this.groupSelected = true;
     this.currentTask = null;
     this.currentrSubtasks = null;
     this.currentGroup = group;

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase, AngularFireList} from 'angularfire2/database'
+import { AngularFireDatabase } from 'angularfire2/database';
 import { Group } from '../model/group';
-import { Observable } from 'rxjs';
 import { Task } from '../model/task';
 import {map} from 'rxjs/operators';
 import { SubTask } from '../model/subTask';
