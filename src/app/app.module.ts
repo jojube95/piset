@@ -22,6 +22,7 @@ import { TasksComponent } from './mainPage/main-page/tasks/tasks.component';
 import { HistoryComponent } from './mainPage/main-page/history/history.component';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+import { BsDatepickerModule} from 'ngx-bootstrap';
 
 export const firebaseCredentials = {
   apiKey: ' AIzaSyCZq6n9XqQE6_rW-T-fXX8aEUTQTnu8qsk',
@@ -57,7 +58,8 @@ export const firebaseCredentials = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule.forRoot(),
-    NgbDropdownModule.forRoot()
+    NgbDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
   providers: [{ provide: FirestoreSettingsToken, useValue: {} }],
   bootstrap: [AppComponent]

@@ -3,3 +3,4 @@
 @import '~bootstrap/dist/css/bootstrap-grid.css';
 @import '~bootstrap/dist/css/bootstrap-reboot.css';
 @import '~@ng-select/ng-select/themes/default.theme.css';
+@import "~ngx-bootstrap/datepicker/bs-datepicker.css";
