@@ -47,7 +47,6 @@ export class GroupManagementComponent implements OnInit {
   }
 
   onClickDelete(group: Group){
-    console.log(group);
     this.groupStorage.deleteGroup(group);
   }
 

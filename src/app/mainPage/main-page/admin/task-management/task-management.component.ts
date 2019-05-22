@@ -112,7 +112,9 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onAddTask(form: NgForm){
-    let task = new Task(form.value.name, []);
+    let task = new Task(form.value.taskName, []);
+    // console.log(task);
+    // console.log(this.currentGroup);
     this.taskStorage.addGroupTask(this.currentGroup, task);
   }
 

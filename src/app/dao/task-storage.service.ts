@@ -14,31 +14,33 @@ export class TaskStorageService {
     }
 
     getGroupTasks(group: Group) {
-        return this.af.list('groups/' + group.key + '/tasks').snapshotChanges().pipe(
-            map(changes =>
-              changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
-            )
-          );
+      return this.af.list('groups/' + group.key + '/tasks').snapshotChanges().pipe(
+          map(changes =>
+            changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
+          )
+        );
     }
 
     addGroupTask(group: Group, task: Task){
-        this.af.list('groups/' + group.key + '/tasks').push(task);
+      this.af.list('groups/' + group.key + '/tasks').push(task);
     }
 
     deleteGroupTask(group: Group, task: Task){
-        this.af.object('groups/' + group.key + '/tasks/' + task.key).remove();
+      this.af.object('groups/' + group.key + '/tasks/' + task.key).remove();
     }
 
     updateGroupTask(group: Group, task: Task){
-        this.af.object('groups/' + group.key + '/tasks/' + task.key).update(task);
+      console.log(group);
+      console.log(task);
+      this.af.object('groups/' + group.key + '/tasks/' + task.key).update(task);
     }
 
     getSubtasks(group: Group, task: Task){
-        return this.af.list('groups/' + group.key + '/tasks/' + task.key + '/subtasks').snapshotChanges().pipe(
-            map(changes =>
-              changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
-            )
-          );
+      return this.af.list('groups/' + group.key + '/tasks/' + task.key + '/subtasks').snapshotChanges().pipe(
+          map(changes =>
+            changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
+          )
+        );
     }
 
     addSubTask(group: Group, task: Task, subtask: SubTask){

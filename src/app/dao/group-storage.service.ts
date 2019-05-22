@@ -27,6 +27,7 @@ export class GroupStorageService {
   }
 
   createGroup(groupObj: Group){
+    console.log(groupObj);
     this.af.list('groups').push(groupObj);
   }
 
