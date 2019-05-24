@@ -4,6 +4,11 @@ import {Observable} from 'rxjs';
 import {Group} from '../../../../model/group';
 import {GroupStorageService} from '../../../../dao/group-storage.service';
 import {UserModel} from '../../../../model/userModel';
+import { Penalty } from 'src/app/model/penalty';
+import { NgForm } from '@angular/forms';
+import { TaskStorageService } from 'src/app/dao/task-storage.service';
+import { SubTask } from 'src/app/model/subTask';
+import { Task } from 'src/app/model/task';
 
 @Component({
   selector: 'app-penalty-management',
@@ -17,17 +22,20 @@ export class PenaltyManagementComponent implements OnInit {
 
   groupsList: Observable<Group[]>;
   usersList: Observable<UserModel[]>;
+  penaltysList: Observable<Penalty[]>;
+  subtasksList: any[];
 
   currentGroup: Group = new Group('Selecciona grupo', []);
   currentUser: UserModel = new UserModel('', '', 'Selecciona usuario', '', false);
-
+  currentEditUser: UserModel = new UserModel('', '', 'Selecciona usuario', '', false); 
   loadingGroups: boolean = false;
   loadingUsers: boolean = false;
 
   groupSelected: boolean = false;
   userSelected: boolean = false;
+  addPenalty = false;
 
-  constructor(private penaltyStorage: PenaltyStorageService, private groupStorage: GroupStorageService) {
+  constructor(private penaltyStorage: PenaltyStorageService, private groupStorage: GroupStorageService, private taskStorage: TaskStorageService) {
     this.maxDate.setDate(this.maxDate.getDate() + 7);
     this.bsRangeValue = [this.bsValue, this.maxDate];
   }
@@ -41,6 +49,7 @@ export class PenaltyManagementComponent implements OnInit {
 
 
   onGroupSelect(group: Group){
+    this.addPenalty = false;
     this.groupSelected = true;
     this.currentGroup = group;
     this.currentUser = new UserModel('', '', 'Selecciona usuario', '', false);
@@ -50,11 +59,45 @@ export class PenaltyManagementComponent implements OnInit {
       this.loadingUsers = await false;
     });
 
+    this.penaltyStorage.getGroupPenaltys(group).subscribe(async () => {
+      this.penaltysList =  await this.penaltyStorage.getGroupPenaltys(group);
+      // this.loadingUsers = await false;
+           
+    });
+
+    this.taskStorage.getGroupTasks(group).subscribe(async next => {
+      next.forEach(nextTask => {
+        let taskAux = new Task('', [], nextTask.key);
+        this.taskStorage.getSubtasks(group, taskAux).subscribe(async nextSubtaks => {
+         this.subtasksList = await nextSubtaks;
+          console.log(nextSubtaks);
+        
+        });
+        /*nextTask.forEach(nextSubTask => {
+          this.subtasksList.push(nextSubTask);
+        });*/
+        
+      });
+
+      
+      
+    });
+
+    console.log(this.subtasksList);
+
   }
 
   onUserSelect(user: UserModel){
     this.userSelected = true;
     this.currentUser = user;
+  }
+
+  onClickAddPenalty(){
+    this.addPenalty = true;
+  }
+
+  onAddPenalty(form: NgForm){
+
   }
 
 

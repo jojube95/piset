@@ -43,7 +43,6 @@ export class GroupStorageService {
     return <Observable<UserModel[]>> this.af.list('groups/' + group.key + '/users').valueChanges();
   }
 
-
-
+  
 
 }
