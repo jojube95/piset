@@ -27,7 +27,8 @@ export class PenaltyManagementComponent implements OnInit {
 
   currentGroup: Group = new Group('Selecciona grupo', []);
   currentUser: UserModel = new UserModel('', '', 'Selecciona usuario', '', false);
-  currentEditUser: UserModel = new UserModel('', '', 'Selecciona usuario', '', false); 
+  currentAddPenaltyUser: UserModel = new UserModel('', '', 'Selecciona usuario', '', false); 
+  currentAddPenaltySubtask: SubTask = new SubTask('Seleccionar subtarea', '', 0);
   loadingGroups: boolean = false;
   loadingUsers: boolean = false;
 
@@ -54,6 +55,7 @@ export class PenaltyManagementComponent implements OnInit {
     this.currentGroup = group;
     this.currentUser = new UserModel('', '', 'Selecciona usuario', '', false);
 
+       
     this.groupStorage.getUsersFromGroup(group).subscribe(async () => {
       this.usersList =  await this.groupStorage.getUsersFromGroup(group);
       this.loadingUsers = await false;
@@ -69,21 +71,15 @@ export class PenaltyManagementComponent implements OnInit {
       next.forEach(nextTask => {
         let taskAux = new Task('', [], nextTask.key);
         this.taskStorage.getSubtasks(group, taskAux).subscribe(async nextSubtaks => {
-         this.subtasksList = await nextSubtaks;
-          console.log(nextSubtaks);
-        
+          this.subtasksList = await nextSubtaks;
+                  
         });
-        /*nextTask.forEach(nextSubTask => {
-          this.subtasksList.push(nextSubTask);
-        });*/
-        
-      });
-
-      
+                
+     });
+ 
       
     });
 
-    console.log(this.subtasksList);
 
   }
 
@@ -96,8 +92,25 @@ export class PenaltyManagementComponent implements OnInit {
     this.addPenalty = true;
   }
 
-  onAddPenalty(form: NgForm){
+  onClickCancelAddPenalty(){
+    this.addPenalty = false;
+  }
 
+  onClickDeletePenalty(penalty: Penalty){
+    this.penaltyStorage.deleteGroupPenalty(this.currentGroup, penalty);
+  }
+
+  onAddPenalty(form: NgForm){
+    let penalty = new Penalty(form.value.amount, form.value.date, this.currentAddPenaltyUser, this.currentAddPenaltySubtask);
+    this.penaltyStorage.createUserPenalty(this.currentGroup, penalty);
+  }
+
+  onPenaltySubtaskSelect(subtask: SubTask){
+    this.currentAddPenaltySubtask = subtask;
+  }
+
+  onPenaltyUserSelect(user: UserModel){
+    this.currentAddPenaltyUser = user;
   }
 
 

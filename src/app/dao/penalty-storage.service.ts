@@ -34,8 +34,8 @@ export class PenaltyStorageService {
 
   }
 
-  deleteUserPenalty(group: Group, user: UserModel, subtask: SubTask, penalty: Penalty){
-
+  deleteGroupPenalty(group: Group, penalty: Penalty){
+    this.af.object('groups/' + group.key + '/penaltys/' + penalty.key).remove();
   }
 
 
