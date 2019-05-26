@@ -58,27 +58,30 @@
       <form (ngSubmit)="onAddPenalty(f)" #f="ngForm">
         <div class="form-group">
           <label>Date</label>
-          <input type="penaltyDate" id="date" name="date" #date="ngModel" bsDatepicker ngModel [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" ngModel class="form-control" required>
+          <input type="penaltyDate" id="date" name="date" #date="ngModel" bsDatepicker ngModel [(bsValue)]="newVar" value="{{ newVar | date:'yyyy-MM-dd' }}" ngModel class="form-control" required>
           <span class="help-block" *ngIf="!date.valid && date.touched">Please enter a date!</span>
-          <label>Subtask</label>
+        </div>
+        <div class="form-group">
           <div ngbDropdown class="d-inline-block">
             <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{currentAddPenaltySubtask.name}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <button type="button" class="dropdown-item" *ngFor="let subtask of subtasksList" (click)="onPenaltySubtaskSelect(subtask)">{{subtask.name}}</button>
             </div>
           </div>
-          <label>User</label>
+        </div>  
+        <div class="form-group">
           <div ngbDropdown class="d-inline-block">
             <button  type="button" class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>{{currentAddPenaltyUser.name}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
               <button type="button" class="dropdown-item" *ngFor="let user of (usersList | async)" (click)="onPenaltyUserSelect(user)">{{user.name}}</button>
             </div>
           </div>
+        </div>
+        <div class="form-group">
           <label>Amount</label>
           <input type="amount" id="amount" name="amount" #amount="ngModel" ngModel class="form-control" required>
           <span class="help-block" *ngIf="!amount.valid && amount.touched">Please enter a amount!</span>
         </div>
-
         <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Añadir multa</button>
         <button type="button" class="btn" (click)="onClickCancelAddPenalty()">Atrás</button>
 
