@@ -1,15 +1,15 @@
 import {UserModel} from './userModel';
 import {SubTask} from './subTask';
-import { Timestamp } from '@google-cloud/firestore';
+import { firestore} from 'firebase';
 
 export class Penalty {
-  amount: number;
-  date: Timestamp;
+  date: firestore.Timestamp;
   user: UserModel;
   subtask: SubTask;
+  amount: number;
   key: string;
 
-  constructor(amount: number, date: Timestamp, user?: UserModel, subtask?: SubTask, key?: string) {
+  constructor(amount: number, date: firestore.Timestamp, user?: UserModel, subtask?: SubTask, key?: string) {
     this.amount = amount;
     this.date = date;
     this.user = user || null;

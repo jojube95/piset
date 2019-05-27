@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 import { TaskStorageService } from 'src/app/dao/task-storage.service';
 import { SubTask } from 'src/app/model/subTask';
 import { Task } from 'src/app/model/task';
+import { firestore} from 'firebase';
 
 @Component({
   selector: 'app-penalty-management',
@@ -25,10 +26,10 @@ export class PenaltyManagementComponent implements OnInit {
   penaltysList: Observable<Penalty[]>;
   subtasksList: any[];
 
-  currentGroup: Group = new Group('Selecciona grupo', []);
-  currentUser: UserModel = new UserModel('', '', 'Selecciona usuario', '', false);
-  currentAddPenaltyUser: UserModel = new UserModel('', '', 'Selecciona usuario', '', false); 
-  currentAddPenaltySubtask: SubTask = new SubTask('Seleccionar subtarea', '', 0);
+  currentGroup: Group;
+  currentUser: UserModel;
+  currentAddPenaltyUser: UserModel;
+  currentAddPenaltySubtask: SubTask;
   loadingGroups: boolean = false;
   loadingUsers: boolean = false;
 
@@ -36,7 +37,8 @@ export class PenaltyManagementComponent implements OnInit {
   userSelected: boolean = false;
   addPenalty = false;
 
-  constructor(private penaltyStorage: PenaltyStorageService, private groupStorage: GroupStorageService, private taskStorage: TaskStorageService) {
+  constructor(private penaltyStorage: PenaltyStorageService, private groupStorage: GroupStorageService,
+              private taskStorage: TaskStorageService) {
     this.maxDate.setDate(this.maxDate.getDate() + 7);
     this.bsRangeValue = [this.bsValue, this.maxDate];
   }
@@ -53,13 +55,19 @@ export class PenaltyManagementComponent implements OnInit {
     this.addPenalty = false;
     this.groupSelected = true;
     this.currentGroup = group;
-    this.currentUser = new UserModel('', '', 'Selecciona usuario', '', false);
+    this.currentUser = null;
 
        
     this.groupStorage.getUsersFromGroup(group).subscribe(async () => {
       this.usersList =  await this.groupStorage.getUsersFromGroup(group);
       this.loadingUsers = await false;
+
+      await this.usersList.subscribe(async next => {
+        await console.log(next);
+      });
     });
+
+
 
     this.penaltyStorage.getGroupPenaltys(group).subscribe(async () => {
       this.penaltysList =  await this.penaltyStorage.getGroupPenaltys(group);
@@ -101,9 +109,12 @@ export class PenaltyManagementComponent implements OnInit {
   }
 
   onAddPenalty(form: NgForm){
-    let penalty = new Penalty(form.value.amount, form.value.date, this.currentAddPenaltyUser, this.currentAddPenaltySubtask);
+    let penalty = new Penalty(form.value.amount, firestore.Timestamp.fromDate(form.value.date) , this.currentAddPenaltyUser,
+                              this.currentAddPenaltySubtask);
     console.log(penalty);
-    
+
+    console.log(typeof penalty.date);
+
     this.penaltyStorage.createUserPenalty(this.currentGroup, penalty);
   }
 

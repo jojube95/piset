@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-sm-auto">
       <div ngbDropdown class="d-inline-block">
-        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{currentGroup.name}}</button>
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{currentGroup == null ? 'Seleccione grupo' : currentGroup.name}}</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <button class="dropdown-item" *ngFor="let group of (groupsList | async)" (click)="onGroupSelect(group)">{{group.name}}</button>
         </div>
@@ -11,7 +11,7 @@
 
     <div class="col-sm-auto">
       <div ngbDropdown class="d-inline-block">
-        <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>{{currentUser.name}}</button>
+        <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>{{currentUser == null ? 'Seleccione usuario' : currentUser.name}}</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
           <button class="dropdown-item" *ngFor="let user of (usersList | async)" (click)="onUserSelect(user)">{{user.name}}</button>
         </div>
@@ -38,7 +38,7 @@
       </thead>
       <tbody>
       <tr *ngFor="let penalty of (penaltysList | async); index as i">
-        <td>{{ penalty.date }}</td>
+        <td>{{ penalty.date.seconds * 1000 | date:'dd/MM/yyyy'}}</td>
         <td>{{ penalty.subtask.name }}</td>
         <td>{{ penalty.user.name }}</td>
         <td>{{ penalty.amount }}</td>
@@ -58,12 +58,12 @@
       <form (ngSubmit)="onAddPenalty(f)" #f="ngForm">
         <div class="form-group">
           <label>Date</label>
-          <input type="penaltyDate" id="date" name="date" #date="ngModel" bsDatepicker ngModel [(bsValue)]="newVar" value="{{ newVar | date:'yyyy-MM-dd' }}" ngModel class="form-control" required>
+          <input type="penaltyDate" id="date" name="date" #date="ngModel" bsDatepicker ngModel [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" ngModel class="form-control" required>
           <span class="help-block" *ngIf="!date.valid && date.touched">Please enter a date!</span>
         </div>
         <div class="form-group">
           <div ngbDropdown class="d-inline-block">
-            <button type="button" class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{currentAddPenaltySubtask.name}}</button>
+            <button type="button" class="btn btn-outline-primary" id="dropdownBasic3" ngbDropdownToggle>{{currentAddPenaltySubtask == null ? 'Seleccione subtarea' : currentAddPenaltySubtask.name}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
               <button type="button" class="dropdown-item" *ngFor="let subtask of subtasksList" (click)="onPenaltySubtaskSelect(subtask)">{{subtask.name}}</button>
             </div>
@@ -71,7 +71,7 @@
         </div>  
         <div class="form-group">
           <div ngbDropdown class="d-inline-block">
-            <button  type="button" class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>{{currentAddPenaltyUser.name}}</button>
+            <button  type="button" class="btn btn-outline-primary" id="dropdownBasic4" ngbDropdownToggle>{{currentAddPenaltyUser == null ? 'Seleccione usuario' : currentAddPenaltyUser.name}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
               <button type="button" class="dropdown-item" *ngFor="let user of (usersList | async)" (click)="onPenaltyUserSelect(user)">{{user.name}}</button>
             </div>
