@@ -28,7 +28,8 @@ export class PenaltyManagementComponent implements OnInit {
 
   currentGroup: Group;
   currentUser: UserModel;
-  currentFilterDate: any;
+  currentFilterDateStart: Date;
+  currentFilterDateEnd: Date;
   currentAddPenaltyUser: UserModel;
   currentAddPenaltySubtask: SubTask;
   loadingGroups: boolean = false;
@@ -99,8 +100,9 @@ export class PenaltyManagementComponent implements OnInit {
   }
 
   onDateFilterChange(value: any){
-    console.log(value);
-
+    let dates = value.split(' ', 3);
+    this.currentFilterDateStart = new Date(dates[0]);
+    this.currentFilterDateEnd= new Date(dates[2]);
   }
 
   onClickAddPenalty(){
@@ -118,10 +120,6 @@ export class PenaltyManagementComponent implements OnInit {
   onAddPenalty(form: NgForm){
     let penalty = new Penalty(form.value.amount, firestore.Timestamp.fromDate(form.value.date) , this.currentAddPenaltyUser,
                               this.currentAddPenaltySubtask);
-    console.log(penalty);
-
-    console.log(typeof penalty.date);
-
     this.penaltyStorage.createUserPenalty(this.currentGroup, penalty);
   }
 

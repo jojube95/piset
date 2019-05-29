@@ -38,7 +38,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let penalty of (penaltysList | async | userFilter : currentUser); index as i">
+      <tr *ngFor="let penalty of (penaltysList | async | userFilter : currentUser | dateFilter : [currentFilterDateStart, currentFilterDateEnd]); index as i">
         <td>{{ penalty.date.seconds * 1000 | date:'dd/MM/yyyy'}}</td>
         <td>{{ penalty.subtask.name }}</td>
         <td>{{ penalty.user.name }}</td>

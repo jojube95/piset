@@ -1,4 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { firestore} from 'firebase';
 
 @Pipe({
   name: 'dateFilter'
@@ -7,23 +8,23 @@ export class DateFilterPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     let filtered = [];
-    let felterDate = null;
+    let felterDateStart;
+    let felterDateEnd;
+    let date;
 
     if(args != null && value != null){
-      console.log(args);
+      felterDateStart = args[0];
+      felterDateEnd = args[1];
 
-      felterDate = args.name;
-      if(felterDate === 'Todos'){
-        filtered = value;
-      }
-      else{
-        value.forEach(element => {
-          if(element.user.name === felterDate){
+      value.forEach(element => {
+        date = new Date(element.date.seconds * 1000);
+        console.log(date);
+        if(felterDateStart <= date && felterDateEnd >= date){
             filtered.push(element);
           }
         });
       }
-    }
+
     else{
       filtered = value;
     }
