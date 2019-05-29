@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, AngularFireList} from 'angularfire2/database'
+import { AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import { UserStorageService} from './user-storage.service';
@@ -20,7 +20,7 @@ export class GroupStorageService {
         changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
       )
     );
-  } 
+  }
 
   updateGroup(group: Group){
     this.af.object('groups/' + group.key).update(group);
@@ -43,6 +43,6 @@ export class GroupStorageService {
     return <Observable<UserModel[]>> this.af.list('groups/' + group.key + '/users').valueChanges();
   }
 
-  
+
 
 }
