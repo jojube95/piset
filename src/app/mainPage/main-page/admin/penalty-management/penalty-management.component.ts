@@ -57,8 +57,6 @@ export class PenaltyManagementComponent implements OnInit {
     this.groupSelected = true;
     this.currentGroup = group;
     this.currentUser = null;
-
-
     this.groupStorage.getUsersFromGroup(group).subscribe(async () => {
       this.usersList =  await this.groupStorage.getUsersFromGroup(group);
       this.loadingUsers = await false;
@@ -73,7 +71,6 @@ export class PenaltyManagementComponent implements OnInit {
     this.penaltyStorage.getGroupPenaltys(group).subscribe(async () => {
       this.penaltysList =  await this.penaltyStorage.getGroupPenaltys(group);
       // this.loadingUsers = await false;
-
     });
 
     this.taskStorage.getGroupTasks(group).subscribe(async next => {

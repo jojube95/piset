@@ -24,8 +24,11 @@ import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.co
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
 import { BsDatepickerModule} from 'ngx-bootstrap';
 import {DateUtilities} from './utilities/date-utilities';
+<<<<<<< HEAD
 import { UserFilterPipe } from './pipes/user-filter.pipe';
 import { DateFilterPipe } from './pipes/date-filter.pipe';
+=======
+>>>>>>> a9bd4b3e05de45cdbba6cbd15c8043c3701139db
 
 export const firebaseCredentials = {
   apiKey: ' AIzaSyCZq6n9XqQE6_rW-T-fXX8aEUTQTnu8qsk',
@@ -50,9 +53,13 @@ export const firebaseCredentials = {
     UserSettingsComponent,
     TasksComponent,
     HistoryComponent,
+<<<<<<< HEAD
     LoadingSpinnerComponent,
     UserFilterPipe,
     DateFilterPipe
+=======
+    LoadingSpinnerComponent
+>>>>>>> a9bd4b3e05de45cdbba6cbd15c8043c3701139db
   ],
   imports: [
     BrowserModule,
