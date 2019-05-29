@@ -1,0 +1,24 @@
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <img width="300" height="300" alt="Angular Logo" src="assets/img/icon.jpg">
+
+      <form (ngSubmit)="onSignin(f)" #f="ngForm">
+        <div class="form-group">
+          <label for="email">Mail</label>
+          <input type="email" id="email" name="email" ngModel class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" ngModel class="form-control">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Sign In</button>
+        <a routerLink="/signUp"><button type="button" class="btn" routerLinkActive="active">Register user</button></a>
+
+      </form>
+    </div>
+  </div>
+
+</div>
