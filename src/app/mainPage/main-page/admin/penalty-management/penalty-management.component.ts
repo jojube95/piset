@@ -62,9 +62,9 @@ export class PenaltyManagementComponent implements OnInit {
       this.usersList =  await this.groupStorage.getUsersFromGroup(group);
       this.loadingUsers = await false;
 
-      await this.usersList.subscribe(async next => {
-        await console.log(next);
-      });
+      // await this.usersList.subscribe(async next => {
+      //   await console.log(next);
+      // });
     });
 
 

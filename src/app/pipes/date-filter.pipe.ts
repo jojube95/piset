@@ -11,23 +11,27 @@ export class DateFilterPipe implements PipeTransform {
     let felterDateStart;
     let felterDateEnd;
     let date;
+    if(args[0] !== undefined && args[1].toString() !== undefined){
+      if(args != null && value != null && args[0].toString() !== 'Invalid Date' && args[1].toString() !== 'Invalid Date'){
+        felterDateStart = args[0];
+        felterDateEnd = args[1];
 
-    if(args != null && value != null){
-      felterDateStart = args[0];
-      felterDateEnd = args[1];
-
-      value.forEach(element => {
-        date = new Date(element.date.seconds * 1000);
-        console.log(date);
-        if(felterDateStart <= date && felterDateEnd >= date){
+        value.forEach(element => {
+          date = new Date(element.date.seconds * 1000);
+          if(felterDateStart <= date && felterDateEnd >= date){
             filtered.push(element);
           }
         });
       }
 
+      else{
+        filtered = value;
+      }
+    }
     else{
       filtered = value;
     }
+
 
     return filtered;
   }

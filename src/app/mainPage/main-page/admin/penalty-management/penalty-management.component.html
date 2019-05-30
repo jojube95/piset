@@ -20,7 +20,7 @@
     </div>
 
     <div class="col-sm-auto">
-      <input class="form-control" #datepicker #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="bsRangeValue" (blur)="onDateFilterChange(datepicker.value)">
+      <input class="form-control" #datepicker #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="bsRangeValue" (ngModelChange)="onDateFilterChange(datepicker.value)">
     </div>
 
 
