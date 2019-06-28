@@ -3,7 +3,7 @@ import {UserModel} from './userModel';
 export class Group {
   name: string;
   users: UserModel[];
-  key: string;
+  id: string;
 
   constructor(name: string, users: UserModel[]){
     this.name = name;

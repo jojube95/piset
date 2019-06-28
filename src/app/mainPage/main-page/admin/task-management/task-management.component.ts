@@ -15,7 +15,7 @@ import { SubTask } from 'src/app/model/subTask';
 export class TaskManagementComponent implements OnInit {
   groupsList: Observable<Group[]>;
   currentGroup: Group = new Group('Selecciona grupo', []);
-  currentTasks: Observable<any>;
+  currentTasks: Observable<Task[]>;
   currentrSubtasks: Observable<any>;
   currentTask: Task;
   currentSubtask: SubTask;
@@ -43,7 +43,7 @@ export class TaskManagementComponent implements OnInit {
     this.taskSelected = true;
     this.add = false;
     this.currentTask = task;
-    this.currentrSubtasks = this.taskStorage.getSubtasks(this.currentGroup, this.currentTask);  
+    this.currentrSubtasks = this.taskStorage.getGroupTaskSubtaks(this.currentGroup, this.currentTask);
   }
   onClickAddSubtask(){
     this.subtaskAdd = true;
@@ -75,13 +75,15 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onAddUpdateTask(form: NgForm){
-    let task = new Task(form.value.name, this.currentTask.subtasks, this.currentTask.key);
+    let task = new Task(form.value.name, this.currentTask.subtasks, this.currentTask.id);
     this.taskStorage.updateGroupTask(this.currentGroup, task);
+    this.onGroupSelect(this.currentGroup);
   }
 
   onUpdateSubTask(form: NgForm){
-    let subtask = new SubTask(form.value.name, form.value.name, form.value.name, this.currentSubtask.key);
-    this.taskStorage.updateSubTask(this.currentGroup, this.currentTask, subtask);
+    let subtask = new SubTask(form.value.name, form.value.description, form.value.penalty, this.currentSubtask.id,
+      this.currentSubtask.taskId, this.currentSubtask.groupId);
+    this.taskStorage.updateSubTask(subtask);
   }
 
   onAddSubTask(form: NgForm){
@@ -90,30 +92,28 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onClickDeleteTask(task: Task){
-    this.taskStorage.deleteGroupTask(this.currentGroup, task);
+    this.taskStorage.deleteTaskFromGroup(this.currentGroup, task);
+    this.onGroupSelect(this.currentGroup);
   }
 
   onClickDeleteSubtask(subTask: SubTask){
-    this.taskStorage.deleteSubTask(this.currentGroup, this.currentTask, subTask);
+    this.taskStorage.deleteSubTask(subTask);
   }
 
   onGroupSelect(group: Group){
     this.updateSubtask = false;
     this.updateSubtaskClicked = false;
-    this.updateTask = false;
-    this.subtaskAdd = false;
     this.add = false;
     this.taskSelected = false;
     this.groupSelected = true;
-    this.currentTask = null;
     this.currentrSubtasks = null;
     this.currentGroup = group;
     this.currentTasks = this.taskStorage.getGroupTasks(group);
   }
 
   onAddTask(form: NgForm){
-    let task = new Task(form.value.name, []);
-    this.taskStorage.addGroupTask(this.currentGroup, task);
+    let task = new Task(form.value.taskName, []);
+    this.taskStorage.addTaskToGroup(this.currentGroup, task);
   }
 
   onClickCancel(){

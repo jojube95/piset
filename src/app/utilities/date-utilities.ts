@@ -7,8 +7,8 @@ export class DateUtilities {
   }
 
   dateToString(date: Date) {
-    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];
     let values: string[] = date.toString().split(' ');
     let month = monthNames.indexOf(values[1]) < 10 ?  '0' + monthNames.indexOf(values[1]) : monthNames.indexOf(values[1]);
@@ -23,8 +23,8 @@ export class DateUtilities {
   }
 
   stringFormToDate(dateString: string) {
-    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];
 
     let values: string[] = dateString.toString().split(' ');

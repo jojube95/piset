@@ -8,6 +8,7 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { CompareValidatorDirective } from './utilities/compare-validator.directive';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
+import { AngularFirestore} from 'angularfire2/firestore';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import {NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -22,6 +23,10 @@ import { TasksComponent } from './mainPage/main-page/tasks/tasks.component';
 import { HistoryComponent } from './mainPage/main-page/history/history.component';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 import { AngularFirestoreModule, FirestoreSettingsToken } from '@angular/fire/firestore';
+import { BsDatepickerModule} from 'ngx-bootstrap';
+import {DateUtilities} from './utilities/date-utilities';
+import { UserFilterPipe } from './pipes/user-filter.pipe';
+import { DateFilterPipe } from './pipes/date-filter.pipe';
 
 export const firebaseCredentials = {
   apiKey: ' AIzaSyCZq6n9XqQE6_rW-T-fXX8aEUTQTnu8qsk',
@@ -46,7 +51,9 @@ export const firebaseCredentials = {
     UserSettingsComponent,
     TasksComponent,
     HistoryComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    UserFilterPipe,
+    DateFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -57,9 +64,10 @@ export const firebaseCredentials = {
     AngularFireDatabaseModule,
     AngularFireAuthModule,
     NgbModule.forRoot(),
-    NgbDropdownModule.forRoot()
+    NgbDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot()
   ],
-  providers: [{ provide: FirestoreSettingsToken, useValue: {} }],
+  providers: [{ provide: FirestoreSettingsToken, useValue: {} }, DateUtilities, AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
