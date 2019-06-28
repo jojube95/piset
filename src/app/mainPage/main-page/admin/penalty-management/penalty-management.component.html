@@ -66,7 +66,7 @@
           <div ngbDropdown class="d-inline-block">
             <button type="button" class="btn btn-outline-primary" id="dropdownBasic3" ngbDropdownToggle>{{currentAddPenaltySubtask == null ? 'Seleccione subtarea' : currentAddPenaltySubtask.name}}</button>
             <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-              <button type="button" class="dropdown-item" *ngFor="let subtask of subtasksList" (click)="onPenaltySubtaskSelect(subtask)">{{subtask.name}}</button>
+              <button type="button" class="dropdown-item" *ngFor="let subtask of subtasksList | async" (click)="onPenaltySubtaskSelect(subtask)">{{subtask.name}}</button>
             </div>
           </div>
         </div>

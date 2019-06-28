@@ -15,7 +15,7 @@ export class UserManagementComponent implements OnInit {
   usersWithoutGroup: Observable<UserModel[]> = new Observable();
   currentGroup: Group = new Group('Selecciona grupo', []);
   currentUser: UserModel = new UserModel('', '', 'Selecciona usuario', '', false);
-  currentUsers: Observable<any>;
+  currentUsers: Observable<UserModel[]>;
   loadingGroup: boolean = true;
   loadingUsers: boolean = true;
 

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
+import {AngularFirestore } from 'angularfire2/firestore';
 import {Observable} from 'rxjs';
 import {UserModel} from '../model/userModel';
 import {map} from 'rxjs/operators';
@@ -11,40 +11,45 @@ import { Group } from '../model/group';
 })
 export class UserStorageService {
 
-  constructor(private af: AngularFireDatabase, private afAuth: AngularFireAuth) {
+  constructor(private firestore: AngularFirestore, private afAuth: AngularFireAuth) {
   }
 
-  getUsersByMail(mail: string): Observable<UserModel[]>{
-    return <Observable<UserModel[]>> this.af.list('/users', ref => ref.equalTo(mail)).snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
-      )
-    );
-  }
 
   updateUserProfile(user: UserModel) {
-    this.af.object('users/' + user.key).update(user);
+    this.firestore.collection('users').doc(user.id).update(user);
   }
 
   getObservableUsers(): Observable<UserModel[]> {
-    return <Observable<UserModel[]>> this.af.list('users').snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
-      )
+    return this.firestore.collection('users').snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as UserModel;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
     );
-  }
 
+  }
 
   public getCurrentUser() {
     return this.afAuth.auth.currentUser;
   }
 
   public deleteUserFromGroup(user: UserModel, group: Group){
-    this.af.object('groups/' + group.key + '/users/' + user.key).remove();
+    user.groupId = null;
+    this.firestore.collection('users').doc(user.id).update(user);
   }
 
   public addUser(user: UserModel){
-    this.af.list('users').push(user);
+    this.firestore.collection('users').add({
+      mail: user.mail,
+      password: user.password,
+      name: user.name,
+      secondName: user.secondName,
+      admin: user.admin
+    });
+
   }
 
 

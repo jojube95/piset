@@ -4,7 +4,8 @@ export class UserModel {
   name: string;
   secondName: string;
   admin: boolean;
-  key: string;
+  id: string;
+  groupId: string;
 
   constructor(mail: string, password: string, name: string, secondName: string, admin: boolean) {
     this.mail = mail;
@@ -13,5 +14,7 @@ export class UserModel {
     this.secondName = secondName;
     this.admin = admin;
   }
+
+
 
 }

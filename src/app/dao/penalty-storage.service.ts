@@ -1,41 +1,68 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase} from 'angularfire2/database';
 import {Group} from '../model/group';
 import {UserModel} from '../model/userModel';
 import {SubTask} from '../model/subTask';
 import {Penalty} from '../model/penalty';
 import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import {AngularFirestore} from 'angularfire2/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PenaltyStorageService {
 
-  constructor(private af: AngularFireDatabase) { }
+  constructor(private firestore: AngularFirestore) { }
 
   getGroupPenaltys(group: Group): Observable<Penalty[]>{
-    return <Observable<Penalty[]>> this.af.list('groups/' + group.key + '/penaltys').snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
-      )
+    return this.firestore.collection('penaltys', ref => ref.where('groupId', '==', group.id)).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Penalty;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
     );
   }
 
-  getUserPenaltys(group: Group, user: UserModel){
-
+  getUserPenaltys(user: UserModel): Observable<Penalty[]>{
+    return this.firestore.collection('penaltys', ref => ref.where('userId', '==', user.id)).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Penalty;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
   }
 
-  createUserPenalty(group: Group, penalty: Penalty) {
-    this.af.list('groups/' + group.key + '/penaltys').push(penalty);
+  getSubtaskPenaltys(subtask: SubTask): Observable<Penalty[]>{
+    return this.firestore.collection('penaltys', ref => ref.where('subtaskId', '==', subtask.id)).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Penalty;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
   }
 
-  updateUserPenalty(group: Group, user: UserModel, subtask: SubTask, penalty: Penalty){
+  createUserPenalty(group: Group, user: UserModel, subtask: SubTask, penalty: Penalty) {
+    this.firestore.collection('penaltys').add({
+      date: penalty.date,
+      amount: penalty.amount,
+      userId: user.id,
+      groupId: group.id,
+      subtaskId: subtask.id
 
+    });
   }
 
-  deleteGroupPenalty(group: Group, penalty: Penalty){
-    this.af.object('groups/' + group.key + '/penaltys/' + penalty.key).remove();
+  deleteGroupPenalty(penalty: Penalty){
+    this.firestore.collection('penaltys').doc(penalty.id).delete();
   }
 
 

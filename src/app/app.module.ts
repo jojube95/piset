@@ -8,6 +8,7 @@ import { SignInComponent } from './auth/sign-in/sign-in.component';
 import { CompareValidatorDirective } from './utilities/compare-validator.directive';
 import { SignUpComponent } from './auth/sign-up/sign-up.component';
 import { AngularFireDatabaseModule} from 'angularfire2/database';
+import { AngularFirestore} from 'angularfire2/firestore';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
 import {NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -66,7 +67,7 @@ export const firebaseCredentials = {
     NgbDropdownModule.forRoot(),
     BsDatepickerModule.forRoot()
   ],
-  providers: [{ provide: FirestoreSettingsToken, useValue: {} }, DateUtilities],
+  providers: [{ provide: FirestoreSettingsToken, useValue: {} }, DateUtilities, AngularFirestore],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

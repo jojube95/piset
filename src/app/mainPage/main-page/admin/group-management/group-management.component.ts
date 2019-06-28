@@ -17,7 +17,7 @@ export class GroupManagementComponent implements OnInit {
   currentGroup: Group = new Group('', []);
   add: boolean = false;
   loading: boolean = true;
-  currentUsers: Observable<any>
+  currentUsers: Observable<UserModel[]>;
 
   constructor(private groupStorage: GroupStorageService) { }
 

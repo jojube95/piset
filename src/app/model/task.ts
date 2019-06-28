@@ -3,12 +3,14 @@ import { SubTask } from './subTask';
 export class Task{
     name: string;
     subtasks: SubTask[];
-    key: string;
+    id: string;
+    groupId: string;
+    userId: string;
 
-    constructor(name: string, subtasks?: SubTask[], key?: string){
+    constructor(name: string, subtasks?: SubTask[], id?: string){
       this.name = name;
       this.subtasks = subtasks || null;
-      this.key = key || null;
+      this.id = id || null;
     }
 
 

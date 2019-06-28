@@ -4,16 +4,18 @@ import { firestore} from 'firebase';
 
 export class Penalty {
   date: firestore.Timestamp;
-  user: UserModel;
-  subtask: SubTask;
   amount: number;
-  key: string;
+  id: string;
+  userId: string;
+  groupId: string;
+  subtaskId: string;
 
-  constructor(amount: number, date: firestore.Timestamp, user?: UserModel, subtask?: SubTask, key?: string) {
+  constructor(amount: number, date: firestore.Timestamp, userId?: string, groupId?: string, subtaskId?: string, id?: string) {
     this.amount = amount;
     this.date = date;
-    this.user = user || null;
-    this.subtask = subtask || null;
-    this.key = key || null;
+    this.id = id || null;
+    this.userId = userId || null;
+    this.groupId = groupId || null;
+    this.subtaskId = subtaskId || null;
   }
 }
