@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {PenaltyStorageService} from '../../../../dao/penalty-storage.service';
-import {Observable} from 'rxjs';
-import {Group} from '../../../../model/group';
-import {GroupStorageService} from '../../../../dao/group-storage.service';
-import {UserModel} from '../../../../model/userModel';
+import { PenaltyStorageService} from '../../../../dao/penalty-storage.service';
+import { Observable} from 'rxjs';
+import { Group} from '../../../../model/group';
+import { GroupStorageService} from '../../../../dao/group-storage.service';
+import { UserModel} from '../../../../model/userModel';
 import { Penalty } from 'src/app/model/penalty';
 import { NgForm } from '@angular/forms';
 import { TaskStorageService } from 'src/app/dao/task-storage.service';
@@ -45,10 +45,8 @@ export class PenaltyManagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.groupStorage.getObservableGroups().subscribe(async () => {
-      this.groupsList =  await this.groupStorage.getObservableGroups();
-      this.loadingGroups = await false;
-    });
+    this.groupsList =  this.groupStorage.getObservableGroups();
+
   }
 
 

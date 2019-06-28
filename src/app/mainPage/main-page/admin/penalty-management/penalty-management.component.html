@@ -20,7 +20,7 @@
     </div>
 
     <div class="col-sm-auto">
-      <input class="form-control" #datepicker #drp="bsDaterangepicker" bsDaterangepicker [(ngModel)]="bsRangeValue" (ngModelChange)="onDateFilterChange(datepicker.value)">
+      <input class="form-control" #datepicker #drp="bsDaterangepicker" [value]=" " bsDaterangepicker [bsConfig]="{rangeInputFormat: 'DD/MM/YYYY'}" [(ngModel)]="bsRangeValue" (ngModelChange)="onDateFilterChange(datepicker.value)">
     </div>
 
 
@@ -40,8 +40,8 @@
       <tbody>
       <tr *ngFor="let penalty of (penaltysList | async | userFilter : currentUser | dateFilter : [currentFilterDateStart, currentFilterDateEnd]); index as i">
         <td>{{ penalty.date.seconds * 1000 | date:'dd/MM/yyyy'}}</td>
-        <td>{{ penalty.subtask.name }}</td>
-        <td>{{ penalty.user.name }}</td>
+        <td>{{ penalty.subtaskName }}</td>
+        <td>{{ penalty.userName }}</td>
         <td>{{ penalty.amount }}</td>
         <td>
           <button type="button" class="close" data-dismiss="alert" (click)="onClickDeletePenalty(penalty)">

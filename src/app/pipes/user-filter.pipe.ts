@@ -16,7 +16,7 @@ export class UserFilterPipe implements PipeTransform {
       }
       else{
         value.forEach(element => {
-          if(element.user.name === userName){
+          if(element.userName === userName){
             filtered.push(element);
           }
         });

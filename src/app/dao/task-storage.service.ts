@@ -5,6 +5,7 @@ import {map} from 'rxjs/operators';
 import { SubTask } from '../model/subTask';
 import {Observable} from 'rxjs';
 import {AngularFirestore} from 'angularfire2/firestore';
+import {Penalty} from '../model/penalty';
 
 
 @Injectable({
@@ -115,6 +116,27 @@ export class TaskStorageService {
         penalty: subtask.penalty,
         taskId: subtask.taskId,
         groupId: subtask.groupId
+      });
+
+      this.firestore.collection('penaltys', ref => ref.where('subtaskId', '==', subtask.id)).snapshotChanges().pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data() as Penalty;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      ).subscribe(penalty => {
+        this.firestore.collection('penaltys').doc(penalty[0].id).update({
+          date: penalty[0].date,
+          amount: penalty[0].amount,
+          userId: penalty[0].id,
+          userName: penalty[0].userName,
+          groupId: penalty[0].groupId,
+          groupName: penalty[0].groupName,
+          subtaskId: subtask.id,
+          subtaskName: subtask.name
+        });
       });
     }
 }

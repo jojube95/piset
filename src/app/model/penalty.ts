@@ -7,8 +7,11 @@ export class Penalty {
   amount: number;
   id: string;
   userId: string;
+  userName: string;
   groupId: string;
+  groupName: string;
   subtaskId: string;
+  subtaskName: string;
 
   constructor(amount: number, date: firestore.Timestamp, userId?: string, groupId?: string, subtaskId?: string, id?: string) {
     this.amount = amount;

@@ -5,6 +5,7 @@ import {UserModel} from '../model/userModel';
 import {map} from 'rxjs/operators';
 import {AngularFireAuth} from 'angularfire2/auth';
 import { Group } from '../model/group';
+import {Penalty} from '../model/penalty';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,27 @@ export class UserStorageService {
 
   updateUserProfile(user: UserModel) {
     this.firestore.collection('users').doc(user.id).update(user);
+
+    this.firestore.collection('penaltys', ref => ref.where('userId', '==', user.id)).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Penalty;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    ).subscribe(penalty => {
+      this.firestore.collection('penaltys').doc(penalty[0].id).update({
+        date: penalty[0].date,
+        amount: penalty[0].amount,
+        userId: user.id,
+        userName: user.name,
+        groupId: penalty[0].groupId,
+        groupName: penalty[0].groupName,
+        subtaskId: penalty[0].subtaskId,
+        subtaskName: penalty[0].subtaskName
+      });
+    });
   }
 
   getObservableUsers(): Observable<UserModel[]> {

@@ -55,8 +55,11 @@ export class PenaltyStorageService {
       date: penalty.date,
       amount: penalty.amount,
       userId: user.id,
+      userName: user.name,
       groupId: group.id,
-      subtaskId: subtask.id
+      groupName: group.name,
+      subtaskId: subtask.id,
+      subtaskName: subtask.name
 
     });
   }
