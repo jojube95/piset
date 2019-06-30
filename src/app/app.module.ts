@@ -11,7 +11,7 @@ import { AngularFireDatabaseModule} from 'angularfire2/database';
 import { AngularFirestore} from 'angularfire2/firestore';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireAuthModule} from 'angularfire2/auth';
-import {NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbButtonsModule, NgbDropdownModule, NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { MainPageComponent } from './mainPage/main-page/main-page.component';
 import { GroupManagementComponent } from './mainPage/main-page/admin/group-management/group-management.component';
 import { TaskManagementComponent } from './mainPage/main-page/admin/task-management/task-management.component';
@@ -65,7 +65,9 @@ export const firebaseCredentials = {
     AngularFireAuthModule,
     NgbModule.forRoot(),
     NgbDropdownModule.forRoot(),
-    BsDatepickerModule.forRoot()
+    BsDatepickerModule.forRoot(),
+    NgbButtonsModule
+
   ],
   providers: [{ provide: FirestoreSettingsToken, useValue: {} }, DateUtilities, AngularFirestore],
   bootstrap: [AppComponent]

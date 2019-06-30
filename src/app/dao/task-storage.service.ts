@@ -6,6 +6,7 @@ import { SubTask } from '../model/subTask';
 import {Observable} from 'rxjs';
 import {AngularFirestore} from 'angularfire2/firestore';
 import {Penalty} from '../model/penalty';
+import {UserModel} from '../model/userModel';
 
 
 @Injectable({
@@ -78,6 +79,30 @@ export class TaskStorageService {
         })
       );
     }
+
+    getUserTasks(user: UserModel): Observable<Task[]>{
+      return this.firestore.collection('tasks', ref => ref.where('userId', '==', user.id)).snapshotChanges().pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data() as Task;
+            const id = a.payload.doc.id;
+            return { id, ...data };
+          });
+        })
+      );
+    }
+
+  getUserSubTasks(user: UserModel): Observable<SubTask[]>{
+    return this.firestore.collection('subtasks', ref => ref.where('userId', '==', user.id)).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as SubTask;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );
+  }
 
     getGroupTaskSubtaks(group: Group, task: Task){
       return this.firestore.collection('subtasks',
