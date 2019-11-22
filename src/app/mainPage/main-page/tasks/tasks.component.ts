@@ -1,14 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {Group} from '../../../model/group';
 import {UserModel} from '../../../model/userModel';
-import {Penalty} from '../../../model/penalty';
 import {SubTask} from '../../../model/subTask';
 import {PenaltyStorageService} from '../../../dao/penalty-storage.service';
-import {GroupStorageService} from '../../../dao/group-storage.service';
 import {TaskStorageService} from '../../../dao/task-storage.service';
-import {NgForm} from '@angular/forms';
-import {firestore} from 'firebase';
 import {UserStorageService} from '../../../dao/user-storage.service';
 
 @Component({
@@ -22,7 +17,7 @@ export class TasksComponent implements OnInit {
   subtasksList: Observable<SubTask[]>;
 
   currentUser: UserModel;
-  loadingGroups: boolean = false;
+  loadingUsers: boolean = true;
 
   userSelected: boolean = false;
 
@@ -33,6 +28,7 @@ export class TasksComponent implements OnInit {
 
   ngOnInit() {
     this.usersList =  this.userStorage.getObservableUsers();
+    this.loadingUsers = false;
   }
 
   onUserSelect(user: UserModel){

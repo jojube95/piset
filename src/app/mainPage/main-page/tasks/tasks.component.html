@@ -1,4 +1,4 @@
-<div *ngIf="!loadingGroups" class="container">
+<div *ngIf="!loadingUsers" class="container">
   <div class="row">
     <div class="col-sm-auto">
       <div ngbDropdown class="d-inline-block">
@@ -21,9 +21,9 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let penalty of (penaltysList | async | userFilter : currentUser | dateFilter : [currentFilterDateStart, currentFilterDateEnd]); index as i">
-        <td>{{ penalty.subtaskName }}</td>
-        <td>{{ penalty.userName }}</td>
+      <tr *ngFor="let subtask of (subtasksList | async )">
+        <td>{{ subtask.subtaskName }}</td>
+        <td>{{ subtask.userName }}</td>
         <td><input type="checkbox" [checked]=""></td>
 
       </tr>
@@ -35,7 +35,7 @@
 
 </div>
 
-<div *ngIf="loadingGroups" class="container">
+<div *ngIf="loadingUsers" class="container">
   <app-loading-spinner></app-loading-spinner>
 </div>
 

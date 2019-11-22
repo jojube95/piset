@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import * as firebase from 'firebase';
 
 
 const config = {
@@ -19,7 +18,6 @@ export class AppComponent implements OnInit {
   title = 'app';
 
   ngOnInit() {
-    firebase.initializeApp(config);
   }
 }
 

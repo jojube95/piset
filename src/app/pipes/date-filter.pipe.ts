@@ -1,6 +1,4 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { firestore} from 'firebase';
-
 @Pipe({
   name: 'dateFilter'
 })

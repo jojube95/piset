@@ -5,16 +5,16 @@ import {SubTask} from '../model/subTask';
 import {Penalty} from '../model/penalty';
 import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import {AngularFirestore} from 'angularfire2/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PenaltyStorageService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor() { }
 
   getGroupPenaltys(group: Group): Observable<Penalty[]>{
+    /*
     return this.firestore.collection('penaltys', ref => ref.where('groupId', '==', group.id)).snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -23,10 +23,12 @@ export class PenaltyStorageService {
           return { id, ...data };
         });
       })
-    );
+    );*/
+    return null;
   }
 
   getUserPenaltys(user: UserModel): Observable<Penalty[]>{
+    /*
     return this.firestore.collection('penaltys', ref => ref.where('userId', '==', user.id)).snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -35,11 +37,13 @@ export class PenaltyStorageService {
           return { id, ...data };
         });
       })
-    );
+    );*/
+    return null;
   }
 
   getSubtaskPenaltys(subtask: SubTask): Observable<Penalty[]>{
-    return this.firestore.collection('penaltys', ref => ref.where('subtaskId', '==', subtask.id)).snapshotChanges().pipe(
+
+    /*return this.firestore.collection('penaltys', ref => ref.where('subtaskId', '==', subtask.id)).snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
           const data = a.payload.doc.data() as Penalty;
@@ -47,11 +51,13 @@ export class PenaltyStorageService {
           return { id, ...data };
         });
       })
-    );
+    );*/
+    return null;
   }
 
   createUserPenalty(group: Group, user: UserModel, subtask: SubTask, penalty: Penalty) {
-    this.firestore.collection('penaltys').add({
+
+    /*this.firestore.collection('penaltys').add({
       date: penalty.date,
       amount: penalty.amount,
       userId: user.id,
@@ -62,10 +68,13 @@ export class PenaltyStorageService {
       subtaskName: subtask.name
 
     });
+    */
   }
 
   deleteGroupPenalty(penalty: Penalty){
+    /*
     this.firestore.collection('penaltys').doc(penalty.id).delete();
+    */
   }
 
 

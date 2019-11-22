@@ -4,7 +4,6 @@ import {NgForm} from '@angular/forms';
 import {Group} from '../../../../model/group';
 import {Observable} from 'rxjs';
 import { UserModel } from 'src/app/model/userModel';
-import { AngularFireList } from 'angularfire2/database';
 
 @Component({
   selector: 'app-group-management',

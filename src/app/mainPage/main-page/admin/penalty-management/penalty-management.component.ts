@@ -8,7 +8,6 @@ import { Penalty } from 'src/app/model/penalty';
 import { NgForm } from '@angular/forms';
 import { TaskStorageService } from 'src/app/dao/task-storage.service';
 import { SubTask } from 'src/app/model/subTask';
-import { firestore} from 'firebase';
 
 @Component({
   selector: 'app-penalty-management',
@@ -94,7 +93,7 @@ export class PenaltyManagementComponent implements OnInit {
   }
 
   onAddPenalty(form: NgForm){
-    let penalty = new Penalty(form.value.amount, firestore.Timestamp.fromDate(form.value.date));
+    let penalty = new Penalty(form.value.amount, new Date(form.value.date));
     console.log(this.currentGroup);
     console.log(this.currentAddPenaltyUser);
     console.log(this.currentAddPenaltySubtask);

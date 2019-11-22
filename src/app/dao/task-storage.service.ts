@@ -4,7 +4,6 @@ import { Task } from '../model/task';
 import {map} from 'rxjs/operators';
 import { SubTask } from '../model/subTask';
 import {Observable} from 'rxjs';
-import {AngularFirestore} from 'angularfire2/firestore';
 import {Penalty} from '../model/penalty';
 import {UserModel} from '../model/userModel';
 
@@ -13,10 +12,11 @@ import {UserModel} from '../model/userModel';
     providedIn: 'root'
 })
 export class TaskStorageService {
-    constructor(private firestore: AngularFirestore) {
+    constructor() {
     }
 
     getGroupTasks(group: Group): Observable<Task[]> {
+      /*
       return this.firestore.collection('tasks', ref => ref.where('groupId', '==', group.id)).snapshotChanges().pipe(
         map(actions => {
           return actions.map(a => {
@@ -25,10 +25,12 @@ export class TaskStorageService {
             return { id, ...data };
           });
         })
-      );
+      );*/
+      return null;
     }
 
     addTaskToGroup(group: Group, task: Task){
+      /*
       this.firestore.collection('tasks').add({
         name: task.name
       }).then(async value => {
@@ -38,25 +40,30 @@ export class TaskStorageService {
           groupId: task.groupId
         });
       });
-
+    */
 
     }
 
     deleteTaskFromGroup(group: Group, task: Task){
+      /*
       task.groupId = null;
-      this.firestore.collection('tasks').doc(task.id).update(task);
+      this.firestore.collection('tasks').doc(task.id).update(task);*/
+
     }
 
     updateGroupTask(group: Group, task: Task){
+      /*
       task.groupId = group.id;
       this.firestore.collection('tasks').doc(task.id).update({
         name: task.name,
         groupId: task.groupId,
         userId: (task.userId === undefined)? null : task.userId
       });
+      */
     }
 
-    getTaskSubtasks(task: Task): Observable<SubTask[]>{
+    getTaskSubtasks(task: Task) {
+      /*
       return this.firestore.collection('subtasks', ref => ref.where('taskId', '==', task.id)).snapshotChanges().pipe(
         map(actions => {
           return actions.map(a => {
@@ -65,10 +72,11 @@ export class TaskStorageService {
             return { id, ...data };
           });
         })
-      );
+      );*/
     }
 
-    getGroupSubtaks(group: Group){
+    getGroupSubtaks(group: Group) : Observable<SubTask[]>{
+      /*
       return this.firestore.collection('subtasks', ref => ref.where('groupId', '==', group.id)).snapshotChanges().pipe(
         map(actions => {
           return actions.map(a => {
@@ -78,9 +86,12 @@ export class TaskStorageService {
           });
         })
       );
+      */
+      return null;
     }
 
     getUserTasks(user: UserModel): Observable<Task[]>{
+      /*
       return this.firestore.collection('tasks', ref => ref.where('userId', '==', user.id)).snapshotChanges().pipe(
         map(actions => {
           return actions.map(a => {
@@ -90,9 +101,12 @@ export class TaskStorageService {
           });
         })
       );
+      */
+      return null;
     }
 
   getUserSubTasks(user: UserModel): Observable<SubTask[]>{
+      /*
     return this.firestore.collection('subtasks', ref => ref.where('userId', '==', user.id)).snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
@@ -102,9 +116,12 @@ export class TaskStorageService {
         });
       })
     );
+    */
+      return null;
   }
 
-    getGroupTaskSubtaks(group: Group, task: Task){
+    getGroupTaskSubtaks(group: Group, task: Task): Observable<SubTask[]>{
+      /*
       return this.firestore.collection('subtasks',
           ref => ref.where('groupId', '==', group.id).where('taskId', '==', task.id)).snapshotChanges().pipe(
         map(actions => {
@@ -115,10 +132,13 @@ export class TaskStorageService {
           });
         })
       );
+      */
+      return null;
   }
 
 
     addSubTask(group: Group, task: Task, subtask: SubTask){
+      /*
       subtask.groupId = group.id;
       subtask.taskId = task.id;
       this.firestore.collection('subtasks').add({
@@ -128,13 +148,16 @@ export class TaskStorageService {
         taskId: subtask.taskId,
         groupId: subtask.groupId
       });
+      */
     }
 
     deleteSubTask(subtask: SubTask){
-      this.firestore.collection('subtasks').doc(subtask.id);
+      /*
+      this.firestore.collection('subtasks').doc(subtask.id);*/
     }
 
     updateSubTask(subtask: SubTask){
+      /*
       this.firestore.collection('subtasks').doc(subtask.id).update({
         name: subtask.name,
         description: subtask.description,
@@ -162,6 +185,6 @@ export class TaskStorageService {
           subtaskId: subtask.id,
           subtaskName: subtask.name
         });
-      });
+      });*/
     }
 }
