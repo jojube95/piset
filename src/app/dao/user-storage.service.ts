@@ -1,50 +1,97 @@
 import { Injectable } from '@angular/core';
-import {AngularFireDatabase, AngularFireList} from 'angularfire2/database';
 import {Observable} from 'rxjs';
 import {UserModel} from '../model/userModel';
 import {map} from 'rxjs/operators';
-import {AngularFireAuth} from 'angularfire2/auth';
 import { Group } from '../model/group';
+import {Penalty} from '../model/penalty';
+import {HttpClient} from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserStorageService {
 
-  constructor(private af: AngularFireDatabase, private afAuth: AngularFireAuth) {
+  constructor(private http: HttpClient) {
   }
 
-  getUsersByMail(mail: string): Observable<UserModel[]>{
-    return <Observable<UserModel[]>> this.af.list('/users', ref => ref.equalTo(mail)).snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
-      )
-    );
-  }
 
   updateUserProfile(user: UserModel) {
-    this.af.object('users/' + user.key).update(user);
+    /*
+    this.firestore.collection('users').doc(user.id).update(user);
+
+    this.firestore.collection('penaltys', ref => ref.where('userId', '==', user.id)).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Penalty;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    ).subscribe(penalty => {
+      this.firestore.collection('penaltys').doc(penalty[0].id).update({
+        date: penalty[0].date,
+        amount: penalty[0].amount,
+        userId: user.id,
+        userName: user.name,
+        groupId: penalty[0].groupId,
+        groupName: penalty[0].groupName,
+        subtaskId: penalty[0].subtaskId,
+        subtaskName: penalty[0].subtaskName
+      });
+    });*/
   }
 
   getObservableUsers(): Observable<UserModel[]> {
-    return <Observable<UserModel[]>> this.af.list('users').snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
-      )
+    return this.http.get<{message: string, users: any}>('http://localhost:3000/api/users/get').pipe(map((userData) =>{
+      return userData.users.map((user) => {
+        return {
+          mail: user.mail,
+          password: user.password,
+          name: user.name,
+          secondName: user.secondName,
+          admin: user.admin,
+          id: user.id,
+          groupId: user.groupId || null
+        }
+      });
+    }));
+
+    /*
+    return this.firestore.collection('users').snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as UserModel;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
     );
+    */
+
   }
 
-
   public getCurrentUser() {
-    return this.afAuth.auth.currentUser;
+    //return this.afAuth.auth.currentUser;
   }
 
   public deleteUserFromGroup(user: UserModel, group: Group){
-    this.af.object('groups/' + group.key + '/users/' + user.key).remove();
+    /*
+    user.groupId = null;
+    this.firestore.collection('users').doc(user.id).update(user);+
+    */
   }
 
   public addUser(user: UserModel){
-    this.af.list('users').push(user);
+    /*
+    this.firestore.collection('users').add({
+      mail: user.mail,
+      password: user.password,
+      name: user.name,
+      secondName: user.secondName,
+      admin: user.admin
+    });
+    */
   }
 
 

@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, AngularFireList} from 'angularfire2/database'
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
-import { UserStorageService} from './user-storage.service';
 import {Group} from '../model/group';
 import {UserModel} from '../model/userModel';
 
@@ -11,37 +8,61 @@ import {UserModel} from '../model/userModel';
   providedIn: 'root'
 })
 export class GroupStorageService {
-  constructor(private af: AngularFireDatabase, private afAuth: AngularFireAuth, private userStorage: UserStorageService) {
+  constructor() {
   }
 
   getObservableGroups(): Observable<Group[]>{
-    return <Observable<Group[]>> this.af.list('groups').snapshotChanges().pipe(
-      map(changes =>
-        changes.map(c => ({key: c.payload.key, ...c.payload.val()}))
-      )
+    /*
+    return this.firestore.collection('groups').snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as Group;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
     );
-  } 
-
-  updateGroup(group: Group){
-    this.af.object('groups/' + group.key).update(group);
+    */
+    return null;
   }
 
-  createGroup(groupObj: Group){
-    this.af.list('groups').push(groupObj);
+  updateGroup(group: Group){
+    // this.firestore.collection('groups').doc(group.id).update(group);
+  }
+
+  createGroup(group: Group){
+    /*
+    this.firestore.collection('groups').add({
+      name: group.name
+    });*/
   }
 
   deleteGroup(group: Group){
-    this.af.object('groups/' + group.key).remove();
+    /*
+    this.firestore.collection('groups').doc(group.id).delete();
+    */
   }
 
   addUserToGroup(user: UserModel, group: Group){
-    this.af.database.ref().child('groups/' + group.key + '/users/' + user.key).set(user);
+    /*
+    user.groupId = group.id;
+    this.firestore.collection('users').doc(user.id).update(user);
+    */
   }
 
-  getUsersFromGroup(group: Group): Observable<UserModel[]> {
-    return <Observable<UserModel[]>> this.af.list('groups/' + group.key + '/users').valueChanges();
+  getUsersFromGroup(group: Group): Observable<UserModel[]>{
+    /*
+    return this.firestore.collection('users', ref => ref.where('groupId', '==', group.id)).snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data() as UserModel;
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        });
+      })
+    );*/
+    return null;
   }
-
 
 
 

@@ -4,7 +4,6 @@ import {NgForm} from '@angular/forms';
 import {Group} from '../../../../model/group';
 import {Observable} from 'rxjs';
 import { UserModel } from 'src/app/model/userModel';
-import { AngularFireList } from 'angularfire2/database';
 
 @Component({
   selector: 'app-group-management',
@@ -17,7 +16,7 @@ export class GroupManagementComponent implements OnInit {
   currentGroup: Group = new Group('', []);
   add: boolean = false;
   loading: boolean = true;
-  currentUsers: Observable<any>
+  currentUsers: Observable<UserModel[]>;
 
   constructor(private groupStorage: GroupStorageService) { }
 
@@ -47,7 +46,6 @@ export class GroupManagementComponent implements OnInit {
   }
 
   onClickDelete(group: Group){
-    console.log(group);
     this.groupStorage.deleteGroup(group);
   }
 
