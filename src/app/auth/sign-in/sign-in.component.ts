@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../auth.service';
-import {UserStorageService} from "../../dao/user-storage.service";
-
 
 @Component({
   selector: 'app-sign-in',
@@ -11,13 +9,13 @@ import {UserStorageService} from "../../dao/user-storage.service";
 })
 export class SignInComponent implements OnInit {
 
-  constructor(private authService: AuthService, private userStorageService: UserStorageService ) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
   }
 
   onSignin(form: NgForm) {
-    this.authService.signinUser(form.value.email, form.value.password);
+    this.authService.signinUser(form.value.mail, form.value.password);
   }
 
 }

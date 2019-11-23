@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {UserModel} from '../../../model/userModel';
+import {User} from '../../../model/user';
 import {SubTask} from '../../../model/subTask';
 import {PenaltyStorageService} from '../../../dao/penalty-storage.service';
 import {TaskStorageService} from '../../../dao/task-storage.service';
@@ -13,10 +13,10 @@ import {UserStorageService} from '../../../dao/user-storage.service';
 })
 export class TasksComponent implements OnInit {
 
-  usersList: Observable<UserModel[]>;
+  usersList: Observable<User[]>;
   subtasksList: Observable<SubTask[]>;
 
-  currentUser: UserModel;
+  currentUser: User;
   loadingUsers: boolean = true;
 
   userSelected: boolean = false;
@@ -31,7 +31,7 @@ export class TasksComponent implements OnInit {
     this.loadingUsers = false;
   }
 
-  onUserSelect(user: UserModel){
+  onUserSelect(user: User){
     this.userSelected = true;
     this.currentUser = null;
 

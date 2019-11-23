@@ -5,7 +5,7 @@ import {map} from 'rxjs/operators';
 import { SubTask } from '../model/subTask';
 import {Observable} from 'rxjs';
 import {Penalty} from '../model/penalty';
-import {UserModel} from '../model/userModel';
+import {User} from '../model/user';
 
 
 @Injectable({
@@ -90,7 +90,7 @@ export class TaskStorageService {
       return null;
     }
 
-    getUserTasks(user: UserModel): Observable<Task[]>{
+    getUserTasks(user: User): Observable<Task[]>{
       /*
       return this.firestore.collection('tasks', ref => ref.where('userId', '==', user.id)).snapshotChanges().pipe(
         map(actions => {
@@ -105,7 +105,7 @@ export class TaskStorageService {
       return null;
     }
 
-  getUserSubTasks(user: UserModel): Observable<SubTask[]>{
+  getUserSubTasks(user: User): Observable<SubTask[]>{
       /*
     return this.firestore.collection('subtasks', ref => ref.where('userId', '==', user.id)).snapshotChanges().pipe(
       map(actions => {

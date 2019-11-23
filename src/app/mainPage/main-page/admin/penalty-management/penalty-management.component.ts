@@ -3,7 +3,7 @@ import { PenaltyStorageService} from '../../../../dao/penalty-storage.service';
 import { Observable} from 'rxjs';
 import { Group} from '../../../../model/group';
 import { GroupStorageService} from '../../../../dao/group-storage.service';
-import { UserModel} from '../../../../model/userModel';
+import { User} from '../../../../model/user';
 import { Penalty } from 'src/app/model/penalty';
 import { NgForm } from '@angular/forms';
 import { TaskStorageService } from 'src/app/dao/task-storage.service';
@@ -20,15 +20,15 @@ export class PenaltyManagementComponent implements OnInit {
   maxDate = new Date();
 
   groupsList: Observable<Group[]>;
-  usersList: Observable<UserModel[]>;
+  usersList: Observable<User[]>;
   penaltysList: Observable<Penalty[]>;
   subtasksList: Observable<SubTask[]>;
 
   currentGroup: Group;
-  currentUser: UserModel;
+  currentUser: User;
   currentFilterDateStart: Date;
   currentFilterDateEnd: Date;
-  currentAddPenaltyUser: UserModel;
+  currentAddPenaltyUser: User;
   currentAddPenaltySubtask: SubTask;
   loadingGroups: boolean = false;
   loadingUsers: boolean = false;
@@ -64,13 +64,13 @@ export class PenaltyManagementComponent implements OnInit {
 
   }
 
-  onUserSelect(user: UserModel){
+  onUserSelect(user: User){
     this.userSelected = true;
     this.currentUser = user;
   }
 
   onAllUserSelect(){
-    this.currentUser = new UserModel('', '', 'Todos', '', false);
+    this.currentUser = new User('', '', 'Todos', '', false);
   }
 
   onDateFilterChange(value: any){
@@ -105,7 +105,7 @@ export class PenaltyManagementComponent implements OnInit {
     this.currentAddPenaltySubtask = subtask;
   }
 
-  onPenaltyUserSelect(user: UserModel){
+  onPenaltyUserSelect(user: User){
     this.currentAddPenaltyUser = user;
   }
 

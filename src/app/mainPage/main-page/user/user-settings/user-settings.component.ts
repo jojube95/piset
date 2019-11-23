@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserModel} from '../../../../model/userModel';
+import {User} from '../../../../model/user';
 import {AuthService} from '../../../../auth/auth.service';
 import {UserStorageService} from '../../../../dao/user-storage.service';
 import {NgForm} from '@angular/forms';
@@ -12,7 +12,7 @@ import {NgForm} from '@angular/forms';
 export class UserSettingsComponent implements OnInit {
   loading = true;
   //userAuth: User;
-  userLogged: UserModel;
+  userLogged: User;
 
   constructor(private authService: AuthService, private userStorage: UserStorageService) {
   }

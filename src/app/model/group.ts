@@ -1,11 +1,11 @@
-import {UserModel} from './userModel';
+import {User} from './user';
 
 export class Group {
   name: string;
-  users: UserModel[];
+  users: User[];
   id: string;
 
-  constructor(name: string, users: UserModel[]){
+  constructor(name: string, users: User[]){
     this.name = name;
     this.users = users;
   }

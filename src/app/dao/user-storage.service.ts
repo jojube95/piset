@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {UserModel} from '../model/userModel';
+import {User} from '../model/user';
 import {map} from 'rxjs/operators';
 import { Group } from '../model/group';
 import {Penalty} from '../model/penalty';
@@ -16,7 +16,7 @@ export class UserStorageService {
   }
 
 
-  updateUserProfile(user: UserModel) {
+  updateUserProfile(user: User) {
     /*
     this.firestore.collection('users').doc(user.id).update(user);
 
@@ -42,7 +42,7 @@ export class UserStorageService {
     });*/
   }
 
-  getObservableUsers(): Observable<UserModel[]> {
+  getObservableUsers(): Observable<User[]> {
     return this.http.get<{message: string, users: any}>('http://localhost:3000/api/users/get').pipe(map((userData) =>{
       return userData.users.map((user) => {
         return {
@@ -61,7 +61,7 @@ export class UserStorageService {
     return this.firestore.collection('users').snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data() as UserModel;
+          const data = a.payload.doc.data() as User;
           const id = a.payload.doc.id;
           return { id, ...data };
         });
@@ -75,14 +75,14 @@ export class UserStorageService {
     //return this.afAuth.auth.currentUser;
   }
 
-  public deleteUserFromGroup(user: UserModel, group: Group){
+  public deleteUserFromGroup(user: User, group: Group){
     /*
     user.groupId = null;
     this.firestore.collection('users').doc(user.id).update(user);+
     */
   }
 
-  public addUser(user: UserModel){
+  public addUser(user: User){
     /*
     this.firestore.collection('users').add({
       mail: user.mail,

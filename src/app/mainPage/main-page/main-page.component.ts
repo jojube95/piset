@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {UserModel} from '../../model/userModel';
+import {User} from '../../model/user';
 import {AuthService} from '../../auth/auth.service';
 import {UserStorageService} from '../../dao/user-storage.service';
 
@@ -11,7 +11,7 @@ import {UserStorageService} from '../../dao/user-storage.service';
 })
 export class MainPageComponent implements OnInit {
   loading = true;
-  userLogged: UserModel;
+  userLogged: User;
 
   constructor(private authService: AuthService, private userStorage: UserStorageService) { }
 

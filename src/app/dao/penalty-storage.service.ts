@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Group} from '../model/group';
-import {UserModel} from '../model/userModel';
+import {User} from '../model/user';
 import {SubTask} from '../model/subTask';
 import {Penalty} from '../model/penalty';
 import {map} from 'rxjs/operators';
@@ -27,7 +27,7 @@ export class PenaltyStorageService {
     return null;
   }
 
-  getUserPenaltys(user: UserModel): Observable<Penalty[]>{
+  getUserPenaltys(user: User): Observable<Penalty[]>{
     /*
     return this.firestore.collection('penaltys', ref => ref.where('userId', '==', user.id)).snapshotChanges().pipe(
       map(actions => {
@@ -55,7 +55,7 @@ export class PenaltyStorageService {
     return null;
   }
 
-  createUserPenalty(group: Group, user: UserModel, subtask: SubTask, penalty: Penalty) {
+  createUserPenalty(group: Group, user: User, subtask: SubTask, penalty: Penalty) {
 
     /*this.firestore.collection('penaltys').add({
       date: penalty.date,

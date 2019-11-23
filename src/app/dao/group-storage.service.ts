@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Group} from '../model/group';
-import {UserModel} from '../model/userModel';
+import {User} from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -43,19 +43,19 @@ export class GroupStorageService {
     */
   }
 
-  addUserToGroup(user: UserModel, group: Group){
+  addUserToGroup(user: User, group: Group){
     /*
     user.groupId = group.id;
     this.firestore.collection('users').doc(user.id).update(user);
     */
   }
 
-  getUsersFromGroup(group: Group): Observable<UserModel[]>{
+  getUsersFromGroup(group: Group): Observable<User[]>{
     /*
     return this.firestore.collection('users', ref => ref.where('groupId', '==', group.id)).snapshotChanges().pipe(
       map(actions => {
         return actions.map(a => {
-          const data = a.payload.doc.data() as UserModel;
+          const data = a.payload.doc.data() as User;
           const id = a.payload.doc.id;
           return { id, ...data };
         });

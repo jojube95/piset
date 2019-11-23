@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Router} from '@angular/router';
-import {UserModel} from '../model/userModel';
+import {User} from '../model/user';
 import {UserStorageService} from '../dao/user-storage.service';
 import {HttpClient} from "@angular/common/http";
 
@@ -17,17 +17,17 @@ export class AuthService {
     // To develop
   }
 
-  signupUser(userObj: UserModel) {
+  signupUser(userObj: User) {
 
     this.http.post('http://localhost:3000/api/users/signup', userObj).subscribe(response => {
       console.log(response);
     });
   }
 
-  signinUser(email: string, password: string) {
-    console.log(email);
+  signinUser(mail: string, password: string) {
+    console.log(mail);
     console.log(password);
-    this.http.post('http://localhost:3000/api/users/signin', {mail: email, password: password}).subscribe(response => {
+    this.http.post('http://localhost:3000/api/users/signin', {mail: mail, password: password}).subscribe(response => {
       console.log(response);
     });
 

@@ -1,4 +1,4 @@
-import {UserModel} from './userModel';
+import {User} from './user';
 import {SubTask} from './subTask';
 
 export class Penalty {

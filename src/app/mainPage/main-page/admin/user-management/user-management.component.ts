@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Group} from '../../../../model/group';
 import {GroupStorageService} from '../../../../dao/group-storage.service';
-import {UserModel} from '../../../../model/userModel';
+import {User} from '../../../../model/user';
 import {UserStorageService} from '../../../../dao/user-storage.service';
 
 @Component({
@@ -12,10 +12,10 @@ import {UserStorageService} from '../../../../dao/user-storage.service';
 })
 export class UserManagementComponent implements OnInit {
   groupsList: Observable<Group[]>;
-  usersWithoutGroup: Observable<UserModel[]> = new Observable();
+  usersWithoutGroup: Observable<User[]> = new Observable();
   currentGroup: Group = new Group('Selecciona grupo', []);
-  currentUser: UserModel = new UserModel('', '', 'Selecciona usuario', '', false);
-  currentUsers: Observable<UserModel[]>;
+  currentUser: User = new User('', '', 'Selecciona usuario', '', false);
+  currentUsers: Observable<User[]>;
   loadingGroup: boolean = true;
   loadingUsers: boolean = true;
 
@@ -39,7 +39,7 @@ export class UserManagementComponent implements OnInit {
     this.currentUsers = this.groupStorage.getUsersFromGroup(group);
   }
 
-  onUserSelect(user: UserModel){
+  onUserSelect(user: User){
     this.currentUser = user;
   }
 
@@ -47,7 +47,7 @@ export class UserManagementComponent implements OnInit {
     this.groupStorage.addUserToGroup(this.currentUser, this.currentGroup);
   }
 
-  onClickDelete(user: UserModel){
+  onClickDelete(user: User){
     this.userStorage.deleteUserFromGroup(user, this.currentGroup);
   }
 

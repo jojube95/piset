@@ -2,13 +2,9 @@ const express = require('express');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-const router = express.Router();
+const User = require('../models/user');
 
-//DB before implements mongoo
-const users = [
-  {"_id":{"$oid":"5dd2d1d21c9d440000dbb773"},"admin":true,"mail":"admin@admin.com","name":"Admin","secondName":"Admin","password":"admin"},
-  {"_id":{"$oid":"5dd2d2291c9d440000dbb775"},"admin":false,"mail":"test@test.com","name":"Test","secondName":"Test","password":"test"}
-];
+const router = express.Router();
 
 router.get('/get', (req, res, next) => {
 
@@ -21,56 +17,59 @@ router.get('/get', (req, res, next) => {
 
 router.post('/signup', (req, res, next) => {
   bcrypt.hash(req.body.password, 10).then(hash => {
-    const user = {
-      '_id': 2432153245234,
-      'admin': false,
+    const user = new User({
       'mail': req.body.mail,
+      'password': hash,
       'name': req.body.name,
       'secondName': req.body.secondName,
-      'password': req.body.password
-    };
-    //This should be mongoo query
-    users.push(user);
+      'admin': false
+    });
+    user.save().then(result => {
+      res.status(201).json({
+        message: 'User registered successfully',
+        result: result
+      });
+    }).catch(err => {
+      res.status(500).json({
+        error : err
+      })
+    });
+
   });
 
 });
 
 router.post('/signin', (req, res, next) => {
-  let exists = false;
-  let userAux = null;
-  let auth = false;
+  let fetchedUser;
 
-  //This should be maongoo query
-  users.forEach((user) => {
-    if(user.mail == req.body.mail){
-      exists = true;
-      userAux = user;
+  User.findOne({ mail: req.body.mail}).then(user => {
+    if(!user){
+      return res.status(401).json({
+        message: 'Auth failed'
+      });
     }
-  });
+    else{
+      fetchedUser = user;
+      return bcrypt.compare(req.body.password, user.password);
+    }
 
-  if(!exists){
-    auth = false;
-  }
-  else{
-    bcrypt.compare(req.body.password, userAux.password).then(result =>{
-      if(!result){
-        return res.status(401).json({
-          message: 'Failed auth'
-        });
-      }
-      else{
-        const token = jwt.sign({email: userAux.mail, userId: userAux.id}, 'secret_this_should_be_longer', {expiresIn: '1h'});
-        res.stat(200).json({
-          token: token
-        });
-      }
+  }).then(result => {
+    if(!result){
+      return res.status(401).json({
+        message: 'Auth failed'
+      });
+    }
+    else{
+      const token = jwt.sign({mail: fetchedUser.mail, userId: fetchedUser._id}, 'secret_this_should_be_longer', {expiresIn: '1h'});
+      res.status(200).json({
+        token:token
+      });
+    }
+  }).catch(err => {
+    return res.status(401).json({
+      message: 'Auth failed'
     });
-  }
-
-
-
-
-
+  });
 });
 
 module.exports = router;

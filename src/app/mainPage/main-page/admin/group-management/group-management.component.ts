@@ -3,7 +3,7 @@ import { GroupStorageService} from '../../../../dao/group-storage.service';
 import {NgForm} from '@angular/forms';
 import {Group} from '../../../../model/group';
 import {Observable} from 'rxjs';
-import { UserModel } from 'src/app/model/userModel';
+import { User } from 'src/app/model/user';
 
 @Component({
   selector: 'app-group-management',
@@ -16,7 +16,7 @@ export class GroupManagementComponent implements OnInit {
   currentGroup: Group = new Group('', []);
   add: boolean = false;
   loading: boolean = true;
-  currentUsers: Observable<UserModel[]>;
+  currentUsers: Observable<User[]>;
 
   constructor(private groupStorage: GroupStorageService) { }
 
