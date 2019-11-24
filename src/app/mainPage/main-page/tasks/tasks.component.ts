@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {User} from '../../../model/user';
 import {SubTask} from '../../../model/subTask';
-import {PenaltyStorageService} from '../../../dao/penalty-storage.service';
-import {TaskStorageService} from '../../../dao/task-storage.service';
-import {UserStorageService} from '../../../dao/user-storage.service';
+import {PenaltyStorageService} from '../../../services/penalty-storage.service';
+import {TaskStorageService} from '../../../services/task-storage.service';
+import {UserStorageService} from '../../../services/user-storage.service';
 
 @Component({
   selector: 'app-tasks',

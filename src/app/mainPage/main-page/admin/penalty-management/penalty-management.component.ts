@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { PenaltyStorageService} from '../../../../dao/penalty-storage.service';
+import { PenaltyStorageService} from '../../../../services/penalty-storage.service';
 import { Observable} from 'rxjs';
 import { Group} from '../../../../model/group';
-import { GroupStorageService} from '../../../../dao/group-storage.service';
+import { GroupStorageService} from '../../../../services/group-storage.service';
 import { User} from '../../../../model/user';
 import { Penalty } from 'src/app/model/penalty';
 import { NgForm } from '@angular/forms';
-import { TaskStorageService } from 'src/app/dao/task-storage.service';
+import { TaskStorageService } from 'src/app/services/task-storage.service';
 import { SubTask } from 'src/app/model/subTask';
 
 @Component({

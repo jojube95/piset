@@ -3,27 +3,26 @@ import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Group} from '../model/group';
 import {User} from '../model/user';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupStorageService {
-  constructor() {
+
+  constructor(private http: HttpClient) {
   }
 
   getObservableGroups(): Observable<Group[]>{
-    /*
-    return this.firestore.collection('groups').snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data() as Group;
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    );
-    */
-    return null;
+    return this.http.get<{message: string, groups: any}>('http://localhost:3000/api/groups/get').pipe(map((groupData) =>{
+      return groupData.groups.map((group) => {
+        return {
+          id: group.id,
+          name: group.name,
+          users: group.users
+        }
+      });
+    }));
   }
 
   updateGroup(group: Group){

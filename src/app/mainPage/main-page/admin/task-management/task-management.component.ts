@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Group } from 'src/app/model/group';
 import { Observable } from 'rxjs';
-import { GroupStorageService } from 'src/app/dao/group-storage.service';
+import { GroupStorageService } from 'src/app/services/group-storage.service';
 import { NgForm } from '@angular/forms';
 import { Task } from 'src/app/model/task';
-import { TaskStorageService } from 'src/app/dao/task-storage.service';
+import { TaskStorageService } from 'src/app/services/task-storage.service';
 import { SubTask } from 'src/app/model/subTask';
 
 @Component({

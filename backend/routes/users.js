@@ -7,12 +7,16 @@ const User = require('../models/user');
 const router = express.Router();
 
 router.get('/get', (req, res, next) => {
-
-  res.status(200).json({
-    message: "Success",
-    users: users
+  User.find().then(result =>{
+    res.status(200).json({
+      message: "Success",
+      users: result
+    });
+  }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
   });
-
 });
 
 router.post('/signup', (req, res, next) => {
@@ -62,7 +66,8 @@ router.post('/signin', (req, res, next) => {
     else{
       const token = jwt.sign({mail: fetchedUser.mail, userId: fetchedUser._id}, 'secret_this_should_be_longer', {expiresIn: '1h'});
       res.status(200).json({
-        token:token
+        token:token,
+        user: fetchedUser
       });
     }
   }).catch(err => {

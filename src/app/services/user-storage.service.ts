@@ -3,8 +3,8 @@ import {Observable} from 'rxjs';
 import {User} from '../model/user';
 import {map} from 'rxjs/operators';
 import { Group } from '../model/group';
-import {Penalty} from '../model/penalty';
 import {HttpClient} from '@angular/common/http';
+import {AuthService} from "../auth/auth.service";
 
 
 @Injectable({
@@ -12,7 +12,7 @@ import {HttpClient} from '@angular/common/http';
 })
 export class UserStorageService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private authService: AuthService) {
   }
 
 
@@ -57,22 +57,10 @@ export class UserStorageService {
       });
     }));
 
-    /*
-    return this.firestore.collection('users').snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data() as User;
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    );
-    */
-
   }
 
   public getCurrentUser() {
-    //return this.afAuth.auth.currentUser;
+    return this.authService.getCurrentUser();
   }
 
   public deleteUserFromGroup(user: User, group: Group){
@@ -82,17 +70,6 @@ export class UserStorageService {
     */
   }
 
-  public addUser(user: User){
-    /*
-    this.firestore.collection('users').add({
-      mail: user.mail,
-      password: user.password,
-      name: user.name,
-      secondName: user.secondName,
-      admin: user.admin
-    });
-    */
-  }
 
 
 

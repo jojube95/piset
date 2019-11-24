@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../model/user';
 import {AuthService} from '../../auth/auth.service';
-import {UserStorageService} from '../../dao/user-storage.service';
-
 
 @Component({
   selector: 'app-user-main-page',
@@ -13,17 +11,12 @@ export class MainPageComponent implements OnInit {
   loading = true;
   userLogged: User;
 
-  constructor(private authService: AuthService, private userStorage: UserStorageService) { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit() {
-    /*
-    this.userAuth = this.authService.getCurrentUser();
+    this.userLogged = this.authService.getCurrentUser();
+    this.loading = false;
 
-    this.userStorage.getObservableUsers().subscribe(async users => {
-      this.userLogged = await users.find(i => i.mail === this.userAuth.email);
-      this.loading = await false;
-
-    });*/
   }
 
   logOut(){

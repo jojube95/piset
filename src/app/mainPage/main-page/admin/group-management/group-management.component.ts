@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { GroupStorageService} from '../../../../dao/group-storage.service';
+import { GroupStorageService} from '../../../../services/group-storage.service';
 import {NgForm} from '@angular/forms';
 import {Group} from '../../../../model/group';
 import {Observable} from 'rxjs';

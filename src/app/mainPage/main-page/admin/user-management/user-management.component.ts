@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
 import {Group} from '../../../../model/group';
-import {GroupStorageService} from '../../../../dao/group-storage.service';
+import {GroupStorageService} from '../../../../services/group-storage.service';
 import {User} from '../../../../model/user';
-import {UserStorageService} from '../../../../dao/user-storage.service';
+import {UserStorageService} from '../../../../services/user-storage.service';
 
 @Component({
   selector: 'app-user-management',

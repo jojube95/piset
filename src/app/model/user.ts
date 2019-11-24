@@ -4,16 +4,16 @@ export class User {
   name: string;
   secondName: string;
   admin: boolean;
-  id: string;
+  _id: string;
   groupId: string;
 
-  constructor(mail: string, password: string, name: string, secondName: string, admin: boolean, id?: string, groupId?: string) {
+  constructor(mail: string, password: string, name: string, secondName: string, admin: boolean, _id?: string, groupId?: string) {
     this.mail = mail;
     this.password = password;
     this.name = name;
     this.secondName = secondName;
     this.admin = admin;
-    this.id = id || '';
+    this._id = _id || '';
     this.groupId = groupId || '';
   }
 
