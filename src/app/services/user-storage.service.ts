@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {User} from '../model/user';
 import {map} from 'rxjs/operators';
-import { Group } from '../model/group';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from "../auth/auth.service";
 
@@ -17,29 +16,9 @@ export class UserStorageService {
 
 
   updateUserProfile(user: User) {
-    /*
-    this.firestore.collection('users').doc(user.id).update(user);
-
-    this.firestore.collection('penaltys', ref => ref.where('userId', '==', user.id)).snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data() as Penalty;
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    ).subscribe(penalty => {
-      this.firestore.collection('penaltys').doc(penalty[0].id).update({
-        date: penalty[0].date,
-        amount: penalty[0].amount,
-        userId: user.id,
-        userName: user.name,
-        groupId: penalty[0].groupId,
-        groupName: penalty[0].groupName,
-        subtaskId: penalty[0].subtaskId,
-        subtaskName: penalty[0].subtaskName
-      });
-    });*/
+    return this.http.post('http://localhost:3000/api/users/update', user).subscribe(response => {
+      console.log(response);
+    });;
   }
 
   getObservableUsers(): Observable<User[]> {
@@ -62,16 +41,5 @@ export class UserStorageService {
   public getCurrentUser() {
     return this.authService.getCurrentUser();
   }
-
-  public deleteUserFromGroup(user: User, group: Group){
-    /*
-    user.groupId = null;
-    this.firestore.collection('users').doc(user.id).update(user);+
-    */
-  }
-
-
-
-
 
 }

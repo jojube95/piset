@@ -2,26 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="599a3f5b-6371-4e06-bb15-df79927fda14" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/backend/middleware/check-auth.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/models/group.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/backend/routes/groups.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/models/penalty.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/piset.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/piset.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/routes/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/users.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/auth/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/auth/auth.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/dao/group-storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/group-storage.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/dao/penalty-storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/penalty-storage.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/dao/task-storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/task-storage.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/dao/user-storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/user-storage.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/group-management/group-management.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/group-management/group-management.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/task-management/task-management.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/task-management/task-management.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/user-management/user-management.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/user-management/user-management.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/main-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/main-page/main-page.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/tasks/tasks.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/main-page/tasks/tasks.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/user/user-settings/user-settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/main-page/user/user-settings/user-settings.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/user.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/model/penalty.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/penalty.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/group-storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/group-storage.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/user-storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/user-storage.service.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -35,16 +25,17 @@
     <session id="2092619000">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.1" value="2" />
           <entry key="project.open.time.10" value="4" />
           <entry key="project.open.time.11" value="4" />
-          <entry key="project.open.time.12" value="2" />
+          <entry key="project.open.time.12" value="3" />
           <entry key="project.open.time.13" value="2" />
           <entry key="project.open.time.5" value="1" />
+          <entry key="project.open.time.6" value="1" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.open.time.9" value="4" />
-          <entry key="project.opened" value="20" />
+          <entry key="project.opened" value="22" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -52,9 +43,9 @@
           <entry key="css" value="1" />
           <entry key="gitignore" value="2" />
           <entry key="html" value="6" />
-          <entry key="js" value="17" />
+          <entry key="js" value="22" />
           <entry key="json" value="6" />
-          <entry key="ts" value="67" />
+          <entry key="ts" value="72" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -62,32 +53,32 @@
           <entry key="CSS" value="1" />
           <entry key="HTML" value="6" />
           <entry key="JSON" value="6" />
-          <entry key="JavaScript" value="17" />
+          <entry key="JavaScript" value="22" />
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="TypeScript" value="67" />
+          <entry key="TypeScript" value="72" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
         <counts>
-          <entry key="Angular2LanguageService" value="17" />
+          <entry key="Angular2LanguageService" value="19" />
           <entry key="TsLintLanguageService" value="6" />
-          <entry key="TypeScriptServerServiceImpl" value="1" />
+          <entry key="TypeScriptServerServiceImpl" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="69" />
-          <entry key="js" value="3765" />
+          <entry key="js" value="4626" />
           <entry key="json" value="51" />
-          <entry key="ts" value="3325" />
+          <entry key="ts" value="3547" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="69" />
           <entry key="JSON" value="51" />
-          <entry key="JavaScript" value="3765" />
-          <entry key="TypeScript" value="3325" />
+          <entry key="JavaScript" value="4626" />
+          <entry key="TypeScript" value="3547" />
         </counts>
       </usages-collector>
     </session>
@@ -104,8 +95,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/auth/auth.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="36">
-              <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+            <state relative-caret-position="342">
+              <caret line="25" column="7" lean-forward="true" selection-start-line="23" selection-start-column="69" selection-end-line="25" selection-end-column="7" />
+              <folding>
+                <element signature="e#0#43#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -113,41 +107,38 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/app.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+            <state relative-caret-position="108">
+              <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/services/user-storage.service.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="259">
+              <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
               <folding>
-                <element signature="e#0#48#0" expanded="true" />
+                <element signature="e#0#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/app/services/user-storage.service.ts">
+        <entry file="file://$PROJECT_DIR$/backend/routes/users.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="234">
-              <caret line="19" column="6" lean-forward="true" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+            <state relative-caret-position="180">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/app-routing.module.ts">
+        <entry file="file://$PROJECT_DIR$/src/app/mainPage/main-page/user/user-settings/user-settings.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
-              <caret line="17" column="34" selection-start-line="17" selection-start-column="28" selection-end-line="17" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/mainPage/main-page/main-page.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="216">
-              <caret line="12" lean-forward="true" selection-start-line="11" selection-start-column="2" selection-end-line="12" />
-              <folding>
-                <element signature="e#0#50#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="414">
+              <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -180,8 +171,6 @@
         <option value="$PROJECT_DIR$/src/app/dao/group-storage.service.ts" />
         <option value="$PROJECT_DIR$/src/app/dao/penalty-storage.service.ts" />
         <option value="$PROJECT_DIR$/src/app/mainPage/main-page/admin/group-management/group-management.component.ts" />
-        <option value="$PROJECT_DIR$/src/app/mainPage/main-page/user/user-settings/user-settings.component.ts" />
-        <option value="$PROJECT_DIR$/src/app/model/penalty.ts" />
         <option value="$PROJECT_DIR$/src/app/pipes/date-filter.pipe.ts" />
         <option value="$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.ts" />
         <option value="$PROJECT_DIR$/src/app/dao/task-storage.service.ts" />
@@ -198,21 +187,31 @@
         <option value="$PROJECT_DIR$/src/app/auth/sign-up/sign-up.component.html" />
         <option value="$PROJECT_DIR$/backend/app.js" />
         <option value="$PROJECT_DIR$/backend/middleware/check-auth.js" />
-        <option value="$PROJECT_DIR$/src/app/services/group-storage.service.ts" />
         <option value="$PROJECT_DIR$/backend/routes/groups.js" />
         <option value="$PROJECT_DIR$/backend/models/group.js" />
         <option value="$PROJECT_DIR$/src/app/auth/sign-in/sign-in.component.ts" />
-        <option value="$PROJECT_DIR$/backend/routes/users.js" />
         <option value="$PROJECT_DIR$/src/app/model/user.ts" />
         <option value="$PROJECT_DIR$/src/app/mainPage/main-page/main-page.component.ts" />
         <option value="$PROJECT_DIR$/src/app/app.component.ts" />
         <option value="$PROJECT_DIR$/src/app/auth/auth.service.ts" />
+        <option value="$PROJECT_DIR$/src/app/model/penalty.ts" />
+        <option value="$PROJECT_DIR$/src/app/services/group-storage.service.ts" />
+        <option value="$PROJECT_DIR$/src/app/mainPage/main-page/admin/user-management/user-management.component.ts" />
+        <option value="$PROJECT_DIR$/backend/models/penalty.js" />
+        <option value="$PROJECT_DIR$/src/app/mainPage/main-page/user/user-settings/user-settings.component.ts" />
         <option value="$PROJECT_DIR$/src/app/services/user-storage.service.ts" />
+        <option value="$PROJECT_DIR$/backend/routes/users.js" />
       </list>
     </option>
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
   <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
   <component name="JsGulpfileManager">
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
@@ -240,8 +239,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -253,12 +250,6 @@
               <item name="piset" type="b2602c69:ProjectViewProjectNode" />
               <item name="piset" type="462c0819:PsiDirectoryNode" />
               <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="piset" type="b2602c69:ProjectViewProjectNode" />
-              <item name="piset" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="piset" type="b2602c69:ProjectViewProjectNode" />
@@ -304,7 +295,19 @@
               <item name="piset" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="model" type="462c0819:PsiDirectoryNode" />
+              <item name="mainPage" type="462c0819:PsiDirectoryNode" />
+              <item name="main-page" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="piset" type="b2602c69:ProjectViewProjectNode" />
+              <item name="piset" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="mainPage" type="462c0819:PsiDirectoryNode" />
+              <item name="main-page" type="462c0819:PsiDirectoryNode" />
+              <item name="user" type="462c0819:PsiDirectoryNode" />
+              <item name="user-settings" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="piset" type="b2602c69:ProjectViewProjectNode" />
@@ -317,12 +320,14 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574611176567" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1574790652586" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../example" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -331,6 +336,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
@@ -408,11 +414,13 @@
       <workItem from="1574602192688" duration="1522000" />
       <workItem from="1574610042253" duration="1157000" />
       <workItem from="1574611302058" duration="2365000" />
+      <workItem from="1574717115601" duration="73000" />
+      <workItem from="1574785614980" duration="4963000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="39383000" />
+    <option name="totallyTimeSpent" value="44419000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -424,10 +432,10 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1024" y="29" width="1920" height="1017" extended-state="6" />
+    <frame x="0" y="29" width="1920" height="1021" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3272727" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.33582887" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -444,7 +452,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32992035" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.27314284" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.27531284" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -483,20 +491,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="5" column="52" selection-start-line="5" selection-start-column="52" selection-end-line="5" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/mainPage/main-page/user/user-settings/user-settings.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="27" column="9" selection-start-line="27" selection-start-column="9" selection-end-line="27" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/model/penalty.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="5" column="17" lean-forward="true" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
         </state>
       </provider>
     </entry>
@@ -556,9 +550,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="72">
           <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -600,24 +591,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/services/group-storage.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="24" column="8" selection-start-line="24" selection-start-column="8" selection-end-line="24" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/routes/groups.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="36">
           <caret line="2" column="34" selection-start-line="2" selection-start-column="34" selection-end-line="2" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/models/user.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="50" selection-start-line="11" selection-start-column="40" selection-end-line="11" selection-end-column="50" />
         </state>
       </provider>
     </entry>
@@ -638,20 +615,10 @@
     <entry file="file://$PROJECT_DIR$/src/app/auth/auth.guard.ts">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/routes/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1242">
-          <caret line="69" column="25" selection-start-line="69" selection-start-column="25" selection-end-line="69" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/auth/sign-in/sign-in.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="288">
           <caret line="18" selection-start-line="18" selection-end-line="18" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -669,16 +636,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/mainPage/main-page/main-page.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="12" lean-forward="true" selection-start-line="11" selection-start-column="2" selection-end-line="12" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/app-routing.module.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="54">
@@ -686,27 +643,92 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/app.component.ts">
+    <entry file="file://$PROJECT_DIR$/src/app/mainPage/main-page/main-page.component.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+        <state relative-caret-position="180">
+          <caret line="12" selection-start-line="11" selection-start-column="2" selection-end-line="12" />
           <folding>
-            <element signature="e#0#48#0" expanded="true" />
+            <element signature="e#0#50#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/model/penalty.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="18" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/models/user.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="162">
+          <caret line="9" selection-start-line="9" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/services/group-storage.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="61" column="8" lean-forward="true" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/models/penalty.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="234">
+          <caret line="13" column="40" selection-start-line="13" selection-start-column="40" selection-end-line="13" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/mainPage/main-page/admin/user-management/user-management.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="756">
+          <caret line="45" column="14" lean-forward="true" selection-start-line="45" selection-start-column="14" selection-end-line="45" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/mainPage/main-page/user/user-settings/user-settings.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/auth/auth.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="36">
-          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+        <state relative-caret-position="342">
+          <caret line="25" column="7" lean-forward="true" selection-start-line="23" selection-start-column="69" selection-end-line="25" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/app.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="7" column="2" selection-start-line="7" selection-start-column="2" selection-end-line="7" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/services/user-storage.service.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="19" column="6" lean-forward="true" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
+        <state relative-caret-position="259">
+          <caret line="20" column="8" lean-forward="true" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/routes/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
         </state>
       </provider>
     </entry>

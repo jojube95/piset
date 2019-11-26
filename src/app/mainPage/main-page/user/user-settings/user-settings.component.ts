@@ -11,21 +11,14 @@ import {NgForm} from '@angular/forms';
 })
 export class UserSettingsComponent implements OnInit {
   loading = true;
-  //userAuth: User;
   userLogged: User;
 
   constructor(private authService: AuthService, private userStorage: UserStorageService) {
   }
 
   ngOnInit() {
-    /*
-    this.userAuth = this.authService.getCurrentUser();
-
-    this.userStorage.getObservableUsers().subscribe(async users => {
-      this.userLogged = await users.find(i => i.mail === this.userAuth.email);
-      this.loading = await false;
-
-    });*/
+    this.userLogged = this.authService.getCurrentUser();
+    this.loading = false;
   }
 
   onUpdate(form: NgForm) {

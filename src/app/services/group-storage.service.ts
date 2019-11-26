@@ -63,6 +63,10 @@ export class GroupStorageService {
     return null;
   }
 
+  deleteUserFromGroup(user: User, group: Group){
+    this.http.post('http://localhost:3000/api/groups/deleteUser', {user: user, group: group});
+  }
+
 
 
 }

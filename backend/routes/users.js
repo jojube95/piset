@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
+const Penaly = require('../models/penalty');
 
 const router = express.Router();
 
@@ -17,6 +18,42 @@ router.get('/get', (req, res, next) => {
       error : err
     })
   });
+});
+
+router.post('/update', async (req, res, next) => {
+  let result = await User.updateOne({'_id': req.body._id}, {
+    mail: req.body.mail,
+    password: req.body.password,
+    name: req.body.name,
+    secondName: req.body.secondName,
+    admin: req.body.admin,
+    groupId: req.body.groupId || null
+  });
+
+  if(result){
+    console.log('User updated successfully');
+    //Update penaltys name too
+    let resultPenalty = await Penaly.updateMany({'userId': req.body._id}, {'$set':{'userName': req.body.name}});
+
+    if(resultPenalty){
+      console.log('Penalty user data updated successfully');
+      res.status(201).json({
+        message: 'User updated successfully',
+        result: result
+      });
+    }
+    else{
+      res.status(500).json({
+        error: err
+      });
+    }
+  }
+  else{
+    res.status(500).json({
+      error: err
+    });
+  }
+
 });
 
 router.post('/signup', (req, res, next) => {
@@ -35,38 +72,42 @@ router.post('/signup', (req, res, next) => {
       });
     }).catch(err => {
       res.status(500).json({
-        error : err
-      })
+        error: err
+
+      });
+
     });
 
   });
-
 });
 
 router.post('/signin', (req, res, next) => {
   let fetchedUser;
 
-  User.findOne({ mail: req.body.mail}).then(user => {
-    if(!user){
+  User.findOne({mail: req.body.mail}).then(user => {
+    if (!user) {
       return res.status(401).json({
         message: 'Auth failed'
       });
     }
-    else{
+    else {
       fetchedUser = user;
       return bcrypt.compare(req.body.password, user.password);
     }
 
   }).then(result => {
-    if(!result){
+    if (!result) {
       return res.status(401).json({
         message: 'Auth failed'
       });
     }
-    else{
-      const token = jwt.sign({mail: fetchedUser.mail, userId: fetchedUser._id}, 'secret_this_should_be_longer', {expiresIn: '1h'});
+    else {
+      const token = jwt.sign({
+        mail: fetchedUser.mail,
+        userId: fetchedUser._id
+      }, 'secret_this_should_be_longer', {expiresIn: '1h'});
       res.status(200).json({
-        token:token,
+        token: token,
         user: fetchedUser
       });
     }
@@ -78,5 +119,6 @@ router.post('/signin', (req, res, next) => {
 });
 
 module.exports = router;
+
 
 

@@ -1,6 +1,3 @@
-import {User} from './user';
-import {SubTask} from './subTask';
-
 export class Penalty {
   date: Date;
   amount: number;
@@ -8,7 +5,6 @@ export class Penalty {
   userId: string;
   userName: string;
   groupId: string;
-  groupName: string;
   subtaskId: string;
   subtaskName: string;
 

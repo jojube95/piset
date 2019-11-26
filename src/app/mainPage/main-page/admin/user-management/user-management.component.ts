@@ -48,7 +48,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   onClickDelete(user: User){
-    this.userStorage.deleteUserFromGroup(user, this.currentGroup);
+    this.groupStorage.deleteUserFromGroup(user, this.currentGroup);
   }
 
   
