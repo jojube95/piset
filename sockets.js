@@ -3,16 +3,30 @@
 let app = require('express')();
 let http = require('http').Server(app);
 let io = require('socket.io')(http);
+const request = require('request');
 
 io.on('connection', (socket) => {
   console.log('user connected');
 
-  socket.on('disconnect', function(){
-    console.log('user disconnected');
+  socket.on('caca', function(){
+    console.log('caca');
   });
 
-  socket.on('add-message', (message) => {
-    io.emit('message', {type:'new-message', text: message});
+  socket.on('groups', (message) => {
+    //Retrieve groups from database
+    request('http://localhost:3000/api/groups/get', function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        //Send the data to socket
+        const data = JSON.parse(body).groups;
+        console.log(data);
+        io.emit('groups', data);
+      }
+      else{
+        console.log(error)
+      }
+    });
+
+
   });
 });
 

@@ -21,12 +21,23 @@ export class GroupManagementComponent implements OnInit {
   constructor(private groupStorage: GroupStorageService) { }
 
   ngOnInit() {
+    //Leer del socket
+    this.groupsList = this.groupStorage.getGroupsFromSocket();
+    //Avisar al socket de que necesito datos
+    this.groupStorage.getGroups();
+
+    this.loading = false;
+
+
+
+    /*
     this.groupStorage.getObservableGroups().subscribe(async () => {
-      this.groupsList = await this.groupStorage.getObservableGroups();
       this.loading = await false;
-      
+      this.groupsList = await this.groupStorage.getObservableGroups();
+
 
     });
+    */
     
   }
 

@@ -5,7 +5,16 @@ const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();
 
-router.get('/get', checkAuth, (req, res, next) => {
+module.exports = function(io) {
+  console.log(io);
+
+  return router;
+}
+
+
+router.get('/get', (req, res, next) => {
+  req.socketServer.emit('caca', 'mensaje');
+
   Group.find().then(result =>{
     res.status(200).json({
       message: "Success",
@@ -19,7 +28,7 @@ router.get('/get', checkAuth, (req, res, next) => {
 });
 
 
-router.post('/post', checkAuth, (req, res, next) => {
+router.post('/post', (req, res, next) => {
 
 });
 

@@ -4,13 +4,35 @@ import {map} from 'rxjs/operators';
 import {Group} from '../model/group';
 import {User} from '../model/user';
 import {HttpClient} from "@angular/common/http";
+import * as io from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GroupStorageService {
+  private url = 'http://localhost:5000';
+  private socket;
 
   constructor(private http: HttpClient) {
+    this.socket = io(this.url);
+  }
+
+  getGroups(){
+    this.socket.emit('groups', 'need groups');
+  }
+
+
+  getGroupsFromSocket(): Observable<Group[]>{
+    return new Observable(observer => {
+      this.socket = io(this.url);
+      this.socket.on('groups', (data) => {
+        console.log(data);
+        observer.next(data);
+      });
+      return () => {
+        this.socket.disconnect();
+      };
+    });
   }
 
   getObservableGroups(): Observable<Group[]>{
