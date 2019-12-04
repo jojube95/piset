@@ -43,6 +43,25 @@ io.on('connection', (socket) => {
       }
     });
   });
+
+  socket.on('group-delete', (group) => {
+    //Delete group
+    request.post('http://localhost:3000/api/groups/delete', {
+      json: {
+        group: group
+      }
+    }, (error, res, body) => {
+      if (error) {
+        console.error(error)
+        return
+      }
+      else{
+        //Emmit data from groups socket
+        console.log('group deleted');
+        getGroups();
+      }
+    });
+  });
 });
 
 http.listen(5000, () => {

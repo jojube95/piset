@@ -39,4 +39,16 @@ router.post('/add', (req, res, next) => {
   });
 });
 
+router.post('/delete', (req, res, next) => {
+  console.log('Try to add group to db');
+  const group = new Group({
+    _id: req.body.group._id,
+    name: req.body.group.name,
+    users: req.body.group.users
+  });
+  group.deleteOne({ _id: group._id }).then(result => {
+    res.status(200).json({ message: "Group deleted!" });
+  });
+});
+
 module.exports = router;

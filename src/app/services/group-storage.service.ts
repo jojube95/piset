@@ -43,18 +43,13 @@ export class GroupStorageService {
     }));
   }
 
-  updateGroup(group: Group){
-    // this.firestore.collection('groups').doc(group.id).update(group);
+  deleteGroup(group: Group){
+    this.socket.emit('group-delete', group);
   }
+
 
   createGroup(group: Group){
     this.socket.emit('group-add', group);
-  }
-
-  deleteGroup(group: Group){
-    /*
-    this.firestore.collection('groups').doc(group.id).delete();
-    */
   }
 
   addUserToGroup(user: User, group: Group){
@@ -80,6 +75,10 @@ export class GroupStorageService {
 
   deleteUserFromGroup(user: User, group: Group){
     this.http.post('http://localhost:3000/api/groups/deleteUser', {user: user, group: group});
+  }
+
+  updateGroup(group: Group){
+    // this.firestore.collection('groups').doc(group.id).update(group);
   }
 
 
