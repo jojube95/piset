@@ -18,7 +18,7 @@ export class GroupStorageService {
   }
 
   getGroups(){
-    this.socket.emit('groups', 'need groups');
+    this.socket.emit('get-groups', 'need groups');
   }
 
 
@@ -26,12 +26,8 @@ export class GroupStorageService {
     return new Observable(observer => {
       this.socket = io(this.url);
       this.socket.on('groups', (data) => {
-        console.log(data);
         observer.next(data);
       });
-      return () => {
-        this.socket.disconnect();
-      };
     });
   }
 
@@ -52,10 +48,7 @@ export class GroupStorageService {
   }
 
   createGroup(group: Group){
-    /*
-    this.firestore.collection('groups').add({
-      name: group.name
-    });*/
+    this.socket.emit('group-add', group);
   }
 
   deleteGroup(group: Group){
