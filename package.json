@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "start:server": "nodemon server.js",
-    "start:sockets": "nodemon sockets.js"
+    "start:sockets": "nodemon sockets/sockets.js"
   },
   "private": true,
   "dependencies": {
