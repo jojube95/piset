@@ -22,21 +22,21 @@ export class UserManagementComponent implements OnInit {
   constructor(private groupStorage: GroupStorageService, private userStorage: UserStorageService) { }
 
   ngOnInit() {
-    this.groupStorage.getObservableGroups().subscribe(async () => {
-      this.groupsList =  await this.groupStorage.getObservableGroups();
-      this.loadingGroup = await false;
-    });
-    this.userStorage.getObservableUsers().subscribe(async () => {
-      this.usersWithoutGroup = await this.userStorage.getObservableUsers();
-      this.loadingUsers = await false;
+    //Read groups from socket
+    this.groupsList = this.groupStorage.getGroupsFromSocket();
+    this.currentUsers = this.userStorage.getUsersFromSocket();
+    //Tell socket that I need data
+    this.groupStorage.getGroups();
 
-    });
+    this.loadingGroup = false;
+    this.loadingUsers = false;
+
 
   }
 
   onGroupSelect(group: Group){
     this.currentGroup = group;
-    this.currentUsers = this.groupStorage.getUsersFromGroup(group);
+    this.userStorage.getUsers(group);
   }
 
   onUserSelect(user: User){

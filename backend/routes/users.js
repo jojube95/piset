@@ -8,6 +8,7 @@ const Penaly = require('../models/penalty');
 const router = express.Router();
 
 router.get('/get', (req, res, next) => {
+  console.log(req.body);
   User.find().then(result =>{
     res.status(200).json({
       message: "Success",

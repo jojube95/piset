@@ -27,7 +27,7 @@ export class TasksComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.usersList =  this.userStorage.getObservableUsers();
+    //this.usersList =  this.userStorage.getObservableUsers();
     this.loadingUsers = false;
   }
 
