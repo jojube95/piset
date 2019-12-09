@@ -8,7 +8,6 @@ const Penaly = require('../models/penalty');
 const router = express.Router();
 
 router.get('/get', (req, res, next) => {
-  console.log(req.body);
   User.find().then(result =>{
     res.status(200).json({
       message: "Success",
@@ -19,6 +18,55 @@ router.get('/get', (req, res, next) => {
       error : err
     })
   });
+});
+
+router.get('/getWithoutGroup', (req, res, next) => {
+  User.find({ groupId: null }).then(result =>{
+    res.status(200).json({
+      message: "Success",
+      users: result
+    });
+  }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
+  });
+});
+
+router.get('/getByGroup:id', (req, res, next) => {
+  User.find({ groupId: req.params.id }).then(result =>{
+    res.status(200).json({
+      message: "Success",
+      users: result
+    });
+  }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
+  });
+});
+
+router.post('/addUserToGroup', (req, res, next) => {
+  User.updateOne({'_id': req.body.user._id}, {
+    mail: req.body.user.mail,
+    password: req.body.user.password,
+    name: req.body.user.name,
+    secondName: req.body.user.secondName,
+    admin: req.body.user.admin,
+    groupId: req.body.group._id
+  }).then(result => {
+    res.status(201).json({
+      message: 'User addet to group successfully',
+      result: result
+    });
+  }).catch(err => {
+    res.status(500).json({
+      error: err
+
+    });
+
+  });
+
 });
 
 router.post('/update', async (req, res, next) => {

@@ -13,8 +13,8 @@ mongoose.connect('mongodb+srv://root:root@cluster0-53xnf.mongodb.net/piset', {us
   console.log('Connection to database failed!');
 });
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");

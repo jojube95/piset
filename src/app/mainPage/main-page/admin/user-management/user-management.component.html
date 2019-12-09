@@ -23,7 +23,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let user of (currentUsers | async); index as i">
+        <tr *ngFor="let user of (usersGroup | async); index as i">
           <td>{{ user.name }}</td>
           <td>{{ user.mail }}</td>
           <td>Multa mes</td>

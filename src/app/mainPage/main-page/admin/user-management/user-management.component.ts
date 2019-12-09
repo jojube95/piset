@@ -15,7 +15,7 @@ export class UserManagementComponent implements OnInit {
   usersWithoutGroup: Observable<User[]> = new Observable();
   currentGroup: Group = new Group('Selecciona grupo', []);
   currentUser: User = new User('', '', 'Selecciona usuario', '', false);
-  currentUsers: Observable<User[]>;
+  usersGroup: Observable<User[]> = new Observable();
   loadingGroup: boolean = true;
   loadingUsers: boolean = true;
 
@@ -24,9 +24,11 @@ export class UserManagementComponent implements OnInit {
   ngOnInit() {
     //Read groups from socket
     this.groupsList = this.groupStorage.getGroupsFromSocket();
-    this.currentUsers = this.userStorage.getUsersFromSocket();
+    this.usersGroup = this.userStorage.getUsersGroupFromSocket();
+    this.usersWithoutGroup = this.userStorage.getUsersWithoutGroupFromSocket();
     //Tell socket that I need data
     this.groupStorage.getGroups();
+    this.userStorage.getUsersWithoutGroup();
 
     this.loadingGroup = false;
     this.loadingUsers = false;
@@ -36,7 +38,7 @@ export class UserManagementComponent implements OnInit {
 
   onGroupSelect(group: Group){
     this.currentGroup = group;
-    this.userStorage.getUsers(group);
+    this.userStorage.getUsersGroup(group);
   }
 
   onUserSelect(user: User){
@@ -44,11 +46,15 @@ export class UserManagementComponent implements OnInit {
   }
 
   onAddUser(){
-    this.groupStorage.addUserToGroup(this.currentUser, this.currentGroup);
+    this.userStorage.addUserToGroup(this.currentUser, this.currentGroup);
+    this.userStorage.getUsersWithoutGroup();
+    this.userStorage.getUsersGroup(this.currentGroup);
   }
 
   onClickDelete(user: User){
-    this.groupStorage.deleteUserFromGroup(user, this.currentGroup);
+    this.userStorage.deleteUserFromGroup(user, this.currentGroup);
+    this.userStorage.getUsersWithoutGroup();
+    this.userStorage.getUsersGroup(this.currentGroup);
   }
 
   

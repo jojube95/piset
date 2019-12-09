@@ -52,13 +52,6 @@ export class GroupStorageService {
     this.socket.emit('group-add', group);
   }
 
-  addUserToGroup(user: User, group: Group){
-    /*
-    user.groupId = group.id;
-    this.firestore.collection('users').doc(user.id).update(user);
-    */
-  }
-
   getUsersFromGroup(group: Group): Observable<User[]>{
     /*
     return this.firestore.collection('users', ref => ref.where('groupId', '==', group.id)).snapshotChanges().pipe(
