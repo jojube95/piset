@@ -16,8 +16,9 @@ export class UserManagementComponent implements OnInit {
   currentGroup: Group = new Group('Selecciona grupo', []);
   currentUser: User = new User('', '', 'Selecciona usuario', '', false);
   usersGroup: Observable<User[]> = new Observable();
-  loadingGroup: boolean = true;
-  loadingUsers: boolean = true;
+
+  userSelected: boolean;
+  groupSelected: boolean;
 
   constructor(private groupStorage: GroupStorageService, private userStorage: UserStorageService) { }
 
@@ -30,33 +31,33 @@ export class UserManagementComponent implements OnInit {
     this.groupStorage.getGroups();
     this.userStorage.getUsersWithoutGroup();
 
-    this.loadingGroup = false;
-    this.loadingUsers = false;
-
+    //Set control variables
+    this.userSelected = false;
+    this.groupSelected = false;
 
   }
 
   onGroupSelect(group: Group){
     this.currentGroup = group;
     this.userStorage.getUsersGroup(group);
+    this.currentUser = new User('', '', 'Selecciona usuario', '', false);
+    this.groupSelected = true;
+    this.userSelected = false;
   }
 
   onUserSelect(user: User){
     this.currentUser = user;
+    this.userSelected = true;
   }
 
   onAddUser(){
     this.userStorage.addUserToGroup(this.currentUser, this.currentGroup);
-    this.userStorage.getUsersWithoutGroup();
-    this.userStorage.getUsersGroup(this.currentGroup);
+    this.currentUser = new User('', '', 'Selecciona usuario', '', false);
+    this.userSelected = false;
   }
 
   onClickDelete(user: User){
     this.userStorage.deleteUserFromGroup(user, this.currentGroup);
-    this.userStorage.getUsersWithoutGroup();
-    this.userStorage.getUsersGroup(this.currentGroup);
   }
-
-  
 
 }

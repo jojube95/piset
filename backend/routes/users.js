@@ -66,7 +66,30 @@ router.post('/addUserToGroup', (req, res, next) => {
     });
 
   });
+});
 
+router.delete('/deleteUserFromGroup', (req, res, next) => {
+  console.log(req.body);
+
+  User.updateOne({'_id': req.body.user._id}, {
+    mail: req.body.user.mail,
+    password: req.body.user.password,
+    name: req.body.user.name,
+    secondName: req.body.user.secondName,
+    admin: req.body.user.admin,
+    groupId: null
+  }).then(result => {
+    res.status(201).json({
+      message: 'User deleted from group successfully',
+      result: result
+    });
+  }).catch(err => {
+    res.status(500).json({
+      error: err
+
+    });
+
+  });
 });
 
 router.post('/update', async (req, res, next) => {

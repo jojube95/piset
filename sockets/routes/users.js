@@ -5,10 +5,9 @@ exports = module.exports = function(io){
 
     function getUsersByGroup(group){
       request('http://localhost:3000/api/users/getByGroup' + group._id, function (error, response, body) {
-        if (!error && response.statusCode == 200) {
+        if (!error) {
           //Send the data to socket
           const data = JSON.parse(body);
-          console.log(data);
           io.emit('users-by-group', data.users);
         }
         else{
@@ -23,7 +22,7 @@ exports = module.exports = function(io){
 
     function getUsersWithoutGroup(){
       request('http://localhost:3000/api/users/getWithoutGroup', function (error, response, body) {
-        if (!error && response.statusCode == 200) {
+        if (!error) {
           //Send the data to socket
           const data = JSON.parse(body);
           io.emit('users-without-group', data.users);
@@ -37,6 +36,47 @@ exports = module.exports = function(io){
     socket.on('get-users-without-group', () => {
       getUsersWithoutGroup();
     });
+
+
+
+    socket.on('add-user-to-group', (data) => {
+      var options = {
+        uri: 'http://localhost:3000/api/users/addUserToGroup',
+        method: 'POST',
+        json: data
+      };
+
+      request.post(options, function (error, response, body) {
+        if (!error) {
+          getUsersByGroup(data.group);
+          getUsersWithoutGroup();
+        }
+        else{
+          console.log(error)
+        }
+      });
+
+    });
+
+    socket.on('delete-user-from-group', (data) => {
+      var options = {
+        uri: 'http://localhost:3000/api/users/deleteUserFromGroup',
+        method: 'DELETE',
+        json: data
+      };
+
+      request.delete(options, function (error, response, body) {
+        if (!error) {
+          getUsersByGroup(data.group);
+          getUsersWithoutGroup();
+        }
+        else{
+          console.log(error)
+        }
+      });
+
+    });
+
 
   });
 };

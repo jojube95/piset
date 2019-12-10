@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {User} from '../model/user';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {AuthService} from "../auth/auth.service";
 import {Group} from "../model/group";
 import * as io from 'socket.io-client';
@@ -14,7 +14,6 @@ import * as io from 'socket.io-client';
 export class UserStorageService {
   private url = 'http://localhost:5000';
   private socket;
-  private options = { headers: new HttpHeaders().set('Content-Type', 'application/json') };
 
   constructor(private http: HttpClient, private authService: AuthService) {
     this.socket = io(this.url);
@@ -54,14 +53,11 @@ export class UserStorageService {
   }
 
   addUserToGroup(user: User, group: Group){
-    this.http.post('http://localhost:3000/api/users/addUserToGroup', {user: user, group: group}).subscribe(response => {
-      console.log(response);
-    });
-
+    this.socket.emit('add-user-to-group', {user: user, group: group});
   }
 
   deleteUserFromGroup(user: User, group: Group){
-
+    this.socket.emit('delete-user-from-group', {user: user, group: group});
   }
 
   public getCurrentUser() {
