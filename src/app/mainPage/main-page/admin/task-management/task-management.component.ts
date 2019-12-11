@@ -31,10 +31,16 @@ export class TaskManagementComponent implements OnInit {
   constructor(private groupStorage: GroupStorageService, private taskStorage: TaskStorageService) { }
 
   ngOnInit() {
-    this.groupStorage.getObservableGroups().subscribe(async () => {
-      this.groupsList =  await this.groupStorage.getObservableGroups();
-      this.loadingGroup = await false;
-    });
+    //Read groups from socket
+    this.groupsList = this.groupStorage.getGroupsFromSocket();
+    //Read tasks from socket
+    this.currentTasks = this.taskStorage.getGroupTasksFromSocket();
+
+    //Tell socket that I need data
+    this.groupStorage.getGroups();
+
+    //Set control variables
+    this.loadingGroup = false;
   }
 
   onClickTask(task: Task){
@@ -47,6 +53,10 @@ export class TaskManagementComponent implements OnInit {
   }
   onClickAddSubtask(){
     this.subtaskAdd = true;
+  }
+
+  onUpdateTask(){
+    this.taskStorage.updateTask(this.currentGroup, this.currentTask);
   }
 
   onClickUpdateTask(){
@@ -76,7 +86,7 @@ export class TaskManagementComponent implements OnInit {
 
   onAddUpdateTask(form: NgForm){
     let task = new Task(form.value.name, this.currentTask.subtasks, this.currentTask.id);
-    this.taskStorage.updateGroupTask(this.currentGroup, task);
+    this.taskStorage.updateTask(this.currentGroup, task);
     this.onGroupSelect(this.currentGroup);
   }
 
@@ -108,7 +118,7 @@ export class TaskManagementComponent implements OnInit {
     this.groupSelected = true;
     this.currentrSubtasks = null;
     this.currentGroup = group;
-    this.currentTasks = this.taskStorage.getGroupTasks(group);
+    this.taskStorage.getGroupTasks(group);
   }
 
   onAddTask(form: NgForm){

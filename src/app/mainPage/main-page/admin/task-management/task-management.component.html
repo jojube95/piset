@@ -55,7 +55,7 @@
               <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</span>
             </div>
 
-            <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Modificar tarea</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!f.valid" (click)="onUpdateTask()">Modificar tarea</button>
             <button type="button" class="btn" (click)="onClickCancelUpdateTask()">Atrás</button>
 
           </form>

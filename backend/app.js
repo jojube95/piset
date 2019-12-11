@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const mongoose = require('mongoose');
 const usersRoutes = require('./routes/users');
 const groupsRoutes = require('./routes/groups');
+const tasksRoutes = require('./routes/tasks');
 const io = require('socket.io-client');
 
 const app  = express();
@@ -40,6 +41,8 @@ app.use(function(req, res, next) {
 app.use('/api/users', usersRoutes);
 
 app.use('/api/groups', groupsRoutes);
+
+app.use('/api/tasks', tasksRoutes);
 
 module.exports = app;
 
