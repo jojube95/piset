@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const usersRoutes = require('./routes/users');
 const groupsRoutes = require('./routes/groups');
 const tasksRoutes = require('./routes/tasks');
+const subtasksRoutes = require('./routes/subtasks');
 const io = require('socket.io-client');
 
 const app  = express();
@@ -43,6 +44,8 @@ app.use('/api/users', usersRoutes);
 app.use('/api/groups', groupsRoutes);
 
 app.use('/api/tasks', tasksRoutes);
+
+app.use('/api/subtasks', subtasksRoutes);
 
 module.exports = app;
 

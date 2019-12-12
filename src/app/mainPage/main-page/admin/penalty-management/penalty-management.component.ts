@@ -8,6 +8,7 @@ import { Penalty } from 'src/app/model/penalty';
 import { NgForm } from '@angular/forms';
 import { TaskStorageService } from 'src/app/services/task-storage.service';
 import { SubTask } from 'src/app/model/subTask';
+import {SubtaskStorageService} from "../../../../services/subtask-storage.service";
 
 @Component({
   selector: 'app-penalty-management',
@@ -38,7 +39,7 @@ export class PenaltyManagementComponent implements OnInit {
   addPenalty = false;
 
   constructor(private penaltyStorage: PenaltyStorageService, private groupStorage: GroupStorageService,
-              private taskStorage: TaskStorageService) {
+              private taskStorage: TaskStorageService, private subtaskStorage: SubtaskStorageService) {
     this.maxDate.setDate(this.maxDate.getDate() + 7);
     this.bsRangeValue = [this.bsValue, this.maxDate];
   }
@@ -59,7 +60,7 @@ export class PenaltyManagementComponent implements OnInit {
 
     this.penaltysList = this.penaltyStorage.getGroupPenaltys(group);
 
-    this.subtasksList = this.taskStorage.getGroupSubtaks(group);
+    this.subtasksList = this.subtaskStorage.getGroupSubtasks(group);
 
 
   }

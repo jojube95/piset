@@ -6,6 +6,7 @@ import { NgForm } from '@angular/forms';
 import { Task } from 'src/app/model/task';
 import { TaskStorageService } from 'src/app/services/task-storage.service';
 import { SubTask } from 'src/app/model/subTask';
+import {SubtaskStorageService} from "../../../../services/subtask-storage.service";
 
 @Component({
   selector: 'app-task-management',
@@ -28,13 +29,15 @@ export class TaskManagementComponent implements OnInit {
   groupSelected: boolean = false;
   taskSelected: boolean = false;
 
-  constructor(private groupStorage: GroupStorageService, private taskStorage: TaskStorageService) { }
+  constructor(private groupStorage: GroupStorageService, private taskStorage: TaskStorageService, private subtaskStorage: SubtaskStorageService) { }
 
   ngOnInit() {
     //Read groups from socket
     this.groupsList = this.groupStorage.getGroupsFromSocket();
     //Read tasks from socket
     this.currentTasks = this.taskStorage.getGroupTasksFromSocket();
+    //Read subtask from socket
+    this.currentrSubtasks = this.subtaskStorage.getTasksSubtasksFromSocket();
 
     //Tell socket that I need data
     this.groupStorage.getGroups();
@@ -49,7 +52,7 @@ export class TaskManagementComponent implements OnInit {
     this.taskSelected = true;
     this.add = false;
     this.currentTask = task;
-    this.currentrSubtasks = this.taskStorage.getGroupTaskSubtaks(this.currentGroup, this.currentTask);
+    this.subtaskStorage.getTaskSubtasks(this.currentTask);
   }
   onClickAddSubtask(){
     this.subtaskAdd = true;
@@ -93,12 +96,12 @@ export class TaskManagementComponent implements OnInit {
   onUpdateSubTask(form: NgForm){
     let subtask = new SubTask(form.value.name, form.value.description, form.value.penalty, this.currentSubtask.id,
       this.currentSubtask.taskId, this.currentSubtask.groupId);
-    this.taskStorage.updateSubTask(subtask);
+    this.subtaskStorage.updateSubtask(subtask);
   }
 
   onAddSubTask(form: NgForm){
     let subtask = new SubTask(form.value.name, form.value.description, form.value.penalty);
-    this.taskStorage.addSubTask(this.currentGroup, this.currentTask, subtask);
+    this.subtaskStorage.addSubtaskToTask(subtask, this.currentTask, this.currentGroup);
   }
 
   onClickDeleteTask(task: Task){
@@ -107,7 +110,7 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onClickDeleteSubtask(subTask: SubTask){
-    this.taskStorage.deleteSubTask(subTask);
+    this.subtaskStorage.deleteSubtask(subTask);
   }
 
   onGroupSelect(group: Group){

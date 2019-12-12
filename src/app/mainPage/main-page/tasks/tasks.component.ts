@@ -5,6 +5,7 @@ import {SubTask} from '../../../model/subTask';
 import {PenaltyStorageService} from '../../../services/penalty-storage.service';
 import {TaskStorageService} from '../../../services/task-storage.service';
 import {UserStorageService} from '../../../services/user-storage.service';
+import {SubtaskStorageService} from "../../../services/subtask-storage.service";
 
 @Component({
   selector: 'app-tasks',
@@ -22,7 +23,7 @@ export class TasksComponent implements OnInit {
   userSelected: boolean = false;
 
   constructor(private penaltyStorage: PenaltyStorageService, private userStorage: UserStorageService,
-              private taskStorage: TaskStorageService) {
+              private subtaskStorage: SubtaskStorageService) {
 
   }
 
@@ -35,7 +36,7 @@ export class TasksComponent implements OnInit {
     this.userSelected = true;
     this.currentUser = null;
 
-    this.subtasksList = this.taskStorage.getUserSubTasks(user);
+    this.subtasksList = this.subtaskStorage.getUserSubtasks(user);
 
 
   }
