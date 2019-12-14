@@ -7,7 +7,7 @@ exports = module.exports = function(io){
       request('http://localhost:3000/api/subtasks/getByTask' + task._id, function (error, response, body) {
         if (!error) {
           const data = JSON.parse(body);
-          io.emit('subtasks-by-task', data.subtasks);
+          io.emit('subtasks-by-task', data.tasks);
         }
         else{
           console.log(error)
@@ -60,7 +60,7 @@ exports = module.exports = function(io){
       var options = {
         uri: 'http://localhost:3000/api/subtasks/deleteFromTask',
         method: 'DELETE',
-        json: data
+        json: data.subtask
       };
 
       request.delete(options, function (error, response, body) {

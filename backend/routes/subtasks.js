@@ -46,7 +46,8 @@ router.post('/addToTask', (req, res, next) => {
 });
 
 router.delete('/deleteFromTask', (req, res, next) => {
-  Subtask.deleteOne({'_id': req.body.subtask._id}).then(result => {
+  console.log(req.body);
+  Subtask.deleteOne({'_id': req.body._id}).then(result => {
     res.status(201).json({
       message: 'Subtask successfully',
       result: result

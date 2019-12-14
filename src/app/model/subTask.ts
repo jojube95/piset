@@ -1,20 +1,19 @@
 export class SubTask{
-    name: string;
-    description: string;
-    penalty: number;
-    id: string;
-    taskId: string;
-    userId: string;
-    groupId: string;
+  private name: string;
+  private description: string;
+  private penalty: number;
+  _id: string;
+  taskId: string;
+  userId: string;
+  groupId: string;
 
-    constructor(name: string, description: string, penalty: number, id?: string, taskId?: string, groupId?: string){
-      this.name = name;
-      this.description = description;
-      this.penalty = penalty;
-      this.id = id || null;
-      this.taskId = taskId || null;
-      this.groupId = groupId || null;
-    }
-
-
+  constructor(name: string, description: string, penalty: number, _id?: string, taskId?: string, groupId?: string, userId?: string){
+    this.name = name;
+    this.description = description;
+    this.penalty = penalty;
+    this._id = _id || null;
+    this.taskId = taskId || null;
+    this.groupId = groupId || null;
+    this.userId = userId || null;
+  }
 }

@@ -17,7 +17,7 @@ export class TaskManagementComponent implements OnInit {
   groupsList: Observable<Group[]>;
   currentGroup: Group = new Group('Selecciona grupo', []);
   currentTasks: Observable<Task[]>;
-  currentrSubtasks: Observable<any>;
+  currentrSubtasks: Observable<SubTask[]>;
   currentTask: Task;
   currentSubtask: SubTask;
   add: boolean = false;
@@ -94,9 +94,10 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onUpdateSubTask(form: NgForm){
-    let subtask = new SubTask(form.value.name, form.value.description, form.value.penalty, this.currentSubtask.id,
+    let subtask = new SubTask(form.value.name, form.value.description, form.value.penalty, this.currentSubtask._id,
       this.currentSubtask.taskId, this.currentSubtask.groupId);
-    this.subtaskStorage.updateSubtask(subtask);
+
+    this.subtaskStorage.updateSubtask(this.currentTask, subtask);
   }
 
   onAddSubTask(form: NgForm){
@@ -110,7 +111,9 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onClickDeleteSubtask(subTask: SubTask){
-    this.subtaskStorage.deleteSubtask(subTask);
+    console.log(this.currentTask);
+    console.log(subTask);
+    this.subtaskStorage.deleteSubtask(this.currentTask, subTask);
   }
 
   onGroupSelect(group: Group){
@@ -119,7 +122,6 @@ export class TaskManagementComponent implements OnInit {
     this.add = false;
     this.taskSelected = false;
     this.groupSelected = true;
-    this.currentrSubtasks = null;
     this.currentGroup = group;
     this.taskStorage.getGroupTasks(group);
   }

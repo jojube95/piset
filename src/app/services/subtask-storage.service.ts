@@ -33,15 +33,15 @@ export class SubtaskStorageService {
   }
 
   addSubtaskToTask(subtask: SubTask, task: Task, group: Group){
-    this.socket.emit('add-subtask-to-task', {task: task, subtask: subtask, group: group});
+    this.socket.emit('add-subtask-to-task', {subtask: subtask, task: task, group: group});
   }
 
-  updateSubtask(subtask: SubTask){
-    this.socket.emit('update-subtask', {subtask: subtask});
+  updateSubtask(task: Task, subtask: SubTask){
+    this.socket.emit('update-subtask', {task: task, subtask: subtask});
   }
 
-  deleteSubtask(subtask: SubTask){
-    this.socket.emit('delete-subtask', {subtask: subtask});
+  deleteSubtask(task: Task, subtask: SubTask){
+    this.socket.emit('delete-subtask', {task: task, subtask: subtask});
   }
 
   getUserSubtasks(user: User): Observable<SubTask[]>{
