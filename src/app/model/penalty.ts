@@ -8,9 +8,11 @@ export class Penalty {
   subtaskId: string;
   subtaskName: string;
 
-  constructor(amount: number, date: Date, userId?: string, groupId?: string, subtaskId?: string, _id?: string) {
+  constructor(amount: number, date: Date, userName: string, subtaskName: string, userId?: string, groupId?: string, subtaskId?: string, _id?: string) {
     this.amount = amount;
     this.date = date;
+    this.userName = userName;
+    this.subtaskName = subtaskName;
     this._id = _id || null;
     this.userId = userId || null;
     this.groupId = groupId || null;

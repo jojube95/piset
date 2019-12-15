@@ -7,7 +7,19 @@ exports = module.exports = function(io){
       request('http://localhost:3000/api/subtasks/getByTask' + task._id, function (error, response, body) {
         if (!error) {
           const data = JSON.parse(body);
-          io.emit('subtasks-by-task', data.tasks);
+          io.emit('subtasks-by-task', data.subtasks);
+        }
+        else{
+          console.log(error)
+        }
+      });
+    }
+
+    function getSubtasksByGroup(group){
+      request('http://localhost:3000/api/subtasks/getByGroup' + group._id, function (error, response, body) {
+        if (!error) {
+          const data = JSON.parse(body);
+          io.emit('subtasks-by-group', data.subtasks);
         }
         else{
           console.log(error)
@@ -18,6 +30,11 @@ exports = module.exports = function(io){
     socket.on('get-subtask-by-task', (task) => {
       getSubtasksByTask(task);
     });
+
+    socket.on('get-subtasks-by-group', (group) => {
+      getSubtasksByGroup(group);
+    });
+
 
     socket.on('add-subtask-to-task', (data) => {
       var options = {

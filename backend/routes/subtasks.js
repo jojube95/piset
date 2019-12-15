@@ -14,7 +14,20 @@ router.get('/getByTask:id', (req, res, next) => {
   Subtask.find({ taskId: req.params.id }).then(result =>{
     res.status(200).json({
       message: "Success",
-      tasks: result
+      subtasks: result
+    });
+  }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
+  });
+});
+
+router.get('/getByGroup:id', (req, res, next) => {
+  Subtask.find({ groupId: req.params.id }).then(result =>{
+    res.status(200).json({
+      message: "Success",
+      subtasks: result
     });
   }).catch(err => {
     res.status(500).json({

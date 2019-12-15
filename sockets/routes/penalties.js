@@ -3,11 +3,11 @@ const request = require('request');
 exports = module.exports = function(io){
   io.on('connection', (socket) => {
 
-    function getPenaltiesByGroupUser(group, user){
-      request('http://localhost:3000/api/penalties/getByGroup' + group._id + user._id, function (error, response, body) {
+    function getPenaltiesByGroup(group){
+      request('http://localhost:3000/api/penalties/getByGroup' + group._id, function (error, response, body) {
         if (!error) {
           const data = JSON.parse(body);
-          io.emit('penalties-by-group-user', data.penalties);
+          io.emit('penalties-filtered', data.penalties);
         }
         else{
           console.log(error)
@@ -15,20 +15,21 @@ exports = module.exports = function(io){
       });
     }
 
-    socket.on('get-penalties-by-group-user', (data) => {
-      getPenaltiesByGroupUser(data.group, data.user);
+    socket.on('get-penalties-filtered', (data) => {
+      getPenaltiesByGroup(data);
     });
 
     socket.on('add-penalty', (data) => {
+      console.log(data);
       var options = {
-        uri: 'http://localhost:3000/api/subtasks/addToTask',
+        uri: 'http://localhost:3000/api/penalties/addPenalty',
         method: 'POST',
-        json: data
+        json: data.penalty
       };
 
       request.post(options, function (error, response, body) {
         if (!error) {
-          getPenaltiesByGroupUser(data.group, data.user);
+          getPenaltiesByGroup(data.group);
         }
         else{
           console.log(error)

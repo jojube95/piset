@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const userSchema = mongoose.Schema({
+const penaltySchema = mongoose.Schema({
   date: {type: Date, required: true},
   amount: {type: Number, required: true},
   groupId: {type: String, required: true},
@@ -10,4 +10,4 @@ const userSchema = mongoose.Schema({
   subtaskName: {type: String, required: true}
 });
 
-module.exports = mongoose.model('Penalty', userSchema);
+module.exports = mongoose.model('Penalty', penaltySchema);

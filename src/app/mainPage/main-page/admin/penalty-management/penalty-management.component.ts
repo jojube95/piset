@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
 import { TaskStorageService } from 'src/app/services/task-storage.service';
 import { SubTask } from 'src/app/model/subTask';
 import {SubtaskStorageService} from "../../../../services/subtask-storage.service";
+import {UserStorageService} from "../../../../services/user-storage.service";
 
 @Component({
   selector: 'app-penalty-management',
@@ -38,15 +39,24 @@ export class PenaltyManagementComponent implements OnInit {
   userSelected: boolean = false;
   addPenalty = false;
 
-  constructor(private penaltyStorage: PenaltyStorageService, private groupStorage: GroupStorageService,
+  constructor(private penaltyStorage: PenaltyStorageService, private groupStorage: GroupStorageService, private userStorage: UserStorageService,
               private taskStorage: TaskStorageService, private subtaskStorage: SubtaskStorageService) {
     this.maxDate.setDate(this.maxDate.getDate() + 7);
     this.bsRangeValue = [this.bsValue, this.maxDate];
+
+    this.currentFilterDateStart = this.bsValue;
+    this.currentFilterDateEnd = this.maxDate;
+
   }
 
   ngOnInit() {
-    this.groupsList =  this.groupStorage.getObservableGroups();
-
+    //Read from socket
+    this.groupsList = this.groupStorage.getGroupsFromSocket();
+    this.usersList = this.userStorage.getUsersGroupFromSocket();
+    this.subtasksList = this.subtaskStorage.getGroupSubtasksFromSocket();
+    this.penaltysList = this.penaltyStorage.getFilteredPenaltysFromSocket();
+    //Tell socket that I need data
+    this.groupStorage.getGroups();
   }
 
 
@@ -55,19 +65,16 @@ export class PenaltyManagementComponent implements OnInit {
     this.groupSelected = true;
     this.currentGroup = group;
     this.currentUser = null;
-    this.usersList = this.groupStorage.getUsersFromGroup(group);
+    this.userStorage.getUsersGroup(group);
     this.loadingUsers = false;
 
-    this.penaltysList = this.penaltyStorage.getGroupPenaltys(group);
-
-    this.subtasksList = this.subtaskStorage.getGroupSubtasks(group);
-
-
+    this.penaltyStorage.getFilteredPenalties(this.currentGroup);
   }
 
   onUserSelect(user: User){
     this.userSelected = true;
     this.currentUser = user;
+
   }
 
   onAllUserSelect(){
@@ -76,13 +83,18 @@ export class PenaltyManagementComponent implements OnInit {
 
   onDateFilterChange(value: any){
     let dates = value.split(' ', 3);
-    this.currentFilterDateStart = new Date(dates[0]);
-    this.currentFilterDateEnd= new Date(dates[2]);
+
+    let dateStart = dates[0].split('/');
+    let dateEnd = dates[2].split('/');
+
+    this.currentFilterDateStart = new Date(dateStart[1] + '/' + dateStart[0] + '/' + dateStart[2]);
+    this.currentFilterDateEnd = new Date(dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2]);
   }
 
   onClickAddPenalty(){
     this.addPenalty = true;
-    this.usersList = this.groupStorage.getUsersFromGroup(this.currentGroup);
+    this.userStorage.getUsersGroup(this.currentGroup);
+    this.subtaskStorage.getGroupSubtasks(this.currentGroup);
   }
 
   onClickCancelAddPenalty(){
@@ -94,12 +106,9 @@ export class PenaltyManagementComponent implements OnInit {
   }
 
   onAddPenalty(form: NgForm){
-    let penalty = new Penalty(form.value.amount, new Date(form.value.date));
-    console.log(this.currentGroup);
-    console.log(this.currentAddPenaltyUser);
-    console.log(this.currentAddPenaltySubtask);
-    console.log(penalty);
-    this.penaltyStorage.createUserPenalty(this.currentGroup, this.currentAddPenaltyUser, this.currentAddPenaltySubtask, penalty);
+    let penalty = new Penalty(form.value.amount, new Date(form.value.date), this.currentAddPenaltyUser.name,
+      this.currentAddPenaltySubtask.name, this.currentAddPenaltyUser._id, this.currentGroup._id, this.currentAddPenaltySubtask._id);
+    this.penaltyStorage.createPenalty(this.currentGroup, this.currentAddPenaltyUser, this.currentAddPenaltySubtask, penalty);
   }
 
   onPenaltySubtaskSelect(subtask: SubTask){
@@ -109,7 +118,5 @@ export class PenaltyManagementComponent implements OnInit {
   onPenaltyUserSelect(user: User){
     this.currentAddPenaltyUser = user;
   }
-
-
 
 }

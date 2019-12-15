@@ -1,7 +1,7 @@
 export class SubTask{
-  private name: string;
-  private description: string;
-  private penalty: number;
+  name: string;
+  description: string;
+  penalty: number;
   _id: string;
   taskId: string;
   userId: string;

@@ -28,6 +28,19 @@ export class SubtaskStorageService {
     });
   }
 
+  getGroupSubtasksFromSocket(): Observable<SubTask[]>{
+    return new Observable(observer => {
+      this.socket = io(this.url);
+      this.socket.on('subtasks-by-group', (data) => {
+        observer.next(data);
+      });
+    });
+  }
+
+  getGroupSubtasks(group: Group) {
+    this.socket.emit('get-subtasks-by-group', group);
+  }
+
   getTaskSubtasks(task: Task) {
     this.socket.emit('get-subtask-by-task', task);
   }
@@ -45,10 +58,6 @@ export class SubtaskStorageService {
   }
 
   getUserSubtasks(user: User): Observable<SubTask[]>{
-    return null;
-  }
-
-  getGroupSubtasks(group: Group): Observable<SubTask[]>{
     return null;
   }
 }

@@ -31,18 +31,6 @@ export class GroupStorageService {
     });
   }
 
-  getObservableGroups(): Observable<Group[]>{
-    return this.http.get<{message: string, groups: any}>('http://localhost:3000/api/groups/get').pipe(map((groupData) =>{
-      return groupData.groups.map((group) => {
-        return {
-          id: group.id,
-          name: group.name,
-          users: group.users
-        }
-      });
-    }));
-  }
-
   deleteGroup(group: Group){
     this.socket.emit('group-delete', group);
   }

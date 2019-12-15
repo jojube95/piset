@@ -3,7 +3,7 @@ import {User} from './user';
 export class Group {
   name: string;
   users: User[];
-  id: string;
+  _id: string;
 
   constructor(name: string, users: User[]){
     this.name = name;
