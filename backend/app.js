@@ -5,6 +5,7 @@ const usersRoutes = require('./routes/users');
 const groupsRoutes = require('./routes/groups');
 const tasksRoutes = require('./routes/tasks');
 const subtasksRoutes = require('./routes/subtasks');
+const penaltiesRoutes = require('./routes/penalties');
 const io = require('socket.io-client');
 
 const app  = express();
@@ -46,6 +47,8 @@ app.use('/api/groups', groupsRoutes);
 app.use('/api/tasks', tasksRoutes);
 
 app.use('/api/subtasks', subtasksRoutes);
+
+app.use('/api/penalties', penaltiesRoutes);
 
 module.exports = app;
 

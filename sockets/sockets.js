@@ -7,6 +7,7 @@ let groups = require('./routes/groups')(io);
 let users = require('./routes/users')(io);
 let tasks = require('./routes/tasks')(io);
 let subtasks = require('./routes/subtasks')(io);
+let penalties = require('./routes/penalties')(io);
 
 
 http.listen(5000, () => {
