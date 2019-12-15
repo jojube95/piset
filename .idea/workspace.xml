@@ -2,21 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="599a3f5b-6371-4e06-bb15-df79927fda14" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/piset.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/piset.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/penalty.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/penalty.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/penalties.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/penalties.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/subtasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/subtasks.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sockets/routes/penalties.js" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/routes/penalties.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sockets/routes/subtasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/routes/subtasks.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/group.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/group.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/penalty.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/penalty.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/model/subTask.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/model/subTask.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/pipes/date-filter.pipe.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/pipes/date-filter.pipe.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/group-storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/group-storage.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/penalty-storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/penalty-storage.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/subtask-storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/subtask-storage.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -79,7 +68,7 @@
         <counts>
           <entry key="html" value="148" />
           <entry key="js" value="10287" />
-          <entry key="json" value="82" />
+          <entry key="json" value="92" />
           <entry key="ts" value="7897" />
           <entry key="txt" value="15" />
         </counts>
@@ -87,7 +76,7 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="148" />
-          <entry key="JSON" value="82" />
+          <entry key="JSON" value="92" />
           <entry key="JavaScript" value="10287" />
           <entry key="PLAIN_TEXT" value="15" />
           <entry key="TypeScript" value="7897" />
@@ -122,11 +111,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="360">
               <caret line="41" column="38" selection-start-line="41" selection-start-column="38" selection-end-line="41" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="536">
+              <caret line="51" column="37" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -197,7 +195,6 @@
         <option value="$PROJECT_DIR$/backend/routes/groups.js" />
         <option value="$PROJECT_DIR$/sockets/routes/group.js" />
         <option value="$PROJECT_DIR$/sockets/routes/groups.js" />
-        <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/src/app/auth/auth.service.ts" />
         <option value="$PROJECT_DIR$/sockets/routes/users.js" />
@@ -229,6 +226,7 @@
         <option value="$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.ts" />
         <option value="$PROJECT_DIR$/src/app/pipes/date-filter.pipe.ts" />
         <option value="$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.html" />
+        <option value="$PROJECT_DIR$/package.json" />
       </list>
     </option>
   </component>
@@ -252,7 +250,7 @@
       <path value="$PROJECT_DIR$/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="960" />
     <option name="y" value="29" />
     <option name="width" value="960" />
@@ -273,34 +271,6 @@
             <path>
               <item name="piset" type="b2602c69:ProjectViewProjectNode" />
               <item name="piset" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="piset" type="b2602c69:ProjectViewProjectNode" />
-              <item name="piset" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="piset" type="b2602c69:ProjectViewProjectNode" />
-              <item name="piset" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="piset" type="b2602c69:ProjectViewProjectNode" />
-              <item name="piset" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="piset" type="b2602c69:ProjectViewProjectNode" />
-              <item name="piset" type="462c0819:PsiDirectoryNode" />
-              <item name="sockets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="piset" type="b2602c69:ProjectViewProjectNode" />
-              <item name="piset" type="462c0819:PsiDirectoryNode" />
-              <item name="sockets" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="piset" type="b2602c69:ProjectViewProjectNode" />
@@ -490,7 +460,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="105552000" />
+    <option name="totallyTimeSpent" value="106379000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -503,9 +473,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="29" width="1920" height="1021" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.27058825" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27058825" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -522,7 +491,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="9" weight="0.32914287" />
-      <window_info anchor="bottom" id="Terminal" order="10" visible="true" weight="0.28327644" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="10" visible="true" weight="0.28327644" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -623,8 +592,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="11" column="48" selection-start-line="11" selection-start-column="48" selection-end-line="11" selection-end-column="48" />
+        <state relative-caret-position="536">
+          <caret line="51" column="37" selection-start-line="51" selection-start-column="37" selection-end-line="51" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -688,9 +657,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="198">
           <caret line="20" column="25" selection-start-line="20" selection-start-column="2" selection-end-line="20" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

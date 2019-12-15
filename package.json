@@ -24,14 +24,17 @@
     "@angular/router": "^6.0.3",
     "@ng-bootstrap/ng-bootstrap": "^4.0.0",
     "@ng-select/ng-select": "^2.20.0",
+    "ajv": "^6.10.2",
     "bcrypt": "^3.0.7",
     "bootstrap": "^4.0.0",
     "core-js": "^2.5.4",
     "express": "^4.17.1",
+    "jquery": "^3.4.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.12",
     "ngx-bootstrap": "^3.3.0",
-    "rxjs": "6.0.0",
+    "popper.js": "^1.16.0",
+    "rxjs": "6.3.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
