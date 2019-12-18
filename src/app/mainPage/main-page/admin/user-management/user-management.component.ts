@@ -24,9 +24,9 @@ export class UserManagementComponent implements OnInit {
 
   ngOnInit() {
     //Read groups from socket
-    this.groupsList = this.groupStorage.getGroupsFromSocket();
-    this.usersGroup = this.userStorage.getUsersGroupFromSocket();
-    this.usersWithoutGroup = this.userStorage.getUsersWithoutGroupFromSocket();
+    this.groupsList = this.groupStorage.observeGroupsFromSocket();
+    this.usersGroup = this.userStorage.observeUsersGroupFromSocket();
+    this.usersWithoutGroup = this.userStorage.observeUsersWithoutGroupFromSocket();
     //Tell socket that I need data
     this.groupStorage.getGroups();
     this.userStorage.getUsersWithoutGroup();

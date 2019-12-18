@@ -51,10 +51,10 @@ export class PenaltyManagementComponent implements OnInit {
 
   ngOnInit() {
     //Read from socket
-    this.groupsList = this.groupStorage.getGroupsFromSocket();
-    this.usersList = this.userStorage.getUsersGroupFromSocket();
-    this.subtasksList = this.subtaskStorage.getGroupSubtasksFromSocket();
-    this.penaltysList = this.penaltyStorage.getFilteredPenaltysFromSocket();
+    this.groupsList = this.groupStorage.observeGroupsFromSocket();
+    this.usersList = this.userStorage.observeUsersGroupFromSocket();
+    this.subtasksList = this.subtaskStorage.observeGroupSubtasksFromSocket();
+    this.penaltysList = this.penaltyStorage.observeFilteredPenaltysFromSocket();
     //Tell socket that I need data
     this.groupStorage.getGroups();
   }

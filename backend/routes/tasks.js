@@ -26,7 +26,7 @@ router.get('/getByGroup:id', (req, res, next) => {
 router.post('/addToGroup', (req, res, next) => {
   const task = new Task({
     name: req.body.task.name,
-    groupId: req.body.group._id
+    groupId: req.body.groupId
   });
 
   task.save().then(result => {
@@ -42,7 +42,7 @@ router.post('/addToGroup', (req, res, next) => {
 });
 
 router.delete('/deleteFromGroup', (req, res, next) => {
-  Task.deleteOne({'_id': req.body.task._id}).then(result => {
+  Task.deleteOne({'_id': req.body.taskId}).then(result => {
     res.status(201).json({
       message: 'Task deleted from group successfully',
       result: result
@@ -55,19 +55,22 @@ router.delete('/deleteFromGroup', (req, res, next) => {
 });
 
 router.post('/update', (req, res, next) => {
-  Task.updateOne({'_id': req.body._id}, {
-    name: req.body.name,
-    groupId: req.body.groupId || null
-  }).then(result => {
-    res.status(201).json({
-      message: 'Task updated successfully',
-      result: result
+  if(req.body.groupId != null){
+    Task.updateOne({'_id': req.body._id}, {
+      name: req.body.name,
+      groupId: req.body.groupId || null
+    }).then(result => {
+      res.status(201).json({
+        message: 'Task updated successfully',
+        result: result
+      });
+    }).catch(err => {
+      res.status(500).json({
+        error: err
+      });
     });
-  }).catch(err => {
-    res.status(500).json({
-      error: err
-    });
-  });
+  }
+
 
 });
 

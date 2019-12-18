@@ -3,8 +3,8 @@ const request = require('request');
 exports = module.exports = function(io){
   io.on('connection', (socket) => {
 
-    function getTasksByGroup(group){
-      request('http://localhost:3000/api/tasks/getByGroup' + group._id, function (error, response, body) {
+    function getTasksByGroup(groupId){
+      request('http://localhost:3000/api/tasks/getByGroup' + groupId, function (error, response, body) {
         if (!error) {
           const data = JSON.parse(body);
           io.emit('tasks-by-group', data.tasks);
@@ -15,8 +15,8 @@ exports = module.exports = function(io){
       });
     }
 
-    socket.on('get-tasks-by-group', (group) => {
-      getTasksByGroup(group);
+    socket.on('get-tasks-by-group', (groupId) => {
+      getTasksByGroup(groupId);
     });
 
     socket.on('add-task-to-group', (data) => {
@@ -28,7 +28,7 @@ exports = module.exports = function(io){
 
       request.post(options, function (error, response, body) {
         if (!error) {
-          getTasksByGroup(data.group);
+          getTasksByGroup(data.groupId);
         }
         else{
           console.log(error)
@@ -43,10 +43,9 @@ exports = module.exports = function(io){
         method: 'POST',
         json: data.task
       };
-
       request.post(options, function (error, response, body) {
         if (!error) {
-          getTasksByGroup(data.group);
+          getTasksByGroup(data.groupId);
         }
         else{
           console.log(error)
@@ -65,7 +64,7 @@ exports = module.exports = function(io){
 
       request.delete(options, function (error, response, body) {
         if (!error) {
-          getTasksByGroup(data.group);
+          getTasksByGroup(data.groupId);
         }
         else{
           console.log(error)

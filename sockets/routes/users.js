@@ -3,8 +3,8 @@ const request = require('request');
 exports = module.exports = function(io){
   io.on('connection', (socket) => {
 
-    function getUsersByGroup(group){
-      request('http://localhost:3000/api/users/getByGroup' + group._id, function (error, response, body) {
+    function getUsersByGroup(groupId){
+      request('http://localhost:3000/api/users/getByGroup' + groupId, function (error, response, body) {
         if (!error) {
           //Send the data to socket
           const data = JSON.parse(body);
@@ -16,8 +16,8 @@ exports = module.exports = function(io){
       });
     }
 
-    socket.on('get-users-by-group', (group) => {
-      getUsersByGroup(group);
+    socket.on('get-users-by-group', (groupId) => {
+      getUsersByGroup(groupId);
     });
 
     function getUsersWithoutGroup(){
@@ -48,7 +48,7 @@ exports = module.exports = function(io){
 
       request.post(options, function (error, response, body) {
         if (!error) {
-          getUsersByGroup(data.group);
+          getUsersByGroup(data.groupId);
           getUsersWithoutGroup();
         }
         else{
@@ -67,7 +67,7 @@ exports = module.exports = function(io){
 
       request.delete(options, function (error, response, body) {
         if (!error) {
-          getUsersByGroup(data.group);
+          getUsersByGroup(data.groupId);
           getUsersWithoutGroup();
         }
         else{

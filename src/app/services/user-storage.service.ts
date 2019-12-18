@@ -26,7 +26,7 @@ export class UserStorageService {
     });
   }
 
-  getUsersGroupFromSocket(): Observable<User[]> {
+  observeUsersGroupFromSocket(): Observable<User[]> {
     return new Observable(observer => {
       this.socket = io(this.url);
       this.socket.on('users-by-group', (data) => {
@@ -35,7 +35,7 @@ export class UserStorageService {
     });
   }
 
-  getUsersWithoutGroupFromSocket(): Observable<User[]> {
+  observeUsersWithoutGroupFromSocket(): Observable<User[]> {
     return new Observable(observer => {
       this.socket = io(this.url);
       this.socket.on('users-without-group', (data) => {
@@ -45,7 +45,7 @@ export class UserStorageService {
   }
 
   getUsersGroup(group: Group){
-    this.socket.emit('get-users-by-group', group);
+    this.socket.emit('get-users-by-group', group._id);
   }
 
   getUsersWithoutGroup(){
@@ -53,11 +53,11 @@ export class UserStorageService {
   }
 
   addUserToGroup(user: User, group: Group){
-    this.socket.emit('add-user-to-group', {user: user, group: group});
+    this.socket.emit('add-user-to-group', {userId: user._id, groupId: group._id});
   }
 
   deleteUserFromGroup(user: User, group: Group){
-    this.socket.emit('delete-user-from-group', {user: user, group: group});
+    this.socket.emit('delete-user-from-group', {userId: user._id, groupId: group._id});
   }
 
   public getCurrentUser() {

@@ -19,7 +19,7 @@ export class PenaltyStorageService {
     this.socket = io(this.url);
   }
 
-  getFilteredPenaltysFromSocket(): Observable<Penalty[]>{
+  observeFilteredPenaltysFromSocket(): Observable<Penalty[]>{
     return new Observable(observer => {
       this.socket = io(this.url);
       this.socket.on('penalties-filtered', (data) => {
@@ -32,19 +32,6 @@ export class PenaltyStorageService {
     this.socket.emit('get-penalties-filtered', group);
   }
 
-  getSubtaskPenaltys(subtask: SubTask): Observable<Penalty[]>{
-
-    /*return this.firestore.collection('penaltys', ref => ref.where('subtaskId', '==', subtask.id)).snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data() as Penalty;
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    );*/
-    return null;
-  }
 
   createPenalty(group: Group, user: User, subtask: SubTask, penalty: Penalty) {
     this.socket.emit('add-penalty', {group: group, user: user, penalty: penalty});

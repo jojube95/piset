@@ -33,11 +33,11 @@ export class TaskManagementComponent implements OnInit {
 
   ngOnInit() {
     //Read groups from socket
-    this.groupsList = this.groupStorage.getGroupsFromSocket();
+    this.groupsList = this.groupStorage.observeGroupsFromSocket();
     //Read tasks from socket
-    this.currentTasks = this.taskStorage.getGroupTasksFromSocket();
+    this.currentTasks = this.taskStorage.observeGroupTasksFromSocket();
     //Read subtask from socket
-    this.currentrSubtasks = this.subtaskStorage.getTasksSubtasksFromSocket();
+    this.currentrSubtasks = this.subtaskStorage.observeTasksSubtasksFromSocket();
 
     //Tell socket that I need data
     this.groupStorage.getGroups();
@@ -88,7 +88,7 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onAddUpdateTask(form: NgForm){
-    let task = new Task(form.value.name, this.currentTask.subtasks, this.currentTask.id);
+    let task = new Task(form.value.name, this.currentTask.subtasks, this.currentTask._id);
     this.taskStorage.updateTask(this.currentGroup, task);
     this.onGroupSelect(this.currentGroup);
   }

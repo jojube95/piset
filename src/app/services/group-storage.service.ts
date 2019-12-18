@@ -22,7 +22,7 @@ export class GroupStorageService {
   }
 
 
-  getGroupsFromSocket(): Observable<Group[]>{
+  observeGroupsFromSocket(): Observable<Group[]>{
     return new Observable(observer => {
       this.socket = io(this.url);
       this.socket.on('groups', (data) => {
@@ -32,36 +32,11 @@ export class GroupStorageService {
   }
 
   deleteGroup(group: Group){
-    this.socket.emit('group-delete', group);
+    this.socket.emit('group-delete', group._id);
   }
 
 
   createGroup(group: Group){
     this.socket.emit('group-add', group);
   }
-
-  getUsersFromGroup(group: Group): Observable<User[]>{
-    /*
-    return this.firestore.collection('users', ref => ref.where('groupId', '==', group.id)).snapshotChanges().pipe(
-      map(actions => {
-        return actions.map(a => {
-          const data = a.payload.doc.data() as User;
-          const id = a.payload.doc.id;
-          return { id, ...data };
-        });
-      })
-    );*/
-    return null;
-  }
-
-  deleteUserFromGroup(user: User, group: Group){
-    this.http.post('http://localhost:3000/api/groups/deleteUser', {user: user, group: group});
-  }
-
-  updateGroup(group: Group){
-    // this.firestore.collection('groups').doc(group.id).update(group);
-  }
-
-
-
 }

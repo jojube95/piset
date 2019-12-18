@@ -40,11 +40,11 @@ exports = module.exports = function(io){
       });
     });
 
-    socket.on('group-delete', (group) => {
+    socket.on('group-delete', (groupId) => {
       //Delete group
       request.post('http://localhost:3000/api/groups/delete', {
         json: {
-          group: group
+          groupId: groupId
         }
       }, (error, res, body) => {
         if (error) {
