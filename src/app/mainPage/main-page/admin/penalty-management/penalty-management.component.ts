@@ -108,7 +108,7 @@ export class PenaltyManagementComponent implements OnInit {
   onAddPenalty(form: NgForm){
     let penalty = new Penalty(form.value.amount, new Date(form.value.date), this.currentAddPenaltyUser.name,
       this.currentAddPenaltySubtask.name, this.currentAddPenaltyUser._id, this.currentGroup._id, this.currentAddPenaltySubtask._id);
-    this.penaltyStorage.createPenalty(this.currentGroup, this.currentAddPenaltyUser, this.currentAddPenaltySubtask, penalty);
+    this.penaltyStorage.createPenalty(this.currentGroup, penalty);
   }
 
   onPenaltySubtaskSelect(subtask: SubTask){

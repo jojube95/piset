@@ -3,8 +3,8 @@ const request = require('request');
 exports = module.exports = function(io){
   io.on('connection', (socket) => {
 
-    function getSubtasksByTask(task){
-      request('http://localhost:3000/api/subtasks/getByTask' + task._id, function (error, response, body) {
+    function getSubtasksByTask(taskId){
+      request('http://localhost:3000/api/subtasks/getByTask' + taskId, function (error, response, body) {
         if (!error) {
           const data = JSON.parse(body);
           io.emit('subtasks-by-task', data.subtasks);
@@ -15,8 +15,8 @@ exports = module.exports = function(io){
       });
     }
 
-    function getSubtasksByGroup(group){
-      request('http://localhost:3000/api/subtasks/getByGroup' + group._id, function (error, response, body) {
+    function getSubtasksByGroup(groupId){
+      request('http://localhost:3000/api/subtasks/getByGroup' + groupId, function (error, response, body) {
         if (!error) {
           const data = JSON.parse(body);
           io.emit('subtasks-by-group', data.subtasks);
@@ -27,12 +27,12 @@ exports = module.exports = function(io){
       });
     }
 
-    socket.on('get-subtask-by-task', (task) => {
-      getSubtasksByTask(task);
+    socket.on('get-subtask-by-task', (taskId) => {
+      getSubtasksByTask(taskId);
     });
 
-    socket.on('get-subtasks-by-group', (group) => {
-      getSubtasksByGroup(group);
+    socket.on('get-subtasks-by-group', (groupId) => {
+      getSubtasksByGroup(groupId);
     });
 
 
@@ -45,7 +45,7 @@ exports = module.exports = function(io){
 
       request.post(options, function (error, response, body) {
         if (!error) {
-          getSubtasksByTask(data.task);
+          getSubtasksByTask(data.taskId);
         }
         else{
           console.log(error)
@@ -63,7 +63,7 @@ exports = module.exports = function(io){
 
       request.post(options, function (error, response, body) {
         if (!error) {
-          getSubtasksByTask(data.task);
+          getSubtasksByTask(data.taskId);
         }
         else{
           console.log(error)
@@ -77,12 +77,12 @@ exports = module.exports = function(io){
       var options = {
         uri: 'http://localhost:3000/api/subtasks/deleteFromTask',
         method: 'DELETE',
-        json: data.subtask
+        json: data.subtaskId
       };
 
       request.delete(options, function (error, response, body) {
         if (!error) {
-          getSubtasksByTask(data.task);
+          getSubtasksByTask(data.taskId);
         }
         else{
           console.log(error)

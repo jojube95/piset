@@ -1,9 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
 import {Group} from '../model/group';
-import {User} from '../model/user';
-import {HttpClient} from "@angular/common/http";
 import * as io from 'socket.io-client';
 
 @Injectable({
@@ -13,7 +10,7 @@ export class GroupStorageService {
   private url = 'http://localhost:5000';
   private socket;
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.socket = io(this.url);
   }
 

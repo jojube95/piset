@@ -19,7 +19,6 @@ import { TasksComponent } from './mainPage/main-page/tasks/tasks.component';
 import { HistoryComponent } from './mainPage/main-page/history/history.component';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
 import { BsDatepickerModule} from 'ngx-bootstrap';
-import {DateUtilities} from './utilities/date-utilities';
 import { UserFilterPipe } from './pipes/user-filter.pipe';
 import { DateFilterPipe } from './pipes/date-filter.pipe';
 import {HttpClientModule} from '@angular/common/http';
@@ -56,7 +55,7 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule
 
   ],
-  providers: [DateUtilities],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

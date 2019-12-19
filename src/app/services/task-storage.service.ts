@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { Group } from '../model/group';
 import { Task } from '../model/task';
 import {Observable} from 'rxjs';
-import {User} from '../model/user';
-import {HttpClient} from "@angular/common/http";
 import * as io from "socket.io-client";
 
 
@@ -14,7 +12,7 @@ export class TaskStorageService {
   private url = 'http://localhost:5000';
   private socket;
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.socket = io(this.url);
   }
 

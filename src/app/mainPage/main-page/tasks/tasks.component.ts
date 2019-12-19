@@ -3,7 +3,6 @@ import {Observable} from 'rxjs';
 import {User} from '../../../model/user';
 import {SubTask} from '../../../model/subTask';
 import {PenaltyStorageService} from '../../../services/penalty-storage.service';
-import {TaskStorageService} from '../../../services/task-storage.service';
 import {UserStorageService} from '../../../services/user-storage.service';
 import {SubtaskStorageService} from "../../../services/subtask-storage.service";
 
@@ -37,8 +36,6 @@ export class TasksComponent implements OnInit {
     this.currentUser = null;
 
     this.subtasksList = this.subtaskStorage.getUserSubtasks(user);
-
-
   }
 
 

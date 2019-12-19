@@ -41,8 +41,8 @@ router.post('/addToTask', (req, res, next) => {
     name: req.body.subtask.name,
     description: req.body.subtask.description,
     penalty: req.body.subtask.penalty,
-    taskId: req.body.task._id,
-    groupId: req.body.group._id,
+    taskId: req.body.taskId,
+    groupId: req.body.groupId,
     userId: req.body.subtask.userId || null
   });
 
@@ -59,8 +59,7 @@ router.post('/addToTask', (req, res, next) => {
 });
 
 router.delete('/deleteFromTask', (req, res, next) => {
-  console.log(req.body);
-  Subtask.deleteOne({'_id': req.body._id}).then(result => {
+  Subtask.deleteOne({'_id': req.body.subtaskId}).then(result => {
     res.status(201).json({
       message: 'Subtask successfully',
       result: result

@@ -14,7 +14,6 @@ import {UserStorageService} from "../../../../services/user-storage.service";
 export class GroupManagementComponent implements OnInit {
   groupsList: Observable<Group[]>;
 
-  currentGroup: Group = new Group('', []);
   add: boolean = false;
   loading: boolean = true;
   currentUsers: Observable<User[]>;

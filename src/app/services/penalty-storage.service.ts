@@ -1,11 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Group} from '../model/group';
-import {User} from '../model/user';
-import {SubTask} from '../model/subTask';
 import {Penalty} from '../model/penalty';
-import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import {HttpClient} from "@angular/common/http";
 import * as io from "socket.io-client";
 
 @Injectable({
@@ -15,7 +11,7 @@ export class PenaltyStorageService {
   private url = 'http://localhost:5000';
   private socket;
 
-  constructor(private http: HttpClient) {
+  constructor() {
     this.socket = io(this.url);
   }
 
@@ -29,12 +25,12 @@ export class PenaltyStorageService {
   }
 
   getFilteredPenalties(group: Group) {
-    this.socket.emit('get-penalties-filtered', group);
+    this.socket.emit('get-penalties-filtered', group._id);
   }
 
 
-  createPenalty(group: Group, user: User, subtask: SubTask, penalty: Penalty) {
-    this.socket.emit('add-penalty', {group: group, user: user, penalty: penalty});
+  createPenalty(group: Group, penalty: Penalty) {
+    this.socket.emit('add-penalty', {groupId: group._id, penalty: penalty});
   }
 
   deleteGroupPenalty(penalty: Penalty){

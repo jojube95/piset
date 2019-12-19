@@ -1,7 +1,7 @@
 export class Penalty {
+  _id: string;
   date: Date;
   amount: number;
-  _id: string;
   userId: string;
   userName: string;
   groupId: string;

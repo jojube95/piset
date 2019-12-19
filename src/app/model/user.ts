@@ -1,10 +1,10 @@
 export class User {
+  _id: string;
   mail: string;
   password: string;
   name: string;
   secondName: string;
   admin: boolean;
-  _id: string;
   groupId: string;
 
   constructor(mail: string, password: string, name: string, secondName: string, admin: boolean, _id?: string, groupId?: string) {
