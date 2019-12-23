@@ -36,6 +36,19 @@ router.get('/getByGroup:id', (req, res, next) => {
   });
 });
 
+router.get('/getByUser:id', (req, res, next) => {
+  Subtask.find({ userId: req.params.id }).then(result =>{
+    res.status(200).json({
+      message: "Success",
+      subtasks: result
+    });
+  }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
+  });
+});
+
 router.post('/addToTask', (req, res, next) => {
   const subtask = new Subtask({
     name: req.body.subtask.name,
