@@ -4,15 +4,15 @@ import { RouterModule, Routes} from '@angular/router';
 import { AuthGuard} from './auth/auth.guard';
 import { SignUpComponent} from './auth/sign-up/sign-up.component';
 import { SignInComponent} from './auth/sign-in/sign-in.component';
-import { MainPageComponent} from './mainPage/main-page/main-page.component';
-import { GroupManagementComponent} from './mainPage/main-page/admin/group-management/group-management.component';
-import { TaskManagementComponent } from './mainPage/main-page/admin/task-management/task-management.component';
-import { UserManagementComponent} from './mainPage/main-page/admin/user-management/user-management.component';
-import { PenaltyManagementComponent} from './mainPage/main-page/admin/penalty-management/penalty-management.component';
-import { UserInfoComponent} from './mainPage/main-page/user/user-info/user-info.component';
-import { UserSettingsComponent} from './mainPage/main-page/user/user-settings/user-settings.component';
-import { TasksComponent} from './mainPage/main-page/tasks/tasks.component';
-import { HistoryComponent} from './mainPage/main-page/history/history.component';
+import { MainPageComponent} from './mainPage/main-page.component';
+import { GroupManagementComponent} from './mainPage/admin/group-management/group-management.component';
+import { TaskManagementComponent } from './mainPage/admin/task-management/task-management.component';
+import { UserManagementComponent} from './mainPage/admin/user-management/user-management.component';
+import { PenaltyManagementComponent} from './mainPage/admin/penalty-management/penalty-management.component';
+import { UserInfoComponent} from './mainPage/user/user-info/user-info.component';
+import { UserSettingsComponent} from './mainPage/user/user-settings/user-settings.component';
+import { TasksComponent} from './mainPage/tasks/tasks.component';
+import { HistoryComponent} from './mainPage/history/history.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/signIn', pathMatch: 'full'},

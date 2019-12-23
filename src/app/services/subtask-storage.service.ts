@@ -68,8 +68,4 @@ export class SubtaskStorageService {
   deleteSubtask(task: Task, subtask: SubTask){
     this.socket.emit('delete-subtask', {taskId: task._id, subtaskId: subtask._id});
   }
-
-  getUserSubtasks(user: User): Observable<SubTask[]>{
-    return null;
-  }
 }

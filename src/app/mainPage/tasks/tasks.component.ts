@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Observable} from 'rxjs';
-import {User} from '../../../model/user';
-import {SubTask} from '../../../model/subTask';
-import {PenaltyStorageService} from '../../../services/penalty-storage.service';
-import {UserStorageService} from '../../../services/user-storage.service';
-import {SubtaskStorageService} from "../../../services/subtask-storage.service";
+import {User} from '../../model/user';
+import {SubTask} from '../../model/subTask';
+import {PenaltyStorageService} from '../../services/penalty-storage.service';
+import {UserStorageService} from '../../services/user-storage.service';
+import {SubtaskStorageService} from "../../services/subtask-storage.service";
+import {Group} from "../../model/group";
 
 @Component({
   selector: 'app-tasks',
@@ -29,10 +30,11 @@ export class TasksComponent implements OnInit {
   ngOnInit() {
     //Observe userList of current userLogged group
     this.usersList =  this.userStorage.observeUsersGroupFromSocket();
-    
+    this.subtasksList = this.subtaskStorage.observeUserSubtasksFromSocket();
+
     //Get the userlist
     this.currentUser = this.userStorage.getCurrentUser();
-    groupAux: Group = new Group(null, null);
+    let groupAux = new Group(null, null);
     groupAux._id = this.currentUser.groupId;
     this.userStorage.getUsersGroup(groupAux);
   }
@@ -41,7 +43,7 @@ export class TasksComponent implements OnInit {
     this.userSelected = true;
     this.currentUser = null;
 
-    this.subtasksList = this.subtaskStorage.getUserSubtasks(user);
+    this.subtaskStorage.getUserSubtasks(user);
   }
 
 

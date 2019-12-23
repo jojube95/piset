@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../../../../model/user';
-import {AuthService} from '../../../../auth/auth.service';
-import {UserStorageService} from '../../../../services/user-storage.service';
+import {User} from '../../../model/user';
+import {AuthService} from '../../../auth/auth.service';
+import {UserStorageService} from '../../../services/user-storage.service';
 import {NgForm} from '@angular/forms';
 
 @Component({

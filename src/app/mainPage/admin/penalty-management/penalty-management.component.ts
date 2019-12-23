@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { PenaltyStorageService} from '../../../../services/penalty-storage.service';
+import { PenaltyStorageService} from '../../../services/penalty-storage.service';
 import { Observable} from 'rxjs';
-import { Group} from '../../../../model/group';
-import { GroupStorageService} from '../../../../services/group-storage.service';
-import { User} from '../../../../model/user';
+import { Group} from '../../../model/group';
+import { GroupStorageService} from '../../../services/group-storage.service';
+import { User} from '../../../model/user';
 import { Penalty } from 'src/app/model/penalty';
 import { NgForm } from '@angular/forms';
 import { TaskStorageService } from 'src/app/services/task-storage.service';
 import { SubTask } from 'src/app/model/subTask';
-import {SubtaskStorageService} from "../../../../services/subtask-storage.service";
-import {UserStorageService} from "../../../../services/user-storage.service";
+import {SubtaskStorageService} from "../../../services/subtask-storage.service";
+import {UserStorageService} from "../../../services/user-storage.service";
 
 @Component({
   selector: 'app-penalty-management',

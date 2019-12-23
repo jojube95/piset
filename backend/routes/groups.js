@@ -49,11 +49,17 @@ router.post('/delete', (req, res, next) => {
     res.status(200).json({ message: "Group deleted!" });
   });
   
-  User.update({ groupId: req.body.groupId }, { $set: { groupId : null } }, {multi: true});
+  User.updateMany({ groupId: req.body.groupId }, { $set: { groupId : null } }).then(result => {
+    console.log('Try users set to null');
+  });
   
-  Task.deleteMany({ groupId: req.body.groupId});
+  Task.deleteMany({ groupId: req.body.groupId}).then(result => {
+    console.log('Try tasks delete');
+  });
   
-  Subtask.deleteMany({ groupId: req.body.groupId});
+  Subtask.deleteMany({ groupId: req.body.groupId}).then(result => {
+    console.log('Try subtask delete');
+  });
 });
 
 module.exports = router;

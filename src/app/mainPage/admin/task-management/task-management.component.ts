@@ -6,7 +6,7 @@ import { NgForm } from '@angular/forms';
 import { Task } from 'src/app/model/task';
 import { TaskStorageService } from 'src/app/services/task-storage.service';
 import { SubTask } from 'src/app/model/subTask';
-import {SubtaskStorageService} from "../../../../services/subtask-storage.service";
+import {SubtaskStorageService} from "../../../services/subtask-storage.service";
 
 @Component({
   selector: 'app-task-management',
