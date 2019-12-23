@@ -2,6 +2,7 @@ const express = require('express');
 
 const MODEL_PATH = '../models/';
 const Task = require(MODEL_PATH + 'task');
+const Subtask = require(MODEL_PATH + 'subtask');
 const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();
@@ -43,6 +44,7 @@ router.post('/addToGroup', (req, res, next) => {
 
 router.delete('/deleteFromGroup', (req, res, next) => {
   Task.deleteOne({'_id': req.body.taskId}).then(result => {
+    Subtask.deleteMany({ taskId: req.body.taskId});
     res.status(201).json({
       message: 'Task deleted from group successfully',
       result: result
