@@ -26,6 +26,18 @@ exports = module.exports = function(io){
         }
       });
     }
+    
+    function getSubtasksByUser(userId){
+      request('http://localhost:3000/api/subtasks/getByUser' + userId, function (error, response, body) {
+        if (!error) {
+          const data = JSON.parse(body);
+          io.emit('subtasks-by-user', data.subtasks);
+        }
+        else{
+          console.log(error)
+        }
+      });
+    }
 
     socket.on('get-subtask-by-task', (taskId) => {
       getSubtasksByTask(taskId);
@@ -33,6 +45,10 @@ exports = module.exports = function(io){
 
     socket.on('get-subtasks-by-group', (groupId) => {
       getSubtasksByGroup(groupId);
+    });
+    
+    socket.on('get-subtasks-by-user', (userId) => {
+      getSubtasksByUser(userId);
     });
 
 
