@@ -3,37 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="599a3f5b-6371-4e06-bb15-df79927fda14" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/routes/groups.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/groups.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/group-management/group-management.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/admin/group-management/group-management.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/group-management/group-management.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/admin/group-management/group-management.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/group-management/group-management.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/admin/group-management/group-management.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/admin/penalty-management/penalty-management.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/admin/penalty-management/penalty-management.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/admin/penalty-management/penalty-management.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/task-management/task-management.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/admin/task-management/task-management.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/task-management/task-management.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/admin/task-management/task-management.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/task-management/task-management.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/admin/task-management/task-management.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/user-management/user-management.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/admin/user-management/user-management.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/user-management/user-management.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/admin/user-management/user-management.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/admin/user-management/user-management.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/admin/user-management/user-management.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/history/history.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/history/history.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/history/history.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/history/history.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/history/history.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/history/history.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/main-page.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/main-page.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/main-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/main-page.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/main-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/main-page.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/tasks/tasks.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/tasks/tasks.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/tasks/tasks.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/user/user-info/user-info.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/user/user-info/user-info.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/user/user-info/user-info.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/user/user-info/user-info.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/user/user-info/user-info.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/user/user-info/user-info.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/user/user-settings/user-settings.component.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/user/user-settings/user-settings.component.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/user/user-settings/user-settings.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/user/user-settings/user-settings.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/mainPage/main-page/user/user-settings/user-settings.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/user/user-settings/user-settings.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/app/services/subtask-storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/subtask-storage.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/subtasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/subtasks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/routes/tasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/routes/tasks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sockets/routes/subtasks.js" beforeDir="false" afterPath="$PROJECT_DIR$/sockets/routes/subtasks.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/mainPage/admin/task-management/task-management.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/admin/task-management/task-management.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/services/task-storage.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/services/task-storage.service.ts" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -70,25 +46,25 @@
           <entry key="Local (1)" value="1" />
           <entry key="Local (2)" value="1" />
           <entry key="browserslist" value="1" />
-          <entry key="css" value="2" />
+          <entry key="css" value="3" />
           <entry key="gitignore" value="2" />
-          <entry key="html" value="24" />
-          <entry key="js" value="143" />
+          <entry key="html" value="25" />
+          <entry key="js" value="155" />
           <entry key="json" value="11" />
           <entry key="md" value="1" />
-          <entry key="ts" value="235" />
+          <entry key="ts" value="240" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="CSS" value="2" />
-          <entry key="HTML" value="24" />
+          <entry key="CSS" value="3" />
+          <entry key="HTML" value="25" />
           <entry key="JSON" value="11" />
-          <entry key="JavaScript" value="143" />
+          <entry key="JavaScript" value="155" />
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="3" />
           <entry key="Terminal Session" value="2" />
-          <entry key="TypeScript" value="235" />
+          <entry key="TypeScript" value="240" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.js.language.service.starts">
@@ -100,20 +76,20 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="148" />
-          <entry key="js" value="10635" />
+          <entry key="html" value="215" />
+          <entry key="js" value="11595" />
           <entry key="json" value="92" />
-          <entry key="ts" value="8243" />
+          <entry key="ts" value="8412" />
           <entry key="txt" value="15" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="148" />
+          <entry key="HTML" value="215" />
           <entry key="JSON" value="92" />
-          <entry key="JavaScript" value="10635" />
+          <entry key="JavaScript" value="11595" />
           <entry key="PLAIN_TEXT" value="15" />
-          <entry key="TypeScript" value="8243" />
+          <entry key="TypeScript" value="8412" />
         </counts>
       </usages-collector>
     </session>
@@ -128,10 +104,22 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="355">
+              <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
+              <folding>
+                <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+            <state relative-caret-position="387">
+              <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
               <folding>
                 <element signature="e#0#50#0" expanded="true" />
               </folding>
@@ -140,10 +128,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/app/services/subtask-storage.service.ts">
+        <entry file="file://$PROJECT_DIR$/src/app/services/task-storage.service.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="38" column="31" selection-start-line="38" selection-start-column="2" selection-end-line="38" selection-end-column="31" />
+            <state relative-caret-position="369">
+              <caret line="45" column="70" selection-start-line="45" selection-start-column="63" selection-end-line="45" selection-end-column="70" />
               <folding>
                 <element signature="e#0#43#0" expanded="true" />
               </folding>
@@ -151,29 +139,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sockets/routes/groups.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="828">
-              <caret line="46" column="26" selection-start-line="46" selection-start-column="26" selection-end-line="46" selection-end-column="26" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sockets/routes/penalties.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="17" column="7" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/backend/routes/groups.js">
+        <entry file="file://$PROJECT_DIR$/backend/routes/tasks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="49" column="5" lean-forward="true" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+            <state relative-caret-position="333">
+              <caret line="101" selection-start-line="101" selection-end-line="101" />
             </state>
           </provider>
         </entry>
@@ -192,17 +162,18 @@
       <find>bodyParse</find>
       <find>log</find>
       <find>console.lo</find>
-      <find>console.log</find>
       <find>update-task</find>
       <find>socket</find>
       <find>io</find>
+      <find>deleteFromTask</find>
+      <find>console.log</find>
     </findStrings>
     <dirStrings>
-      <dir>$PROJECT_DIR$/src/app</dir>
       <dir>$PROJECT_DIR$</dir>
       <dir>$PROJECT_DIR$/backend</dir>
       <dir>$PROJECT_DIR$/sockets</dir>
       <dir>$PROJECT_DIR$/src</dir>
+      <dir>$PROJECT_DIR$/src/app</dir>
     </dirStrings>
   </component>
   <component name="Git.Settings">
@@ -211,7 +182,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/app/auth/sign-in/sign-in.component.html" />
         <option value="$PROJECT_DIR$/src/app/auth/sign-up/sign-up.component.ts" />
         <option value="$PROJECT_DIR$/src/app/auth/sign-up/sign-up.component.html" />
         <option value="$PROJECT_DIR$/backend/middleware/check-auth.js" />
@@ -242,10 +212,7 @@
         <option value="$PROJECT_DIR$/backend/routes/users.js" />
         <option value="$PROJECT_DIR$/backend/models/task.js" />
         <option value="$PROJECT_DIR$/src/app/mainPage/main-page/admin/task-management/task-management.component.ts" />
-        <option value="$PROJECT_DIR$/backend/routes/tasks.js" />
         <option value="$PROJECT_DIR$/sockets/routes/tasks.js" />
-        <option value="$PROJECT_DIR$/sockets/routes/subtasks.js" />
-        <option value="$PROJECT_DIR$/backend/routes/subtasks.js" />
         <option value="$PROJECT_DIR$/sockets/routes/penalties.js" />
         <option value="$PROJECT_DIR$/src/app/mainPage/main-page/admin/penalty-management/penalty-management.component.ts" />
         <option value="$PROJECT_DIR$/src/app/mainPage/main-page/tasks/tasks.component.ts" />
@@ -255,13 +222,17 @@
         <option value="$PROJECT_DIR$/src/app/model/subTask.ts" />
         <option value="$PROJECT_DIR$/src/app/model/penalty.ts" />
         <option value="$PROJECT_DIR$/src/app/model/group.ts" />
-        <option value="$PROJECT_DIR$/src/app/services/task-storage.service.ts" />
         <option value="$PROJECT_DIR$/src/app/services/penalty-storage.service.ts" />
         <option value="$PROJECT_DIR$/src/app/services/group-storage.service.ts" />
         <option value="$PROJECT_DIR$/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/src/app/services/subtask-storage.service.ts" />
-        <option value="$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.ts" />
         <option value="$PROJECT_DIR$/backend/routes/groups.js" />
+        <option value="$PROJECT_DIR$/sockets/routes/subtasks.js" />
+        <option value="$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.html" />
+        <option value="$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.ts" />
+        <option value="$PROJECT_DIR$/src/app/services/task-storage.service.ts" />
+        <option value="$PROJECT_DIR$/backend/routes/subtasks.js" />
+        <option value="$PROJECT_DIR$/backend/routes/tasks.js" />
       </list>
     </option>
   </component>
@@ -317,6 +288,12 @@
               <item name="piset" type="b2602c69:ProjectViewProjectNode" />
               <item name="piset" type="462c0819:PsiDirectoryNode" />
               <item name="backend" type="462c0819:PsiDirectoryNode" />
+              <item name="functions" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="piset" type="b2602c69:ProjectViewProjectNode" />
+              <item name="piset" type="462c0819:PsiDirectoryNode" />
+              <item name="backend" type="462c0819:PsiDirectoryNode" />
               <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -341,6 +318,35 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="piset" type="b2602c69:ProjectViewProjectNode" />
+              <item name="piset" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="auth" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="piset" type="b2602c69:ProjectViewProjectNode" />
+              <item name="piset" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="mainPage" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="piset" type="b2602c69:ProjectViewProjectNode" />
+              <item name="piset" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="mainPage" type="462c0819:PsiDirectoryNode" />
+              <item name="tasks" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="piset" type="b2602c69:ProjectViewProjectNode" />
+              <item name="piset" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -351,7 +357,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1577119664358" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1577125918014" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.tslint" value="project" />
@@ -360,7 +366,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
   </component>
   <component name="RecentsManager">
@@ -467,12 +473,12 @@
       <workItem from="1576941120072" duration="24000" />
       <workItem from="1576945291500" duration="4785000" />
       <workItem from="1577016707557" duration="2001000" />
-      <workItem from="1577117578092" duration="2006000" />
+      <workItem from="1577117578092" duration="7953000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122538000" />
+    <option name="totallyTimeSpent" value="128485000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -524,33 +530,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/app/mainPage/admin/penalty-management/penalty-management.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="449">
-          <caret line="46" column="76" selection-start-line="46" selection-start-column="76" selection-end-line="46" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/routes/penalties.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-72">
-          <caret line="14" column="6" selection-start-line="14" selection-start-column="6" selection-end-line="14" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/auth/auth.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="25" column="7" lean-forward="true" selection-start-line="25" selection-start-column="7" selection-end-line="25" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/auth/auth.guard.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/auth/sign-up/sign-up.component.ts">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/auth/sign-in/sign-in.component.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="324">
@@ -592,13 +571,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/model/task.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/model/subTask.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -615,13 +587,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/pipes/user-filter.pipe.ts">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/services/task-storage.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/services/penalty-storage.service.ts">
       <provider selected="true" editor-type-id="text-editor">
@@ -692,9 +657,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sockets/sockets.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/app/model/penalty.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
@@ -702,18 +664,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/functions/functions.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/middleware/check-auth.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sockets/routes/subtasks.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="72" column="7" lean-forward="true" selection-start-line="56" selection-start-column="4" selection-end-line="72" selection-end-column="7" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
@@ -752,33 +704,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/app.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/models/user.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/backend/routes/users.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="35" selection-start-line="35" selection-end-line="46" selection-end-column="3" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sockets/routes/users.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="108">
           <caret line="6" column="68" selection-start-line="6" selection-start-column="58" selection-end-line="6" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -799,6 +731,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/backend/routes/groups.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="49" column="5" lean-forward="true" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sockets/routes/penalties.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -806,10 +745,98 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/routes/groups.js">
+    <entry file="file://$PROJECT_DIR$/backend/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="180">
-          <caret line="49" column="5" lean-forward="true" selection-start-line="49" selection-start-column="5" selection-end-line="49" selection-end-column="5" />
+        <state relative-caret-position="378">
+          <caret line="48" column="39" selection-start-line="48" selection-start-column="25" selection-end-line="48" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sockets/sockets.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/model/task.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sockets/routes/subtasks.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="801">
+          <caret line="87" lean-forward="true" selection-start-line="87" selection-end-line="87" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="355">
+          <caret line="31" column="32" selection-start-line="31" selection-start-column="32" selection-end-line="31" selection-end-column="32" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/mainPage/tasks/tasks.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="387">
+          <caret line="53" column="44" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/auth/auth.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="216">
+          <caret line="12" column="62" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="62" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/services/task-storage.service.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="369">
+          <caret line="45" column="70" selection-start-line="45" selection-start-column="63" selection-end-line="45" selection-end-column="70" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/routes/subtasks.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="41" column="55" lean-forward="true" selection-start-line="41" selection-start-column="2" selection-end-line="41" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/routes/users.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="49" column="80" selection-start-line="49" selection-start-column="43" selection-end-line="49" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/functions/functions.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="513">
+          <caret line="40" column="58" lean-forward="true" selection-start-line="34" selection-start-column="4" selection-end-line="40" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/routes/tasks.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="333">
+          <caret line="101" selection-start-line="101" selection-end-line="101" />
         </state>
       </provider>
     </entry>

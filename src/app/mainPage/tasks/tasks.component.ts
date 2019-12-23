@@ -6,6 +6,7 @@ import {PenaltyStorageService} from '../../services/penalty-storage.service';
 import {UserStorageService} from '../../services/user-storage.service';
 import {SubtaskStorageService} from "../../services/subtask-storage.service";
 import {Group} from "../../model/group";
+import {TaskStorageService} from "../../services/task-storage.service";
 
 @Component({
   selector: 'app-tasks',
@@ -18,12 +19,13 @@ export class TasksComponent implements OnInit {
   subtasksList: Observable<SubTask[]>;
 
   currentUser: User;
-  loadingUsers: boolean = true;
+
+  loggedUser: User;
 
   userSelected: boolean = false;
 
   constructor(private penaltyStorage: PenaltyStorageService, private userStorage: UserStorageService,
-              private subtaskStorage: SubtaskStorageService) {
+              private subtaskStorage: SubtaskStorageService, private taskStorage: TaskStorageService) {
 
   }
 
@@ -33,18 +35,23 @@ export class TasksComponent implements OnInit {
     this.subtasksList = this.subtaskStorage.observeUserSubtasksFromSocket();
 
     //Get the userlist
-    this.currentUser = this.userStorage.getCurrentUser();
+    this.loggedUser = this.userStorage.getCurrentUser();
     let groupAux = new Group(null, null);
-    groupAux._id = this.currentUser.groupId;
+    groupAux._id = this.loggedUser.groupId;
     this.userStorage.getUsersGroup(groupAux);
   }
 
   onUserSelect(user: User){
     this.userSelected = true;
-    this.currentUser = null;
+    this.currentUser = user;
 
     this.subtaskStorage.getUserSubtasks(user);
   }
 
+  reasignTasks(){
+    let groupAux = new Group(null, null);
+    groupAux._id = this.loggedUser.groupId;
+    this.taskStorage.reasignTasks(groupAux);
+  }
 
 }

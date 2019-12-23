@@ -111,8 +111,6 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onClickDeleteSubtask(subTask: SubTask){
-    console.log(this.currentTask);
-    console.log(subTask);
     this.subtaskStorage.deleteSubtask(this.currentTask, subTask);
   }
 

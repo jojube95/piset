@@ -3,6 +3,7 @@ import { Group } from '../model/group';
 import { Task } from '../model/task';
 import {Observable} from 'rxjs';
 import * as io from "socket.io-client";
+import {HttpClient} from "@angular/common/http";
 
 
 @Injectable({
@@ -12,7 +13,7 @@ export class TaskStorageService {
   private url = 'http://localhost:5000';
   private socket;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.socket = io(this.url);
   }
 
@@ -39,5 +40,11 @@ export class TaskStorageService {
 
   updateTask(group: Group, task: Task){
     this.socket.emit('update-task', {task: task, groupId: group._id});
+  }
+
+  reasignTasks(group: Group){
+    this.http.post('http://localhost:3000/api/tasks/reasign', {groupId: group._id}).subscribe(response => {
+      console.log(response);
+    });
   }
 }

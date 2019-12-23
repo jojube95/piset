@@ -3,6 +3,7 @@ const express = require('express');
 const MODEL_PATH = '../models/';
 const Task = require(MODEL_PATH + 'task');
 const Subtask = require(MODEL_PATH + 'subtask');
+const User = require(MODEL_PATH + 'user');
 const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();
@@ -72,9 +73,53 @@ router.post('/update', (req, res, next) => {
       });
     });
   }
-
-
 });
+
+router.post('/reasign', async (req, res, next) => {
+  let users = await User.find({ groupId: req.body.groupId });
+  let tasks = await Task.find({ groupId: req.body.groupId });
+
+  //Complete tasks array to users.length
+  if(tasks.length < users.length){
+    let i = users.length - tasks.length;
+
+    for (i; i >= 0; i--){
+      tasks.push(null);
+    }
+
+  }
+
+  //Get week number
+  let weekNumber = getWeekNumber();
+  //Loop the users array
+  users.forEach(async (currentValue, index) => {
+    //find the task using function findTask(weekNumber%users.length, currentUserIndex, arrayTaks);
+    let taskAux = await findTask(weekNumber, index, tasks);
+
+    //Update the searched task userId on current user loop id
+    await Task.updateOne({'_id': taskAux._id}, { $set: { userId: currentValue._id}});
+  });
+});
+
+function findTask(ciclo, userArrayIndex, tareas) {
+  let remainder = (ciclo + userArrayIndex) % tareas.length;
+  return tareas[remainder === 0 ? tareas.length - 1 : remainder - 1];
+}
+
+function getWeekNumber() {
+  let d = new Date();
+  // Copy date so don't modify original
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  // Set to nearest Thursday: current date + 4 - current day number
+  // Make Sunday's day number 7
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+  // Get first day of year
+  let yearStart = new Date(Date.UTC(d.getUTCFullYear(),0,1));
+  // Calculate full weeks to nearest Thursday
+  let weekNo = Math.ceil(( ( (d.getTime() - yearStart.getTime()) / 86400000) + 1)/7);
+  // Return array of year and week number
+  return weekNo;
+}
 
 
 module.exports = router;

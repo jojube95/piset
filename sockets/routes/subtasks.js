@@ -93,7 +93,7 @@ exports = module.exports = function(io){
       var options = {
         uri: 'http://localhost:3000/api/subtasks/deleteFromTask',
         method: 'DELETE',
-        json: data.subtaskId
+        json: data
       };
 
       request.delete(options, function (error, response, body) {

@@ -2,6 +2,7 @@ const express = require('express');
 
 const MODEL_PATH = '../models/';
 const Subtask = require(MODEL_PATH + 'subtask');
+const Task = require(MODEL_PATH + 'task');
 const checkAuth = require('../middleware/check-auth');
 
 const router = express.Router();
@@ -36,8 +37,11 @@ router.get('/getByGroup:id', (req, res, next) => {
   });
 });
 
-router.get('/getByUser:id', (req, res, next) => {
-  Subtask.find({ userId: req.params.id }).then(result =>{
+router.get('/getByUser:id', async (req, res, next) => {
+
+  task = await Task.findOne({ userId: req.params.id });
+
+  await Subtask.find({ taskId: task._id }).then(result =>{
     res.status(200).json({
       message: "Success",
       subtasks: result
