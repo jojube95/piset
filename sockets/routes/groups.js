@@ -57,6 +57,18 @@ exports = module.exports = function(io){
           getGroups();
         }
       });
+      
+      //Emmit the users without group
+      request('http://localhost:3000/api/users/getWithoutGroup', function (error, response, body) {
+        if (!error) {
+          //Send the data to socket
+          const data = JSON.parse(body);
+          io.emit('users-without-group', data.users);
+        }
+        else{
+          console.log(error)
+        }
+      });
     });
   });
 };
