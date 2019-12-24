@@ -33,6 +33,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.12",
     "ngx-bootstrap": "^3.3.0",
+    "node-cron": "^2.0.3",
     "popper.js": "^1.16.0",
     "rxjs": "6.3.0",
     "zone.js": "^0.8.26"
