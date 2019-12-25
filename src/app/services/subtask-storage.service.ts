@@ -11,7 +11,7 @@ import {Group} from "../model/group";
   providedIn: 'root'
 })
 export class SubtaskStorageService {
-  private url = 'http://localhost:5000';
+  private url = 'http://localhost:5000/subtasks';
   private socket;
 
   constructor() {

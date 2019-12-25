@@ -8,7 +8,7 @@ import * as io from "socket.io-client";
   providedIn: 'root'
 })
 export class PenaltyStorageService {
-  private url = 'http://localhost:5000';
+  private url = 'http://localhost:5000/penalties';
   private socket;
 
   constructor() {

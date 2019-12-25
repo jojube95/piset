@@ -2,6 +2,7 @@ const request = require('request');
 
 exports = module.exports = function(io){
   io.on('connection', (socket) => {
+    console.log('user connected to socket Subtasks');
 
     function getSubtasksByTask(taskId){
       request('http://localhost:3000/api/subtasks/getByTask' + taskId, function (error, response, body) {

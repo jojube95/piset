@@ -12,7 +12,7 @@ import * as io from 'socket.io-client';
   providedIn: 'root'
 })
 export class UserStorageService {
-  private url = 'http://localhost:5000';
+  private url = 'http://localhost:5000/users';
   private socket;
 
   constructor(private http: HttpClient, private authService: AuthService) {

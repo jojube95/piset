@@ -2,6 +2,7 @@ const request = require('request');
 
 exports = module.exports = function(io){
   io.on('connection', (socket) => {
+    console.log('user connected to socket Tasks');
 
     function getTasksByGroup(groupId){
       request('http://localhost:3000/api/tasks/getByGroup' + groupId, function (error, response, body) {

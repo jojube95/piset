@@ -2,7 +2,7 @@ const request = require('request');
 
 exports = module.exports = function(io){
   io.on('connection', (socket) => {
-    console.log('user connected');
+    console.log('user connected to socket Groups');
 
     function getGroups(){
       request('http://localhost:3000/api/groups/get', function (error, response, body) {

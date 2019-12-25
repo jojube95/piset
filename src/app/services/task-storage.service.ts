@@ -10,7 +10,7 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class TaskStorageService {
-  private url = 'http://localhost:5000';
+  private url = 'http://localhost:5000/tasks';
   private socket;
 
   constructor(private http: HttpClient) {

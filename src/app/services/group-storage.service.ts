@@ -7,7 +7,7 @@ import * as io from 'socket.io-client';
   providedIn: 'root'
 })
 export class GroupStorageService {
-  private url = 'http://localhost:5000';
+  private url = 'http://localhost:5000/groups';
   private socket;
 
   constructor() {

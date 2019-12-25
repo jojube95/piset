@@ -2,6 +2,7 @@ const request = require('request');
 
 exports = module.exports = function(io){
   io.on('connection', (socket) => {
+    console.log('user connected to socket Penalties');
 
     function getPenaltiesByGroup(groupId){
       request('http://localhost:3000/api/penalties/getByGroup' + groupId, function (error, response, body) {
