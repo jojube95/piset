@@ -28,8 +28,8 @@ export class UserManagementComponent implements OnInit {
     this.usersGroup = this.userStorage.observeUsersGroupFromSocket();
     this.usersWithoutGroup = this.userStorage.observeUsersWithoutGroupFromSocket();
     //Tell socket that I need data
-    this.groupStorage.getGroups();
-    this.userStorage.getUsersWithoutGroup();
+    //this.groupStorage.getGroups();
+    //this.userStorage.getUsersWithoutGroup();
 
     //Set control variables
     this.userSelected = false;
