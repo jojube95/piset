@@ -18,10 +18,10 @@ import { UserSettingsComponent } from './mainPage/user/user-settings/user-settin
 import { TasksComponent } from './mainPage/tasks/tasks.component';
 import { HistoryComponent } from './mainPage/history/history.component';
 import { LoadingSpinnerComponent } from './ui/loading-spinner/loading-spinner.component';
-import { BsDatepickerModule} from 'ngx-bootstrap';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { UserFilterPipe } from './pipes/user-filter.pipe';
 import { DateFilterPipe } from './pipes/date-filter.pipe';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -48,9 +48,9 @@ import {HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     RouterModule,
     FormsModule,
-    NgbModule.forRoot(),
-    NgbDropdownModule.forRoot(),
-    BsDatepickerModule.forRoot(),
+    NgbModule,
+    NgbDropdownModule,
+    BsDatepickerModule,
     NgbButtonsModule,
     HttpClientModule
 
