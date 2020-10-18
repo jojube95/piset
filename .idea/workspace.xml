@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="599a3f5b-6371-4e06-bb15-df79927fda14" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-    </list>
+    <list default="true" id="599a3f5b-6371-4e06-bb15-df79927fda14" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/dist/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -380,12 +376,12 @@
       <workItem from="1577016707557" duration="2001000" />
       <workItem from="1577117578092" duration="8109000" />
       <workItem from="1577183293059" duration="1605000" />
-      <workItem from="1603034490659" duration="597000" />
+      <workItem from="1603034490659" duration="917000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136663000" />
+    <option name="totallyTimeSpent" value="136983000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
