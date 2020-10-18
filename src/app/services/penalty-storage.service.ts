@@ -1,36 +1,35 @@
 import { Injectable } from '@angular/core';
 import {Group} from '../model/group';
 import {Penalty} from '../model/penalty';
+import {map} from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import * as io from "socket.io-client";
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PenaltyStorageService {
-  private url = 'http://localhost:5000/penalties';
-  private socket;
 
-  constructor() {
-    this.socket = io(this.url);
-  }
+  constructor(private http: HttpClient) {}
 
-  observeFilteredPenaltysFromSocket(): Observable<Penalty[]>{
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('penalties-filtered', (data) => {
-        observer.next(data);
+  getFilteredPenalties(group: Group): Observable<Penalty[]> {
+    return this.http.get<{message: string, groups: any}>('http://localhost:3000/api/penalties/getByGroup' + group._id).pipe(map((groupData) =>{
+      return groupData.groups.map((group) => {
+        return {
+          id: group.id,
+          name: group.name,
+          users: group.users
+        }
       });
-    });
-  }
-
-  getFilteredPenalties(group: Group) {
-    this.socket.emit('get-penalties-filtered', group._id);
+    }));
   }
 
 
   createPenalty(group: Group, penalty: Penalty) {
-    this.socket.emit('add-penalty', {groupId: group._id, penalty: penalty});
+    penalty.groupId = group._id;
+    this.http.post('http://localhost:3000/api/penalties/addPenalty', {penalty: penalty}).subscribe(response => {
+      console.log(response);
+    });
   }
 
   deleteGroupPenalty(penalty: Penalty){

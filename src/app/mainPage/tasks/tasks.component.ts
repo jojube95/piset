@@ -30,10 +30,6 @@ export class TasksComponent implements OnInit {
   }
 
   ngOnInit() {
-    //Observe userList of current userLogged group
-    this.usersList =  this.userStorage.observeUsersGroupFromSocket();
-    this.subtasksList = this.subtaskStorage.observeUserSubtasksFromSocket();
-
     //Get the userlist
     this.loggedUser = this.userStorage.getCurrentUser();
     let groupAux = new Group(null, null);

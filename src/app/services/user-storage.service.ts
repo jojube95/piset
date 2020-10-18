@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs';
 import {User} from '../model/user';
 import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
 import {AuthService} from "../auth/auth.service";
 import {Group} from "../model/group";
-import * as io from 'socket.io-client';
 
 
 
@@ -12,12 +12,8 @@ import * as io from 'socket.io-client';
   providedIn: 'root'
 })
 export class UserStorageService {
-  private url = 'http://localhost:5000/users';
-  private socket;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
-    this.socket = io(this.url);
-  }
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
 
   updateUserProfile(user: User) {
@@ -26,38 +22,49 @@ export class UserStorageService {
     });
   }
 
-  observeUsersGroupFromSocket(): Observable<User[]> {
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('users-by-group', (data) => {
-        observer.next(data);
+
+  getUsersGroup(group: Group): Observable<User[]> {
+    return this.http.get<{message: string, users: any}>('http://localhost:3000/api/users/getByGroup' + group._id).pipe(map((userData) =>{
+      return userData.users.map((user) => {
+        return {
+          mail: user.mail,
+          password: user.password,
+          name: user.name,
+          secondName: user.secondName,
+          admin: user.admin,
+          id: user.id,
+          groupId: user.groupId || null
+        }
       });
-    });
+    }));
   }
 
-  observeUsersWithoutGroupFromSocket(): Observable<User[]> {
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('users-without-group', (data) => {
-        observer.next(data);
+  getUsersWithoutGroup(): Observable<User[]> {
+    return this.http.get<{message: string, users: any}>('http://localhost:3000/api/users/getWithoutGroup').pipe(map((userData) =>{
+      return userData.users.map((user) => {
+        return {
+          mail: user.mail,
+          password: user.password,
+          name: user.name,
+          secondName: user.secondName,
+          admin: user.admin,
+          id: user.id,
+          groupId: user.groupId || null
+        }
       });
-    });
-  }
-
-  getUsersGroup(group: Group){
-    this.socket.emit('get-users-by-group', group._id);
-  }
-
-  getUsersWithoutGroup(){
-    this.socket.emit('get-users-without-group');
+    }));
   }
 
   addUserToGroup(user: User, group: Group){
-    this.socket.emit('add-user-to-group', {userId: user._id, groupId: group._id});
+    this.http.post('http://localhost:3000/api/users/addUserToGroup', {userId: user._id, groupId: group._id}).subscribe(response => {
+      console.log(response);
+    });;
   }
 
   deleteUserFromGroup(user: User, group: Group){
-    this.socket.emit('delete-user-from-group', {userId: user._id, groupId: group._id});
+    this.http.post('http://localhost:3000/api/users/deleteUserFromGroup', {userId: user._id, groupId: group._id}).subscribe(response => {
+      console.log(response);
+    });
   }
 
   public getCurrentUser() {

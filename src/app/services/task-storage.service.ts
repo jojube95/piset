@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Group } from '../model/group';
 import { Task } from '../model/task';
+import {map} from 'rxjs/operators';
 import {Observable} from 'rxjs';
-import * as io from "socket.io-client";
 import {HttpClient} from "@angular/common/http";
 
 
@@ -10,36 +10,30 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class TaskStorageService {
-  private url = 'http://localhost:5000/tasks';
-  private socket;
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {
-    this.socket = io(this.url);
-  }
-
-  observeGroupTasksFromSocket(): Observable<Task[]> {
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('tasks-by-group', (data) => {
-        observer.next(data);
+  getGroupTasks(group: Group): Observable<Task[]> {
+    return this.http.get<{message: string, groups: any}>('http://localhost:3000/api/tasks/getByGroup' + group._id).pipe(map((groupData) =>{
+      return groupData.groups.map((group) => {
+        return {
+          id: group.id,
+          name: group.name,
+          users: group.users
+        }
       });
-    });
-  }
-
-  getGroupTasks(group: Group) {
-    this.socket.emit('get-tasks-by-group', group._id);
+    }));
   }
 
   addTaskToGroup(group: Group, task: Task){
-    this.socket.emit('add-task-to-group', {task: task, groupId: group._id});
+    this.http.post('http://localhost:3000/api/tasks/addToGroup', {task: task, groupId: group._id});
   }
 
   deleteTaskFromGroup(group: Group, task: Task){
-    this.socket.emit('delete-task-from-group', {groupId: group._id, taskId: task._id});
+    this.http.post('http://localhost:3000/api/tasks/deleteFromGroup', {groupId: group._id, taskId: task._id});
   }
 
   updateTask(group: Group, task: Task){
-    this.socket.emit('update-task', {task: task, groupId: group._id});
+    this.http.post('http://localhost:3000/api/tasks/update', {task: task, groupId: group._id});
   }
 
   reasignTasks(group: Group){

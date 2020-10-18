@@ -21,13 +21,8 @@ export class GroupManagementComponent implements OnInit {
   constructor(private groupStorage: GroupStorageService, private  userStorage: UserStorageService) { }
 
   ngOnInit() {
-    //Read from socket
-    this.groupsList = this.groupStorage.observeGroupsFromSocket();
-    //Read users from socket
-    this.currentUsers = this.userStorage.observeUsersGroupFromSocket();
-
-    //Tell socket that I need data
-    this.groupStorage.getGroups();
+    //Read groups
+    this.groupsList = this.groupStorage.getGrups();
 
     this.loading = false;
 
@@ -53,8 +48,7 @@ export class GroupManagementComponent implements OnInit {
   }
 
   onClickGroup(group: Group){
-    this.userStorage.getUsersGroup(group);
-       
+    this.currentUsers = this.userStorage.getUsersGroup(group);
   }
 
 }

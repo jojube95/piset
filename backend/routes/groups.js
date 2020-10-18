@@ -43,7 +43,7 @@ router.post('/add', (req, res, next) => {
 });
 
 router.post('/delete', (req, res, next) => {
-  console.log('Try to add group to db');
+  console.log('Try to delete group to db');
 
   Group.deleteOne({ _id: req.body.groupId }).then(result => {
     res.status(200).json({ message: "Group deleted!" });

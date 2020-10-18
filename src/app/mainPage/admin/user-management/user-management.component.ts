@@ -24,12 +24,7 @@ export class UserManagementComponent implements OnInit {
 
   ngOnInit() {
     //Read groups from socket
-    this.groupsList = this.groupStorage.observeGroupsFromSocket();
-    this.usersGroup = this.userStorage.observeUsersGroupFromSocket();
-    this.usersWithoutGroup = this.userStorage.observeUsersWithoutGroupFromSocket();
-    //Tell socket that I need data
-    //this.groupStorage.getGroups();
-    //this.userStorage.getUsersWithoutGroup();
+    this.groupsList = this.groupStorage.getGrups();
 
     //Set control variables
     this.userSelected = false;
@@ -39,8 +34,9 @@ export class UserManagementComponent implements OnInit {
 
   onGroupSelect(group: Group){
     this.currentGroup = group;
-    this.userStorage.getUsersGroup(group);
+    this.usersGroup =  this.userStorage.getUsersGroup(group);
     this.currentUser = new User('', '', 'Selecciona usuario', '', false);
+    this.usersWithoutGroup = this.userStorage.getUsersWithoutGroup();
     this.groupSelected = true;
     this.userSelected = false;
   }

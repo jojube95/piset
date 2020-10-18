@@ -32,15 +32,8 @@ export class TaskManagementComponent implements OnInit {
   constructor(private groupStorage: GroupStorageService, private taskStorage: TaskStorageService, private subtaskStorage: SubtaskStorageService) { }
 
   ngOnInit() {
-    //Read groups from socket
-    this.groupsList = this.groupStorage.observeGroupsFromSocket();
-    //Read tasks from socket
-    this.currentTasks = this.taskStorage.observeGroupTasksFromSocket();
-    //Read subtask from socket
-    this.currentrSubtasks = this.subtaskStorage.observeTasksSubtasksFromSocket();
-
-    //Tell socket that I need data
-    this.groupStorage.getGroups();
+    //Read groups
+    this.groupsList = this.groupStorage.getGrups();
 
     //Set control variables
     this.loadingGroup = false;

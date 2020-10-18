@@ -2,70 +2,83 @@ import { Injectable } from '@angular/core';
 import { Task } from '../model/task';
 import { SubTask } from '../model/subTask';
 import {Observable} from 'rxjs';
-import * as io from "socket.io-client";
+import {map} from 'rxjs/operators';
 import {User} from "../model/user";
 import {Group} from "../model/group";
+import {HttpClient} from "@angular/common/http";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubtaskStorageService {
-  private url = 'http://localhost:5000/subtasks';
-  private socket;
 
-  constructor() {
-    this.socket = io(this.url);
-  }
+  constructor(private http: HttpClient) {}
 
-  observeTasksSubtasksFromSocket(): Observable<SubTask[]> {
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('subtasks-by-task', (data) => {
-        observer.next(data);
+
+  getGroupSubtasks(group: Group): Observable<SubTask[]> {
+    return this.http.get<{message: string, users: any}>('http://localhost:3000/api/subtasks/getByGroup' + group._id).pipe(map((userData) =>{
+      return userData.users.map((user) => {
+        return {
+          mail: user.mail,
+          password: user.password,
+          name: user.name,
+          secondName: user.secondName,
+          admin: user.admin,
+          id: user.id,
+          groupId: user.groupId || null
+        }
       });
-    });
-  }
-
-  observeGroupSubtasksFromSocket(): Observable<SubTask[]>{
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('subtasks-by-group', (data) => {
-        observer.next(data);
-      });
-    });
+    }));
   }
   
-  observeUserSubtasksFromSocket(): Observable<SubTask[]>{
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('subtasks-by-user', (data) => {
-        observer.next(data);
+  getUserSubtasks(user: User): Observable<SubTask[]> {
+    return this.http.get<{message: string, users: any}>('http://localhost:3000/api/subtasks/getByUser' + user._id).pipe(map((userData) =>{
+      return userData.users.map((user) => {
+        return {
+          mail: user.mail,
+          password: user.password,
+          name: user.name,
+          secondName: user.secondName,
+          admin: user.admin,
+          id: user.id,
+          groupId: user.groupId || null
+        }
       });
-    });
+    }));
   }
 
-  getGroupSubtasks(group: Group) {
-    this.socket.emit('get-subtasks-by-group', group._id);
-  }
-  
-  getUserSubtasks(user: User) {
-    this.socket.emit('get-subtasks-by-user', user._id);
-  }
-
-  getTaskSubtasks(task: Task) {
-    this.socket.emit('get-subtask-by-task', task._id);
+  getTaskSubtasks(task: Task): Observable<SubTask[]> {
+    return this.http.get<{message: string, users: any}>('http://localhost:3000/api/subtasks/getByTask' + task._id).pipe(map((userData) =>{
+      return userData.users.map((user) => {
+        return {
+          mail: user.mail,
+          password: user.password,
+          name: user.name,
+          secondName: user.secondName,
+          admin: user.admin,
+          id: user.id,
+          groupId: user.groupId || null
+        }
+      });
+    }));
   }
 
   addSubtaskToTask(subtask: SubTask, task: Task, group: Group){
-    this.socket.emit('add-subtask-to-task', {subtask: subtask, taskId: task._id, groupId: group._id});
+    this.http.post('http://localhost:3000/api/subtasks/addToTask', {subtask: subtask, taskId: task._id, groupId: group._id}).subscribe(response => {
+      console.log(response);
+    });
   }
 
   updateSubtask(task: Task, subtask: SubTask){
-    this.socket.emit('update-subtask', {taskId: task._id, subtask: subtask});
+    this.http.post('http://localhost:3000/api/subtasks/update', {taskId: task._id, subtask: subtask}).subscribe(response => {
+      console.log(response);
+    });
   }
 
   deleteSubtask(task: Task, subtask: SubTask){
-    this.socket.emit('delete-subtask', {taskId: task._id, subtaskId: subtask._id});
+    this.http.post('http://localhost:3000/api/subtasks/deleteFromTask', {taskId: task._id, subtaskId: subtask._id}).subscribe(response => {
+      console.log(response);
+    });
   }
 }
