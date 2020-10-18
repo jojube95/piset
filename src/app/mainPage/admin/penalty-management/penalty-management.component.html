@@ -1,0 +1,96 @@
+<div *ngIf="!loadingGroups" class="container">
+  <div class="row">
+    <div class="col-sm-auto">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{currentGroup == null ? 'Seleccione grupo' : currentGroup.name}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button class="dropdown-item" *ngFor="let group of (groupsList | async)" (click)="onGroupSelect(group)">{{group.name}}</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-auto">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>{{currentUser == null ? 'Seleccione usuario' : currentUser.name}}</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+          <button class="dropdown-item" *ngFor="let user of (usersList | async)" (click)="onUserSelect(user)">{{user.name}}</button>
+          <button class="dropdown-item" (click)="onAllUserSelect()">Todos</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-auto">
+      <input class="form-control" #datepicker #drp="bsDaterangepicker" [value]=" " bsDaterangepicker [bsConfig]="{rangeInputFormat: 'DD/MM/YYYY'}" [(ngModel)]="bsRangeValue" (ngModelChange)="onDateFilterChange(datepicker.value)">
+    </div>
+
+
+  </div>
+
+  <div class="row">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th scope="col">Fecha</th>
+        <th scope="col">Subtarea</th>
+        <th scope="col">Usuario</th>
+        <th scope="col">Multa</th>
+        <th scope="col">Eliminar</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let penalty of (penaltysList | async | userFilter : currentUser | dateFilter : [currentFilterDateStart, currentFilterDateEnd]); index as i">
+        <td>{{ penalty.date.toString() | date:'dd/MM/yyyy'}}</td>
+        <td>{{ penalty.subtaskName }}</td>
+        <td>{{ penalty.userName }}</td>
+        <td>{{ penalty.amount }}</td>
+        <td>
+          <button type="button" class="close" data-dismiss="alert" (click)="onClickDeletePenalty(penalty)">
+            <span aria-hidden="true">×</span>
+          </button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <button *ngIf="groupSelected" type="button" class="btn btn-primary" (click)="onClickAddPenalty()">Añadir</button>
+  </div>
+
+  <div class="row">
+    <div *ngIf="addPenalty">
+      <form (ngSubmit)="onAddPenalty(f)" #f="ngForm">
+        <div class="form-group">
+          <label>Date</label>
+          <input type="penaltyDate" id="date" name="date" #date="ngModel" bsDatepicker ngModel [bsConfig]="{ dateInputFormat: 'DD/MM/YYYY' }" ngModel class="form-control" required>
+          <span class="help-block" *ngIf="!date.valid && date.touched">Please enter a date!</span>
+        </div>
+        <div class="form-group">
+          <div ngbDropdown class="d-inline-block">
+            <button type="button" class="btn btn-outline-primary" id="dropdownBasic3" ngbDropdownToggle>{{currentAddPenaltySubtask == null ? 'Seleccione subtarea' : currentAddPenaltySubtask.name}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+              <button type="button" class="dropdown-item" *ngFor="let subtask of (subtasksList | async)" (click)="onPenaltySubtaskSelect(subtask)">{{subtask.name}}</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div ngbDropdown class="d-inline-block">
+            <button  type="button" class="btn btn-outline-primary" id="dropdownBasic4" ngbDropdownToggle>{{currentAddPenaltyUser == null ? 'Seleccione usuario' : currentAddPenaltyUser.name}}</button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+              <button type="button" class="dropdown-item" *ngFor="let user of (usersList | async)" (click)="onPenaltyUserSelect(user)">{{user.name}}</button>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Amount</label>
+          <input type="amount" id="amount" name="amount" #amount="ngModel" ngModel class="form-control" required>
+          <span class="help-block" *ngIf="!amount.valid && amount.touched">Please enter a amount!</span>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="!f.valid">Añadir multa</button>
+        <button type="button" class="btn" (click)="onClickCancelAddPenalty()">Atrás</button>
+
+      </form>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="loadingGroups" class="container">
+
+</div>
