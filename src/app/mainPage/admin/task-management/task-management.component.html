@@ -5,12 +5,12 @@
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{currentGroup.name}}</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button class="dropdown-item" *ngFor="let group of (groupsList | async)" (click)="onGroupSelect(group)">{{group.name}}</button>
+          <button class="dropdown-item" *ngFor="let group of (groupStorage._groups | async)" (click)="onGroupSelect(group)">{{group.name}}</button>
         </div>
       </div>
 
       <ul class="list-group">
-        <a class="list-group-item" style="cursor: pointer" *ngFor="let task of (currentTasks | async)" (click)="onClickTask(task)"
+        <a class="list-group-item" style="cursor: pointer" *ngFor="let task of (taskStorage._tasksGroup | async)" (click)="onClickTask(task)"
            [ngClass]="{'active': currentTask == task}">
           <div class="row">
             <div class="col-md-10">
@@ -73,7 +73,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let subtask of (currentrSubtasks | async); index as i" (click)="onSubtaskSelect(subtask)">
+          <tr *ngFor="let subtask of (subtaskStorage._subtasksTask | async); index as i" (click)="onSubtaskSelect(subtask)">
             <td>{{ subtask.name }}</td>
             <td>{{ subtask.description }}</td>
             <td>{{ subtask.penalty}}</td>

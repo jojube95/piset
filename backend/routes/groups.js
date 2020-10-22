@@ -15,6 +15,7 @@ module.exports = function(io) {
 
 
 router.get('/get', (req, res, next) => {
+  console.log('Getting groups');
   Group.find().then(result =>{
     res.status(200).json({
       message: "Success",

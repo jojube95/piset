@@ -7,7 +7,7 @@
       </h1>
 
       <ul class="list-group">
-        <a class="list-group-item" style="cursor: pointer" *ngFor="let group of (groupsList | async)" (click)="onClickGroup(group)">
+        <a class="list-group-item" style="cursor: pointer" *ngFor="let group of (groupStorage._groups | async)" (click)="onClickGroup(group)">
           <div class="row">
             <div class="col-md-10">
               {{ group.name }}
@@ -49,7 +49,7 @@
     <div *ngIf="!add" class="col-sm-6">
       <h1>Usuarios</h1>
       <ul class="list-group">
-        <li class="list-group-item" *ngFor="let user of (currentUsers | async)">
+        <li class="list-group-item" *ngFor="let user of (userStorage._usersGroup | async)">
           {{ user.name }}
 
         </li>

@@ -64,7 +64,7 @@ router.post('/addToTask', (req, res, next) => {
   });
 
   subtask.save().then(result => {
-    res.status(201).json({
+  res.status(201).json({
       message: 'Subtask added to task successfully',
       result: result
     });
@@ -75,7 +75,7 @@ router.post('/addToTask', (req, res, next) => {
   });
 });
 
-router.delete('/deleteFromTask', (req, res, next) => {
+router.post('/deleteFromTask', (req, res, next) => {
   Subtask.deleteOne({'_id': req.body.subtaskId}).then(result => {
     res.status(201).json({
       message: 'Subtask successfully',
@@ -89,13 +89,13 @@ router.delete('/deleteFromTask', (req, res, next) => {
 });
 
 router.post('/update', (req, res, next) => {
-  Subtask.updateOne({'_id': req.body._id}, {
-    name: req.body.name,
-    description: req.body.description,
-    penalty: req.body.penalty,
-    taskId: req.body.taskId,
-    groupId: req.body.groupId,
-    userId: req.body.userId || null
+  Subtask.updateOne({'_id': req.body.subtask._id}, {
+    name: req.body.subtask.name,
+    description: req.body.subtask.description,
+    penalty: req.body.subtask.penalty,
+    taskId: req.body.subtask.taskId,
+    groupId: req.body.subtask.groupId,
+    userId: req.body.subtask.userId || null
   }).then(result => {
     res.status(201).json({
       message: 'Subtask updated successfully',

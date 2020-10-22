@@ -14,10 +14,7 @@ import {SubtaskStorageService} from "../../../services/subtask-storage.service";
   styleUrls: ['./task-management.component.css']
 })
 export class TaskManagementComponent implements OnInit {
-  groupsList: Observable<Group[]>;
-  currentGroup: Group = new Group('Selecciona grupo', []);
-  currentTasks: Observable<Task[]>;
-  currentrSubtasks: Observable<SubTask[]>;
+  currentGroup: Group = new Group(null, 'Selecciona grupo', []);
   currentTask: Task;
   currentSubtask: SubTask;
   add: boolean = false;
@@ -29,11 +26,10 @@ export class TaskManagementComponent implements OnInit {
   groupSelected: boolean = false;
   taskSelected: boolean = false;
 
-  constructor(private groupStorage: GroupStorageService, private taskStorage: TaskStorageService, private subtaskStorage: SubtaskStorageService) { }
+  constructor(public groupStorage: GroupStorageService, public taskStorage: TaskStorageService, public subtaskStorage: SubtaskStorageService) { }
 
   ngOnInit() {
     //Read groups
-    this.groupsList = this.groupStorage.getGrups();
 
     //Set control variables
     this.loadingGroup = false;

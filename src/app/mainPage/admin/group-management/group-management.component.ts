@@ -12,20 +12,13 @@ import {UserStorageService} from "../../../services/user-storage.service";
   styleUrls: ['./group-management.component.css']
 })
 export class GroupManagementComponent implements OnInit {
-  groupsList: Observable<Group[]>;
-
   add: boolean = false;
   loading: boolean = true;
-  currentUsers: Observable<User[]>;
 
-  constructor(private groupStorage: GroupStorageService, private  userStorage: UserStorageService) { }
+  constructor(public groupStorage: GroupStorageService, public  userStorage: UserStorageService) { }
 
   ngOnInit() {
-    //Read groups
-    this.groupsList = this.groupStorage.getGrups();
-
     this.loading = false;
-
   }
 
   onClickAdd() {
@@ -37,10 +30,9 @@ export class GroupManagementComponent implements OnInit {
   }
 
   onAddGroup(form: NgForm){
-    let group = new Group(form.value.name, []);
+    let group = new Group(null, form.value.name, []);
 
     this.groupStorage.createGroup(group);
-
   }
 
   onClickDelete(group: Group){
@@ -48,7 +40,7 @@ export class GroupManagementComponent implements OnInit {
   }
 
   onClickGroup(group: Group){
-    this.currentUsers = this.userStorage.getUsersGroup(group);
+    this.userStorage.getUsersGroup(group);
   }
 
 }

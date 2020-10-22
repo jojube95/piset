@@ -21,9 +21,6 @@ export class PenaltyManagementComponent implements OnInit {
   bsRangeValue: Date[];
   maxDate = new Date();
 
-  groupsList: Observable<Group[]>;
-  usersList: Observable<User[]>;
-  penaltysList: Observable<Penalty[]>;
   subtasksList: Observable<SubTask[]>;
 
   currentGroup: Group;
@@ -39,8 +36,8 @@ export class PenaltyManagementComponent implements OnInit {
   userSelected: boolean = false;
   addPenalty = false;
 
-  constructor(private penaltyStorage: PenaltyStorageService, private groupStorage: GroupStorageService, private userStorage: UserStorageService,
-              private taskStorage: TaskStorageService, private subtaskStorage: SubtaskStorageService) {
+  constructor(public penaltyStorage: PenaltyStorageService, public groupStorage: GroupStorageService, public userStorage: UserStorageService,
+              public taskStorage: TaskStorageService, public subtaskStorage: SubtaskStorageService) {
     this.maxDate.setDate(this.maxDate.getDate() + 7);
     this.bsRangeValue = [this.bsValue, this.maxDate];
 
@@ -51,7 +48,6 @@ export class PenaltyManagementComponent implements OnInit {
 
   ngOnInit() {
     //Read data
-    this.groupsList = this.groupStorage.getGrups();
   }
 
 

@@ -1,19 +1,22 @@
+
 <div *ngIf="!loadingGroups" class="container">
   <div class="row">
+
     <div class="col-sm-auto">
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{currentGroup == null ? 'Seleccione grupo' : currentGroup.name}}</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button class="dropdown-item" *ngFor="let group of (groupsList | async)" (click)="onGroupSelect(group)">{{group.name}}</button>
+          <button class="dropdown-item" *ngFor="let group of (groupStorage._groups | async)" (click)="onGroupSelect(group)">{{group.name}}</button>
         </div>
       </div>
     </div>
+
 
     <div class="col-sm-auto">
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>{{currentUser == null ? 'Seleccione usuario' : currentUser.name}}</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button class="dropdown-item" *ngFor="let user of (usersList | async)" (click)="onUserSelect(user)">{{user.name}}</button>
+          <button class="dropdown-item" *ngFor="let user of (userStorage._usersGroup | async)" (click)="onUserSelect(user)">{{user.name}}</button>
           <button class="dropdown-item" (click)="onAllUserSelect()">Todos</button>
         </div>
       </div>
@@ -38,7 +41,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let penalty of (penaltysList | async | userFilter : currentUser | dateFilter : [currentFilterDateStart, currentFilterDateEnd]); index as i">
+      <tr *ngFor="let penalty of (penaltyStorage._penaltys | async | userFilter : currentUser | dateFilter : [currentFilterDateStart, currentFilterDateEnd]); index as i">
         <td>{{ penalty.date.toString() | date:'dd/MM/yyyy'}}</td>
         <td>{{ penalty.subtaskName }}</td>
         <td>{{ penalty.userName }}</td>
@@ -53,6 +56,7 @@
     </table>
     <button *ngIf="groupSelected" type="button" class="btn btn-primary" (click)="onClickAddPenalty()">Añadir</button>
   </div>
+
 
   <div class="row">
     <div *ngIf="addPenalty">
@@ -88,7 +92,9 @@
 
       </form>
     </div>
+
   </div>
+
 </div>
 
 <div *ngIf="loadingGroups" class="container">
