@@ -43,7 +43,7 @@ router.post('/addToGroup', (req, res, next) => {
   });
 });
 
-router.delete('/deleteFromGroup', (req, res, next) => {
+router.post('/deleteFromGroup', (req, res, next) => {
   Task.deleteOne({'_id': req.body.taskId}).then(result => {
     Subtask.deleteMany({ taskId: req.body.taskId});
     res.status(201).json({

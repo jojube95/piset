@@ -1,71 +1,82 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../model/task';
 import { SubTask } from '../model/subTask';
-import {Observable} from 'rxjs';
-import * as io from "socket.io-client";
+import {BehaviorSubject, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {User} from "../model/user";
 import {Group} from "../model/group";
+import {HttpClient} from "@angular/common/http";
+import {List} from "immutable";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubtaskStorageService {
-  private url = 'http://localhost:5000/subtasks';
-  private socket;
 
-  constructor() {
-    this.socket = io(this.url);
-  }
+  public _subtasksTask: BehaviorSubject<List<SubTask>> = new BehaviorSubject(List([]));
+  public _subtasksGroup: BehaviorSubject<List<SubTask>> = new BehaviorSubject(List([]));
+  public _subtasksUser: BehaviorSubject<List<SubTask>> = new BehaviorSubject(List([]));
 
-  observeTasksSubtasksFromSocket(): Observable<SubTask[]> {
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('subtasks-by-task', (data) => {
-        observer.next(data);
-      });
-    });
-  }
+  constructor(private http: HttpClient) {}
 
-  observeGroupSubtasksFromSocket(): Observable<SubTask[]>{
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('subtasks-by-group', (data) => {
-        observer.next(data);
-      });
-    });
-  }
-  
-  observeUserSubtasksFromSocket(): Observable<SubTask[]>{
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('subtasks-by-user', (data) => {
-        observer.next(data);
-      });
-    });
-  }
 
   getGroupSubtasks(group: Group) {
-    this.socket.emit('get-subtasks-by-group', group._id);
+    return this.http.get<{message: string, subtasks: any}>('http://localhost:3000/api/subtasks/getByGroup' + group._id).subscribe(
+      res => {
+        let subtasks = (<Object[]>res.subtasks).map((subtask: any) =>
+          new SubTask(subtask.name, subtask.description, subtask.penalty, subtask._id, subtask.taskId, subtask.groupId, subtask.userId));
+
+        this._subtasksGroup.next(List(subtasks));
+      },
+      err => console.log("Error retrieving Todos")
+    );
   }
   
   getUserSubtasks(user: User) {
-    this.socket.emit('get-subtasks-by-user', user._id);
+    return this.http.get<{message: string, subtasks: any}>('http://localhost:3000/api/subtasks/getByUser' + user._id).subscribe(
+      res => {
+        let subtasks = (<Object[]>res.subtasks).map((subtask: any) =>
+          new SubTask(subtask.name, subtask.description, subtask.penalty, subtask._id, subtask.taskId, subtask.groupId, subtask.userId));
+
+        this._subtasksUser.next(List(subtasks));
+      },
+      err => console.log("Error retrieving Todos")
+    );
   }
 
   getTaskSubtasks(task: Task) {
-    this.socket.emit('get-subtask-by-task', task._id);
+    return this.http.get<{message: string, subtasks: any}>('http://localhost:3000/api/subtasks/getByTask' + task._id).subscribe(
+      res => {
+        let subtasks = (<Object[]>res.subtasks).map((subtask: any) =>
+          new SubTask(subtask.name, subtask.description, subtask.penalty, subtask._id, subtask.taskId, subtask.groupId, subtask.userId));
+
+        this._subtasksTask.next(List(subtasks));
+      },
+      err => console.log("Error retrieving Todos")
+    );
   }
 
   addSubtaskToTask(subtask: SubTask, task: Task, group: Group){
-    this.socket.emit('add-subtask-to-task', {subtask: subtask, taskId: task._id, groupId: group._id});
+    this.http.post('http://localhost:3000/api/subtasks/addToTask', {subtask: subtask, taskId: task._id, groupId: group._id}).subscribe(response => {
+      //Add task to _subtasksTask and push
+      this._subtasksTask.next(this._subtasksTask.getValue().push(subtask));
+    });
   }
 
-  updateSubtask(task: Task, subtask: SubTask){
-    this.socket.emit('update-subtask', {taskId: task._id, subtask: subtask});
+  updateSubtask(task: Task, updatedSubtask: SubTask){
+    this.http.post('http://localhost:3000/api/subtasks/update', {taskId: task._id, subtask: updatedSubtask}).subscribe(response => {
+      let subtasks: List<SubTask> = this._subtasksTask.getValue();
+      let index = subtasks.findIndex((task) => task._id === updatedSubtask._id);
+      this._subtasksTask.next(subtasks.set(index, updatedSubtask));
+    });
   }
 
-  deleteSubtask(task: Task, subtask: SubTask){
-    this.socket.emit('delete-subtask', {taskId: task._id, subtaskId: subtask._id});
+  deleteSubtask(task: Task, deletedSubtask: SubTask){
+    this.http.post('http://localhost:3000/api/subtasks/deleteFromTask', {taskId: task._id, subtaskId: deletedSubtask._id}).subscribe(response => {
+      let subtasks: List<SubTask> = this._subtasksTask.getValue();
+      let index = subtasks.findIndex((subtask) => subtask._id === deletedSubtask._id);
+      this._subtasksTask.next(subtasks.delete(index));
+    });
   }
 }

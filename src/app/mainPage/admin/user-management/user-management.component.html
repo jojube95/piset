@@ -3,7 +3,7 @@
       <div ngbDropdown class="d-inline-block">
         <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>{{currentGroup.name}}</button>
         <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-          <button class="dropdown-item" *ngFor="let group of (groupsList | async)" (click)="onGroupSelect(group)">{{group.name}}</button>
+          <button class="dropdown-item" *ngFor="let group of (groupStorage._groups | async)" (click)="onGroupSelect(group)">{{group.name}}</button>
         </div>
       </div>
     </div>
@@ -22,7 +22,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let user of (usersGroup | async); index as i">
+        <tr *ngFor="let user of (userStorage._usersGroup | async); index as i">
           <td>{{ user.name }}</td>
           <td>{{ user.mail }}</td>
           <td>Multa mes</td>
@@ -43,7 +43,7 @@
     <div ngbDropdown class="d-inline-block col-sm-auto">
       <button class="btn btn-outline-primary" id="dropdownBasic2" ngbDropdownToggle>{{currentUser.name}}</button>
       <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
-        <button class="dropdown-item" *ngFor="let user of (usersWithoutGroup | async)" (click)="onUserSelect(user)">{{user.name}}</button>
+        <button class="dropdown-item" *ngFor="let user of (userStorage._usersWithoutGroup | async)" (click)="onUserSelect(user)">{{user.name}}</button>
       </div>
     </div>
 

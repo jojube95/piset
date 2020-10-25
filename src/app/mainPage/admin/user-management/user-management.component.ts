@@ -11,36 +11,25 @@ import {UserStorageService} from '../../../services/user-storage.service';
   styleUrls: ['./user-management.component.css']
 })
 export class UserManagementComponent implements OnInit {
-  groupsList: Observable<Group[]>;
-  usersWithoutGroup: Observable<User[]> = new Observable();
-  currentGroup: Group = new Group('Selecciona grupo', []);
+  currentGroup: Group = new Group(null, 'Selecciona grupo', []);
   currentUser: User = new User('', '', 'Selecciona usuario', '', false);
-  usersGroup: Observable<User[]> = new Observable();
 
   userSelected: boolean;
   groupSelected: boolean;
 
-  constructor(private groupStorage: GroupStorageService, private userStorage: UserStorageService) { }
+  constructor(public groupStorage: GroupStorageService, public userStorage: UserStorageService) { }
 
   ngOnInit() {
-    //Read groups from socket
-    this.groupsList = this.groupStorage.observeGroupsFromSocket();
-    this.usersGroup = this.userStorage.observeUsersGroupFromSocket();
-    this.usersWithoutGroup = this.userStorage.observeUsersWithoutGroupFromSocket();
-    //Tell socket that I need data
-    //this.groupStorage.getGroups();
-    //this.userStorage.getUsersWithoutGroup();
-
     //Set control variables
     this.userSelected = false;
     this.groupSelected = false;
-
   }
 
   onGroupSelect(group: Group){
     this.currentGroup = group;
     this.userStorage.getUsersGroup(group);
     this.currentUser = new User('', '', 'Selecciona usuario', '', false);
+    this.userStorage.getUsersWithoutGroup();
     this.groupSelected = true;
     this.userSelected = false;
   }

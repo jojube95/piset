@@ -30,13 +30,9 @@ export class TasksComponent implements OnInit {
   }
 
   ngOnInit() {
-    //Observe userList of current userLogged group
-    this.usersList =  this.userStorage.observeUsersGroupFromSocket();
-    this.subtasksList = this.subtaskStorage.observeUserSubtasksFromSocket();
-
     //Get the userlist
     this.loggedUser = this.userStorage.getCurrentUser();
-    let groupAux = new Group(null, null);
+    let groupAux = new Group(null, null, null);
     groupAux._id = this.loggedUser.groupId;
     this.userStorage.getUsersGroup(groupAux);
   }
@@ -49,7 +45,7 @@ export class TasksComponent implements OnInit {
   }
 
   reasignTasks(){
-    let groupAux = new Group(null, null);
+    let groupAux = new Group(null, null, null);
     groupAux._id = this.loggedUser.groupId;
     this.taskStorage.reasignTasks(groupAux);
   }

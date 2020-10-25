@@ -60,7 +60,8 @@ router.post('/addUserToGroup', (req, res, next) => {
   });
 });
 
-router.delete('/deleteUserFromGroup', (req, res, next) => {
+router.post('/deleteUserFromGroup', (req, res, next) => {
+  console.log("Trying delete user from group");
   User.updateOne({'_id': req.body.userId}, { $set: { groupId: null}}).then(result => {
     res.status(201).json({
       message: 'User deleted from group successfully',

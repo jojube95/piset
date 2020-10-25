@@ -6,7 +6,6 @@ const groupsRoutes = require('./routes/groups');
 const tasksRoutes = require('./routes/tasks');
 const subtasksRoutes = require('./routes/subtasks');
 const penaltiesRoutes = require('./routes/penalties');
-const io = require('socket.io-client');
 const cron = require('node-cron');
 const app  = express();
 const request = require('request');
@@ -62,15 +61,6 @@ cron.schedule("59 23 * * SUN", function () {
     });
 
 });
-
-const socketServer = io('http://localhost:5000');
-
-app.use(function(req, res, next) {
-  req.socketServer = socketServer;
-  next();
-});
-
-
 
 app.use('/api/users', usersRoutes);
 

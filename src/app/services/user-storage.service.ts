@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {User} from '../model/user';
 import {HttpClient} from '@angular/common/http';
 import {AuthService} from "../auth/auth.service";
 import {Group} from "../model/group";
-import * as io from 'socket.io-client';
+import {List} from "immutable";
 
 
 
@@ -12,12 +12,11 @@ import * as io from 'socket.io-client';
   providedIn: 'root'
 })
 export class UserStorageService {
-  private url = 'http://localhost:5000/users';
-  private socket;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
-    this.socket = io(this.url);
-  }
+  public _usersGroup: BehaviorSubject<List<User>> = new BehaviorSubject(List([]));
+  public _usersWithoutGroup: BehaviorSubject<List<User>> = new BehaviorSubject(List([]));
+
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
 
   updateUserProfile(user: User) {
@@ -26,38 +25,53 @@ export class UserStorageService {
     });
   }
 
-  observeUsersGroupFromSocket(): Observable<User[]> {
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('users-by-group', (data) => {
-        observer.next(data);
-      });
+
+  getUsersGroup(group: Group) {
+    return this.http.get<{message: string, users: any}>('http://localhost:3000/api/users/getByGroup' + group._id).subscribe(
+      res => {
+        let users = (<Object[]>res.users).map((user: any) =>
+          new User(user.mail, user.password, user.name, user.secondName, user.admin, user._id, user.groupId));
+
+        this._usersGroup.next(List(users));
+      },
+      err => console.log("Error retrieving Todos")
+    );
+  }
+
+  getUsersWithoutGroup() {
+    return this.http.get<{message: string, users: any}>('http://localhost:3000/api/users/getWithoutGroup').subscribe(
+      res => {
+        let users = (<Object[]>res.users).map((user: any) =>
+          new User(user.mail, user.password, user.name, user.secondName, user.admin, user._id, user.groupId));
+
+        this._usersWithoutGroup.next(List(users));
+      },
+      err => console.log("Error retrieving Todos")
+    );
+  }
+
+  addUserToGroup(addedUser: User, group: Group){
+    this.http.post('http://localhost:3000/api/users/addUserToGroup', {userId: addedUser._id, groupId: group._id}).subscribe(response => {
+      //Add user to _usersGroup and push
+      this._usersGroup.next(this._usersGroup.getValue().push(addedUser));
+
+      //Delete user from group and push to the _usersWithoutGroup
+      let usersWithoutGroup: List<User> = this._usersWithoutGroup.getValue();
+      let index = usersWithoutGroup.findIndex((user) => user._id === addedUser._id);
+      this._usersWithoutGroup.next(usersWithoutGroup.delete(index));
     });
   }
 
-  observeUsersWithoutGroupFromSocket(): Observable<User[]> {
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('users-without-group', (data) => {
-        observer.next(data);
-      });
+  deleteUserFromGroup(deletedUser: User, group: Group){
+    this.http.post('http://localhost:3000/api/users/deleteUserFromGroup', {userId: deletedUser._id, groupId: group._id}).subscribe(response => {
+      //Delete user from group and push to the _usersGroup
+      let usersGroup: List<User> = this._usersGroup.getValue();
+      let index = usersGroup.findIndex((user) => user._id === deletedUser._id);
+      this._usersGroup.next(usersGroup.delete(index));
+
+      //Add user to _usersWithoutGroup and push
+      this._usersWithoutGroup.next(this._usersWithoutGroup.getValue().push(deletedUser));
     });
-  }
-
-  getUsersGroup(group: Group){
-    this.socket.emit('get-users-by-group', group._id);
-  }
-
-  getUsersWithoutGroup(){
-    this.socket.emit('get-users-without-group');
-  }
-
-  addUserToGroup(user: User, group: Group){
-    this.socket.emit('add-user-to-group', {userId: user._id, groupId: group._id});
-  }
-
-  deleteUserFromGroup(user: User, group: Group){
-    this.socket.emit('delete-user-from-group', {userId: user._id, groupId: group._id});
   }
 
   public getCurrentUser() {

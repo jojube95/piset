@@ -1,36 +1,38 @@
 import { Injectable } from '@angular/core';
 import {Group} from '../model/group';
 import {Penalty} from '../model/penalty';
-import { Observable } from 'rxjs';
-import * as io from "socket.io-client";
+import {BehaviorSubject} from 'rxjs';
+import {HttpClient} from "@angular/common/http";
+import {List} from "immutable";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PenaltyStorageService {
-  private url = 'http://localhost:5000/penalties';
-  private socket;
 
-  constructor() {
-    this.socket = io(this.url);
-  }
+  public _penaltys: BehaviorSubject<List<Penalty>> = new BehaviorSubject(List([]));
 
-  observeFilteredPenaltysFromSocket(): Observable<Penalty[]>{
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('penalties-filtered', (data) => {
-        observer.next(data);
-      });
-    });
-  }
+  constructor(private http: HttpClient) {}
 
   getFilteredPenalties(group: Group) {
-    this.socket.emit('get-penalties-filtered', group._id);
+    return this.http.get<{message: string, penalties: any}>('http://localhost:3000/api/penalties/getByGroup' + group._id).subscribe(
+      res => {
+        console.log(res);
+        let penalties = (<Object[]>res.penalties).map((penalty: any) =>
+          new Penalty(penalty.mount, penalty.date, penalty.userName, penalty.subtaskName, penalty.userId, penalty.groupId, penalty.subtaskId, penalty._id));
+
+        this._penaltys.next(List(penalties));
+      },
+      err => console.log("Error retrieving Todos")
+    );
   }
 
 
   createPenalty(group: Group, penalty: Penalty) {
-    this.socket.emit('add-penalty', {groupId: group._id, penalty: penalty});
+    penalty.groupId = group._id;
+    this.http.post('http://localhost:3000/api/penalties/addPenalty', {penalty: penalty}).subscribe(response => {
+      console.log(response);
+    });
   }
 
   deleteGroupPenalty(penalty: Penalty){

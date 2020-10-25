@@ -1,45 +1,54 @@
 import { Injectable } from '@angular/core';
 import { Group } from '../model/group';
 import { Task } from '../model/task';
-import {Observable} from 'rxjs';
-import * as io from "socket.io-client";
+import {BehaviorSubject} from 'rxjs';
 import {HttpClient} from "@angular/common/http";
+import {List} from "immutable";
+import {SubTask} from "../model/subTask";
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskStorageService {
-  private url = 'http://localhost:5000/tasks';
-  private socket;
 
-  constructor(private http: HttpClient) {
-    this.socket = io(this.url);
-  }
+  public _tasksGroup: BehaviorSubject<List<Task>> = new BehaviorSubject(List([]));
 
-  observeGroupTasksFromSocket(): Observable<Task[]> {
-    return new Observable(observer => {
-      this.socket = io(this.url);
-      this.socket.on('tasks-by-group', (data) => {
-        observer.next(data);
-      });
-    });
-  }
+  constructor(private http: HttpClient) {}
 
   getGroupTasks(group: Group) {
-    this.socket.emit('get-tasks-by-group', group._id);
+    return this.http.get<{message: string, tasks: any}>('http://localhost:3000/api/tasks/getByGroup' + group._id).subscribe(
+      res => {
+        let tasks = (<Object[]>res.tasks).map((task: any) =>
+          new Task(task.name, task.subtasks, task._id));
+
+        this._tasksGroup.next(List(tasks));
+      },
+      err => console.log("Error retrieving Todos")
+    );
   }
 
   addTaskToGroup(group: Group, task: Task){
-    this.socket.emit('add-task-to-group', {task: task, groupId: group._id});
+    this.http.post('http://localhost:3000/api/tasks/addToGroup', {task: task, groupId: group._id}).subscribe(response => {
+      //Add task to _tasksGroup and push
+      this._tasksGroup.next(this._tasksGroup.getValue().push(task));
+    });
   }
 
-  deleteTaskFromGroup(group: Group, task: Task){
-    this.socket.emit('delete-task-from-group', {groupId: group._id, taskId: task._id});
+  deleteTaskFromGroup(group: Group, deletedTask: Task){
+    this.http.post('http://localhost:3000/api/tasks/deleteFromGroup', {groupId: group._id, taskId: deletedTask._id}).subscribe(response => {
+      let tasks: List<Task> = this._tasksGroup.getValue();
+      let index = tasks.findIndex((subtask) => subtask._id === deletedTask._id);
+      this._tasksGroup.next(tasks.delete(index));
+    });
   }
 
-  updateTask(group: Group, task: Task){
-    this.socket.emit('update-task', {task: task, groupId: group._id});
+  updateTask(group: Group, updatedTask: Task){
+    this.http.post('http://localhost:3000/api/tasks/update', {task: updatedTask, groupId: group._id}).subscribe(response => {
+      let tasks: List<Task> = this._tasksGroup.getValue();
+      let index = tasks.findIndex((task) => task._id === updatedTask._id);
+      this._tasksGroup.next(tasks.set(index, updatedTask));
+    });
   }
 
   reasignTasks(group: Group){

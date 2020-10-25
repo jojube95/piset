@@ -12,25 +12,13 @@ import {UserStorageService} from "../../../services/user-storage.service";
   styleUrls: ['./group-management.component.css']
 })
 export class GroupManagementComponent implements OnInit {
-  groupsList: Observable<Group[]>;
-
   add: boolean = false;
   loading: boolean = true;
-  currentUsers: Observable<User[]>;
 
-  constructor(private groupStorage: GroupStorageService, private  userStorage: UserStorageService) { }
+  constructor(public groupStorage: GroupStorageService, public  userStorage: UserStorageService) { }
 
   ngOnInit() {
-    //Read from socket
-    this.groupsList = this.groupStorage.observeGroupsFromSocket();
-    //Read users from socket
-    this.currentUsers = this.userStorage.observeUsersGroupFromSocket();
-
-    //Tell socket that I need data
-    this.groupStorage.getGroups();
-
     this.loading = false;
-
   }
 
   onClickAdd() {
@@ -42,10 +30,9 @@ export class GroupManagementComponent implements OnInit {
   }
 
   onAddGroup(form: NgForm){
-    let group = new Group(form.value.name, []);
+    let group = new Group(null, form.value.name, []);
 
     this.groupStorage.createGroup(group);
-
   }
 
   onClickDelete(group: Group){
@@ -54,7 +41,6 @@ export class GroupManagementComponent implements OnInit {
 
   onClickGroup(group: Group){
     this.userStorage.getUsersGroup(group);
-       
   }
 
 }

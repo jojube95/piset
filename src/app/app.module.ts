@@ -22,6 +22,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { UserFilterPipe } from './pipes/user-filter.pipe';
 import { DateFilterPipe } from './pipes/date-filter.pipe';
 import { HttpClientModule } from '@angular/common/http';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 
 @NgModule({
@@ -45,12 +46,13 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     RouterModule,
     FormsModule,
     NgbModule,
     NgbDropdownModule,
-    BsDatepickerModule,
+    BsDatepickerModule.forRoot(),
     NgbButtonsModule,
     HttpClientModule
 
