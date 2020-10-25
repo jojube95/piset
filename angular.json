@@ -123,5 +123,8 @@
       }
     }
   },
-  "defaultProject": "piset"
+  "defaultProject": "piset",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -16,7 +16,9 @@ import {SubtaskStorageService} from "../../../services/subtask-storage.service";
 export class TaskManagementComponent implements OnInit {
   currentGroup: Group = new Group(null, 'Selecciona grupo', []);
   currentTask: Task;
+  currentEditTask: Task;
   currentSubtask: SubTask;
+  currentEditSubtask: SubTask;
   add: boolean = false;
   updateSubtask: boolean = false;
   updateSubtaskClicked: boolean = false;
@@ -53,6 +55,7 @@ export class TaskManagementComponent implements OnInit {
 
   onClickUpdateTask(){
     this.updateTask = true;
+    this.currentEditTask = new Task(this.currentTask.name, this.currentTask.subtasks, this.currentTask._id);
   }
 
   onClickCancelSubtask(){
@@ -65,6 +68,7 @@ export class TaskManagementComponent implements OnInit {
 
   onClickUpdateSubtask(){
     this.updateSubtaskClicked = true;
+    this.currentEditSubtask = new SubTask(this.currentSubtask.name, this.currentSubtask.description, this.currentSubtask.penalty, this.currentSubtask._id, this.currentSubtask.taskId, this.currentSubtask.groupId, this.currentSubtask.userId);
   }
 
   onClickCancelUpdateSubtask(){
@@ -87,6 +91,7 @@ export class TaskManagementComponent implements OnInit {
       this.currentSubtask.taskId, this.currentSubtask.groupId);
 
     this.subtaskStorage.updateSubtask(this.currentTask, subtask);
+    this.updateSubtask = false;
   }
 
   onAddSubTask(form: NgForm){
@@ -116,6 +121,7 @@ export class TaskManagementComponent implements OnInit {
   onAddTask(form: NgForm){
     let task = new Task(form.value.taskName, []);
     this.taskStorage.addTaskToGroup(this.currentGroup, task);
+    this.subtaskAdd = false;
   }
 
   onClickCancel(){
