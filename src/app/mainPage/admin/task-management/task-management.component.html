@@ -51,7 +51,7 @@
           <form (ngSubmit)="onAddUpdateTask(f)" #f="ngForm">
             <div class="form-group">
               <label>Name</label>
-              <input type="name" id="name2" name="name" #name="ngModel" ngModel class="form-control" required [(ngModel)]="currentTask.name">
+              <input type="name" id="name2" name="name" #name="ngModel" ngModel class="form-control" required [(ngModel)]="currentEditTask.name">
               <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</span>
             </div>
 
@@ -93,13 +93,13 @@
         <form (ngSubmit)="onUpdateSubTask(f)" #f="ngForm">
           <div class="form-group">
             <label>Name</label>
-            <input type="name" id="nameSubtask2" name="name" #name="ngModel" ngModel class="form-control" required [(ngModel)]="currentSubtask.name">
+            <input type="name" id="nameSubtask2" name="name" #name="ngModel" ngModel class="form-control" required [(ngModel)]="currentEditSubtask.name">
             <span class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</span>
             <label>Description</label>
-            <input type="description" id="description2" name="description" #description="ngModel" ngModel class="form-control" required [(ngModel)]="currentSubtask.description">
+            <input type="description" id="description2" name="description" #description="ngModel" ngModel class="form-control" required [(ngModel)]="currentEditSubtask.description">
             <span class="help-block" *ngIf="!description.valid && description.touched">Please enter a description!</span>
             <label>Penalty</label>
-            <input type="penalty" id="penalty2" name="penalty" #penalty="ngModel" ngModel class="form-control" required [(ngModel)]="currentSubtask.penalty">
+            <input type="penalty" id="penalty2" name="penalty" #penalty="ngModel" ngModel class="form-control" required [(ngModel)]="currentEditSubtask.penalty">
             <span class="help-block" *ngIf="!penalty.valid && penalty.touched">Please enter a penalty!</span>
           </div>
 
