@@ -1,0 +1,25 @@
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <img width="300" height="300" alt="Angular Logo" src="assets/img/icon.png">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <form (ngSubmit)="onSignin(f)" #f="ngForm">
+        <ion-item>
+          <ion-label for="mail">Mail</ion-label>
+          <ion-input type="mail" id="mail" name="mail" ngModel></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label for="password">Password</ion-label>
+          <ion-input type="password" id="password" name="password" ngModel></ion-input>
+        </ion-item>
+        <ion-button type="submit" block>Sign In</ion-button>
+        <a routerLink="/signUp"><ion-button type="button" class="btn" routerLinkActive="active">Sign Up</ion-button></a>
+
+      </form>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
