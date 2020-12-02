@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../model/user';
 import {AuthService} from '../auth/auth.service';
+import {MenuController} from '@ionic/angular';
 
 @Component({
   selector: 'app-main-page',
@@ -11,7 +12,13 @@ export class MainPageComponent implements OnInit {
   loading = true;
   userLogged: User;
 
-  constructor(private authService: AuthService) { }
+  selectOptions = {
+    title: 'Pizza Toppings',
+    subTitle: 'Select your toppings',
+    mode: 'md'
+  };
+
+  constructor(private authService: AuthService, private menu: MenuController) { }
 
   ngOnInit() {
     this.userLogged = this.authService.getCurrentUser();
@@ -20,6 +27,10 @@ export class MainPageComponent implements OnInit {
 
   logOut(){
     this.authService.signOut();
+  }
+
+  openMenu(menuId){
+    this.menu.open(menuId);
   }
 
 }

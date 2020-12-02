@@ -13,13 +13,17 @@ import {SignInComponent} from './auth/sign-in/sign-in.component';
 import {SignUpComponent} from './auth/sign-up/sign-up.component';
 import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
+import {TaskManagementComponent} from './main-page/admin/task-management/task-management.component';
+import {LoadingSpinerComponent} from './ui/loading-spiner/loading-spiner.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    MainPageComponent
+    MainPageComponent,
+    TaskManagementComponent,
+    LoadingSpinerComponent
   ],
   entryComponents: [],
   imports: [
