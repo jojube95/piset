@@ -49,6 +49,8 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onUpdateTask(){
+    console.log('Clickeado UpdateTask');
+    console.log(this.currentTask);
     this.taskStorage.updateTask(this.currentGroup, this.currentTask);
   }
 
@@ -81,8 +83,9 @@ export class TaskManagementComponent implements OnInit {
 
   onAddUpdateTask(form: NgForm){
     let task = new Task(form.value.name, this.currentTask.subtasks, this.currentTask._id);
+    console.log(task);
     this.taskStorage.updateTask(this.currentGroup, task);
-    this.onGroupSelect(this.currentGroup);
+    this.selectGroup(this.currentGroup);
   }
 
   onUpdateSubTask(form: NgForm){
@@ -109,6 +112,16 @@ export class TaskManagementComponent implements OnInit {
 
   onGroupSelect(event){
     let group = event.detail.value;
+    this.updateSubtask = false;
+    this.updateSubtaskClicked = false;
+    this.add = false;
+    this.taskSelected = false;
+    this.groupSelected = true;
+    this.currentGroup = group;
+    this.taskStorage.getGroupTasks(group);
+  }
+
+  selectGroup(group: Group){
     this.updateSubtask = false;
     this.updateSubtaskClicked = false;
     this.add = false;

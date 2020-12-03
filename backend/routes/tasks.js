@@ -58,9 +58,10 @@ router.post('/deleteFromGroup', (req, res, next) => {
 });
 
 router.post('/update', (req, res, next) => {
+  console.log(req.body)
   if(req.body.groupId != null){
-    Task.updateOne({'_id': req.body._id}, {
-      name: req.body.name,
+    Task.updateOne({'_id': req.body.task._id}, {
+      name: req.body.task.name,
       groupId: req.body.groupId || null
     }).then(result => {
       res.status(201).json({

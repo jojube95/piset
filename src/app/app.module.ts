@@ -15,6 +15,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {TaskManagementComponent} from './main-page/admin/task-management/task-management.component';
 import {LoadingSpinerComponent} from './ui/loading-spiner/loading-spiner.component';
+import {UserManagementComponent} from './main-page/admin/user-management/user-management.component';
+import {GroupManagementComponent} from './main-page/admin/group-management/group-management.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +25,8 @@ import {LoadingSpinerComponent} from './ui/loading-spiner/loading-spiner.compone
     SignUpComponent,
     MainPageComponent,
     TaskManagementComponent,
+    UserManagementComponent,
+      GroupManagementComponent,
     LoadingSpinerComponent
   ],
   entryComponents: [],
