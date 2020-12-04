@@ -7,6 +7,7 @@ import {SignUpComponent} from './auth/sign-up/sign-up.component';
 import {TaskManagementComponent} from './main-page/admin/task-management/task-management.component';
 import {UserManagementComponent} from './main-page/admin/user-management/user-management.component';
 import {GroupManagementComponent} from './main-page/admin/group-management/group-management.component';
+import {PenaltyManagementComponent} from './main-page/admin/penalty-management/penalty-management.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/signIn', pathMatch: 'full'},
@@ -16,7 +17,7 @@ const routes: Routes = [
     { path: 'admin', canActivate: [AuthGuard], children: [
         {path: 'taskManagement', component: TaskManagementComponent},
         {path: 'userManagement', component: UserManagementComponent},
-        //{path: 'penaltyManagement', component: PenaltyManagementComponent},
+        {path: 'penaltyManagement', component: PenaltyManagementComponent},
         {path: 'groupManagement', component: GroupManagementComponent},
       ]},
     ]}

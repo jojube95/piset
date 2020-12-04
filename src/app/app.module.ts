@@ -17,6 +17,9 @@ import {TaskManagementComponent} from './main-page/admin/task-management/task-ma
 import {LoadingSpinerComponent} from './ui/loading-spiner/loading-spiner.component';
 import {UserManagementComponent} from './main-page/admin/user-management/user-management.component';
 import {GroupManagementComponent} from './main-page/admin/group-management/group-management.component';
+import {PenaltyManagementComponent} from './main-page/admin/penalty-management/penalty-management.component';
+import {DateFilterPipe} from './pipe/date-filter.pipe';
+import {UserFilterPipe} from './pipe/user-filter.pipe';
 
 @NgModule({
   declarations: [
@@ -26,8 +29,11 @@ import {GroupManagementComponent} from './main-page/admin/group-management/group
     MainPageComponent,
     TaskManagementComponent,
     UserManagementComponent,
-      GroupManagementComponent,
-    LoadingSpinerComponent
+    GroupManagementComponent,
+    PenaltyManagementComponent,
+    LoadingSpinerComponent,
+    UserFilterPipe,
+    DateFilterPipe
   ],
   entryComponents: [],
   imports: [
