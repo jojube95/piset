@@ -17,16 +17,15 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./penalty-management.component.scss'],
 })
 export class PenaltyManagementComponent implements OnInit {
-  bsValue = new Date();
-  bsRangeValue: Date[];
+  minDate = new Date();
   maxDate = new Date();
 
   subtasksList: Observable<SubTask[]>;
 
   currentGroup: Group;
   currentUser: User;
-  currentFilterDateStart: Date;
-  currentFilterDateEnd: Date;
+  currentDate: String;
+
   currentAddPenaltyUser: User;
   currentAddPenaltySubtask: SubTask;
   loadingGroups: boolean = false;
@@ -38,27 +37,30 @@ export class PenaltyManagementComponent implements OnInit {
 
   constructor(public penaltyStorage: PenaltyStorageService, public groupStorage: GroupStorageService, public userStorage: UserStorageService,
               public taskStorage: TaskStorageService, public subtaskStorage: SubtaskStorageService) {
-    this.maxDate.setDate(this.maxDate.getDate() + 7);
-    this.bsRangeValue = [this.bsValue, this.maxDate];
 
-    this.currentFilterDateStart = this.bsValue;
-    this.currentFilterDateEnd = this.maxDate;
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.currentGroup = new Group(null, 'Selecciona grupo', null);
+    this.currentUser = new User('', '', 'Selecciona usuario', '', false);
+    this.currentDate = new Date().toISOString().substr(0, 10);
 
-  onGroupSelect(group: Group){
+    console.log(this.currentDate);
+  }
+
+  onGroupSelect(event){
+    let group = event.detail.value;
     this.addPenalty = false;
     this.groupSelected = true;
     this.currentGroup = group;
-    this.currentUser = null;
     this.userStorage.getUsersGroup(group);
     this.loadingUsers = false;
 
     this.penaltyStorage.getFilteredPenalties(this.currentGroup);
   }
 
-  onUserSelect(user: User){
+  onUserSelect(event){
+    let user = event.detail.value;
     this.userSelected = true;
     this.currentUser = user;
 
@@ -68,14 +70,9 @@ export class PenaltyManagementComponent implements OnInit {
     this.currentUser = new User('', '', 'Todos', '', false);
   }
 
-  onDateFilterChange(value: any){
-    let dates = value.split(' ', 3);
-
-    let dateStart = dates[0].split('/');
-    let dateEnd = dates[2].split('/');
-
-    this.currentFilterDateStart = new Date(dateStart[1] + '/' + dateStart[0] + '/' + dateStart[2]);
-    this.currentFilterDateEnd = new Date(dateEnd[1] + '/' + dateEnd[0] + '/' + dateEnd[2]);
+  onDateFilterChange(event){
+    let date = event.detail.value;
+    console.log(date);
   }
 
   onClickAddPenalty(){
