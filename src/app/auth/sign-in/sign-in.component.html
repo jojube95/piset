@@ -1,4 +1,4 @@
-<ion-content class="ion-padding">
+<ion-content *ngIf="!loading" class="ion-padding">
   <ion-grid>
     <ion-row>
       <ion-col>
@@ -22,4 +22,8 @@
     </ion-row>
 
   </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="loading" class="ion-padding">
+  <app-loading-spiner></app-loading-spiner>
 </ion-content>

@@ -33,4 +33,8 @@ export class MainPageComponent implements OnInit {
     this.menu.open(menuId);
   }
 
+  closeMenu(menuId){
+    this.menu.close(menuId)
+  }
+
 }

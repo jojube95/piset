@@ -8,6 +8,9 @@ import {TaskManagementComponent} from './main-page/admin/task-management/task-ma
 import {UserManagementComponent} from './main-page/admin/user-management/user-management.component';
 import {GroupManagementComponent} from './main-page/admin/group-management/group-management.component';
 import {PenaltyManagementComponent} from './main-page/admin/penalty-management/penalty-management.component';
+import {UserSettingsComponent} from './main-page/user/user-settings/user-settings.component';
+import {UserInfoComponent} from './main-page/user/user-info/user-info.component';
+import {TasksComponent} from './main-page/tasks/tasks.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/signIn', pathMatch: 'full'},
@@ -19,9 +22,17 @@ const routes: Routes = [
         {path: 'userManagement', component: UserManagementComponent},
         {path: 'penaltyManagement', component: PenaltyManagementComponent},
         {path: 'groupManagement', component: GroupManagementComponent},
-      ]},
-    ]}
-];
+      ]
+    },
+    { path: 'user', canActivate: [AuthGuard], children: [
+            {path: 'info', component: UserInfoComponent},
+            {path: 'settings', component: UserSettingsComponent}
+        ]
+    },
+    { path: 'tasks', canActivate: [AuthGuard], component: TasksComponent},
+  ]}
+  ]
+;
 
 @NgModule({
   imports: [

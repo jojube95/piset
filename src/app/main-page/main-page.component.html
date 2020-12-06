@@ -27,22 +27,22 @@
     <ion-content>
       <ion-list>
 
-        <ion-label>Tasks</ion-label>
-        <ion-item>Tasks</ion-item>
+        <ion-label>Tasks</ion-label>tasks
+        <ion-item routerLink="/main/tasks" (click)="closeMenu('custom')">Tasks</ion-item>
 
         <ion-label>History</ion-label>
         <ion-item>History</ion-item>
 
         <ion-label>Admin</ion-label>
-        <ion-item routerLink="/main/admin/taskManagement">Admin-Tasks</ion-item>
-        <ion-item routerLink="/main/admin/userManagement">Admin-Users</ion-item>
-        <ion-item routerLink="/main/admin/penaltyManagement">Admin-Penalties</ion-item>
-        <ion-item routerLink="/main/admin/groupManagement">Admin-Groups</ion-item>
+        <ion-item routerLink="/main/admin/taskManagement" (click)="closeMenu('custom')">Admin-Tasks</ion-item>
+        <ion-item routerLink="/main/admin/userManagement" (click)="closeMenu('custom')">Admin-Users</ion-item>
+        <ion-item routerLink="/main/admin/penaltyManagement" (click)="closeMenu('custom')">Admin-Penalties</ion-item>
+        <ion-item routerLink="/main/admin/groupManagement" (click)="closeMenu('custom')">Admin-Groups</ion-item>
 
         <ion-label>Account</ion-label>
-        <ion-item>Account-Info</ion-item>
-        <ion-item>Account-Settings</ion-item>
-        <ion-item>Account-LogOut</ion-item>
+        <ion-item routerLink="/main/user/info" (click)="closeMenu('custom')">Account-Info</ion-item>
+        <ion-item routerLink="/main/user/settings" (click)="closeMenu('custom')">Account-Settings</ion-item>
+        <ion-item (click)="logOut()">Account-LogOut</ion-item>
 
       </ion-list>
     </ion-content>
