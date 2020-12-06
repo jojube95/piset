@@ -12,6 +12,8 @@ import {Group} from '../../../model/group';
 export class GroupManagementComponent implements OnInit {
   add: boolean = false;
   loading: boolean = true;
+  currentGroup: Group = null;
+  groupSelected: boolean = false;
 
   constructor(public groupStorage: GroupStorageService, public  userStorage: UserStorageService) { }
 
@@ -29,18 +31,27 @@ export class GroupManagementComponent implements OnInit {
 
   onAddGroup(form: NgForm){
     let group = new Group(null, form.value.name, []);
-
-    console.log(group);
-
     this.groupStorage.createGroup(group);
+
   }
 
-  onClickDelete(group: Group){
-    this.groupStorage.deleteGroup(group);
+  onClickDelete(){
+    if(this.currentGroup != null){
+      this.groupStorage.deleteGroup(this.currentGroup);
+    }
   }
 
-  onClickGroup(group: Group){
-    this.userStorage.getUsersGroup(group);
+  onGroupSelect(event){
+    let group = event.detail.value;
+
+    if(this.currentGroup == group){
+      this.groupSelected = false;
+    }
+    else{
+      this.groupSelected = true;
+      this.userStorage.getUsersGroup(group);
+    }
+    this.currentGroup = group;
   }
 
 }

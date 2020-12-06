@@ -83,7 +83,6 @@ export class TaskManagementComponent implements OnInit {
 
   onAddUpdateTask(form: NgForm){
     let task = new Task(form.value.name, this.currentTask.subtasks, this.currentTask._id);
-    console.log(task);
     this.taskStorage.updateTask(this.currentGroup, task);
     this.selectGroup(this.currentGroup);
   }

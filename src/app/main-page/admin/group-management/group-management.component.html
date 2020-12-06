@@ -6,13 +6,15 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-list>
-          <ion-item *ngFor="let group of (groupStorage._groups | async)" (click)="onClickGroup(group)">
-            <ion-label>{{ group.name }}</ion-label>
-            <ion-label (click)="onClickDelete(group)">x</ion-label>
-          </ion-item>
-        </ion-list>
+        <ion-item>
+          <ion-label>Groups</ion-label>
+          <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="onGroupSelect($event)" [value]="currentGroup">
+            <ion-select-option *ngFor="let group of (groupStorage._groups | async)" [value]="group" >{{group.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
         <ion-button type="button" (click)="onClickAdd()">Add Group</ion-button>
+        <ion-button type="button" [disabled]="!groupSelected" (click)="onClickDelete()">Delete Group</ion-button>
       </ion-col>
 
 

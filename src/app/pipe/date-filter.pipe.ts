@@ -6,19 +6,18 @@ export class DateFilterPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
     let filtered = [];
-    let felterDateStart;
-    let felterDateEnd;
-    let date;
-    if(args[0] !== undefined && args[1].toString() !== undefined){
+    let felterDate: Date;
+    let date: Date;
 
-      if(args != null && value != null && args[0].toString() !== 'Invalid Date' && args[1].toString() !== 'Invalid Date'){
-        felterDateStart = args[0];
-        felterDateEnd = args[1];
+    if(args[0] !== undefined){
+
+      if(args != null && value != null && args[0].toString() !== 'Invalid Date'){
+        felterDate = new Date(args[0]);
 
         value.forEach(element => {
           date = new Date(element.date);
 
-          if(felterDateStart <= date && felterDateEnd >= date){
+          if(felterDate.getMonth() == date.getMonth() && felterDate.getFullYear() == date.getFullYear()){
             filtered.push(element);
           }
         });

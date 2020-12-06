@@ -17,14 +17,12 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./penalty-management.component.scss'],
 })
 export class PenaltyManagementComponent implements OnInit {
-  minDate = new Date();
-  maxDate = new Date();
-
-  subtasksList: Observable<SubTask[]>;
+  minDate: Date;
+  maxDate: Date;
 
   currentGroup: Group;
   currentUser: User;
-  currentDate: String;
+  currentDate: Date;
 
   currentAddPenaltyUser: User;
   currentAddPenaltySubtask: SubTask;
@@ -37,15 +35,17 @@ export class PenaltyManagementComponent implements OnInit {
 
   constructor(public penaltyStorage: PenaltyStorageService, public groupStorage: GroupStorageService, public userStorage: UserStorageService,
               public taskStorage: TaskStorageService, public subtaskStorage: SubtaskStorageService) {
+    this.currentGroup = new Group(null, 'Selecciona grupo', null);
+    this.currentUser = new User('', '', 'Todos', '', false);
 
+    this.currentDate = new Date();
+
+    this.maxDate = new Date(this.currentDate.getFullYear() + 5, 0, 0);
+    this.minDate = new Date(this.currentDate.getFullYear() - 5, 0, 1);
   }
 
   ngOnInit() {
-    this.currentGroup = new Group(null, 'Selecciona grupo', null);
-    this.currentUser = new User('', '', 'Selecciona usuario', '', false);
-    this.currentDate = new Date().toISOString().substr(0, 10);
 
-    console.log(this.currentDate);
   }
 
   onGroupSelect(event){
@@ -54,6 +54,7 @@ export class PenaltyManagementComponent implements OnInit {
     this.groupSelected = true;
     this.currentGroup = group;
     this.userStorage.getUsersGroup(group);
+    this.subtaskStorage.getGroupSubtasks(group);
     this.loadingUsers = false;
 
     this.penaltyStorage.getFilteredPenalties(this.currentGroup);
@@ -61,18 +62,19 @@ export class PenaltyManagementComponent implements OnInit {
 
   onUserSelect(event){
     let user = event.detail.value;
-    this.userSelected = true;
-    this.currentUser = user;
 
-  }
-
-  onAllUserSelect(){
-    this.currentUser = new User('', '', 'Todos', '', false);
+    if(user == 'All'){
+      this.currentUser = new User('', '', 'Todos', '', false);
+    }
+    else{
+      this.userSelected = true;
+      this.currentUser = user;
+    }
   }
 
   onDateFilterChange(event){
     let date = event.detail.value;
-    console.log(date);
+    this.currentDate = new Date(date);
   }
 
   onClickAddPenalty(){
@@ -92,14 +94,16 @@ export class PenaltyManagementComponent implements OnInit {
   onAddPenalty(form: NgForm){
     let penalty = new Penalty(form.value.amount, new Date(form.value.date), this.currentAddPenaltyUser.name,
         this.currentAddPenaltySubtask.name, this.currentAddPenaltyUser._id, this.currentGroup._id, this.currentAddPenaltySubtask._id);
-    this.penaltyStorage.createPenalty(this.currentGroup, penalty);
+    this.penaltyStorage.createPenalty(penalty);
   }
 
-  onPenaltySubtaskSelect(subtask: SubTask){
+  onPenaltySubtaskSelect(event){
+    let subtask = event.detail.value;
     this.currentAddPenaltySubtask = subtask;
   }
 
-  onPenaltyUserSelect(user: User){
+  onPenaltyUserSelect(event){
+    let user = event.detail.value;
     this.currentAddPenaltyUser = user;
   }
 
