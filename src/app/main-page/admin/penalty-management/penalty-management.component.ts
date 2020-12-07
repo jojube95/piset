@@ -36,7 +36,7 @@ export class PenaltyManagementComponent implements OnInit {
   constructor(public penaltyStorage: PenaltyStorageService, public groupStorage: GroupStorageService, public userStorage: UserStorageService,
               public taskStorage: TaskStorageService, public subtaskStorage: SubtaskStorageService) {
     this.currentGroup = new Group(null, 'Selecciona grupo', null);
-    this.currentUser = new User('', '', 'Todos', '', false);
+    this.currentUser = new User('', '', 'Todos', '', false, false);
 
     this.currentDate = new Date();
 
@@ -64,7 +64,7 @@ export class PenaltyManagementComponent implements OnInit {
     let user = event.detail.value;
 
     if(user == 'All'){
-      this.currentUser = new User('', '', 'Todos', '', false);
+      this.currentUser = new User('', '', 'Todos', '', false, false);
     }
     else{
       this.userSelected = true;

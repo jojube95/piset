@@ -48,6 +48,7 @@ router.get('/getByGroup:id', (req, res, next) => {
 
 router.post('/addUserToGroup', (req, res, next) => {
   User.updateOne({'_id': req.body.userId}, { $set: { groupId: req.body.groupId}}).then(result => {
+    console.log(result);
     res.status(200).json({
       message: 'User added to group successfully',
       result: result
@@ -83,6 +84,7 @@ router.post('/update', async (req, res, next) => {
     name: req.body.name,
     secondName: req.body.secondName,
     admin: req.body.admin,
+    groupAdmin: req.body.groupAdmin,
     groupId: req.body.groupId || null
   });
 
@@ -139,7 +141,6 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/signin', (req, res, next) => {
   let fetchedUser;
-  console.log(req.body);
 
   User.findOne({mail: req.body.mail}).then(user => {
     if (!user) {

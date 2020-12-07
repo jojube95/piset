@@ -2,31 +2,42 @@
   Tasks
 </ion-header>
 
-<ion-content *ngIf="!loading" class="ion-padding">
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-item>
-          <ion-label>Users</ion-label>
-          <ion-select value="All" okText="Okay" cancelText="Dismiss" (ionChange)="onUserSelect($event)">
-            <ion-select-option *ngFor="let user of (userStorage._usersGroup | async)" [value]="user" >{{user.name}}</ion-select-option>
-          </ion-select>
-        </ion-item>
-      </ion-col>
-    </ion-row>
 
-    <ion-row>
-      <ion-col>
-        <ion-list>
-          <ion-item *ngFor="let subtask of (subtaskStorage._subtasksUser | async)">
-            <ion-label>{{ subtask.name }}</ion-label>
-            <ion-label>{{ subtask.description }}</ion-label>
-            <ion-checkbox></ion-checkbox>
+<ion-content *ngIf="!loading" class="ion-padding">
+  <div *ngIf="!isUserInGroup">
+    <ion-label>User don't have a group</ion-label>
+  </div>
+
+  <div *ngIf="isUserInGroup">
+    <ion-label>{{ loggedUser.groupId }}</ion-label>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Users</ion-label>
+            <ion-select value="All" okText="Okay" cancelText="Dismiss" (ionChange)="onUserSelect($event)">
+              <ion-select-option *ngFor="let user of (userStorage._usersGroup | async)" [value]="user" >{{user.name}}</ion-select-option>
+            </ion-select>
           </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="selectedTask != null">
+        {{ selectedTask.name }}
+      </ion-row>
+      <ion-row *ngIf="selectedTask != null">
+        <ion-col>
+          <ion-list>
+            <ion-item *ngFor="let subtask of (subtaskStorage._subtasksTask | async)">
+              <ion-label>{{ subtask.name }}</ion-label>
+              <ion-label>{{ subtask.description }}</ion-label>
+              <ion-checkbox></ion-checkbox>
+            </ion-item>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
 </ion-content>
 
 <ion-content *ngIf="loading" class="ion-padding">

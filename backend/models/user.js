@@ -6,6 +6,7 @@ const userSchema = mongoose.Schema({
   name: { type: String, required: true},
   secondName: { type: String, required: true},
   admin:  {type: Boolean, required: true},
+  groupAdmin:  {type: Boolean, required: true},
   groupId:  {type: String, required: false}
 });
 

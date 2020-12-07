@@ -25,6 +25,21 @@ router.get('/getByGroup:id', (req, res, next) => {
   });
 });
 
+router.get('/getByUser:id', (req, res, next) => {
+  console.log(req.params)
+  Task.findOne({ userId: req.params.id }).then(result =>{
+    console.log(result)
+    res.status(200).json({
+      message: "Success",
+      task: result
+    });
+  }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
+  });
+});
+
 router.post('/addToGroup', (req, res, next) => {
   const task = new Task({
     name: req.body.task.name,

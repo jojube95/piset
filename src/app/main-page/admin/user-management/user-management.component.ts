@@ -11,7 +11,7 @@ import {User} from '../../../model/user';
 })
 export class UserManagementComponent implements OnInit {
   currentGroup: Group = new Group(null, 'Selecciona grupo', []);
-  currentUser: User = new User('', '', 'Selecciona usuario', '', false);
+  currentUser: User = new User('', '', 'Selecciona usuario', '', false, false);
 
   userSelected: boolean;
   groupSelected: boolean;
@@ -28,7 +28,7 @@ export class UserManagementComponent implements OnInit {
     let group = event.detail.value;
     this.currentGroup = group;
     this.userStorage.getUsersGroup(group);
-    this.currentUser = new User('', '', 'Selecciona usuario', '', false);
+    this.currentUser = new User('', '', 'Selecciona usuario', '', false, false);
     this.userStorage.getUsersWithoutGroup();
     this.groupSelected = true;
     this.userSelected = false;
@@ -36,7 +36,8 @@ export class UserManagementComponent implements OnInit {
 
   onUserSelect(event){
     let user = event.detail.value;
-
+    console.log('Selected user');
+    console.log(user);
     if(this.currentUser == user){
       this.userSelected = false;
     }
@@ -47,8 +48,10 @@ export class UserManagementComponent implements OnInit {
   }
 
   onAddUser(){
+    console.log(this.currentUser);
+
     this.userStorage.addUserToGroup(this.currentUser, this.currentGroup);
-    this.currentUser = new User('', '', 'Selecciona usuario', '', false);
+    this.currentUser = new User('', '', 'Selecciona usuario', '', false, false);
     this.userSelected = false;
   }
 

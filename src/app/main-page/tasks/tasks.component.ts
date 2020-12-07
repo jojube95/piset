@@ -3,6 +3,7 @@ import {Group} from '../../model/group';
 import {User} from '../../model/user';
 import {PenaltyStorageService} from '../../services/penalty-storage.service';
 import {UserStorageService} from '../../services/user-storage.service';
+import {Task} from '../../model/task';
 import {SubTask} from '../../model/subTask';
 import {Observable} from 'rxjs';
 import {SubtaskStorageService} from '../../services/subtask-storage.service';
@@ -14,33 +15,41 @@ import {TaskStorageService} from '../../services/task-storage.service';
   styleUrls: ['./tasks.component.scss'],
 })
 export class TasksComponent implements OnInit {
-  usersList: Observable<User[]>;
-  subtasksList: Observable<SubTask[]>;
-
-  currentUser: User;
+  selectedUser: User;
+  selectedTask: Task;
 
   loggedUser: User;
 
-  userSelected: boolean = false;
+  isUserInGroup: boolean = false;
 
+  loading = true;
   constructor(private penaltyStorage: PenaltyStorageService, private userStorage: UserStorageService,
               private subtaskStorage: SubtaskStorageService, private taskStorage: TaskStorageService) {
 
   }
 
   ngOnInit() {
-    //Get the userlist
     this.loggedUser = this.userStorage.getCurrentUser();
-    let groupAux = new Group(null, null, null);
-    groupAux._id = this.loggedUser.groupId;
-    this.userStorage.getUsersGroup(groupAux);
+    this.loading = false;
+
+    if(this.loggedUser.groupId == null || this.loggedUser.groupId.length == 0){
+      this.isUserInGroup = false;
+    }
+    else {
+      this.isUserInGroup = true;
+
+      this.userStorage.getUsersGroup(new Group(this.loggedUser.groupId, null, null));
+    }
   }
 
-  onUserSelect(user: User){
-    this.userSelected = true;
-    this.currentUser = user;
-
-    this.subtaskStorage.getUserSubtasks(user);
+  onUserSelect(event){
+    let user = event.detail.value;
+    console.log(user);
+    //Get task user
+    this.taskStorage.getTaskByUser(user).subscribe(res => {
+      this.selectedTask = res.task;
+      this.subtaskStorage.getTaskSubtasks(this.selectedTask);
+    });
   }
 
   reasignTasks(){

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Group } from '../model/group';
 import { Task } from '../model/task';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 import {List} from "immutable";
 import {SubTask} from "../model/subTask";
+import {User} from '../model/user';
 
 
 @Injectable({
@@ -45,12 +46,16 @@ export class TaskStorageService {
   }
 
   updateTask(group: Group, updatedTask: Task){
-    console.log('Llamando a updateTask');
     this.http.post('http://localhost:3000/api/tasks/update', {task: updatedTask, groupId: group._id}).subscribe(response => {
       let tasks: List<Task> = this._tasksGroup.getValue();
       let index = tasks.findIndex((task) => task._id === updatedTask._id);
       this._tasksGroup.next(tasks.set(index, updatedTask));
     });
+  }
+
+  getTaskByUser(user: User): Observable<{message, task}>{
+    console.log(user);
+    return this.http.get<{message: string, task: any}>('http://localhost:3000/api/tasks/getByUser' + user._id);
   }
 
   reasignTasks(group: Group){
