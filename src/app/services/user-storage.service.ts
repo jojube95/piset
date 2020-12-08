@@ -30,7 +30,7 @@ export class UserStorageService {
     return this.http.get<{message: string, users: any}>('http://localhost:3000/api/users/getByGroup' + group._id).subscribe(
       res => {
         let users = (<Object[]>res.users).map((user: any) =>
-          new User(user.mail, user.password, user.name, user.secondName, user.admin, user._id, user.groupId));
+          new User(user.mail, user.password, user.name, user.secondName, user.admin, user.groupAdmin, user._id, user.groupId));
 
         this._usersGroup.next(List(users));
       },
@@ -42,7 +42,7 @@ export class UserStorageService {
     return this.http.get<{message: string, users: any}>('http://localhost:3000/api/users/getWithoutGroup').subscribe(
       res => {
         let users = (<Object[]>res.users).map((user: any) =>
-          new User(user.mail, user.password, user.name, user.secondName, user.admin, user._id, user.groupId));
+          new User(user.mail, user.password, user.name, user.secondName, user.admin, user.groupAdmin, user._id, user.groupId));
 
         this._usersWithoutGroup.next(List(users));
       },
@@ -52,6 +52,7 @@ export class UserStorageService {
 
   addUserToGroup(addedUser: User, group: Group){
     this.http.post('http://localhost:3000/api/users/addUserToGroup', {userId: addedUser._id, groupId: group._id}).subscribe(response => {
+      console.log(response);
       //Add user to _usersGroup and push
       this._usersGroup.next(this._usersGroup.getValue().push(addedUser));
 
@@ -76,6 +77,10 @@ export class UserStorageService {
 
   public getCurrentUser() {
     return this.authService.getCurrentUser();
+  }
+
+  public getCurrentGroup(){
+    return this.authService.getCurrentUser().groupId;
   }
 
 }

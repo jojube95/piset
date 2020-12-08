@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Group } from '../model/group';
 import { Task } from '../model/task';
-import {BehaviorSubject} from 'rxjs';
+import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 import {List} from "immutable";
 import {SubTask} from "../model/subTask";
+import {User} from '../model/user';
 
 
 @Injectable({
@@ -23,6 +24,7 @@ export class TaskStorageService {
           new Task(task.name, task.subtasks, task._id));
 
         this._tasksGroup.next(List(tasks));
+        console.log(tasks);
       },
       err => console.log("Error retrieving Todos")
     );
@@ -49,6 +51,11 @@ export class TaskStorageService {
       let index = tasks.findIndex((task) => task._id === updatedTask._id);
       this._tasksGroup.next(tasks.set(index, updatedTask));
     });
+  }
+
+  getTaskByUser(user: User): Observable<{message, task}>{
+    console.log(user);
+    return this.http.get<{message: string, task: any}>('http://localhost:3000/api/tasks/getByUser' + user._id);
   }
 
   reasignTasks(group: Group){

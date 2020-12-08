@@ -12,7 +12,7 @@ module.exports = function(io) {
 
 router.get('/getByGroup:id', (req, res, next) => {
   Penalty.find({ groupId: req.params.id }).then(result =>{
-      res.status(200).json({
+    res.status(200).json({
         message: "Success",
         penalties: result
       });
@@ -26,13 +26,13 @@ router.get('/getByGroup:id', (req, res, next) => {
 
 router.post('/addPenalty', (req, res, next) => {
   const penalty = new Penalty({
-    date: req.body.date,
-    amount: req.body.amount,
-    groupId: req.body.groupId,
-    userId: req.body.userId,
-    userName: req.body.userName,
-    subtaskId: req.body.subtaskId,
-    subtaskName: req.body.subtaskName
+    date: req.body.penalty.date,
+    amount: req.body.penalty.amount,
+    groupId: req.body.penalty.groupId,
+    userId: req.body.penalty.userId,
+    userName: req.body.penalty.userName,
+    subtaskId: req.body.penalty.subtaskId,
+    subtaskName: req.body.penalty.subtaskName
   });
 
   penalty.save().then(result => {

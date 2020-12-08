@@ -1,24 +1,29 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <img width="300" height="300" alt="Angular Logo" src="assets/img/icon.jpg">
-
+<ion-content *ngIf="!loading" class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <img width="300" height="300" alt="Angular Logo" src="assets/img/icon.png">
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <form (ngSubmit)="onSignin(f)" #f="ngForm">
-        <div class="form-group">
-          <label for="mail">Mail</label>
-          <input type="mail" id="mail" name="mail" ngModel class="form-control">
-        </div>
-
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" id="password" name="password" ngModel class="form-control">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Sign In</button>
-        <a routerLink="/signUp"><button type="button" class="btn" routerLinkActive="active">Register user</button></a>
+        <ion-item>
+          <ion-label for="mail">Mail</ion-label>
+          <ion-input type="email" id="mail" name="mail" ngModel></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label for="password">Password</ion-label>
+          <ion-input type="password" id="password" name="password" ngModel></ion-input>
+        </ion-item>
+        <ion-button type="submit" block>Sign In</ion-button>
+        <a routerLink="/signUp"><ion-button type="button" class="btn" routerLinkActive="active">Sign Up</ion-button></a>
 
       </form>
-    </div>
-  </div>
+    </ion-row>
 
-</div>
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="loading" class="ion-padding">
+  <app-loading-spiner></app-loading-spiner>
+</ion-content>

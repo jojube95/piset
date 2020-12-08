@@ -29,7 +29,7 @@ export class AuthService {
   signinUser(mail: string, password: string) {
     this.http.post<{token: string, user: User}>('http://localhost:3000/api/users/signin', {mail: mail, password: password}).subscribe(response => {
       this.token = response.token;
-      this.currentUser = new User(response.user.mail, response.user.password, response.user.name, response.user.secondName, response.user.admin, response.user._id, response.user.groupId);
+      this.currentUser = new User(response.user.mail, response.user.password, response.user.name, response.user.secondName, response.user.admin, response.user.groupAdmin, response.user._id, response.user.groupId);
       this.saveAuthData(response.token, this.currentUser);
       this.router.navigate(['/main']);
     });

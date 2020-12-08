@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterContentChecked, AfterViewChecked, AfterViewInit, Component, OnChanges, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../auth.service';
 
@@ -8,10 +8,12 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
+  loading: boolean = false;
 
   constructor(private authService: AuthService) { }
 
   ngOnInit() {
+
   }
 
   onSignin(form: NgForm) {

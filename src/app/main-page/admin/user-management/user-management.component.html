@@ -1,0 +1,58 @@
+<ion-header>
+  User management
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>{{currentGroup.name}}</ion-label>
+          <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="onGroupSelect($event)">
+            <ion-select-option *ngFor="let group of (groupStorage._groups | async)" [value]="group" >{{group.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-grid>
+        <ion-row>
+          <ion-col>Nombre</ion-col>
+          <ion-col>Email</ion-col>
+          <ion-col>Multa mes</ion-col>
+          <ion-col>Eliminar</ion-col>
+        </ion-row>
+
+        <ion-row *ngFor="let user of (userStorage._usersGroup | async); index as i">
+          <ion-col>{{ user.name }}</ion-col>
+          <ion-col>{{ user.mail }}</ion-col>
+          <ion-col>Multa mes</ion-col>
+          <ion-col>
+            <ion-button type="button" class="close" data-dismiss="alert" (click)="onClickDelete(user)">
+              <ion-label aria-hidden="true">×</ion-label>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+
+      </ion-grid>
+    </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>{{currentUser.name}}</ion-label>
+          <ion-select okText="Okay" cancelText="Dismiss" (ionChange)="onUserSelect($event)" [value]="currentUser">
+            <ion-select-option *ngFor="let user of (userStorage._usersWithoutGroup | async)" [value]="user">{{user.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-button [disabled]="!groupSelected || !userSelected" (click)="onAddUser()">Añadir</ion-button>
+      </ion-col>
+    </ion-row>
+
+  </ion-grid>
+</ion-content>

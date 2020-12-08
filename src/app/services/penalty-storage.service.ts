@@ -17,9 +17,8 @@ export class PenaltyStorageService {
   getFilteredPenalties(group: Group) {
     return this.http.get<{message: string, penalties: any}>('http://localhost:3000/api/penalties/getByGroup' + group._id).subscribe(
       res => {
-        console.log(res);
         let penalties = (<Object[]>res.penalties).map((penalty: any) =>
-          new Penalty(penalty.mount, penalty.date, penalty.userName, penalty.subtaskName, penalty.userId, penalty.groupId, penalty.subtaskId, penalty._id));
+          new Penalty(penalty.amount, penalty.date, penalty.userName, penalty.subtaskName, penalty.userId, penalty.groupId, penalty.subtaskId, penalty._id));
 
         this._penaltys.next(List(penalties));
       },
@@ -28,10 +27,9 @@ export class PenaltyStorageService {
   }
 
 
-  createPenalty(group: Group, penalty: Penalty) {
-    penalty.groupId = group._id;
+  createPenalty(penalty: Penalty) {
     this.http.post('http://localhost:3000/api/penalties/addPenalty', {penalty: penalty}).subscribe(response => {
-      console.log(response);
+      this._penaltys.next(this._penaltys.getValue().push(penalty));
     });
   }
 

@@ -25,6 +25,21 @@ router.get('/getByGroup:id', (req, res, next) => {
   });
 });
 
+router.get('/getByUser:id', (req, res, next) => {
+  console.log(req.params)
+  Task.findOne({ userId: req.params.id }).then(result =>{
+    console.log(result)
+    res.status(200).json({
+      message: "Success",
+      task: result
+    });
+  }).catch(err => {
+    res.status(500).json({
+      error : err
+    })
+  });
+});
+
 router.post('/addToGroup', (req, res, next) => {
   const task = new Task({
     name: req.body.task.name,
@@ -58,9 +73,10 @@ router.post('/deleteFromGroup', (req, res, next) => {
 });
 
 router.post('/update', (req, res, next) => {
+  console.log(req.body)
   if(req.body.groupId != null){
-    Task.updateOne({'_id': req.body._id}, {
-      name: req.body.name,
+    Task.updateOne({'_id': req.body.task._id}, {
+      name: req.body.task.name,
       groupId: req.body.groupId || null
     }).then(result => {
       res.status(201).json({
@@ -76,6 +92,9 @@ router.post('/update', (req, res, next) => {
 });
 
 router.post('/reasign', async (req, res, next) => {
+  //Generate history
+  //Loop the current group subtasks and insert into history
+
   let users = await User.find({ groupId: req.body.groupId });
   let tasks = await Task.find({ groupId: req.body.groupId });
 

@@ -1,14 +1,14 @@
 import { AppPage } from './app.po';
 
-describe('workspace-project App', () => {
+describe('new App', () => {
   let page: AppPage;
 
   beforeEach(() => {
     page = new AppPage();
   });
 
-  it('should display welcome message', () => {
+  it('should be blank', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('Welcome to piset!');
+    expect(page.getParagraphText()).toContain('Start with Ionic UI Components');
   });
 });
