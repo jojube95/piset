@@ -11,6 +11,7 @@ import {PenaltyManagementComponent} from './main-page/admin/penalty-management/p
 import {UserSettingsComponent} from './main-page/user/user-settings/user-settings.component';
 import {UserInfoComponent} from './main-page/user/user-info/user-info.component';
 import {TasksComponent} from './main-page/tasks/tasks.component';
+import {HistoryComponent} from './main-page/history/history.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/signIn', pathMatch: 'full'},
@@ -30,6 +31,7 @@ const routes: Routes = [
         ]
     },
     { path: 'tasks', canActivate: [AuthGuard], component: TasksComponent},
+    { path: 'history', canActivate: [AuthGuard], component: HistoryComponent},
   ]}
   ]
 ;

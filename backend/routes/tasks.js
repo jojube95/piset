@@ -92,6 +92,9 @@ router.post('/update', (req, res, next) => {
 });
 
 router.post('/reasign', async (req, res, next) => {
+  //Generate history
+  //Loop the current group subtasks and insert into history
+
   let users = await User.find({ groupId: req.body.groupId });
   let tasks = await Task.find({ groupId: req.body.groupId });
 

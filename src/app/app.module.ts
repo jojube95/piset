@@ -21,6 +21,7 @@ import {UserSettingsComponent} from './main-page/user/user-settings/user-setting
 import {UserInfoComponent} from './main-page/user/user-info/user-info.component';
 import {LoadingSpinerComponent} from './ui/loading-spiner/loading-spiner.component';
 import {TasksComponent} from './main-page/tasks/tasks.component';
+import {HistoryComponent} from './main-page/history/history.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import {TasksComponent} from './main-page/tasks/tasks.component';
     UserSettingsComponent,
     UserFilterPipe,
     DateFilterPipe,
-    TasksComponent
+    TasksComponent,
+    HistoryComponent
   ],
   entryComponents: [],
   imports: [
