@@ -1,0 +1,149 @@
+<ion-header>
+  Task management
+</ion-header>
+
+<ion-content *ngIf="!loadingGroup" class="ion-padding">
+  <ion-grid>
+
+    <ion-row>
+
+      <ion-col>
+
+        <ion-item>
+          <ion-label>{{currentGroup.name}}</ion-label>
+          <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="onGroupSelect($event)">
+            <ion-select-option *ngFor="let group of (groupStorage._groups | async)" [value]="group" >{{group.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-list>
+          <ion-item *ngFor="let task of (taskStorage._tasksGroup | async)" (click)="onClickTask(task)" [ngClass]="{'active': currentTask == task}">
+            <ion-label>{{ task.name }}</ion-label>
+            <ion-label (click)="onClickDeleteTask(task)">x</ion-label>
+          </ion-item>
+        </ion-list>
+        <ion-button *ngIf="groupSelected" (click)="onClickAdd()">Add Task</ion-button>
+        <ion-button *ngIf="taskSelected" (click)="onClickUpdateTask()">Update Task</ion-button>
+
+      </ion-col>
+
+      <ion-col>
+        <div *ngIf="add || updateTask">
+          <div *ngIf="add">
+            <form (ngSubmit)="onAddTask(f)" #f="ngForm">
+              <ion-item>
+                <ion-label for="name">Name</ion-label>
+                <ion-input type="name" id="name" name="taskName" #name="ngModel" ngModel required></ion-input>
+                <ion-label class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</ion-label>
+              </ion-item>
+
+              <ion-button type="submit" [disabled]="!f.valid">Add Task</ion-button>
+              <ion-button type="button" (click)="onClickCancel()">Back</ion-button>
+
+            </form>
+          </div>
+
+          <div *ngIf="updateTask">
+            <form (ngSubmit)="onAddUpdateTask(f)" #f="ngForm">
+              <ion-item>
+                <ion-label for="name">Name</ion-label>
+                <ion-input type="name" id="name2" name="name" #name="ngModel" ngModel class="form-control" required [(ngModel)]="currentEditTask.name"></ion-input>
+                <ion-label class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</ion-label>
+              </ion-item>
+
+              <ion-button type="submit" [disabled]="!f.valid">Update Task</ion-button>
+              <ion-button type="button" (click)="onClickCancelUpdateTask()">Back</ion-button>
+
+            </form>
+          </div>
+        </div>
+
+        <div *ngIf="!add && !updateTask && taskSelected">
+          <ion-grid>
+
+            <ion-row>
+              <ion-col scope="col">Nombre</ion-col>
+              <ion-col scope="col">Descripcion</ion-col>
+              <ion-col scope="col">Multa</ion-col>
+              <ion-col scope="col">Eliminar</ion-col>
+            </ion-row>
+
+
+            <ion-row *ngFor="let subtask of (subtaskStorage._subtasksTask | async); index as i" (click)="onSubtaskSelect(subtask)">
+              <ion-col>{{ subtask.name }}</ion-col>
+              <ion-col>{{ subtask.description }}</ion-col>
+              <ion-col>{{ subtask.penalty}}</ion-col>
+              <ion-col>
+                <ion-button type="button" class="close" data-dismiss="alert" (click)="onClickDeleteSubtask(subtask)">
+                  <ion-label aria-hidden="true">×</ion-label>
+                </ion-button>
+              </ion-col>
+            </ion-row>
+
+          </ion-grid>
+          <ion-button type="button" (click)="onClickAddSubtask()">Añadir</ion-button>
+          <ion-button *ngIf="updateSubtask" type="button" (click)="onClickUpdateSubtask()">Modificar</ion-button>
+        </div>
+
+        <div *ngIf="updateSubtaskClicked">
+          <form (ngSubmit)="onUpdateSubTask(f)" #f="ngForm">
+            <ion-item>
+              <ion-label>Name</ion-label>
+              <ion-input type="name" id="nameSubtask2" name="name" #name="ngModel" ngModel class="form-control" required [(ngModel)]="currentEditSubtask.name"></ion-input>
+              <ion-label class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Description</ion-label>
+              <ion-input type="description" id="description2" name="description" #description="ngModel" ngModel class="form-control" required [(ngModel)]="currentEditSubtask.description"></ion-input>
+              <ion-label class="help-block" *ngIf="!description.valid && description.touched">Please enter a description!</ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Penalty</ion-label>
+              <ion-input type="penalty" id="penalty2" name="penalty" #penalty="ngModel" ngModel class="form-control" required [(ngModel)]="currentEditSubtask.penalty"></ion-input>
+              <ion-label class="help-block" *ngIf="!penalty.valid && penalty.touched">Please enter a penalty!</ion-label>
+            </ion-item>
+
+            <ion-button type="submit" [disabled]="!f.valid">Modificar</ion-button>
+            <ion-button type="button" (click)="onClickCancelUpdateSubtask()">Atrás</ion-button>
+
+          </form>
+        </div>
+
+        <div *ngIf="subtaskAdd">
+          <form (ngSubmit)="onAddSubTask(f)" #f="ngForm">
+            <ion-item>
+              <ion-label>Name</ion-label>
+              <ion-input type="name" id="nameSubtask" name="name" #name="ngModel" ngModel class="form-control" required></ion-input>
+              <ion-label class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Description</ion-label>
+              <ion-input type="description" id="description" name="description" #description="ngModel" ngModel class="form-control" required></ion-input>
+              <ion-label class="help-block" *ngIf="!description.valid && description.touched">Please enter a description!</ion-label>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Penalty</ion-label>
+              <ion-input type="penalty" id="penalty" name="penalty" #penalty="ngModel" ngModel class="form-control" required></ion-input>
+              <ion-label class="help-block" *ngIf="!penalty.valid && penalty.touched">Please enter a penalty!</ion-label>
+            </ion-item>
+
+            <ion-button type="submit" class="btn btn-primary" [disabled]="!f.valid">Añadir</ion-button>
+            <ion-button type="button" class="btn" (click)="onClickCancelSubtask()">Atrás</ion-button>
+
+          </form>
+        </div>
+
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="loadingGroup" class="ion-padding">
+  <app-loading-spiner></app-loading-spiner>
+</ion-content>

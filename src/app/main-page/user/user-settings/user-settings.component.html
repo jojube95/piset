@@ -1,0 +1,31 @@
+<ion-header>
+  User settings
+</ion-header>
+
+<ion-content *ngIf="!loading" class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <form (ngSubmit)="onUpdate(f)" #f="ngForm">
+          <ion-item>
+            <ion-label for="name">Name</ion-label>
+            <ion-input [(ngModel)]="userLogged.name" type="name" id="name" name="name" #name="ngModel" class="form-control" required></ion-input>
+            <ion-label class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label for="name">Second name</ion-label>
+            <ion-input [(ngModel)]="userLogged.secondName" type="secondName" id="secondName" name="secondName" #secondName="ngModel" class="form-control" required></ion-input>
+            <ion-label class="help-block" *ngIf="!secondName.valid && secondName.touched">Please enter a second name!</ion-label>
+          </ion-item>
+
+          <ion-button type="submit" [disabled]="!f.valid || !f.dirty">Update profile</ion-button>
+        </form>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="loading" class="ion-padding">
+  <app-loading-spiner></app-loading-spiner>
+</ion-content>

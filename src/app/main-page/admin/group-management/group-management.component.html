@@ -1,0 +1,56 @@
+<ion-header>
+  Group management
+</ion-header>
+
+<ion-content *ngIf="!loading" class="ion-padding">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>Groups</ion-label>
+          <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="onGroupSelect($event)" [value]="currentGroup">
+            <ion-select-option *ngFor="let group of (groupStorage._groups | async)" [value]="group" >{{group.name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-button type="button" (click)="onClickAdd()">Add Group</ion-button>
+        <ion-button type="button" [disabled]="!groupSelected" (click)="onClickDelete()">Delete Group</ion-button>
+      </ion-col>
+
+
+    </ion-row>
+
+    <ion-row *ngIf="add">
+      <ion-col>
+        <form (ngSubmit)="onAddGroup(f)" #f="ngForm">
+          <ion-item>
+            <ion-label for="name">Name</ion-label>
+            <ion-input type="name" id="name" name="name" #name="ngModel" ngModel class="form-control" required></ion-input>
+            <ion-label class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</ion-label>
+          </ion-item>
+
+          <ion-button type="submit" [disabled]="!f.valid">Add Group</ion-button>
+          <ion-button type="button" (click)="onClickCancel()">Back</ion-button>
+
+        </form>
+      </ion-col>
+
+    </ion-row>
+
+    <ion-row *ngIf="!add">
+      <ion-col>
+        <ion-list>
+          <ion-item *ngFor="let user of (userStorage._usersGroup | async)">
+            <ion-label>{{ user.name }}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+</ion-content>
+
+<ion-content *ngIf="loading" class="ion-padding">
+  <app-loading-spiner></app-loading-spiner>
+</ion-content>
