@@ -1,0 +1,12 @@
+[{
+  "_id": {
+    "$oid": "5fccd0adaa5cf21710ea706f"
+  },
+  "name": "Subtask1",
+  "description": "Subtask1",
+  "penalty": 2,
+  "taskId": "5fccd03caa5cf21710ea706d",
+  "groupId": "5fc92fa4b8165b083045d7e8",
+  "userId": null,
+  "__v": 0
+}]

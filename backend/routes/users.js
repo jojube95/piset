@@ -141,7 +141,6 @@ router.post('/signup', (req, res, next) => {
 
 router.post('/signin', (req, res, next) => {
   let fetchedUser;
-
   User.findOne({mail: req.body.mail}).then(user => {
     if (!user) {
       return res.status(401).json({
@@ -170,9 +169,7 @@ router.post('/signin', (req, res, next) => {
       });
     }
   }).catch(err => {
-    return res.status(401).json({
-      message: 'Auth failed'
-    });
+    console.log(err);
   });
 });
 

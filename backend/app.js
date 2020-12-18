@@ -11,9 +11,16 @@ const cron = require('node-cron');
 const app  = express();
 const request = require('request');
 
-mongoose.connect('mongodb+srv://root:root@cluster0-53xnf.mongodb.net/piset', {useNewUrlParser: true, useUnifiedTopology: true}).then( () => {
+const uris = {
+  "desa": "mongodb://127.0.0.1:27017/desa",
+  "test": "mongodb://127.0.0.1:27017/test",
+  "prod": "mongodb+srv://root:root@cluster0-53xnf.mongodb.net/piset"
+};
+
+mongoose.connect(uris.test, {useNewUrlParser: true, useUnifiedTopology: true}).then( () => {
   console.log('Connected to database!');
-}).catch(() => {
+}).catch((err) => {
+  console.log(err);
   console.log('Connection to database failed!');
 });
 

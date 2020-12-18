@@ -1,0 +1,36 @@
+[{
+  "_id": {
+    "$oid": "5f8c746f7a31c72155dfb409"
+  },
+  "name": "Group3",
+  "users": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fc92fa4b8165b083045d7e8"
+  },
+  "name": "Group1",
+  "users": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fc93010b8165b083045d7e9"
+  },
+  "name": "Group2",
+  "users": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fc93060b8165b083045d7ea"
+  },
+  "name": "Group4",
+  "users": [],
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fcccf41aa5cf21710ea706c"
+  },
+  "name": "Group5",
+  "users": [],
+  "__v": 0
+}]
