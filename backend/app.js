@@ -4,7 +4,6 @@ const usersRoutes = require('./routes/users');
 const groupsRoutes = require('./routes/groups');
 const tasksRoutes = require('./routes/tasks');
 const subtasksRoutes = require('./routes/subtasks');
-const penaltiesRoutes = require('./routes/penalties');
 const historiesRoutes = require('./routes/histories');
 const cron = require('node-cron');
 const request = require('request');
@@ -68,9 +67,7 @@ app.use('/api/tasks', tasksRoutes);
 
 app.use('/api/subtasks', subtasksRoutes);
 
-app.use('/api/penalties', penaltiesRoutes);
-
-app.use('/api/history', historiesRoutes);
+app.use('/api/histories', historiesRoutes);
 
 module.exports = app;
 

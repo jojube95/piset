@@ -7,7 +7,8 @@ export class DateFilterPipe implements PipeTransform {
   transform(value: any, args?: any): any {
     let filtered = [];
     let felterDate: Date;
-    let date: Date;
+    let dateIni: Date;
+    let dateFin: Date;
 
     if(args[0] !== undefined){
 
@@ -15,9 +16,11 @@ export class DateFilterPipe implements PipeTransform {
         felterDate = new Date(args[0]);
 
         value.forEach(element => {
-          date = new Date(element.date);
+          dateIni = new Date(element.dateIni);
+          dateFin = new Date(element.dateFin);
 
-          if(felterDate.getMonth() == date.getMonth() && felterDate.getFullYear() == date.getFullYear()){
+          if(felterDate.getMonth() == dateIni.getMonth() && felterDate.getFullYear() == dateIni.getFullYear() ||
+              felterDate.getMonth() == dateFin.getMonth() && felterDate.getFullYear() == dateFin.getFullYear()){
             filtered.push(element);
           }
         });

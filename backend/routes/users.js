@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const User = require('../models/user');
-const Penaly = require('../models/penalty');
+const History = require('../models/history');
 
 const router = express.Router();
 
@@ -91,10 +91,10 @@ router.post('/update', async (req, res, next) => {
   if(result){
     console.log('User updated successfully');
     //Update penaltys name too
-    let resultPenalty = await Penaly.updateMany({'userId': req.body._id}, {'$set':{'userName': req.body.name}});
+    let resultHistory = await History.updateMany({'userId': req.body._id}, {'$set':{'userName': req.body.name}});
 
-    if(resultPenalty){
-      console.log('Penalty user data updated successfully');
+    if(resultHistory){
+      console.log('History user data updated successfully');
       res.status(201).json({
         message: 'User updated successfully',
         result: result

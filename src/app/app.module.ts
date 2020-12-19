@@ -14,7 +14,6 @@ import {FormsModule} from '@angular/forms';
 import {TaskManagementComponent} from './main-page/admin/task-management/task-management.component';
 import {UserManagementComponent} from './main-page/admin/user-management/user-management.component';
 import {GroupManagementComponent} from './main-page/admin/group-management/group-management.component';
-import {PenaltyManagementComponent} from './main-page/admin/penalty-management/penalty-management.component';
 import {DateFilterPipe} from './pipe/date-filter.pipe';
 import {UserFilterPipe} from './pipe/user-filter.pipe';
 import {UserSettingsComponent} from './main-page/user/user-settings/user-settings.component';
@@ -32,7 +31,6 @@ import {HistoryComponent} from './main-page/history/history.component';
     TaskManagementComponent,
     UserManagementComponent,
     GroupManagementComponent,
-    PenaltyManagementComponent,
     LoadingSpinerComponent,
     UserInfoComponent,
     UserSettingsComponent,

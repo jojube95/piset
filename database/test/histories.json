@@ -1,0 +1,77 @@
+[{
+  "_id": {
+    "$oid": "5df660dd11157d3148531e19"
+  },
+  "subtaskId": "5df6504d702b8013706ea829",
+  "subtaskName": "Subtask1",
+  "subtaskPenalty": 2,
+  "subtaskDone": false,
+  "userId": "5dd915e96353fc09555f7ec1",
+  "userName": "Admin",
+  "groupId": "5fc92fa4b8165b083045d7e8",
+  "groupName": "Group1",
+  "dateIni": {
+    "$date": "2020-11-30T16:35:19Z"
+  },
+  "dateFin": {
+    "$date": "2020-12-06T16:35:19Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fccd35443f0282a68d8d6e7"
+  },
+  "subtaskId": "5df6504d702b8013706ea829",
+  "subtaskName": "Subtask1",
+  "subtaskPenalty": 0,
+  "subtaskDone": true,
+  "userId": "5dd915e96353fc09555f7ec1",
+  "userName": "Admin",
+  "groupId": "5fc92fa4b8165b083045d7e8",
+  "groupName": "Group1",
+  "dateIni": {
+    "$date": "2020-12-14T16:35:19Z"
+  },
+  "dateFin": {
+    "$date": "2020-12-20T16:35:19Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fccd35943f0282a68d8d6e8"
+  },
+  "subtaskId": "5df6504d702b8013706ea829",
+  "subtaskName": "Subtask1",
+  "subtaskPenalty": 5,
+  "subtaskDone": false,
+  "userId": "5dd915e96353fc09555f7ec1",
+  "userName": "Admin",
+  "groupId": "5fc92fa4b8165b083045d7e8",
+  "groupName": "Group1",
+  "dateIni": {
+    "$date": "2020-12-21T16:35:19Z"
+  },
+  "dateFin": {
+    "$date": "2020-12-27T16:35:19Z"
+  },
+  "__v": 0
+},{
+  "_id": {
+    "$oid": "5fccd9ae43f0282a68d8d6e9"
+  },
+  "subtaskId": "5df6504d702b8013706ea829",
+  "subtaskName": "Subtask1",
+  "subtaskPenalty": 0,
+  "subtaskDone": true,
+  "userId": "5dd915e96353fc09555f7ec1",
+  "userName": "Admin",
+  "groupId": "5fc92fa4b8165b083045d7e8",
+  "groupName": "Group1",
+  "dateIni": {
+    "$date": "2020-12-07T16:35:19Z"
+  },
+  "dateFin": {
+    "$date": "2020-12-13T16:35:19Z"
+  },
+  "__v": 0
+}]
