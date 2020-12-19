@@ -1,6 +1,5 @@
 const express = require('express');
 const bodyParser = require("body-parser");
-const mongoose = require('mongoose');
 const usersRoutes = require('./routes/users');
 const groupsRoutes = require('./routes/groups');
 const tasksRoutes = require('./routes/tasks');
@@ -8,21 +7,12 @@ const subtasksRoutes = require('./routes/subtasks');
 const penaltiesRoutes = require('./routes/penalties');
 const historiesRoutes = require('./routes/histories');
 const cron = require('node-cron');
-const app  = express();
 const request = require('request');
+const app  = express();
 
-const uris = {
-  "desa": "mongodb://127.0.0.1:27017/desa",
-  "test": "mongodb://127.0.0.1:27017/test",
-  "prod": "mongodb+srv://root:root@cluster0-53xnf.mongodb.net/piset"
-};
 
-mongoose.connect(uris.test, {useNewUrlParser: true, useUnifiedTopology: true}).then( () => {
-  console.log('Connected to database!');
-}).catch((err) => {
-  console.log(err);
-  console.log('Connection to database failed!');
-});
+
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

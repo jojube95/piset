@@ -1,9 +1,10 @@
 const app = require("./backend/app");
 const debug = require("debug")("node-angular");
 const http = require("http");
+const mongoose = require('mongoose');
 
 const normalizePort = val => {
-  var port = parseInt(val, 10);
+  let port = parseInt(val, 10);
 
   if (isNaN(port)) {
     // named pipe
@@ -45,6 +46,41 @@ const onListening = () => {
 
 const port = normalizePort(process.env.PORT || "3000");
 app.set("port", port);
+
+const uris = {
+  "desa": "mongodb://127.0.0.1:27017/desa",
+  "test": "mongodb://127.0.0.1:27017/test",
+  "prod": "mongodb+srv://root:root@cluster0-53xnf.mongodb.net/piset"
+};
+
+let database;
+
+switch (process.argv[2]){
+  case 'desa':
+    database = uris.desa;
+    app.set('database', uris.desa);
+    break;
+
+  case 'test':
+    database = uris.test;
+    break;
+
+  case 'prod':
+    database = uris.prod;
+    break;
+
+  default:
+    database = uris.desa;
+    break;
+}
+
+
+mongoose.connect(database, {useNewUrlParser: true, useUnifiedTopology: true}).then( () => {
+  console.log('Connected to database!');
+}).catch((err) => {
+  console.log(err);
+  console.log('Connection to database failed!');
+});
 
 const server = http.createServer(app);
 server.on("error", onError);

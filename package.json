@@ -5,12 +5,14 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "angular": "ng serve",
+    "server": "nodemon server.js",
+    "database": "mongod",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "start:server": "nodemon server.js"
+    "e2e": "ng e2e"
+
   },
   "private": true,
   "dependencies": {
