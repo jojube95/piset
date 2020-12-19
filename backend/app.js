@@ -5,10 +5,10 @@ const groupsRoutes = require('./routes/groups');
 const tasksRoutes = require('./routes/tasks');
 const subtasksRoutes = require('./routes/subtasks');
 const historiesRoutes = require('./routes/histories');
+const testRoutes = require('./routes/test');
 const cron = require('node-cron');
 const request = require('request');
 const app  = express();
-
 
 
 
@@ -39,6 +39,7 @@ cron.schedule("59 23 * * SUN", function () {
     + currentdate.getSeconds();
 
   console.log("Running Cron Job at: " + datetime);
+
   //Do something
   //Get all groups
 
@@ -68,6 +69,8 @@ app.use('/api/tasks', tasksRoutes);
 app.use('/api/subtasks', subtasksRoutes);
 
 app.use('/api/histories', historiesRoutes);
+
+app.use('/api/test', testRoutes);
 
 module.exports = app;
 

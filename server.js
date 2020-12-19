@@ -77,6 +77,7 @@ switch (process.argv[2]){
 
 mongoose.connect(database, {useNewUrlParser: true, useUnifiedTopology: true}).then( () => {
   console.log('Connected to database!');
+  app.set('mongoose', mongoose);
 }).catch((err) => {
   console.log(err);
   console.log('Connection to database failed!');
