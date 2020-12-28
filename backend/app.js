@@ -4,13 +4,9 @@ const usersRoutes = require('./routes/users');
 const groupsRoutes = require('./routes/groups');
 const tasksRoutes = require('./routes/tasks');
 const subtasksRoutes = require('./routes/subtasks');
-<<<<<<< HEAD
-const penaltiesRoutes = require('./routes/penalties');
-const historiesRoutes = require('./routes/histories');
-=======
 const historiesRoutes = require('./routes/histories');
 const testRoutes = require('./routes/test');
->>>>>>> dev
+
 const cron = require('node-cron');
 const request = require('request');
 const app  = express();

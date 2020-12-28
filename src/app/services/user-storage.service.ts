@@ -5,14 +5,14 @@ import {HttpClient} from '@angular/common/http';
 import {AuthService} from "../auth/auth.service";
 import {Group} from "../model/group";
 import {List} from "immutable";
-
+import { environment } from '../../environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserStorageService {
-
+  private API_URL = environment.API_URL;
   public _usersGroup: BehaviorSubject<List<User>> = new BehaviorSubject(List([]));
   public _usersWithoutGroup: BehaviorSubject<List<User>> = new BehaviorSubject(List([]));
 
@@ -20,14 +20,14 @@ export class UserStorageService {
 
 
   updateUserProfile(user: User) {
-    return this.http.post('http://localhost:3000/api/users/update', user).subscribe(response => {
+    return this.http.post(this.API_URL + '/api/users/update', user).subscribe(response => {
       console.log(response);
     });
   }
 
 
   getUsersGroup(group: Group) {
-    return this.http.get<{message: string, users: any}>('http://localhost:3000/api/users/getByGroup' + group._id).subscribe(
+    return this.http.get<{message: string, users: any}>(this.API_URL + '/api/users/getByGroup' + group._id).subscribe(
       res => {
         let users = (<Object[]>res.users).map((user: any) =>
           new User(user.mail, user.password, user.name, user.secondName, user.admin, user.groupAdmin, user._id, user.groupId));
@@ -39,7 +39,7 @@ export class UserStorageService {
   }
 
   getUsersWithoutGroup() {
-    return this.http.get<{message: string, users: any}>('http://localhost:3000/api/users/getWithoutGroup').subscribe(
+    return this.http.get<{message: string, users: any}>(this.API_URL + '/api/users/getWithoutGroup').subscribe(
       res => {
         let users = (<Object[]>res.users).map((user: any) =>
           new User(user.mail, user.password, user.name, user.secondName, user.admin, user.groupAdmin, user._id, user.groupId));
@@ -51,7 +51,7 @@ export class UserStorageService {
   }
 
   addUserToGroup(addedUser: User, group: Group){
-    this.http.post('http://localhost:3000/api/users/addUserToGroup', {userId: addedUser._id, groupId: group._id}).subscribe(response => {
+    this.http.post(this.API_URL + '/api/users/addUserToGroup', {userId: addedUser._id, groupId: group._id}).subscribe(response => {
       console.log(response);
       //Add user to _usersGroup and push
       this._usersGroup.next(this._usersGroup.getValue().push(addedUser));
@@ -64,7 +64,7 @@ export class UserStorageService {
   }
 
   deleteUserFromGroup(deletedUser: User, group: Group){
-    this.http.post('http://localhost:3000/api/users/deleteUserFromGroup', {userId: deletedUser._id, groupId: group._id}).subscribe(response => {
+    this.http.post(this.API_URL + '/api/users/deleteUserFromGroup', {userId: deletedUser._id, groupId: group._id}).subscribe(response => {
       //Delete user from group and push to the _usersGroup
       let usersGroup: List<User> = this._usersGroup.getValue();
       let index = usersGroup.findIndex((user) => user._id === deletedUser._id);

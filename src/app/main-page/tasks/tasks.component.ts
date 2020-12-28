@@ -1,10 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Group} from '../../model/group';
 import {User} from '../../model/user';
-<<<<<<< HEAD
-import {PenaltyStorageService} from '../../services/penalty-storage.service';
-=======
->>>>>>> dev
 import {UserStorageService} from '../../services/user-storage.service';
 import {Task} from '../../model/task';
 import {SubTask} from '../../model/subTask';
@@ -26,11 +22,8 @@ export class TasksComponent implements OnInit {
   isUserInGroup: boolean = false;
 
   loading = true;
-<<<<<<< HEAD
-  constructor(private penaltyStorage: PenaltyStorageService, private userStorage: UserStorageService,
-=======
+
   constructor(private userStorage: UserStorageService,
->>>>>>> dev
               private subtaskStorage: SubtaskStorageService, private taskStorage: TaskStorageService) {
 
   }

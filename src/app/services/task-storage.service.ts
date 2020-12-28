@@ -6,19 +6,19 @@ import {HttpClient} from "@angular/common/http";
 import {List} from "immutable";
 import {SubTask} from "../model/subTask";
 import {User} from '../model/user';
-
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskStorageService {
-
+  private API_URL = environment.API_URL;
   public _tasksGroup: BehaviorSubject<List<Task>> = new BehaviorSubject(List([]));
 
   constructor(private http: HttpClient) {}
 
   getGroupTasks(group: Group) {
-    return this.http.get<{message: string, tasks: any}>('http://localhost:3000/api/tasks/getByGroup' + group._id).subscribe(
+    return this.http.get<{message: string, tasks: any}>(this.API_URL + '/api/tasks/getByGroup' + group._id).subscribe(
       res => {
         let tasks = (<Object[]>res.tasks).map((task: any) =>
           new Task(task.name, task.subtasks, task._id));
@@ -31,14 +31,14 @@ export class TaskStorageService {
   }
 
   addTaskToGroup(group: Group, task: Task){
-    this.http.post('http://localhost:3000/api/tasks/addToGroup', {task: task, groupId: group._id}).subscribe(response => {
+    this.http.post(this.API_URL + '/api/tasks/addToGroup', {task: task, groupId: group._id}).subscribe(response => {
       //Add task to _tasksGroup and push
       this._tasksGroup.next(this._tasksGroup.getValue().push(task));
     });
   }
 
   deleteTaskFromGroup(group: Group, deletedTask: Task){
-    this.http.post('http://localhost:3000/api/tasks/deleteFromGroup', {groupId: group._id, taskId: deletedTask._id}).subscribe(response => {
+    this.http.post(this.API_URL + '/api/tasks/deleteFromGroup', {groupId: group._id, taskId: deletedTask._id}).subscribe(response => {
       let tasks: List<Task> = this._tasksGroup.getValue();
       let index = tasks.findIndex((subtask) => subtask._id === deletedTask._id);
       this._tasksGroup.next(tasks.delete(index));
@@ -46,7 +46,7 @@ export class TaskStorageService {
   }
 
   updateTask(group: Group, updatedTask: Task){
-    this.http.post('http://localhost:3000/api/tasks/update', {task: updatedTask, groupId: group._id}).subscribe(response => {
+    this.http.post(this.API_URL + '/api/tasks/update', {task: updatedTask, groupId: group._id}).subscribe(response => {
       let tasks: List<Task> = this._tasksGroup.getValue();
       let index = tasks.findIndex((task) => task._id === updatedTask._id);
       this._tasksGroup.next(tasks.set(index, updatedTask));
@@ -55,11 +55,11 @@ export class TaskStorageService {
 
   getTaskByUser(user: User): Observable<{message, task}>{
     console.log(user);
-    return this.http.get<{message: string, task: any}>('http://localhost:3000/api/tasks/getByUser' + user._id);
+    return this.http.get<{message: string, task: any}>(this.API_URL + '/api/tasks/getByUser' + user._id);
   }
 
   reasignTasks(group: Group){
-    this.http.post('http://localhost:3000/api/tasks/reasign', {groupId: group._id}).subscribe(response => {
+    this.http.post(this.API_URL + '/api/tasks/reasign', {groupId: group._id}).subscribe(response => {
       console.log(response);
     });
   }

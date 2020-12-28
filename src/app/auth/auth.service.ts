@@ -2,11 +2,13 @@ import { Injectable } from '@angular/core';
 import {Router} from '@angular/router';
 import {User} from '../model/user';
 import {HttpClient} from "@angular/common/http";
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  private API_URL = environment.API_URL;
   private token: string;
   private currentUser: User;
 
@@ -21,13 +23,13 @@ export class AuthService {
 
   signupUser(userObj: User) {
 
-    this.http.post('http://localhost:3000/api/users/signup', userObj).subscribe(response => {
+    this.http.post(this.API_URL + '/api/users/signup', userObj).subscribe(response => {
       console.log(response);
     });
   }
 
   signinUser(mail: string, password: string) {
-    this.http.post<{token: string, user: User}>('http://localhost:3000/api/users/signin', {mail: mail, password: password}).subscribe(response => {
+    this.http.post<{token: string, user: User}>(this.API_URL + '/api/users/signin', {mail: mail, password: password}).subscribe(response => {
       this.token = response.token;
       this.currentUser = new User(response.user.mail, response.user.password, response.user.name, response.user.secondName, response.user.admin, response.user.groupAdmin, response.user._id, response.user.groupId);
       this.saveAuthData(response.token, this.currentUser);
