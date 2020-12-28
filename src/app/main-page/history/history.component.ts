@@ -23,6 +23,11 @@ export class HistoryComponent implements OnInit {
 
     this.maxDate = new Date(this.currentDate.getFullYear() + 5, 0, 0);
     this.minDate = new Date(this.currentDate.getFullYear() - 5, 0, 1);
+<<<<<<< HEAD
+=======
+
+    this.historyStorage.getUserHistories(this.loggedUser);
+>>>>>>> dev
   }
 
   ngOnInit() {}

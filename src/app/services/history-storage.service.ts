@@ -3,7 +3,10 @@ import {BehaviorSubject} from 'rxjs';
 import {List} from 'immutable';
 import {Group} from '../model/group';
 import {History} from '../model/history';
+<<<<<<< HEAD
 import {Penalty} from '../model/penalty';
+=======
+>>>>>>> dev
 import {HttpClient} from '@angular/common/http';
 import {User} from '../model/user';
 
@@ -11,20 +14,54 @@ import {User} from '../model/user';
   providedIn: 'root'
 })
 export class HistoryStorageService {
+<<<<<<< HEAD
 
+=======
+  public _histories: BehaviorSubject<List<History>> = new BehaviorSubject(List([]));
+>>>>>>> dev
   public _userHistory: BehaviorSubject<List<History>> = new BehaviorSubject(List([]));
 
   constructor(private http: HttpClient) { }
 
+<<<<<<< HEAD
   getUserHistories(user: User) {
     return this.http.get<{message: string, histories: any}>('http://localhost:3000/api/histories/getByUser' + user._id).subscribe(
         res => {
           let histories = (<Object[]>res.histories).map((history: any) =>
               new History(history.subtaskId, history.subtaskName, history.subtaskPenalty, history.subtaskDone, history.userId, history.dateIni, history.dateFin));
+=======
+    getUserHistories(user: User) {
+    return this.http.get<{message: string, histories: any}>('http://localhost:3000/api/histories/getByUser' + user._id).subscribe(
+        res => {
+          let histories = (<Object[]>res.histories).map((history: any) =>
+              new History(history.subtaskId, history.subtaskName, history.subtaskPenalty, history.subtaskDone, history.userId, history.userName, history.dateIni, history.dateFin));
+>>>>>>> dev
 
           this._userHistory.next(List(histories));
         },
         err => console.log("Error retrieving histories")
     );
+<<<<<<< HEAD
   }
+=======
+    }
+
+    getFilteredHistories(group: Group) {
+        return this.http.get<{message: string, histories: any}>('http://localhost:3000/api/histories/getByGroup' + group._id).subscribe(
+            res => {
+                let histories = (<Object[]>res.histories).map((history: any) =>
+                    new History(history.subtaskId, history.subtaskName, history.subtaskPenalty, history.subtaskDone, history.userId, history.dateIni, history.dateFin, history._id, history.groupId, history.groupName));
+                this._histories.next(List(histories));
+            },
+            err => console.log("Error retrieving Todos")
+        );
+    }
+
+
+    createHistory(history: History) {
+        this.http.post('http://localhost:3000/api/penalties/addPenalty', {history: history}).subscribe(response => {
+            this._histories.next(this._histories.getValue().push(history));
+        });
+    }
+>>>>>>> dev
 }

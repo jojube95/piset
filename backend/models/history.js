@@ -6,6 +6,12 @@ const historySchema = mongoose.Schema({
     subtaskPenalty: {type: String, required: true},
     subtaskDone: {type: Boolean, required: true},
     userId: {type: String, required: true},
+<<<<<<< HEAD
+=======
+    userName: {type: String, required: true},
+    groupId: {type: String, required: true},
+    groupName: {type: String, required: true},
+>>>>>>> dev
     dateIni: {type: Date, required: true},
     dateFin: {type: Date, required: true}
 });

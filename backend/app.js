@@ -1,21 +1,22 @@
 const express = require('express');
 const bodyParser = require("body-parser");
-const mongoose = require('mongoose');
 const usersRoutes = require('./routes/users');
 const groupsRoutes = require('./routes/groups');
 const tasksRoutes = require('./routes/tasks');
 const subtasksRoutes = require('./routes/subtasks');
+<<<<<<< HEAD
 const penaltiesRoutes = require('./routes/penalties');
 const historiesRoutes = require('./routes/histories');
+=======
+const historiesRoutes = require('./routes/histories');
+const testRoutes = require('./routes/test');
+>>>>>>> dev
 const cron = require('node-cron');
-const app  = express();
 const request = require('request');
+const app  = express();
 
-mongoose.connect('mongodb+srv://root:root@cluster0-53xnf.mongodb.net/piset', {useNewUrlParser: true, useUnifiedTopology: true}).then( () => {
-  console.log('Connected to database!');
-}).catch(() => {
-  console.log('Connection to database failed!');
-});
+
+
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
@@ -43,6 +44,7 @@ cron.schedule("59 23 * * SUN", function () {
     + currentdate.getSeconds();
 
   console.log("Running Cron Job at: " + datetime);
+
   //Do something
   //Get all groups
 
@@ -71,7 +73,9 @@ app.use('/api/tasks', tasksRoutes);
 
 app.use('/api/subtasks', subtasksRoutes);
 
-app.use('/api/penalties', penaltiesRoutes);
+app.use('/api/histories', historiesRoutes);
+
+app.use('/api/test', testRoutes);
 
 app.use('/api/history', historiesRoutes);
 
