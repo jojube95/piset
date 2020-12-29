@@ -64,8 +64,8 @@ export class SubtaskStorageService {
     });
   }
 
-  updateSubtask(task: Task, updatedSubtask: SubTask){
-    this.http.post(this.API_URL + '/api/subtasks/update', {taskId: task._id, subtask: updatedSubtask}).subscribe(response => {
+  updateSubtask(updatedSubtask: SubTask){
+    this.http.post(this.API_URL + '/api/subtasks/update', {subtask: updatedSubtask}).subscribe(response => {
       let subtasks: List<SubTask> = this._subtasksTask.getValue();
       let index = subtasks.findIndex((task) => task._id === updatedSubtask._id);
       this._subtasksTask.next(subtasks.set(index, updatedSubtask));

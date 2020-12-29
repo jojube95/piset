@@ -18,4 +18,8 @@ export class SubTask{
     this.groupId = groupId || null;
     this.userId = userId || null;
   }
+
+  updateDone(){
+    this.done = !this.done;
+  }
 }

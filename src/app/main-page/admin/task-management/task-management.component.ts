@@ -91,7 +91,7 @@ export class TaskManagementComponent implements OnInit {
     let subtask = new SubTask(form.value.name, form.value.description, form.value.penalty, this.currentSubtask.done, this.currentSubtask._id,
         this.currentSubtask.taskId, this.currentSubtask.groupId);
 
-    this.subtaskStorage.updateSubtask(this.currentTask, subtask);
+    this.subtaskStorage.updateSubtask(subtask);
     this.updateSubtask = false;
   }
 

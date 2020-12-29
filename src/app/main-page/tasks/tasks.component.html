@@ -30,7 +30,7 @@
             <ion-item *ngFor="let subtask of (subtaskStorage._subtasksTask | async)">
               <ion-label>{{ subtask.name }}</ion-label>
               <ion-label>{{ subtask.description }}</ion-label>
-              <ion-checkbox [checked]="subtask.done" [disabled]="(loggedUser._id != selectedUser._id) && !loggedUser.groupDealer"></ion-checkbox>
+              <ion-checkbox [checked]="subtask.done" [disabled]="(loggedUser._id != selectedUser._id) && !loggedUser.groupDealer" (ionChange)="onChangeSubtask(subtask)"></ion-checkbox>
             </ion-item>
           </ion-list>
         </ion-col>

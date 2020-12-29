@@ -59,6 +59,11 @@ export class TasksComponent implements OnInit {
     });
   }
 
+  onChangeSubtask(subtask: SubTask){
+    subtask.updateDone();
+    this.subtaskStorage.updateSubtask(subtask);
+  }
+
   selectUser(user: User){
     this.selectedUser = user;
     //Get task user
