@@ -11,6 +11,7 @@ import {UserSettingsComponent} from './main-page/user/user-settings/user-setting
 import {UserInfoComponent} from './main-page/user/user-info/user-info.component';
 import {TasksComponent} from './main-page/tasks/tasks.component';
 import {HistoryComponent} from './main-page/history/history.component';
+import {TestComponent} from './main-page/test/test.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/signIn', pathMatch: 'full'},
@@ -21,6 +22,7 @@ const routes: Routes = [
         {path: 'taskManagement', component: TaskManagementComponent},
         {path: 'userManagement', component: UserManagementComponent},
         {path: 'groupManagement', component: GroupManagementComponent},
+        {path: 'test', component: TestComponent},
       ]
     },
     { path: 'user', canActivate: [AuthGuard], children: [

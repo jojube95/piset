@@ -1,4 +1,7 @@
+
+
 <ion-header>
+
   <ion-toolbar>
     <ion-row>
       <ion-col>
@@ -13,10 +16,8 @@
   </ion-toolbar>
 
 </ion-header>
-
 <ion-content class="ion-padding">
-
-
+  <ion-router-outlet id="main"></ion-router-outlet>
 
   <ion-menu side="start" menuId="custom" contentId="main" class="my-custom-menu">
     <ion-header>
@@ -37,6 +38,7 @@
         <ion-item routerLink="/main/admin/taskManagement" (click)="closeMenu('custom')">Admin-Tasks</ion-item>
         <ion-item routerLink="/main/admin/userManagement" (click)="closeMenu('custom')">Admin-Users</ion-item>
         <ion-item routerLink="/main/admin/groupManagement" (click)="closeMenu('custom')">Admin-Groups</ion-item>
+        <ion-item routerLink="/main/admin/test" (click)="closeMenu('custom')">Admin-Test</ion-item>
 
         <ion-label>Account</ion-label>
         <ion-item routerLink="/main/user/info" (click)="closeMenu('custom')">Account-Info</ion-item>
@@ -46,10 +48,6 @@
       </ion-list>
     </ion-content>
   </ion-menu>
-
-  <ion-router-outlet id="main"></ion-router-outlet>
-
-
 </ion-content>
 
 

@@ -10,15 +10,27 @@ import {environment} from '../../environments/environment';
 })
 export class TestService {
     private API_URL = environment.API_URL;
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
 
-  restoreDatabase(database: String) {
-    return this.http.get<{message: string, tasks: any}>(this.API_URL + '/api/test/restoreDatabase' + database).subscribe(
-        res => {
-          console.log(res);
-        },
-        err => console.log("Error retrieving Todos")
-    );
-  }
+    restoreDatabase(database) {
+        return this.http.get<{message: string, tasks: any}>(this.API_URL + '/api/test/restoreDatabase' + database).subscribe(
+            res => {
+              console.log(res);
+            },
+            err => console.log("Error retrieving Todos")
+        );
+      }
+
+    exportDatabase(database) {
+
+        return this.http.get<{message: string, tasks: any}>(this.API_URL + '/api/test/exportDatabase' + database).subscribe(
+            res => {
+                console.log(res);
+            },
+            err => console.log("Error retrieving Todos")
+        );
+
+
+    }
 
 }

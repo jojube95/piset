@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {User} from '../model/user';
 import {AuthService} from '../auth/auth.service';
 import {MenuController} from '@ionic/angular';
+import {TestService} from '../services/test.service';
+import {environment} from '../../environments/environment';
 
 @Component({
   selector: 'app-main-page',
@@ -18,7 +20,7 @@ export class MainPageComponent implements OnInit {
     mode: 'md'
   };
 
-  constructor(private authService: AuthService, private menu: MenuController) { }
+  constructor(private authService: AuthService, private menu: MenuController, private testService: TestService) { }
 
   ngOnInit() {
     this.userLogged = this.authService.getCurrentUser();
@@ -36,5 +38,4 @@ export class MainPageComponent implements OnInit {
   closeMenu(menuId){
     this.menu.close(menuId)
   }
-
 }
