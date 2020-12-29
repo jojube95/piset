@@ -25,7 +25,7 @@ export class SubtaskStorageService {
     return this.http.get<{message: string, subtasks: any}>(this.API_URL + '/api/subtasks/getByGroup' + group._id).subscribe(
       res => {
         let subtasks = (<Object[]>res.subtasks).map((subtask: any) =>
-          new SubTask(subtask.name, subtask.description, subtask.penalty, subtask._id, subtask.taskId, subtask.groupId, subtask.userId));
+          new SubTask(subtask.name, subtask.description, subtask.penalty, subtask.done, subtask._id, subtask.taskId, subtask.groupId, subtask.userId));
 
         this._subtasksGroup.next(List(subtasks));
       },
@@ -37,7 +37,7 @@ export class SubtaskStorageService {
     return this.http.get<{message: string, subtasks: any}>(this.API_URL + '/api/subtasks/getByUser' + user._id).subscribe(
       res => {
         let subtasks = (<Object[]>res.subtasks).map((subtask: any) =>
-          new SubTask(subtask.name, subtask.description, subtask.penalty, subtask._id, subtask.taskId, subtask.groupId, subtask.userId));
+          new SubTask(subtask.name, subtask.description, subtask.penalty, subtask.done, subtask._id, subtask.taskId, subtask.groupId, subtask.userId));
 
         this._subtasksUser.next(List(subtasks));
       },
@@ -49,7 +49,7 @@ export class SubtaskStorageService {
     return this.http.get<{message: string, subtasks: any}>(this.API_URL + '/api/subtasks/getByTask' + task._id).subscribe(
       res => {
         let subtasks = (<Object[]>res.subtasks).map((subtask: any) =>
-          new SubTask(subtask.name, subtask.description, subtask.penalty, subtask._id, subtask.taskId, subtask.groupId, subtask.userId));
+          new SubTask(subtask.name, subtask.description, subtask.penalty, subtask.done, subtask._id, subtask.taskId, subtask.groupId, subtask.userId));
 
         this._subtasksTask.next(List(subtasks));
       },

@@ -21,7 +21,7 @@ import {UserInfoComponent} from './main-page/user/user-info/user-info.component'
 import {LoadingSpinerComponent} from './ui/loading-spiner/loading-spiner.component';
 import {TasksComponent} from './main-page/tasks/tasks.component';
 import {HistoryComponent} from './main-page/history/history.component';
-import {TestComponent} from './main-page/test/test.component';
+import {TestComponent} from './main-page/admin/test/test.component';
 
 @NgModule({
   declarations: [

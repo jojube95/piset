@@ -54,7 +54,6 @@ export class TaskStorageService {
   }
 
   getTaskByUser(user: User): Observable<{message, task}>{
-    console.log(user);
     return this.http.get<{message: string, task: any}>(this.API_URL + '/api/tasks/getByUser' + user._id);
   }
 

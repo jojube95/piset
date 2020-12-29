@@ -39,12 +39,28 @@ export class TasksComponent implements OnInit {
       this.isUserInGroup = true;
 
       this.userStorage.getUsersGroup(new Group(this.loggedUser.groupId, null, null));
+      this.userStorage._usersGroup.subscribe((users) =>{
+        let matchedUser = users.find(user => user._id === this.loggedUser._id);
+        if(matchedUser != undefined){
+          this.selectUser(matchedUser);
+        }
+
+      })
     }
   }
 
   onUserSelect(event){
     let user = event.detail.value;
-    console.log(user);
+    this.selectedUser = user;
+    //Get task user
+    this.taskStorage.getTaskByUser(user).subscribe(res => {
+      this.selectedTask = res.task;
+      this.subtaskStorage.getTaskSubtasks(this.selectedTask);
+    });
+  }
+
+  selectUser(user: User){
+    this.selectedUser = user;
     //Get task user
     this.taskStorage.getTaskByUser(user).subscribe(res => {
       this.selectedTask = res.task;
@@ -57,5 +73,4 @@ export class TasksComponent implements OnInit {
     groupAux._id = this.loggedUser.groupId;
     this.taskStorage.reasignTasks(groupAux);
   }
-
 }

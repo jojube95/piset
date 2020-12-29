@@ -69,7 +69,7 @@ export class TaskManagementComponent implements OnInit {
 
   onClickUpdateSubtask(){
     this.updateSubtaskClicked = true;
-    this.currentEditSubtask = new SubTask(this.currentSubtask.name, this.currentSubtask.description, this.currentSubtask.penalty, this.currentSubtask._id, this.currentSubtask.taskId, this.currentSubtask.groupId, this.currentSubtask.userId);
+    this.currentEditSubtask = new SubTask(this.currentSubtask.name, this.currentSubtask.description, this.currentSubtask.penalty, this.currentSubtask.done, this.currentSubtask._id, this.currentSubtask.taskId, this.currentSubtask.groupId, this.currentSubtask.userId);
   }
 
   onClickCancelUpdateSubtask(){
@@ -88,7 +88,7 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onUpdateSubTask(form: NgForm){
-    let subtask = new SubTask(form.value.name, form.value.description, form.value.penalty, this.currentSubtask._id,
+    let subtask = new SubTask(form.value.name, form.value.description, form.value.penalty, this.currentSubtask.done, this.currentSubtask._id,
         this.currentSubtask.taskId, this.currentSubtask.groupId);
 
     this.subtaskStorage.updateSubtask(this.currentTask, subtask);
@@ -96,7 +96,7 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onAddSubTask(form: NgForm){
-    let subtask = new SubTask(form.value.name, form.value.description, form.value.penalty);
+    let subtask = new SubTask(form.value.name, form.value.description, form.value.penalty, false);
     this.subtaskStorage.addSubtaskToTask(subtask, this.currentTask, this.currentGroup);
   }
 

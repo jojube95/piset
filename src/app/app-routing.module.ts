@@ -11,7 +11,7 @@ import {UserSettingsComponent} from './main-page/user/user-settings/user-setting
 import {UserInfoComponent} from './main-page/user/user-info/user-info.component';
 import {TasksComponent} from './main-page/tasks/tasks.component';
 import {HistoryComponent} from './main-page/history/history.component';
-import {TestComponent} from './main-page/test/test.component';
+import {TestComponent} from './main-page/admin/test/test.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/signIn', pathMatch: 'full'},
@@ -30,6 +30,7 @@ const routes: Routes = [
             {path: 'settings', component: UserSettingsComponent}
         ]
     },
+    { path: '', redirectTo: 'tasks', pathMatch: 'full'},
     { path: 'tasks', canActivate: [AuthGuard], component: TasksComponent},
     { path: 'history', canActivate: [AuthGuard], component: HistoryComponent},
   ]}
