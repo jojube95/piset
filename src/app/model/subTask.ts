@@ -5,10 +5,11 @@ export class SubTask{
   penalty: number;
   taskId: string;
   userId: string;
+  userName: string;
   done: boolean;
   groupId: string;
 
-  constructor(name: string, description: string, penalty: number, done: boolean, _id?: string, taskId?: string, groupId?: string, userId?: string){
+  constructor(name: string, description: string, penalty: number, done: boolean, _id?: string, taskId?: string, groupId?: string, userId?: string, userName?: string){
     this.name = name;
     this.description = description;
     this.penalty = penalty;
@@ -17,6 +18,7 @@ export class SubTask{
     this.taskId = taskId || null;
     this.groupId = groupId || null;
     this.userId = userId || null;
+    this.userName = userId || null;
   }
 
   updateDone(){
