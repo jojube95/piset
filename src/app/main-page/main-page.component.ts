@@ -13,6 +13,7 @@ import {environment} from '../../environments/environment';
 export class MainPageComponent implements OnInit {
   loading = true;
   userLogged: User;
+  private production = environment.production;
 
   selectOptions = {
     title: 'Pizza Toppings',

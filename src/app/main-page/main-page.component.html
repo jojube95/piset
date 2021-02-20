@@ -38,7 +38,7 @@
         <ion-item routerLink="/main/admin/taskManagement" (click)="closeMenu('custom')">Admin-Tasks</ion-item>
         <ion-item routerLink="/main/admin/userManagement" (click)="closeMenu('custom')">Admin-Users</ion-item>
         <ion-item routerLink="/main/admin/groupManagement" (click)="closeMenu('custom')">Admin-Groups</ion-item>
-        <ion-item routerLink="/main/admin/test" (click)="closeMenu('custom')">Admin-Test</ion-item>
+        <ion-item *ngIf="!this.production" routerLink="/main/admin/test" (click)="closeMenu('custom')">Admin-Test</ion-item>
 
         <ion-label>Account</ion-label>
         <ion-item routerLink="/main/user/info" (click)="closeMenu('custom')">Account-Info</ion-item>

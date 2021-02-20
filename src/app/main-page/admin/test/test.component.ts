@@ -8,11 +8,13 @@ import {environment} from '../../../../environments/environment';
   styleUrls: ['./test.component.scss'],
 })
 export class TestComponent implements OnInit {
-  private production = environment.production;
-
   constructor(private testService: TestService) { }
 
   ngOnInit() {}
+
+  nextWeek(){
+    this.testService.nextWeek();
+  }
 
   restoreDatabase(database){
     this.testService.restoreDatabase(database);
