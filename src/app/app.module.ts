@@ -22,6 +22,7 @@ import {LoadingSpinerComponent} from './ui/loading-spiner/loading-spiner.compone
 import {TasksComponent} from './main-page/tasks/tasks.component';
 import {HistoryComponent} from './main-page/history/history.component';
 import {TestComponent} from './main-page/admin/test/test.component';
+import {UserInvitationsComponent} from './main-page/user/user-invitations/user-invitations.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {TestComponent} from './main-page/admin/test/test.component';
     LoadingSpinerComponent,
     UserInfoComponent,
     UserSettingsComponent,
+    UserInvitationsComponent,
     TestComponent,
     UserFilterPipe,
     DateFilterPipe,

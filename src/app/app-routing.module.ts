@@ -12,6 +12,7 @@ import {UserInfoComponent} from './main-page/user/user-info/user-info.component'
 import {TasksComponent} from './main-page/tasks/tasks.component';
 import {HistoryComponent} from './main-page/history/history.component';
 import {TestComponent} from './main-page/admin/test/test.component';
+import {UserInvitationsComponent} from './main-page/user/user-invitations/user-invitations.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/signIn', pathMatch: 'full'},
@@ -27,7 +28,8 @@ const routes: Routes = [
     },
     { path: 'user', canActivate: [AuthGuard], children: [
             {path: 'info', component: UserInfoComponent},
-            {path: 'settings', component: UserSettingsComponent}
+            {path: 'settings', component: UserSettingsComponent},
+            {path: 'invitations', component: UserInvitationsComponent}
         ]
     },
     { path: '', redirectTo: 'tasks', pathMatch: 'full'},
