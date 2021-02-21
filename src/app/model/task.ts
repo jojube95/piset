@@ -6,6 +6,7 @@ export class Task{
   subtasks: SubTask[];
   groupId: string;
   userId: string;
+  userName: string;
 
   constructor(name: string, subtasks?: SubTask[], _id?: string){
     this.name = name;
