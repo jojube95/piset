@@ -25,7 +25,6 @@ export class UserStorageService {
     });
   }
 
-
   getUsersGroup(group: Group) {
     return this.http.get<{message: string, users: any}>(this.API_URL + '/api/users/getByGroup' + group._id).subscribe(
       res => {
@@ -75,12 +74,16 @@ export class UserStorageService {
     });
   }
 
+  getUserByMail(mail: String) {
+    return this.http.get<{message: string, users: any}>(this.API_URL + '/api/users/getByEmail' + mail);
+  }
+
   public getCurrentUser() {
     return this.authService.getCurrentUser();
   }
 
   public getCurrentGroup(){
-    return this.authService.getCurrentUser().groupId;
+    return new Group(this.authService.getCurrentUser().groupId, this.authService.getCurrentUser().groupName, null);
   }
 
 }

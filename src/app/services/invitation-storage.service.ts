@@ -21,6 +21,7 @@ export class InvitationStorageService {
   loadInvitations(user: User) {
     return this.http.get<{message: string, invitations: any}>(this.API_URL + '/api/invitations/getInvitations' + user._id).subscribe(
         res => {
+          console.log(res);
           let invitations = (<Object[]>res.invitations).map((invitation: any) =>
               new Invitation(invitation._id, invitation.userId, invitation.groupId, invitation.groupName));
           this._userInvitations.next(List(invitations));
@@ -30,6 +31,7 @@ export class InvitationStorageService {
   }
 
   inviteUser(invitation: Invitation){
+    console.log(invitation);
     this.http.post(this.API_URL + '/api/invitations/invite', {invitation: invitation}).subscribe(res => {
       this._userInvitations.next(this._userInvitations.getValue().push(invitation));
     });

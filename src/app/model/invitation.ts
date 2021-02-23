@@ -1,13 +1,15 @@
 export class Invitation {
     _id: string;
-    userId: string;
-    groupId: string;
-    groupName: string;
+    senderMail: string;
+    invitedUserId: string;
+    invitedGroupId: string;
+    invitedGroupName: string;
 
-    constructor(userId: string, groupId: string, groupName: string, _id?: string){
-        this.userId = userId;
-        this.groupId = groupId;
-        this.groupName = groupName;
+    constructor(invitedUserId: string, senderMail: string, invitedGroupId: string, invitedGroupName: string, _id?: string){
+        this.senderMail = senderMail;
+        this.invitedUserId = invitedUserId;
+        this.invitedGroupId = invitedGroupId;
+        this.invitedGroupName = invitedGroupName;
         this._id = _id || null;
     }
 }
