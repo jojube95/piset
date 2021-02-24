@@ -15,7 +15,6 @@ import {TaskManagementComponent} from './main-page/admin/task-management/task-ma
 import {UserManagementComponent} from './main-page/admin/user-management/user-management.component';
 import {GroupManagementComponent} from './main-page/admin/group-management/group-management.component';
 import {DateFilterPipe} from './pipe/date-filter.pipe';
-import {UserFilterPipe} from './pipe/user-filter.pipe';
 import {UserSettingsComponent} from './main-page/user/user-settings/user-settings.component';
 import {UserInfoComponent} from './main-page/user/user-info/user-info.component';
 import {LoadingSpinerComponent} from './ui/loading-spiner/loading-spiner.component';
@@ -38,10 +37,9 @@ import {UserInvitationsComponent} from './main-page/user/user-invitations/user-i
     UserSettingsComponent,
     UserInvitationsComponent,
     TestComponent,
-    UserFilterPipe,
     DateFilterPipe,
     TasksComponent,
-    HistoryComponent
+    HistoryComponent,
   ],
   entryComponents: [],
   imports: [
