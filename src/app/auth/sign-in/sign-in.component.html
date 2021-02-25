@@ -8,15 +8,15 @@
     <ion-row>
       <form (ngSubmit)="onSignin(f)" #f="ngForm">
         <ion-item>
-          <ion-label for="mail">Mail</ion-label>
+          <ion-label id="inputMail" for="mail">Mail</ion-label>
           <ion-input type="email" id="mail" name="mail" ngModel></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label for="password">Password</ion-label>
+          <ion-label id="inputPassword" for="password">Password</ion-label>
           <ion-input type="password" id="password" name="password" ngModel></ion-input>
         </ion-item>
-        <ion-button type="submit" block>Sign In</ion-button>
-        <a routerLink="/signUp"><ion-button type="button" class="btn" routerLinkActive="active">Sign Up</ion-button></a>
+        <ion-button id="signInButton" type="submit" block>Sign In</ion-button>
+        <a id="signUpButton" routerLink="/signUp"><ion-button type="button" class="btn" routerLinkActive="active">Sign Up</ion-button></a>
 
       </form>
     </ion-row>

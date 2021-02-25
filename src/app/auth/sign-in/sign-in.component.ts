@@ -1,6 +1,7 @@
 import {AfterContentChecked, AfterViewChecked, AfterViewInit, Component, OnChanges, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthService} from '../auth.service';
+import {TestService} from '../../services/test.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,9 +11,7 @@ import {AuthService} from '../auth.service';
 export class SignInComponent implements OnInit {
   constructor(private authService: AuthService) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   onSignin(form: NgForm) {
     this.authService.signinUser(form.value.mail, form.value.password);

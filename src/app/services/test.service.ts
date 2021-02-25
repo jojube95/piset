@@ -6,6 +6,13 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {BehaviorSubject} from 'rxjs';
 
+import users from "../../testData/users.json";
+import groups from "../../testData/groups.json";
+import tasks from "../../testData/tasks.json";
+import subtasks from "../../testData/subtasks.json";
+import invitations from "../../testData/invitations.json";
+import histories from "../../testData/histories.json";
+
 @Injectable({
   providedIn: 'root'
 })
@@ -16,6 +23,7 @@ export class TestService {
     constructor(private http: HttpClient) { }
 
     getCurrentDate() {
+
         return this.http.get<{message: string, currentDate: Date}>(this.API_URL + '/api/test/getCurrentDate').subscribe(
             res => {
                 this._currentDate.next(res.currentDate);
@@ -52,6 +60,10 @@ export class TestService {
         );
 
 
+    }
+
+    getUserByMail(mail: String){
+        return users.find(user => user.mail === mail);
     }
 
 }
