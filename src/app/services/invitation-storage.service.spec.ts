@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { InvitationStorageService } from './invitation-storage.service';
 
-describe('InvitationStorageService', () => {
+xdescribe('InvitationStorageService', () => {
   let service: InvitationStorageService;
 
   beforeEach(() => {

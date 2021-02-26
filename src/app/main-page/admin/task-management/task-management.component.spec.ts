@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { TaskManagementComponent} from './task-management.component';
 
-describe('TaskManagementComponent', () => {
+xdescribe('TaskManagementComponent', () => {
   let component: TaskManagementComponent;
   let fixture: ComponentFixture<TaskManagementComponent>;
 

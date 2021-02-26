@@ -41,10 +41,10 @@
             <ion-label class="help-block" *ngIf="!secondName.valid && secondName.touched">Please enter a second name!</ion-label>
           </ion-item>
 
-          <a routerLink="/signUp"><ion-button type="button" class="btn" routerLinkActive="active">Sign Up</ion-button></a>
+          <ion-button type="button" class="btn" routerLinkActive="active">Sign Up</ion-button>
 
           <ion-button type="submit" [disabled]="!f.valid">Register</ion-button>
-          <a routerLink="/signIn"><ion-button type="button" class="btn" routerLinkActive="active">Back</ion-button></a>
+          <ion-button type="button" class="btn" (click)="onBack()">Back</ion-button>
 
 
         </form>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { User } from '../../model/user';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,7 +11,7 @@ import { User } from '../../model/user';
 })
 export class SignUpComponent implements OnInit {
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -20,6 +21,11 @@ export class SignUpComponent implements OnInit {
       form.value.password, form.value.name, form.value.secondName, false, false, false);
 
     this.authService.signupUser(user);
+    this.router.navigate(['/signUp']);
+  }
+
+  onBack(){
+    this.router.navigate(['/signIn']);
   }
 
 }

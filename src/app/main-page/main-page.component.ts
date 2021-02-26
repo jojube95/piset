@@ -4,6 +4,7 @@ import {AuthService} from '../auth/auth.service';
 import {MenuController} from '@ionic/angular';
 import {TestService} from '../services/test.service';
 import {environment} from '../../environments/environment';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-main-page',
@@ -21,7 +22,7 @@ export class MainPageComponent implements OnInit {
     mode: 'md'
   };
 
-  constructor(private authService: AuthService, private menu: MenuController, private testService: TestService) { }
+  constructor(private authService: AuthService, private menu: MenuController, private testService: TestService, private router: Router) { }
 
   ngOnInit() {
     this.userLogged = this.authService.getCurrentUser();
@@ -36,7 +37,50 @@ export class MainPageComponent implements OnInit {
     this.menu.open(menuId);
   }
 
-  closeMenu(menuId){
-    this.menu.close(menuId)
+  onClickTasks(){
+    this.router.navigate(['/main/tasks']);
+    this.menu.close('custom')
   }
+
+  onClickHistory(){
+    this.router.navigate(['/main/history']);
+    this.menu.close('custom')
+  }
+
+  onClickTaskManagement(){
+    this.router.navigate(['/main/admin/taskManagement']);
+    this.menu.close('custom')
+  }
+
+  onClickUserManagement(){
+    this.router.navigate(['/main/admin/userManagement']);
+    this.menu.close('custom')
+  }
+
+  onClickGroupManagement(){
+    this.router.navigate(['/main/admin/groupManagement']);
+    this.menu.close('custom')
+  }
+
+  onClickTest(){
+    this.router.navigate(['/main/admin/test']);
+    this.menu.close('custom')
+  }
+
+  onClickUserInfo(){
+    this.router.navigate(['/main/user/info']);
+    this.menu.close('custom')
+  }
+
+  onClickUserSettings(){
+    this.router.navigate(['/main/user/settings']);
+    this.menu.close('custom')
+  }
+
+  onClickUserInvitations(){
+    this.router.navigate(['/main/user/invitations']);
+    this.menu.close('custom')
+  }
+
+
 }

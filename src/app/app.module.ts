@@ -44,10 +44,10 @@ import {UserInvitationsComponent} from './main-page/user/user-invitations/user-i
   entryComponents: [],
   imports: [
     BrowserModule,
+    FormsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule,
-    FormsModule
+    HttpClientModule
   ],
   providers: [
     StatusBar,

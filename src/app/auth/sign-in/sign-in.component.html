@@ -16,7 +16,7 @@
           <ion-input type="password" id="password" name="password" ngModel></ion-input>
         </ion-item>
         <ion-button id="signInButton" type="submit" block>Sign In</ion-button>
-        <a id="signUpButton" routerLink="/signUp"><ion-button type="button" class="btn" routerLinkActive="active">Sign Up</ion-button></a>
+        <ion-button id="signUpButton" type="button" (click)="onSignUp()">Sign Up</ion-button>
 
       </form>
     </ion-row>

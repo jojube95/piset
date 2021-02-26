@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 
 import {UserManagementComponent} from './user-management.component';
 
-describe('UserManagementComponent', () => {
+xdescribe('UserManagementComponent', () => {
   let component: UserManagementComponent;
   let fixture: ComponentFixture<UserManagementComponent>;
 

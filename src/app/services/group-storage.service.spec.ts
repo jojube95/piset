@@ -2,7 +2,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { GroupStorageService } from './group-storage.service';
 
-describe('GroupStorageService', () => {
+xdescribe('GroupStorageService', () => {
   let service: GroupStorageService;
 
   beforeEach(() => {
