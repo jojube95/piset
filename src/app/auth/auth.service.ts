@@ -22,7 +22,6 @@ export class AuthService {
   }
 
   signupUser(userObj: User) {
-
     this.http.post(this.API_URL + '/api/users/signup', userObj).subscribe(response => {
       console.log(response);
     });

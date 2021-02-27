@@ -8,7 +8,7 @@ import {ConfirmedValidator} from '../../ui/confirmed.validator';
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css'],
 })
 export class SignUpComponent implements OnInit {
   form: FormGroup;
@@ -46,7 +46,6 @@ export class SignUpComponent implements OnInit {
           this.form.value.password, this.form.value.name, this.form.value.secondName, false, false, false);
 
       this.authService.signupUser(user);
-      this.router.navigate(['/signUp']);
     }
   }
 
