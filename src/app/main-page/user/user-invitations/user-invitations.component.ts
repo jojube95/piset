@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Invitation} from '../../../model/invitation';
 import {InvitationStorageService} from '../../../services/invitation-storage.service';
-import {NgForm} from '@angular/forms';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {UserStorageService} from '../../../services/user-storage.service';
 
 @Component({
@@ -11,10 +11,18 @@ import {UserStorageService} from '../../../services/user-storage.service';
 })
 export class UserInvitationsComponent implements OnInit {
   loading = true;
+  form: FormGroup;
 
-  constructor(private invitationStorage: InvitationStorageService, private userStorage: UserStorageService) { }
+  constructor(private invitationStorage: InvitationStorageService, private userStorage: UserStorageService, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      email: ['', [
+        Validators.required,
+        Validators.pattern("[^ @]*@[^ @]*")
+      ]]
+    })
+
     this.loading = false;
   }
 
@@ -26,26 +34,24 @@ export class UserInvitationsComponent implements OnInit {
     this.invitationStorage.declineInvitation(invitation);
   }
 
-  onInvite(form: NgForm){
-    //Check userMail exist
-    this.userStorage.getUserByMail(form.value.email).subscribe(res => {
+  invite(){
+    if(this.form.valid){
+      //Check userMail exist
+      this.userStorage.getUserByMail(this.form.value.email).subscribe(res => {
 
-      if(res.users.length != 0){
-        let currentUser = this.userStorage.getCurrentUser();
-        let invitedUser = res.users[0];
-        let currentGroup = this.userStorage.getCurrentGroup();
+        if(res.users.length != 0){
+          let currentUser = this.userStorage.getCurrentUser();
+          let invitedUser = res.users[0];
+          let currentGroup = this.userStorage.getCurrentGroup();
 
-        let invitation = new Invitation(currentUser.mail, invitedUser._id, currentGroup._id, currentGroup.name);
-        this.invitationStorage.inviteUser(invitation);
-      }
-      else{
-        alert("User doesn't exist")
-      }
-    });
-
-
-
-
+          let invitation = new Invitation(currentUser.mail, invitedUser._id, currentGroup._id, currentGroup.name);
+          this.invitationStorage.inviteUser(invitation);
+        }
+        else{
+          alert("User doesn't exist")
+        }
+      });
+    }
   }
 
 }

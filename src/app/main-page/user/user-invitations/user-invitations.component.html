@@ -38,14 +38,13 @@
     </ion-grid>
 
 
-    <form (ngSubmit)="onInvite(f)" #f="ngForm">
+    <form (ngSubmit)="invite()" [formGroup]="form">
       <ion-item>
         <ion-label for="email">Email</ion-label>
-        <ion-input type="email" id="email" name="email" #email="ngModel" ngModel required></ion-input>
-        <ion-label class="help-block" *ngIf="!email.valid && email.touched">Email</ion-label>
+        <ion-input type="email" id="email" name="email" formControlName="email"></ion-input>
       </ion-item>
 
-      <ion-button type="submit" [disabled]="!f.valid">Invite</ion-button>
+      <ion-button type="submit" [disabled]="!form.valid">Invite</ion-button>
 
     </form>
 

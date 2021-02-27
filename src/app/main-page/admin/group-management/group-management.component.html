@@ -22,14 +22,13 @@
 
     <ion-row *ngIf="add">
       <ion-col>
-        <form (ngSubmit)="onAddGroup(f)" #f="ngForm">
+        <form (ngSubmit)="addGroup()" [formGroup]="form">
           <ion-item>
             <ion-label for="name">Name</ion-label>
-            <ion-input type="name" id="name" name="name" #name="ngModel" ngModel class="form-control" required></ion-input>
-            <ion-label class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</ion-label>
+            <ion-input type="name" id="name" name="name" formControlName="name"></ion-input>
           </ion-item>
 
-          <ion-button type="submit" [disabled]="!f.valid">Add Group</ion-button>
+          <ion-button type="submit" [disabled]="!form.valid">Add Group</ion-button>
           <ion-button type="button" (click)="onClickCancel()">Back</ion-button>
 
         </form>

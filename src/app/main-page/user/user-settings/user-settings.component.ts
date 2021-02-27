@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NgForm} from '@angular/forms';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {UserStorageService} from '../../../services/user-storage.service';
 import {AuthService} from '../../../auth/auth.service';
 import {User} from '../../../model/user';
@@ -12,20 +12,33 @@ import {User} from '../../../model/user';
 export class UserSettingsComponent implements OnInit {
   loading = true;
   userLogged: User;
+  form: FormGroup;
 
-  constructor(private authService: AuthService, private userStorage: UserStorageService) {
+  constructor(private authService: AuthService, private userStorage: UserStorageService, private fb: FormBuilder) {
   }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      name: ['', [
+        Validators.required
+      ]],
+      secondName: ['', [
+        Validators.required
+      ]]
+    })
+
     this.userLogged = this.authService.getCurrentUser();
     this.loading = false;
   }
 
-  onUpdate(form: NgForm) {
-    this.userLogged.name = form.value.name;
-    this.userLogged.secondName = form.value.secondName;
+  update() {
+    if(this.form.valid){
+      this.userLogged.name = this.form.value.name;
+      this.userLogged.secondName = this.form.value.secondName;
 
-    this.userStorage.updateUserProfile(this.userLogged);
+      this.userStorage.updateUserProfile(this.userLogged);
+    }
+
   }
 
 }

@@ -10,7 +10,7 @@ import {MainPageComponent} from './main-page/main-page.component';
 import {SignInComponent} from './auth/sign-in/sign-in.component';
 import {SignUpComponent} from './auth/sign-up/sign-up.component';
 import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TaskManagementComponent} from './main-page/admin/task-management/task-management.component';
 import {UserManagementComponent} from './main-page/admin/user-management/user-management.component';
 import {GroupManagementComponent} from './main-page/admin/group-management/group-management.component';
@@ -45,6 +45,7 @@ import {UserInvitationsComponent} from './main-page/user/user-invitations/user-i
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     HttpClientModule

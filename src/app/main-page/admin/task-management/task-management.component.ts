@@ -5,7 +5,7 @@ import {Task} from '../../../model/task';
 import {GroupStorageService} from '../../../services/group-storage.service';
 import {TaskStorageService} from '../../../services/task-storage.service';
 import {SubtaskStorageService} from '../../../services/subtask-storage.service';
-import {NgForm} from '@angular/forms';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-task-management',
@@ -27,13 +27,52 @@ export class TaskManagementComponent implements OnInit {
   groupSelected: boolean = false;
   taskSelected: boolean = false;
 
-  constructor(public groupStorage: GroupStorageService, public taskStorage: TaskStorageService, public subtaskStorage: SubtaskStorageService) { }
+  formAddTask: FormGroup;
+  formUpdateTask: FormGroup;
+  formAddSubtask: FormGroup;
+  formUpdateSubtask: FormGroup;
+
+  constructor(public groupStorage: GroupStorageService, public taskStorage: TaskStorageService, public subtaskStorage: SubtaskStorageService, private fb: FormBuilder) { }
 
   ngOnInit() {
-    //Read groups
-
     //Set control variables
     this.loadingGroup = false;
+
+    this.formAddTask = this.fb.group({
+      taskName: ['', [
+        Validators.required
+      ]]
+    });
+
+    this.formUpdateTask = this.fb.group({
+      taskName: ['', [
+        Validators.required
+      ]]
+    });
+
+    this.formAddSubtask = this.fb.group({
+      name: ['', [
+        Validators.required
+      ]],
+      description: ['', [
+        Validators.required
+      ]],
+      penalty: ['', [
+        Validators.required
+      ]]
+    });
+
+    this.formUpdateSubtask = this.fb.group({
+      name: ['', [
+        Validators.required
+      ]],
+      description: ['', [
+        Validators.required
+      ]],
+      penalty: ['', [
+        Validators.required
+      ]]
+    });
   }
 
   onClickTask(task: Task){
@@ -81,23 +120,29 @@ export class TaskManagementComponent implements OnInit {
     this.currentSubtask = subtask;
   }
 
-  onAddUpdateTask(form: NgForm){
-    let task = new Task(form.value.name, this.currentTask.subtasks, this.currentTask._id);
-    this.taskStorage.updateTask(this.currentGroup, task);
-    this.selectGroup(this.currentGroup);
+  addUpdateTask(){
+    if(this.formAddTask.valid){
+      let task = new Task(this.formAddTask.value.name, this.currentTask.subtasks, this.currentTask._id);
+      this.taskStorage.updateTask(this.currentGroup, task);
+      this.selectGroup(this.currentGroup);
+    }
   }
 
-  onUpdateSubTask(form: NgForm){
-    let subtask = new SubTask(form.value.name, form.value.description, form.value.penalty, this.currentSubtask.done, this.currentSubtask._id,
-        this.currentSubtask.taskId, this.currentSubtask.groupId);
+  updateSubTask(){
+    if(this.formUpdateSubtask.valid){
+      let subtask = new SubTask(this.formUpdateSubtask.value.name, this.formUpdateSubtask.value.description, this.formUpdateSubtask.value.penalty, this.currentSubtask.done, this.currentSubtask._id,
+          this.currentSubtask.taskId, this.currentSubtask.groupId);
 
-    this.subtaskStorage.updateSubtask(subtask);
-    this.updateSubtask = false;
+      this.subtaskStorage.updateSubtask(subtask);
+      this.updateSubtask = false;
+    }
   }
 
-  onAddSubTask(form: NgForm){
-    let subtask = new SubTask(form.value.name, form.value.description, form.value.penalty, false);
-    this.subtaskStorage.addSubtaskToTask(subtask, this.currentTask, this.currentGroup);
+  addSubTask(){
+    if(this.formAddSubtask.valid){
+      let subtask = new SubTask(this.formAddSubtask.value.name, this.formAddSubtask.value.description, this.formAddSubtask.value.penalty, false);
+      this.subtaskStorage.addSubtaskToTask(subtask, this.currentTask, this.currentGroup);
+    }
   }
 
   onClickDeleteTask(task: Task){
@@ -130,10 +175,12 @@ export class TaskManagementComponent implements OnInit {
     this.taskStorage.getGroupTasks(group);
   }
 
-  onAddTask(form: NgForm){
-    let task = new Task(form.value.taskName, []);
-    this.taskStorage.addTaskToGroup(this.currentGroup, task);
-    this.subtaskAdd = false;
+  addTask(){
+    if(this.formAddTask.valid){
+      let task = new Task(this.formAddTask.value.taskName, []);
+      this.taskStorage.addTaskToGroup(this.currentGroup, task);
+      this.subtaskAdd = false;
+    }
   }
 
   onClickCancel(){

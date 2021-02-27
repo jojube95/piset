@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {GroupStorageService} from '../../../services/group-storage.service';
 import {UserStorageService} from '../../../services/user-storage.service';
-import {NgForm} from '@angular/forms';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {Group} from '../../../model/group';
 
 @Component({
@@ -14,11 +14,18 @@ export class GroupManagementComponent implements OnInit {
   loading: boolean = true;
   currentGroup: Group = null;
   groupSelected: boolean = false;
+  form: FormGroup;
 
-  constructor(public groupStorage: GroupStorageService, public  userStorage: UserStorageService) { }
+  constructor(public groupStorage: GroupStorageService, public  userStorage: UserStorageService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.loading = false;
+
+    this.form = this.fb.group({
+      name: ['', [
+        Validators.required
+      ]]
+    })
   }
 
   onClickAdd() {
@@ -29,10 +36,11 @@ export class GroupManagementComponent implements OnInit {
     this.add = false;
   }
 
-  onAddGroup(form: NgForm){
-    let group = new Group(null, form.value.name, []);
-    this.groupStorage.createGroup(group);
-
+  addGroup(){
+    if(this.form.valid){
+      let group = new Group(null, this.form.value.name, []);
+      this.groupStorage.createGroup(group);
+    }
   }
 
   onClickDelete(){

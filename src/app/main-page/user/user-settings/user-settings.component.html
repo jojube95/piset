@@ -6,20 +6,18 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <form (ngSubmit)="onUpdate(f)" #f="ngForm">
+        <form (ngSubmit)="update()" [formGroup]="form">
           <ion-item>
             <ion-label for="name">Name</ion-label>
-            <ion-input [(ngModel)]="userLogged.name" type="name" id="name" name="name" #name="ngModel" class="form-control" required></ion-input>
-            <ion-label class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</ion-label>
+            <ion-input [(ngModel)]="userLogged.name" type="name" id="name" name="name" formControlName="name"></ion-input>
           </ion-item>
 
           <ion-item>
             <ion-label for="name">Second name</ion-label>
-            <ion-input [(ngModel)]="userLogged.secondName" type="secondName" id="secondName" name="secondName" #secondName="ngModel" class="form-control" required></ion-input>
-            <ion-label class="help-block" *ngIf="!secondName.valid && secondName.touched">Please enter a second name!</ion-label>
+            <ion-input [(ngModel)]="userLogged.secondName" type="secondName" id="secondName" formControlName="secondName"></ion-input>
           </ion-item>
 
-          <ion-button type="submit" [disabled]="!f.valid || !f.dirty">Update profile</ion-button>
+          <ion-button type="submit" [disabled]="!form.valid || !form.dirty">Update profile</ion-button>
         </form>
       </ion-col>
     </ion-row>

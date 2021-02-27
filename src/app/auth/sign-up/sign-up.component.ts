@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import { AuthService } from '../auth.service';
 import { User } from '../../model/user';
 import {Router} from '@angular/router';
+import {ConfirmedValidator} from '../../ui/confirmed.validator';
 
 @Component({
   selector: 'app-sign-up',
@@ -10,22 +11,46 @@ import {Router} from '@angular/router';
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+  form: FormGroup;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.form = this.fb.group({
+      email: ['', [
+        Validators.required,
+        Validators.pattern("[^ @]*@[^ @]*")
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8)
+      ]],
+      confPassword: ['', [
+        Validators.required,
+        Validators.minLength(8)
+      ]],
+      name: ['', [
+        Validators.required
+      ]],
+      secondName: ['', [
+        Validators.required
+      ]]
+    },{
+      validator: ConfirmedValidator('password', 'confPassword')
+    });
   }
 
-  onSignup(form: NgForm) {
-    const user = new User(form.value.mail,
-      form.value.password, form.value.name, form.value.secondName, false, false, false);
+  signUp() {
+    if(this.form.valid){
+      const user = new User(this.form.value.mail,
+          this.form.value.password, this.form.value.name, this.form.value.secondName, false, false, false);
 
-    this.authService.signupUser(user);
-    this.router.navigate(['/signUp']);
+      this.authService.signupUser(user);
+      this.router.navigate(['/signUp']);
+    }
   }
 
   onBack(){
     this.router.navigate(['/signIn']);
   }
-
 }

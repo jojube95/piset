@@ -1,16 +1,14 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { SignInComponent } from './sign-in.component';
-import { TestService} from '../../services/test.service';
 import {AuthService} from '../auth.service';
 import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {NgForm} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 import {Router} from '@angular/router';
-
 
 describe('SignInComponent', () => {
   let component: SignInComponent;
@@ -26,10 +24,11 @@ describe('SignInComponent', () => {
     const authServiceSpy = jasmine.createSpyObj('AuthService', ['signinUser']);
 
     TestBed.configureTestingModule({
-      declarations: [ SignInComponent, NgForm],
+      declarations: [ SignInComponent],
       imports: [IonicModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
       providers: [
-        { provie: AuthService, useValue: authServiceSpy}
+        { provie: AuthService, useValue: authServiceSpy},
+        FormBuilder
       ]
     }).compileComponents().then(()=> {
       fixture = TestBed.createComponent(SignInComponent);
@@ -38,7 +37,7 @@ describe('SignInComponent', () => {
       authService = TestBed.get(AuthService);
       router = TestBed.get(Router);
       spyOn(router, 'navigate');
-
+      component.ngOnInit();
     });
 
 
@@ -49,35 +48,58 @@ describe('SignInComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  xit('should execute logIn service when click on signIn with user', () => {
+  it('form invalid when empty', () => {
+    expect(component.form.valid).toBeFalsy();
+  });
+
+  it('email field validity', ()=>{
+    let email = component.form.controls['email'];
+    expect(email.valid).toBeFalsy();
+
+    let errors = {};
+    errors = email.errors || {};
+    expect(errors['required']).toBeTruthy();
+
+    email.setValue('test');
+    errors = email.errors || {};
+    expect(errors['pattern']).toBeTruthy();
+    expect(errors['required']).toBeFalsy();
+
+    email.setValue('test@test.com');
+    errors = email.errors || {};
+    expect(errors['pattern']).toBeFalsy();
+    expect(errors['required']).toBeFalsy();
+
+  });
+
+  it('should execute logIn service when click on signIn with user', () => {
     // set up spies, could also call a fake method in case you don't want the API call to go through
-    const authServiceSpy = spyOn(authService, 'signinUser').and.callThrough();
+    const signinSpy = spyOn(fixture.componentInstance, 'signIn').and.callThrough();
+    const authServiceSignInSpy = spyOn(authService, 'signinUser');
+
+    fixture.detectChanges();
 
     // make sure they haven't been called yet
-    expect(authServiceSpy).not.toHaveBeenCalled();
+    expect(signinSpy).not.toHaveBeenCalled();
+    expect(component.form.valid).toBeFalsy();
+
+    component.form.controls['email'].setValue('user1@user.com');
+    component.form.controls['password'].setValue('useruser')
 
     fixture.detectChanges();
 
-    const signInButton = el.query(By.css('#signInButton'));
-    const inputMail = el.query(By.css('#inputMail'));
-    const inputPassword = el.query(By.css('#inputPassword'));
-
-    inputMail.nativeNode.value = 'user1@user.com';
-    inputPassword.nativeNode.value = 'useruser';
+    component.signIn();
 
     fixture.detectChanges();
 
-    signInButton.nativeElement.click();
-
-    fixture.detectChanges();
-
-    expect(component).toHaveBeenCalledWith('user1@user.com', 'useruser');
-  });
+    expect(component.form.valid).toBeTruthy();
+    expect(component.form.controls['email'].value).toBe('user1@user.com');
+    expect(component.form.controls['password'].value).toBe('useruser');
+    expect(authServiceSignInSpy).toHaveBeenCalledWith('user1@user.com', 'useruser');
+   });
 
   it('should open register page when click sign up', () => {
     let signUpButton = el.query(By.css('#signUpButton'));
-
-    console.log(signUpButton.nativeElement);
 
     signUpButton.nativeElement.click();
     fixture.detectChanges();

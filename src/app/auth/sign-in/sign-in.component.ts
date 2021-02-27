@@ -1,7 +1,6 @@
-import {AfterContentChecked, AfterViewChecked, AfterViewInit, Component, OnChanges, OnInit} from '@angular/core';
-import {NgForm} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
-import {TestService} from '../../services/test.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -10,14 +9,29 @@ import {Router} from '@angular/router';
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements OnInit {
-  constructor(private authService: AuthService, private router: Router) { }
+  form: FormGroup;
 
-  ngOnInit() {}
+  constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) { }
 
-  onSignin(form: NgForm) {
-    this.authService.signinUser(form.value.mail, form.value.password);
+  ngOnInit() {
+    this.form = this.fb.group({
+      email: ['', [
+          Validators.required,
+          Validators.pattern("[^ @]*@[^ @]*")
+      ]],
+      password: ['', [
+        Validators.required,
+        Validators.minLength(8)
+      ]]
+    })
   }
-  onSignUp(){
+
+  signIn() {
+    if(this.form.valid){
+      this.authService.signinUser(this.form.value.email, this.form.value.password);
+    }
+  }
+  signUp(){
     this.router.navigate(['/signUp']);
   }
 

@@ -30,28 +30,26 @@
       <ion-col>
         <div *ngIf="add || updateTask">
           <div *ngIf="add">
-            <form (ngSubmit)="onAddTask(f)" #f="ngForm">
+            <form (ngSubmit)="addTask()" [formGroup]="formAddTask">
               <ion-item>
                 <ion-label for="name">Name</ion-label>
-                <ion-input type="name" id="name" name="taskName" #name="ngModel" ngModel required></ion-input>
-                <ion-label class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</ion-label>
+                <ion-input type="name" id="name" name="taskName" formControlName="taskName"></ion-input>
               </ion-item>
 
-              <ion-button type="submit" [disabled]="!f.valid">Add Task</ion-button>
+              <ion-button type="submit" [disabled]="!formAddTask.valid">Add Task</ion-button>
               <ion-button type="button" (click)="onClickCancel()">Back</ion-button>
 
             </form>
           </div>
 
           <div *ngIf="updateTask">
-            <form (ngSubmit)="onAddUpdateTask(f)" #f="ngForm">
+            <form (ngSubmit)="addUpdateTask()" [formGroup]="formUpdateTask">
               <ion-item>
                 <ion-label for="name">Name</ion-label>
-                <ion-input type="name" id="name2" name="name" #name="ngModel" ngModel class="form-control" required [(ngModel)]="currentEditTask.name"></ion-input>
-                <ion-label class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</ion-label>
+                <ion-input type="name" id="name2" name="taskName" formControlName="taskName"></ion-input>
               </ion-item>
 
-              <ion-button type="submit" [disabled]="!f.valid">Update Task</ion-button>
+              <ion-button type="submit" [disabled]="!formUpdateTask.valid">Update Task</ion-button>
               <ion-button type="button" (click)="onClickCancelUpdateTask()">Back</ion-button>
 
             </form>
@@ -86,52 +84,46 @@
         </div>
 
         <div *ngIf="updateSubtaskClicked">
-          <form (ngSubmit)="onUpdateSubTask(f)" #f="ngForm">
+          <form (ngSubmit)="updateSubTask()" [formGroup]="formUpdateSubtask">
             <ion-item>
               <ion-label>Name</ion-label>
-              <ion-input type="name" id="nameSubtask2" name="name" #name="ngModel" ngModel class="form-control" required [(ngModel)]="currentEditSubtask.name"></ion-input>
-              <ion-label class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</ion-label>
+              <ion-input type="name" id="nameSubtask2" name="name" formControlName="name" [(ngModel)]="currentEditSubtask.name"></ion-input>
             </ion-item>
 
             <ion-item>
               <ion-label>Description</ion-label>
-              <ion-input type="description" id="description2" name="description" #description="ngModel" ngModel class="form-control" required [(ngModel)]="currentEditSubtask.description"></ion-input>
-              <ion-label class="help-block" *ngIf="!description.valid && description.touched">Please enter a description!</ion-label>
+              <ion-input type="description" id="description2" name="description" formControlName="description" [(ngModel)]="currentEditSubtask.description"></ion-input>
             </ion-item>
 
             <ion-item>
               <ion-label>Penalty</ion-label>
-              <ion-input type="penalty" id="penalty2" name="penalty" #penalty="ngModel" ngModel class="form-control" required [(ngModel)]="currentEditSubtask.penalty"></ion-input>
-              <ion-label class="help-block" *ngIf="!penalty.valid && penalty.touched">Please enter a penalty!</ion-label>
+              <ion-input type="penalty" id="penalty2" name="penalty" formControlName="penalty" [(ngModel)]="currentEditSubtask.penalty"></ion-input>
             </ion-item>
 
-            <ion-button type="submit" [disabled]="!f.valid">Modificar</ion-button>
+            <ion-button type="submit" [disabled]="!formUpdateSubtask.valid">Modificar</ion-button>
             <ion-button type="button" (click)="onClickCancelUpdateSubtask()">Atrás</ion-button>
 
           </form>
         </div>
 
         <div *ngIf="subtaskAdd">
-          <form (ngSubmit)="onAddSubTask(f)" #f="ngForm">
+          <form (ngSubmit)="addSubTask()" [formGroup]="formAddSubtask">
             <ion-item>
               <ion-label>Name</ion-label>
-              <ion-input type="name" id="nameSubtask" name="name" #name="ngModel" ngModel class="form-control" required></ion-input>
-              <ion-label class="help-block" *ngIf="!name.valid && name.touched">Please enter a name!</ion-label>
-            </ion-item>
+              <ion-input type="name" id="nameSubtask" name="name" formControlName="name"></ion-input>
+              </ion-item>
 
             <ion-item>
               <ion-label>Description</ion-label>
-              <ion-input type="description" id="description" name="description" #description="ngModel" ngModel class="form-control" required></ion-input>
-              <ion-label class="help-block" *ngIf="!description.valid && description.touched">Please enter a description!</ion-label>
-            </ion-item>
+              <ion-input type="description" id="description" name="description" formControlName="description"></ion-input>
+              </ion-item>
 
             <ion-item>
               <ion-label>Penalty</ion-label>
-              <ion-input type="penalty" id="penalty" name="penalty" #penalty="ngModel" ngModel class="form-control" required></ion-input>
-              <ion-label class="help-block" *ngIf="!penalty.valid && penalty.touched">Please enter a penalty!</ion-label>
+              <ion-input type="penalty" id="penalty" name="penalty" formControlName="penalty"></ion-input>
             </ion-item>
 
-            <ion-button type="submit" class="btn btn-primary" [disabled]="!f.valid">Añadir</ion-button>
+            <ion-button type="submit" class="btn btn-primary" [disabled]="!formAddSubtask.valid">Añadir</ion-button>
             <ion-button type="button" class="btn" (click)="onClickCancelSubtask()">Atrás</ion-button>
 
           </form>
