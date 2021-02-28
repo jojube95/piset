@@ -82,5 +82,9 @@ export class MainPageComponent implements OnInit {
     this.menu.close('custom')
   }
 
+  getEnvironment() {
+    return this.production;
+  }
+
 
 }

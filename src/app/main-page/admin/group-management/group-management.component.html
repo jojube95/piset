@@ -8,13 +8,13 @@
       <ion-col>
         <ion-item>
           <ion-label>Groups</ion-label>
-          <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="onGroupSelect($event)" [value]="currentGroup">
+          <ion-select id="selectGroup" value="unselect" okText="Okay" cancelText="Dismiss" (ionChange)="onGroupSelect($event)" [value]="currentGroup">
             <ion-select-option *ngFor="let group of (groupStorage._groups | async)" [value]="group" >{{group.name}}</ion-select-option>
           </ion-select>
         </ion-item>
 
-        <ion-button type="button" (click)="onClickAdd()">Add Group</ion-button>
-        <ion-button type="button" [disabled]="!groupSelected" (click)="onClickDelete()">Delete Group</ion-button>
+        <ion-button id="addGroup" type="button" (click)="onClickAdd()">Add Group</ion-button>
+        <ion-button id="deleteGroup" type="button" [disabled]="!groupSelected" (click)="onClickDelete()">Delete Group</ion-button>
       </ion-col>
 
 
@@ -38,7 +38,7 @@
 
     <ion-row *ngIf="!add">
       <ion-col>
-        <ion-list>
+        <ion-list id="usersList">
           <ion-item *ngFor="let user of (userStorage._usersGroup | async)">
             <ion-label>{{ user.name }}</ion-label>
           </ion-item>

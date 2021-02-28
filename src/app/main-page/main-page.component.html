@@ -3,7 +3,7 @@
   <ion-toolbar>
     <ion-row>
       <ion-col>
-        <ion-title (click)="openMenu('custom')">Piset</ion-title>
+        <ion-title id="pisetTitle" (click)="openMenu('custom')">Piset</ion-title>
       </ion-col>
       <ion-col>
         <ion-label>Total month penalty: </ion-label>
@@ -17,7 +17,7 @@
 <ion-content class="ion-padding">
   <ion-router-outlet id="main"></ion-router-outlet>
 
-  <ion-menu side="start" menuId="custom" contentId="main" class="my-custom-menu">
+  <ion-menu id="ionMenu" side="start" menuId="custom" contentId="main" class="my-custom-menu">
     <ion-header>
       <ion-toolbar color="tertiary">
         <ion-title>Custom Menu</ion-title>
@@ -27,22 +27,22 @@
       <ion-list>
 
         <ion-label>Tasks</ion-label>
-        <ion-item (click)="onClickTasks()">Tasks</ion-item>
+        <ion-item id="clickTasks" (click)="onClickTasks()">Tasks</ion-item>
 
         <ion-label>History</ion-label>
-        <ion-item (click)="onClickHistory()">History</ion-item>
+        <ion-item id="clickHistory" (click)="onClickHistory()">History</ion-item>
 
         <ion-label>Admin</ion-label>
-        <ion-item (click)="onClickTaskManagement()">Admin-Tasks</ion-item>
-        <ion-item (click)="onClickUserManagement()">Admin-Users</ion-item>
-        <ion-item (click)="onClickGroupManagement()">Admin-Groups</ion-item>
-        <ion-item *ngIf="!this.production" (click)="onClickTest()">Admin-Test</ion-item>
+        <ion-item id="clickTaskManagement" (click)="onClickTaskManagement()">Admin-Tasks</ion-item>
+        <ion-item id="clickUserManagement" (click)="onClickUserManagement()">Admin-Users</ion-item>
+        <ion-item id="clickGroupManagement" (click)="onClickGroupManagement()">Admin-Groups</ion-item>
+        <ion-item *ngIf="!getEnvironment()" id="clickTest" (click)="onClickTest()">Admin-Test</ion-item>
 
         <ion-label>Account</ion-label>
-        <ion-item (click)="onClickUserInfo()">Account-Info</ion-item>
-        <ion-item (click)="onClickUserSettings()">Account-Settings</ion-item>
-        <ion-item (click)="onClickUserInvitations()">Account-Invitations</ion-item>
-        <ion-item (click)="logOut()">Account-LogOut</ion-item>
+        <ion-item id="clickUserInfo" (click)="onClickUserInfo()">Account-Info</ion-item>
+        <ion-item id="clickUserSettings" (click)="onClickUserSettings()">Account-Settings</ion-item>
+        <ion-item id="clickUserInvitations" (click)="onClickUserInvitations()">Account-Invitations</ion-item>
+        <ion-item id="logOut" (click)="logOut()">Account-LogOut</ion-item>
 
       </ion-list>
     </ion-content>

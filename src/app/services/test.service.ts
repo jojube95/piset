@@ -66,4 +66,12 @@ export class TestService {
         return users.find(user => user.mail === mail);
     }
 
+    getGroupByName(groupName: String){
+        return groups.find(group => group.name === groupName);
+    }
+
+    getUsersByGroupId(groupId: string){
+        return users.filter(user => user.groupId === groupId['$oid']);
+    }
+
 }

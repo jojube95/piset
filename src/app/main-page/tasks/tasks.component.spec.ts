@@ -21,4 +21,12 @@ xdescribe('TasksComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('show user dont have group message if user dont have group', () => {
+
+  });
+
+  it('show user current tasks', () => {
+
+  });
 });

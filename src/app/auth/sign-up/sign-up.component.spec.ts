@@ -10,6 +10,7 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {By} from '@angular/platform-browser';
 import {User} from '../../model/user';
+import * as confirmedValidator from '../../ui/confirmed.validator';
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
@@ -103,21 +104,6 @@ describe('SignUpComponent', () => {
 
     secondName.setValue('secondName');
     expect(secondName.hasError('required')).toBe(false);
-  });
-
-  it('same password validator', () => {
-    let password = component.form.controls['password'];
-    let confPassword = component.form.controls['confPassword'];
-
-
-
-    password.setValue('aaaaaaaa');
-    confPassword.setValue('');
-
-    expect(confPassword.hasError('confirmedValidator')).toBe(true);
-    fixture.detectChanges();
-
-
   });
 
   it('register should be disabled when form is invalid', () => {
