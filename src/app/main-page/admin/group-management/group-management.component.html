@@ -22,14 +22,14 @@
 
     <ion-row *ngIf="add">
       <ion-col>
-        <form (ngSubmit)="addGroup()" [formGroup]="form">
+        <form id="newGroupForm" (ngSubmit)="addGroup()" [formGroup]="form">
           <ion-item>
             <ion-label for="name">Name</ion-label>
             <ion-input type="name" id="name" name="name" formControlName="name"></ion-input>
           </ion-item>
 
-          <ion-button type="submit" [disabled]="!form.valid">Add Group</ion-button>
-          <ion-button type="button" (click)="onClickCancel()">Back</ion-button>
+          <ion-button id="addGroupButton" type="submit" [disabled]="!form.valid">Add Group</ion-button>
+          <ion-button id="backGroupButton" type="button" (click)="onClickCancel()">Back</ion-button>
 
         </form>
       </ion-col>

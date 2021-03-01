@@ -10,6 +10,7 @@ import {HttpClientTestingModule, HttpTestingController} from '@angular/common/ht
 import {RouterTestingModule} from '@angular/router/testing';
 import {By} from '@angular/platform-browser';
 import {TestService} from '../../../services/test.service';
+import {Group} from '../../../model/group';
 
 
 describe('GroupManagementComponent', () => {
@@ -50,7 +51,10 @@ describe('GroupManagementComponent', () => {
   it('at start no group is selected', () => {
     let groupSelect =  el.query(By.css('#selectGroup'));
     expect(component.currentGroup).toBeNull();
+
     expect(groupSelect.nativeElement.value).toBeNull();
+
+
 
   });
 
@@ -101,16 +105,91 @@ describe('GroupManagementComponent', () => {
     expect(usersList.nativeElement.children.length).toBe(4);
   });
 
-  xit('add group show add group form', () => {
+  it('add group show add group form', () => {
+    let addGroup = el.query(By.css('#addGroup'));
 
+    expect(el.query(By.css('#newGroupForm'))).toBeFalsy();
+    expect(component.add).toBeFalsy();
+
+    addGroup.nativeElement.click();
+
+    expect(el.query(By.css('#newGroupForm'))).toBeTruthy();
+    expect(component.add).toBeTruthy();
   });
 
-  xit('validations and enabled/disabled buttons of new group form', () => {
+  it('validations and enabled/disabled buttons of new group form', () => {
+    let addGroup = el.query(By.css('#addGroup'));
+    let name = component.form.controls['name'];
 
+    addGroup.nativeElement.click();
+
+    let addGroupButton = el.query(By.css('#addGroupButton'));
+
+    expect(addGroupButton.nativeElement.disabled).toBeTruthy();
+
+    name.setValue('');
+    fixture.detectChanges();
+    expect(name.hasError('required')).toBe(true);
+
+    expect(addGroupButton.nativeElement.disabled).toBeTruthy();
+
+    name.setValue('Test');
+    fixture.detectChanges();
+
+    expect(addGroupButton.nativeElement.disabled).toBeFalsy();
   });
 
-  xit('add group should add group to list', () => {
+  it('back button should hide group form', () => {
+    let addGroup = el.query(By.css('#addGroup'));
 
+    addGroup.nativeElement.click();
+
+    let backGroupButton = el.query(By.css('#backGroupButton'));
+
+    expect(backGroupButton.nativeElement.disabled).toBeFalsy();
+
+    backGroupButton.nativeElement.click();
+
+    expect(el.query(By.css('#newGroupForm'))).toBeFalsy();
+    expect(el.query(By.css('#addGroupButton'))).toBeFalsy();
+    expect(el.query(By.css('#backGroupButton'))).toBeFalsy();
+  });
+
+  it('add group should add group to list', () => {
+    //Get the form field
+    let name = component.form.controls['name'];
+
+    //Spy functions, should call through because we are going to spy the http call and the observable with mock data
+    let addGroupSpy = spyOn(component, 'addGroup').and.callThrough();
+    let createGroupSpy = spyOn(groupStorageService, 'createGroup').and.callThrough();
+
+    //Define mock data
+    let groupMockName = 'TestGroup';
+
+    //Complete form
+    name.setValue(groupMockName);
+
+    //SpyMethods to not have been colled yet
+    expect(addGroupSpy).not.toHaveBeenCalled();
+    expect(createGroupSpy).not.toHaveBeenCalled();
+
+    //Call spy method addGroup
+    component.addGroup();
+
+    //SpyMethods should have been called
+    expect(addGroupSpy).toHaveBeenCalled();
+    expect(createGroupSpy).toHaveBeenCalled();
+
+    //Mock the http request
+    const reqUsers = httpTestingController.expectOne(groupStorageService.API_URL + '/api/groups/add');
+
+    reqUsers.flush({
+      message: "Success"
+    });
+
+    //Check if groups retrive correctly
+    console.log();
+    expect(groupStorageService._groups.getValue().get(0).name).toBe(groupMockName);
   });
 
   xit('delete group should delete group from list', () => {
