@@ -36,8 +36,6 @@ export class UserManagementComponent implements OnInit {
 
   onUserSelect(event){
     let user = event.detail.value;
-    console.log('Selected user');
-    console.log(user);
     if(this.currentUser == user){
       this.userSelected = false;
     }
@@ -48,8 +46,6 @@ export class UserManagementComponent implements OnInit {
   }
 
   onAddUser(){
-    console.log(this.currentUser);
-
     this.userStorage.addUserToGroup(this.currentUser, this.currentGroup);
     this.currentUser = new User('', '', 'Selecciona usuario', '', false, false, false);
     this.userSelected = false;

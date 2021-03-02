@@ -188,11 +188,36 @@ describe('GroupManagementComponent', () => {
     });
 
     //Check if groups retrive correctly
-    console.log();
     expect(groupStorageService._groups.getValue().get(0).name).toBe(groupMockName);
   });
 
-  xit('delete group should delete group from list', () => {
+  it('delete group should delete group from list', () => {
+    let deleteGroupSpy = spyOn(groupStorageService, 'deleteGroup').and.callThrough();
+
+    //Create mock group
+    let groupMock = new Group(null, 'TestGroup', null);
+
+    //Push mock group to gorup list
+    groupStorageService._groups.next(groupStorageService._groups.getValue().push(groupMock));
+    expect(groupStorageService._groups.getValue().size).toBe(1);
+
+    expect(deleteGroupSpy).not.toHaveBeenCalled();
+
+    //Call delete group
+    component.currentGroup = groupMock;
+    component.onClickDelete();
+
+    expect(deleteGroupSpy).toHaveBeenCalled();
+
+    //Mock the http request
+    const reqUsers = httpTestingController.expectOne(groupStorageService.API_URL + '/api/groups/delete');
+
+    reqUsers.flush({
+      message: "Success"
+    });
+
+    //Check if deleted group doesnt appear
+    expect(groupStorageService._groups.getValue().size).toBe(0);
 
   });
 });

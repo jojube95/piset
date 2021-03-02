@@ -2,26 +2,26 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button type="button" (click)="restoreDatabase('desa')">Restore desa database</ion-button>
+        <ion-button id="restoreDesa" type="button" (click)="restoreDatabase('desa')">Restore desa database</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button type="button" (click)="restoreDatabase('test')">Restore test database</ion-button>
+        <ion-button id="restoreTest" type="button" (click)="restoreDatabase('test')">Restore test database</ion-button>
       </ion-col>
 
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <ion-button type="button" (click)="exportDatabase('desa')">Export desa database</ion-button>
+        <ion-button id="exportDesa" type="button" (click)="exportDatabase('desa')">Export desa database</ion-button>
       </ion-col>
       <ion-col>
-        <ion-button type="button" (click)="exportDatabase('test')">Export test database</ion-button>
+        <ion-button id="exportTest" type="button" (click)="exportDatabase('test')">Export test database</ion-button>
       </ion-col>
     </ion-row>
 
     <ion-row>
       <ion-col>
-        <ion-button type="button" (click)="nextWeek()">Next Week</ion-button>
+        <ion-button id="nextWeek" type="button" (click)="nextWeek()">Next Week</ion-button>
       </ion-col>
       <ion-col>
         <ion-label>Current date: {{testService._currentDate | async}}</ion-label>

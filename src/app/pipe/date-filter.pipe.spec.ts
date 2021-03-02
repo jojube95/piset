@@ -6,10 +6,8 @@ xdescribe('DateFilterPipe', () => {
   let history1, history2, history3, history4;
   let date1, date2, date3, date4, date5, date6;
   let datefilter1, datefilter2, datefilter3, datefilter4, datefilter5;
-
+  let pipe = new DateFilterPipe();
   beforeEach(()=> {
-    const pipe = new DateFilterPipe();
-
     date1 = new Date(Date.UTC(2020, 0, 0));
     date2 = new Date(Date.UTC(2020, 0, 28));
     date3 = new Date(Date.UTC(2020, 1, 1));
@@ -30,17 +28,27 @@ xdescribe('DateFilterPipe', () => {
 
     list1 = [];
 
+    list2 = [];
+
     list2.push(history1);
+
+    list3 = [];
 
     list3.push(history1);
     list3.push(history2);
+
+    list4 = [];
 
     list4.push(history1);
     list4.push(history2);
     list4.push(history3);
 
+    list5 = [];
+
     list5.push(history2);
     list5.push(history3);
+
+    list6 = [];
 
     list6.push(history1);
     list6.push(history3);
@@ -49,38 +57,38 @@ xdescribe('DateFilterPipe', () => {
   });
 
   it('create an instance', () => {
-    expect(this.pipe).toBeTruthy();
+    expect(pipe).toBeTruthy();
   });
 
   it('should filter data', () => {
-    expect(this.pipe.transform(list1, datefilter1)).toBe([]);
+    expect(pipe.transform(list1, datefilter1)).toEqual([]);
 
-    expect(this.pipe.transform(list2, datefilter1)).toBe([]);
-    expect(this.pipe.transform(list2, datefilter2)).toContain(history1);
-    expect(this.pipe.transform(list2, datefilter5)).toBe([]);
+    expect(pipe.transform(list2, datefilter1)).toEqual([]);
+    expect(pipe.transform(list2, datefilter2)).toContain(history1);
+    expect(pipe.transform(list2, datefilter5)).toEqual([]);
 
-    expect(this.pipe.transform(list3, datefilter1)).toContain(history1);
-    expect(this.pipe.transform(list3, datefilter2)).toContain(history2);
-    expect(this.pipe.transform(list3, datefilter3)).toBe([]);
-    expect(this.pipe.transform(list3, datefilter5)).toBe([]);
+    expect(pipe.transform(list3, datefilter1)).toContain(history1);
+    expect(pipe.transform(list3, datefilter2)).toContain(history2);
+    expect(pipe.transform(list3, datefilter3)).toEqual([]);
+    expect(pipe.transform(list3, datefilter5)).toEqual([]);
 
-    expect(this.pipe.transform(list4, datefilter1)).toContain(history1);
-    expect(this.pipe.transform(list4, datefilter2)).toContain(history2);
-    expect(this.pipe.transform(list4, datefilter3)).toContain(history3);
-    expect(this.pipe.transform(list4, datefilter4)).toBe([]);
-    expect(this.pipe.transform(list4, datefilter5)).toBe([]);
+    expect(pipe.transform(list4, datefilter1)).toContain(history1);
+    expect(pipe.transform(list4, datefilter2)).toContain(history2);
+    expect(pipe.transform(list4, datefilter3)).toContain(history3);
+    expect(pipe.transform(list4, datefilter4)).toEqual([]);
+    expect(pipe.transform(list4, datefilter5)).toEqual([]);
 
-    expect(this.pipe.transform(list5, datefilter1)).toBe([]);
-    expect(this.pipe.transform(list5, datefilter2)).toContain(history2);
-    expect(this.pipe.transform(list5, datefilter3)).toContain(history3);
-    expect(this.pipe.transform(list5, datefilter4)).toBe([]);
-    expect(this.pipe.transform(list5, datefilter5)).toBe([]);
+    expect(pipe.transform(list5, datefilter1)).toEqual([]);
+    expect(pipe.transform(list5, datefilter2)).toContain(history2);
+    expect(pipe.transform(list5, datefilter3)).toContain(history3);
+    expect(pipe.transform(list5, datefilter4)).toEqual([]);
+    expect(pipe.transform(list5, datefilter5)).toEqual([]);
 
-    expect(this.pipe.transform(list6, datefilter1)).toContain(history4);
-    expect(this.pipe.transform(list6, datefilter1)).toContain(history1);
-    expect(this.pipe.transform(list6, datefilter2)).toContain(history4);
-    expect(this.pipe.transform(list6, datefilter3)).toContain(history3);
-    expect(this.pipe.transform(list6, datefilter4)).toBe([]);
-    expect(this.pipe.transform(list6, datefilter5)).toBe([]);
+    expect(pipe.transform(list6, datefilter1)).toContain(history4);
+    expect(pipe.transform(list6, datefilter1)).toContain(history1);
+    expect(pipe.transform(list6, datefilter2)).toContain(history4);
+    expect(pipe.transform(list6, datefilter3)).toContain(history3);
+    expect(pipe.transform(list6, datefilter4)).toEqual([]);
+    expect(pipe.transform(list6, datefilter5)).toEqual([]);
   });
 });
