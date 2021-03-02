@@ -71,7 +71,19 @@ export class TestService {
     }
 
     getUsersByGroupId(groupId: string){
-        return users.filter(user => user.groupId === groupId['$oid']);
+        return users.filter(user => user.groupId === groupId);
+    }
+
+    getTasksByGroupId(groupId: string){
+        return tasks.filter(task => task.groupId === groupId);
+    }
+
+    getTaskByName(taskName: String){
+        return tasks.find(task => task.name === taskName);
+    }
+
+    getSubtasksByTaskId(taskId: string){
+        return subtasks.filter(subtask => subtask.taskId === taskId);
     }
 
 }

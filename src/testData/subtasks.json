@@ -1,7 +1,5 @@
 [{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca14530"
-  },
+  "_id": "5fde504d9e491a29eca14530",
   "name": "Subtask1",
   "description": "Subtask1",
   "penalty": 2,
@@ -12,9 +10,7 @@
   "userName": "User1",
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca14531"
-  },
+  "_id": "5fde504d9e491a29eca14531",
   "name": "Subtask2",
   "description": "Subtask2",
   "penalty": 2,
@@ -25,9 +21,7 @@
   "userName": "User1",
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca14532"
-  },
+  "_id": "5fde504d9e491a29eca14532",
   "name": "Subtask3",
   "description": "Subtask3",
   "penalty": 2,
@@ -38,9 +32,7 @@
   "userName": "User2",
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca14533"
-  },
+  "_id": "5fde504d9e491a29eca14533",
   "name": "Subtask4",
   "description": "Subtask4",
   "penalty": 2,
@@ -51,9 +43,7 @@
   "userName": "User2",
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca14534"
-  },
+  "_id": "5fde504d9e491a29eca14534",
   "name": "Subtask5",
   "description": "Subtask5",
   "penalty": 2,
@@ -64,9 +54,7 @@
   "userName": "User3",
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca14535"
-  },
+  "_id": "5fde504d9e491a29eca14535",
   "name": "Subtask6",
   "description": "Subtask6",
   "penalty": 2,
@@ -77,9 +65,7 @@
   "userName": "User3",
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca14536"
-  },
+  "_id": "5fde504d9e491a29eca14536",
   "name": "Subtask7",
   "description": "Subtask7",
   "penalty": 2,
@@ -90,9 +76,7 @@
   "userName": "User4",
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca14537"
-  },
+  "_id": "5fde504d9e491a29eca14537",
   "name": "Subtask8",
   "description": "Subtask8",
   "penalty": 2,
@@ -103,9 +87,7 @@
   "userName": "User4",
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca14538"
-  },
+  "_id": "5fde504d9e491a29eca14538",
   "name": "Subtask9",
   "description": "Subtask9",
   "penalty": 2,
@@ -116,9 +98,7 @@
   "userName": "User5",
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca14539"
-  },
+  "_id": "5fde504d9e491a29eca14539",
   "name": "Subtask10",
   "description": "Subtask10",
   "penalty": 2,
@@ -129,9 +109,7 @@
   "userName": "User5",
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca1453a"
-  },
+  "_id": "5fde504d9e491a29eca1453a",
   "name": "Subtask11",
   "description": "Subtask11",
   "penalty": 2,
@@ -142,9 +120,7 @@
   "userName": "User6",
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca1453b"
-  },
+  "_id": "5fde504d9e491a29eca1453b",
   "name": "Subtask12",
   "description": "Subtask12",
   "penalty": 2,
@@ -155,9 +131,7 @@
   "userName": "User6",
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca1453c"
-  },
+  "_id": "5fde504d9e491a29eca1453c",
   "name": "Subtask13",
   "description": "Subtask13",
   "penalty": 2,
@@ -168,9 +142,7 @@
   "userName": "User7",
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde504d9e491a29eca1453d"
-  },
+  "_id": "5fde504d9e491a29eca1453d",
   "name": "Subtask14",
   "description": "Subtask14",
   "penalty": 2,

@@ -9,14 +9,14 @@
 
       <ion-col>
 
-        <ion-item>
+        <ion-item id="selectGroupIon">
           <ion-label>{{currentGroup.name}}</ion-label>
-          <ion-select value="brown" okText="Okay" cancelText="Dismiss" (ionChange)="onGroupSelect($event)">
+          <ion-select id="selectGroup" value="unselect" okText="Okay" cancelText="Dismiss" (ionChange)="onGroupSelect($event)">
             <ion-select-option *ngFor="let group of (groupStorage._groups | async)" [value]="group" >{{group.name}}</ion-select-option>
           </ion-select>
         </ion-item>
 
-        <ion-list>
+        <ion-list id="tasksList">
           <ion-item *ngFor="let task of (taskStorage._tasksGroup | async)" (click)="onClickTask(task)" [ngClass]="{'active': currentTask == task}">
             <ion-label>{{ task.name }}</ion-label>
             <ion-label (click)="onClickDeleteTask(task)">x</ion-label>
@@ -57,7 +57,7 @@
         </div>
 
         <div *ngIf="!add && !updateTask && taskSelected">
-          <ion-grid>
+          <ion-grid id="subtasksList">
 
             <ion-row>
               <ion-col scope="col">Nombre</ion-col>
@@ -80,7 +80,7 @@
 
           </ion-grid>
           <ion-button type="button" (click)="onClickAddSubtask()">Añadir</ion-button>
-          <ion-button *ngIf="updateSubtask" type="button" (click)="onClickUpdateSubtask()">Modificar</ion-button>
+          <ion-button *ngIf="updateSubtaskBoolean" type="button" (click)="onClickUpdateSubtask()">Modificar</ion-button>
         </div>
 
         <div *ngIf="updateSubtaskClicked">

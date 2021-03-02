@@ -1,7 +1,5 @@
 [{
-  "_id": {
-    "$oid": "5fde50459e491a29eca1452c"
-  },
+  "_id": "5fde50459e491a29eca1452c",
   "subtaskId": "5fde504d9e491a29eca14530",
   "subtaskName": "Subtask1",
   "subtaskPenalty": 2,
@@ -18,9 +16,7 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde50459e491a29eca1452d"
-  },
+  "_id": "5fde50459e491a29eca1452d",
   "subtaskId": "5fde504d9e491a29eca14531",
   "subtaskName": "Subtask2",
   "subtaskPenalty": 2,
@@ -37,9 +33,7 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde50459e491a29eca1452e"
-  },
+  "_id": "5fde50459e491a29eca1452e",
   "subtaskId": "5fde504d9e491a29eca14532",
   "subtaskName": "Subtask3",
   "subtaskPenalty": 2,
@@ -56,9 +50,7 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fde50459e491a29eca1452f"
-  },
+  "_id": "5fde50459e491a29eca1452f",
   "subtaskId": "",
   "subtaskName": "Subtask4",
   "subtaskPenalty": 2,
@@ -75,9 +67,7 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fdf743e0eb4dc2bc464355f"
-  },
+  "_id": "5fdf743e0eb4dc2bc464355f",
   "subtaskId": "5fde504d9e491a29eca14534",
   "subtaskName": "Subtask5",
   "subtaskPenalty": 2,
@@ -94,9 +84,7 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fdf74420eb4dc2bc4643560"
-  },
+  "_id": "5fdf74420eb4dc2bc4643560",
   "subtaskId": "5fde504d9e491a29eca14535",
   "subtaskName": "Subtask6",
   "subtaskPenalty": 2,
@@ -113,9 +101,7 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fdf74430eb4dc2bc4643561"
-  },
+  "_id": "5fdf74430eb4dc2bc4643561",
   "subtaskId": "5fde504d9e491a29eca14536",
   "subtaskName": "Subtask7",
   "subtaskPenalty": 2,
@@ -132,9 +118,7 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fdf74450eb4dc2bc4643562"
-  },
+  "_id": "5fdf74450eb4dc2bc4643562",
   "subtaskId": "5fde504d9e491a29eca14537",
   "subtaskName": "Subtask8",
   "subtaskPenalty": 2,
@@ -151,9 +135,7 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fdf744c0eb4dc2bc4643563"
-  },
+  "_id": "5fdf744c0eb4dc2bc4643563",
   "subtaskId": "5fde504d9e491a29eca14538",
   "subtaskName": "Subtask9",
   "subtaskPenalty": 2,
@@ -170,9 +152,7 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fdf744d0eb4dc2bc4643564"
-  },
+  "_id": "5fdf744d0eb4dc2bc4643564",
   "subtaskId": "5fde504d9e491a29eca14539",
   "subtaskName": "Subtask10",
   "subtaskPenalty": 2,
@@ -189,9 +169,7 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fdf744f0eb4dc2bc4643565"
-  },
+  "_id": "5fdf744f0eb4dc2bc4643565",
   "subtaskId": "5fde504d9e491a29eca1453a",
   "subtaskName": "Subtask11",
   "subtaskPenalty": 2,
@@ -208,9 +186,7 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fdf74510eb4dc2bc4643566"
-  },
+  "_id": "5fdf74510eb4dc2bc4643566",
   "subtaskId": "5fde504d9e491a29eca1453b",
   "subtaskName": "Subtask12",
   "subtaskPenalty": 2,
@@ -227,9 +203,7 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fdf74520eb4dc2bc4643567"
-  },
+  "_id": "5fdf74520eb4dc2bc4643567",
   "subtaskId": "5fde504d9e491a29eca1453c",
   "subtaskName": "Subtask13",
   "subtaskPenalty": 2,
@@ -246,9 +220,7 @@
   },
   "__v": 0
 },{
-  "_id": {
-    "$oid": "5fdf74540eb4dc2bc4643568"
-  },
+  "_id": "5fdf74540eb4dc2bc4643568",
   "subtaskId": "5fde504d9e491a29eca1453d",
   "subtaskName": "Subtask14",
   "subtaskPenalty": 2,

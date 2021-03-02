@@ -24,7 +24,6 @@ export class TaskStorageService {
           new Task(task.name, task.subtasks, task._id));
 
         this._tasksGroup.next(List(tasks));
-        console.log(tasks);
       },
       err => console.log("Error retrieving Todos")
     );
@@ -39,6 +38,7 @@ export class TaskStorageService {
 
   deleteTaskFromGroup(group: Group, deletedTask: Task){
     this.http.post(this.API_URL + '/api/tasks/deleteFromGroup', {groupId: group._id, taskId: deletedTask._id}).subscribe(response => {
+
       let tasks: List<Task> = this._tasksGroup.getValue();
       let index = tasks.findIndex((subtask) => subtask._id === deletedTask._id);
       this._tasksGroup.next(tasks.delete(index));

@@ -75,7 +75,9 @@ export class SubtaskStorageService {
   deleteSubtask(task: Task, deletedSubtask: SubTask){
     this.http.post(this.API_URL + '/api/subtasks/deleteFromTask', {taskId: task._id, subtaskId: deletedSubtask._id}).subscribe(response => {
       let subtasks: List<SubTask> = this._subtasksTask.getValue();
+      console.log(deletedSubtask);
       let index = subtasks.findIndex((subtask) => subtask._id === deletedSubtask._id);
+      console.log(index);
       this._subtasksTask.next(subtasks.delete(index));
     });
   }

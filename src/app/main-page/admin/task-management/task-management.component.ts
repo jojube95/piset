@@ -19,7 +19,7 @@ export class TaskManagementComponent implements OnInit {
   currentSubtask: SubTask;
   currentEditSubtask: SubTask;
   add: boolean = false;
-  updateSubtask: boolean = false;
+  updateSubtaskBoolean: boolean = false;
   updateSubtaskClicked: boolean = false;
   updateTask: boolean = false;
   subtaskAdd: boolean = false;
@@ -77,7 +77,7 @@ export class TaskManagementComponent implements OnInit {
 
   onClickTask(task: Task){
     this.updateSubtaskClicked = false;
-    this.updateSubtask = false;
+    this.updateSubtaskBoolean = false;
     this.taskSelected = true;
     this.add = false;
     this.currentTask = task;
@@ -88,8 +88,6 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onUpdateTask(){
-    console.log('Clickeado UpdateTask');
-    console.log(this.currentTask);
     this.taskStorage.updateTask(this.currentGroup, this.currentTask);
   }
 
@@ -116,7 +114,7 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onSubtaskSelect(subtask: SubTask){
-    this.updateSubtask = true;
+    this.updateSubtaskBoolean = true;
     this.currentSubtask = subtask;
   }
 
@@ -134,7 +132,7 @@ export class TaskManagementComponent implements OnInit {
           this.currentSubtask.taskId, this.currentSubtask.groupId);
 
       this.subtaskStorage.updateSubtask(subtask);
-      this.updateSubtask = false;
+      this.updateSubtaskBoolean = false;
     }
   }
 
@@ -147,7 +145,11 @@ export class TaskManagementComponent implements OnInit {
 
   onClickDeleteTask(task: Task){
     this.taskStorage.deleteTaskFromGroup(this.currentGroup, task);
-    this.onGroupSelect(this.currentGroup);
+    this.updateSubtaskBoolean = false;
+    this.updateSubtaskClicked = false;
+    this.add = false;
+    this.taskSelected = false;
+    this.groupSelected = true;
   }
 
   onClickDeleteSubtask(subTask: SubTask){
@@ -156,7 +158,7 @@ export class TaskManagementComponent implements OnInit {
 
   onGroupSelect(event){
     let group = event.detail.value;
-    this.updateSubtask = false;
+    this.updateSubtaskBoolean = false;
     this.updateSubtaskClicked = false;
     this.add = false;
     this.taskSelected = false;
@@ -166,7 +168,7 @@ export class TaskManagementComponent implements OnInit {
   }
 
   selectGroup(group: Group){
-    this.updateSubtask = false;
+    this.updateSubtaskBoolean = false;
     this.updateSubtaskClicked = false;
     this.add = false;
     this.taskSelected = false;

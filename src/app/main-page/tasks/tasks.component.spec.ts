@@ -2,10 +2,13 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { TasksComponent} from './tasks.component';
+import {DebugElement} from '@angular/core';
 
 xdescribe('TasksComponent', () => {
   let component: TasksComponent;
   let fixture: ComponentFixture<TasksComponent>;
+  let el: DebugElement;
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
