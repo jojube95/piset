@@ -140,6 +140,7 @@ export class TaskManagementComponent implements OnInit {
     if(this.formAddSubtask.valid){
       let subtask = new SubTask(this.formAddSubtask.value.name, this.formAddSubtask.value.description, this.formAddSubtask.value.penalty, false);
       this.subtaskStorage.addSubtaskToTask(subtask, this.currentTask, this.currentGroup);
+      this.subtaskAdd = false;
     }
   }
 

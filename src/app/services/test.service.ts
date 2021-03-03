@@ -86,4 +86,7 @@ export class TestService {
         return subtasks.filter(subtask => subtask.taskId === taskId);
     }
 
+    getHistoriesByUserId(userId: string){
+        return histories.filter(history => history.userId === userId);
+    }
 }
