@@ -23,34 +23,34 @@
           </ion-item>
         </ion-list>
         <ion-button *ngIf="groupSelected" (click)="onClickAdd()">Add Task</ion-button>
-        <ion-button *ngIf="taskSelected" (click)="onClickUpdateTask()">Update Task</ion-button>
+        <ion-button id="updateTaskButton" *ngIf="taskSelected" (click)="onClickUpdateTask()">Update Task</ion-button>
 
       </ion-col>
 
       <ion-col>
         <div *ngIf="add || updateTask">
           <div *ngIf="add">
-            <form (ngSubmit)="addTask()" [formGroup]="formAddTask">
+            <form id="addTaskForm" (ngSubmit)="addTask()" [formGroup]="formAddTask">
               <ion-item>
                 <ion-label for="name">Name</ion-label>
                 <ion-input type="name" id="name" name="taskName" formControlName="taskName"></ion-input>
               </ion-item>
 
-              <ion-button type="submit" [disabled]="!formAddTask.valid">Add Task</ion-button>
-              <ion-button type="button" (click)="onClickCancel()">Back</ion-button>
+              <ion-button id="submitAddTask" type="submit" [disabled]="!formAddTask.valid">Add Task</ion-button>
+              <ion-button id="backAddTask" type="button" (click)="onClickCancel()">Back</ion-button>
 
             </form>
           </div>
 
           <div *ngIf="updateTask">
-            <form (ngSubmit)="addUpdateTask()" [formGroup]="formUpdateTask">
+            <form id="updateTaskForm" (ngSubmit)="addUpdateTask()" [formGroup]="formUpdateTask">
               <ion-item>
                 <ion-label for="name">Name</ion-label>
-                <ion-input type="name" id="name2" name="taskName" formControlName="taskName"></ion-input>
+                <ion-input type="name" id="name2" name="taskName" formControlName="taskName" [value]="currentEditTask.name"></ion-input>
               </ion-item>
 
-              <ion-button type="submit" [disabled]="!formUpdateTask.valid">Update Task</ion-button>
-              <ion-button type="button" (click)="onClickCancelUpdateTask()">Back</ion-button>
+              <ion-button id="submitUpdateTask" type="submit" [disabled]="!formUpdateTask.valid">Update Task</ion-button>
+              <ion-button id="backUpdateTask" type="button" (click)="onClickCancelUpdateTask()">Back</ion-button>
 
             </form>
           </div>

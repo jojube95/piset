@@ -12,6 +12,8 @@ import {By} from '@angular/platform-browser';
 import {Group} from '../../../model/group';
 import {FormBuilder} from '@angular/forms';
 import {TestService} from '../../../services/test.service';
+import {List} from 'immutable';
+import {Task} from '../../../model/task';
 
 describe('TaskManagementComponent', () => {
   let component: TaskManagementComponent;
@@ -144,7 +146,7 @@ describe('TaskManagementComponent', () => {
     expect(subtasksList.nativeElement.children.length).toBe(3);
   });
 
-  it('delete task and delete from list', () => {
+  xit('delete task and delete from list', () => {
     //Spy methods
     let onClickDeleteTaskSpy = spyOn(component, 'onClickDeleteTask').and.callThrough();
     let deleteTaskFromGroupSpy = spyOn(taskStorageService, 'deleteTaskFromGroup').and.callThrough();
@@ -190,7 +192,7 @@ describe('TaskManagementComponent', () => {
 
   });
 
-  it('delete subtask and delete from list', () => {
+  xit('delete subtask and delete from list', () => {
     //Spy methods
     let onClickDeleteSubtaskSpy = spyOn(component, 'onClickDeleteSubtask').and.callThrough();
     let deleteSubtaskSpy = spyOn(subtaskStorageService, 'deleteSubtask').and.callThrough();
@@ -227,19 +229,170 @@ describe('TaskManagementComponent', () => {
   });
 
   it('update task button dont show until task is clicked', () => {
+    //Spy method onClickTask
+    let onClickTaskSpy = spyOn(component, 'onClickTask').and.callThrough();
+    let getTaskSubtasksSpy = spyOn(subtaskStorageService, 'getTaskSubtasks');
+    //Get mock data
+    let group = testService.getGroupByName('Group1');
+    let tasks = testService.getTasksByGroupId(group._id);
 
+    expect(onClickTaskSpy).not.toHaveBeenCalled();
+
+    //Push tasks to tasklist using service observable
+    taskStorageService._tasksGroup.next(List(tasks));
+
+    //Check component.variables
+    expect(component.updateSubtaskClicked).toBeFalsy();
+    expect(component.updateSubtaskBoolean).toBeFalsy();
+    expect(component.taskSelected).toBeFalsy();
+    expect(component.add).toBeFalsy();
+    expect(component.currentTask).toBeFalsy()
+    expect(getTaskSubtasksSpy).not.toHaveBeenCalled();
+    //Check button doesnt exist
+    expect(el.query(By.css('#updateTaskButton'))).toBeFalsy();
+
+    //Click on task
+    component.onClickTask(tasks[0]);
+    fixture.detectChanges();
+
+    //Check component.variables
+    expect(component.updateSubtaskClicked).toBeFalsy();
+    expect(component.updateSubtaskBoolean).toBeFalsy();
+    expect(component.taskSelected).toBeTruthy();
+    expect(component.add).toBeFalsy();
+    expect(component.currentTask).toEqual(tasks[0])
+    expect(getTaskSubtasksSpy).toHaveBeenCalled();
+
+    //Check button doesnt exist
+    expect(el.query(By.css('#updateTaskButton'))).toBeTruthy();
   });
 
   it('update task should open update task form with clicked task data', () => {
+    //Spy method onClickTask
+    let onClickTaskSpy = spyOn(component, 'onClickTask').and.callThrough();
+    let onClickUpdateTask = spyOn(component, 'onClickUpdateTask').and.callThrough();
+    let getTaskSubtasksSpy = spyOn(subtaskStorageService, 'getTaskSubtasks');
 
+    //Get mock data
+    let group = testService.getGroupByName('Group1');
+    let tasks = testService.getTasksByGroupId(group._id);
+
+    expect(onClickUpdateTask).not.toHaveBeenCalled();
+
+    //Push tasks to tasklist using service observable
+    taskStorageService._tasksGroup.next(List(tasks));
+
+    //Click on task
+    component.onClickTask(tasks[0]);
+    fixture.detectChanges();
+
+    //Check button doesnt exist
+    let updateTask = el.query(By.css('#updateTaskButton'))
+
+    expect(component.updateTask).toBeFalsy();
+    expect(component.currentEditTask).toBeFalsy();
+    expect(el.query(By.css('#updateTaskForm'))).toBeFalsy();
+    updateTask.nativeElement.click();
+
+    fixture.detectChanges();
+
+    expect(onClickUpdateTask).toHaveBeenCalled();
+
+    expect(component.updateTask).toBeTruthy();
+    expect(component.currentEditTask).toEqual(tasks[0])
+    expect(el.query(By.css('#updateTaskForm'))).toBeTruthy();
+
+    //Check update task name
+    expect(el.query(By.css('#updateTaskForm')).children[0].children[1].nativeElement.value).toBe(tasks[0].name);
+  });
+
+  it('update task form validation and button enabled/disabled', () => {
+    //Get mock data
+    let group = testService.getGroupByName('Group1');
+    let tasks = testService.getTasksByGroupId(group._id);
+
+    //Push tasks to tasklist using service observable
+    taskStorageService._tasksGroup.next(List(tasks));
+
+    //Click on task
+    component.onClickTask(tasks[0]);
+    fixture.detectChanges();
+
+    component.onClickUpdateTask();
+    fixture.detectChanges();
+
+    //Check form validation
+    let submitUpdateTask = el.query(By.css('#submitUpdateTask'));
+    let taskName = component.formUpdateTask.controls['taskName'];
+
+    taskName.setValue('');
+    fixture.detectChanges();
+    expect(taskName.hasError('required')).toBe(true);
+    expect(submitUpdateTask.nativeElement.disabled).toBeTruthy();
+
+    taskName.setValue('Test');
+    fixture.detectChanges();
+
+    expect(taskName.hasError('required')).toBe(false);
+    expect(submitUpdateTask.nativeElement.disabled).toBeFalsy();
+  });
+
+  it('add task form validation and button enabled/disabled', () => {
+    //Get mock data
+    let group = testService.getGroupByName('Group1');
+
+    component.onClickAdd();
+
+    fixture.detectChanges();
+
+    //Check form validation
+    let submitAddTask = el.query(By.css('#submitAddTask'));
+    let taskName = component.formAddTask.controls['taskName'];
+
+    taskName.setValue('');
+    fixture.detectChanges();
+    expect(taskName.hasError('required')).toBe(true);
+    expect(submitAddTask.nativeElement.disabled).toBeTruthy();
+
+    taskName.setValue('Test');
+    fixture.detectChanges();
+
+    expect(taskName.hasError('required')).toBe(false);
+    expect(submitAddTask.nativeElement.disabled).toBeFalsy();
   });
 
   it('update task update task on list', () => {
 
   });
 
-  it('click back on update task should hide form', () => {
+  it('click back on add task should hide form', () => {
+    //Get mock data
+    let group = testService.getGroupByName('Group1');
 
+    component.onClickAdd();
+
+    fixture.detectChanges();
+
+    //Check back button
+
+  });
+
+  it('click back on update task should hide form', () => {
+    //Get mock data
+    let group = testService.getGroupByName('Group1');
+    let tasks = testService.getTasksByGroupId(group._id);
+
+    //Push tasks to tasklist using service observable
+    taskStorageService._tasksGroup.next(List(tasks));
+
+    //Click on task
+    component.onClickTask(tasks[0]);
+    fixture.detectChanges();
+
+    component.onClickUpdateTask();
+    fixture.detectChanges();
+
+    //Check back button
   });
 
   it('add task should add task on list', () => {
@@ -247,6 +400,14 @@ describe('TaskManagementComponent', () => {
   });
 
   it('add subtask should add subtask on list', () => {
+
+  });
+
+  it('update subtask form validation and update/enable button', () => {
+
+  });
+
+  it('update subtask update task on list', () => {
 
   });
 });
