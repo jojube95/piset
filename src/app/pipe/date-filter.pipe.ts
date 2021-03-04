@@ -5,8 +5,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class DateFilterPipe implements PipeTransform {
 
   transform(value: any, args?: any): any {
-    console.log(args[0]);
-    console.log(value);
     let filtered = [];
     let felterDate: Date;
     let dateIni: Date;

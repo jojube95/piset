@@ -7,7 +7,7 @@ import {DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
-import {FormBuilder} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {Router} from '@angular/router';
 
 describe('SignInComponent', () => {
@@ -25,10 +25,9 @@ describe('SignInComponent', () => {
 
     TestBed.configureTestingModule({
       declarations: [ SignInComponent],
-      imports: [IonicModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
+      imports: [IonicModule.forRoot(), RouterTestingModule, HttpClientTestingModule, ReactiveFormsModule],
       providers: [
-        { provie: AuthService, useValue: authServiceSpy},
-        FormBuilder
+        { provie: AuthService, useValue: authServiceSpy}
       ]
     }).compileComponents().then(()=> {
       fixture = TestBed.createComponent(SignInComponent);

@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { SignUpComponent } from '../sign-up/sign-up.component';
 import {AuthService} from '../auth.service';
-import {FormBuilder} from '@angular/forms';
+import {ReactiveFormsModule} from '@angular/forms';
 import {DebugElement} from '@angular/core';
 import {Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -23,8 +23,8 @@ describe('SignUpComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ SignUpComponent ],
-      imports: [IonicModule.forRoot(), RouterTestingModule, HttpClientTestingModule],
-      providers:[AuthService, FormBuilder]
+      imports: [IonicModule.forRoot(), RouterTestingModule, HttpClientTestingModule, ReactiveFormsModule],
+      providers:[AuthService]
     }).compileComponents().then(()=>{
       fixture = TestBed.createComponent(SignUpComponent);
       component = fixture.componentInstance;

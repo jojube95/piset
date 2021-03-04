@@ -17,16 +17,18 @@ export class HistoryComponent implements OnInit {
   currentDate: Date;
 
   constructor(public userStorage: UserStorageService, public historyStorage: HistoryStorageService) {
-    this.loggedUser = this.userStorage.getCurrentUser();
 
+  }
+
+  ngOnInit() {
+    this.loggedUser = this.userStorage.getCurrentUser();
     this.currentDate = new Date();
 
     this.maxDate = new Date(this.currentDate.getFullYear() + 5, 0, 0);
     this.minDate = new Date(this.currentDate.getFullYear() - 5, 0, 1);
+
     this.historyStorage.getUserHistories(this.loggedUser);
   }
-
-  ngOnInit() {}
 
   onDateFilterChange(event){
     let date = event.detail.value;

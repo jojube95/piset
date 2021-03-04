@@ -4,7 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { GroupManagementComponent} from './group-management.component';
 import {GroupStorageService} from '../../../services/group-storage.service';
 import {UserStorageService} from '../../../services/user-storage.service';
-import {FormBuilder} from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 import {DebugElement} from '@angular/core';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
@@ -27,8 +27,8 @@ describe('GroupManagementComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ GroupManagementComponent ],
-      imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
-      providers: [GroupStorageService, UserStorageService, FormBuilder, TestService]
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule],
+      providers: [GroupStorageService, UserStorageService, TestService, ]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(GroupManagementComponent);
       component = fixture.componentInstance;

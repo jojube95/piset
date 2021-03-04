@@ -59,7 +59,7 @@ export class TaskStorageService {
 
   reasignTasks(group: Group){
     this.http.post(this.API_URL + '/api/tasks/reasign', {groupId: group._id}).subscribe(response => {
-      console.log(response);
+
     });
   }
 }

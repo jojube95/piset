@@ -5,12 +5,10 @@ import {UserManagementComponent} from './user-management.component';
 import {By} from '@angular/platform-browser';
 import {DebugElement} from '@angular/core';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
-import {GroupManagementComponent} from '../group-management/group-management.component';
 import {GroupStorageService} from '../../../services/group-storage.service';
 import {UserStorageService} from '../../../services/user-storage.service';
 import {TestService} from '../../../services/test.service';
 import {RouterTestingModule} from '@angular/router/testing';
-import {FormBuilder} from '@angular/forms';
 import {Group} from '../../../model/group';
 import {User} from '../../../model/user';
 
