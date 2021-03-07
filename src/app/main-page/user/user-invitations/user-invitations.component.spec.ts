@@ -21,4 +21,24 @@ xdescribe('UserInvitationsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('show current invitations', () => {
+
+  });
+
+  it('validation invite form', () => {
+
+  });
+
+  it('invite user that doesnt exist show error', () => {
+
+  });
+
+  it('invite user with group show error', () => {
+
+  });
+
+  it('accept invitation update my current group', () => {
+
+  });
 });

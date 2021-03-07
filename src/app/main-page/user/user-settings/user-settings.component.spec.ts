@@ -21,4 +21,16 @@ xdescribe('UserSettingsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('form validation', () =>  {
+
+  });
+
+  it('change name', () => {
+
+  });
+
+  it('change mail', () => {
+
+  });
 });

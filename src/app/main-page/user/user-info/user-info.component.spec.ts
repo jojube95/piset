@@ -21,4 +21,8 @@ xdescribe('UserInfoComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('show logged user account info', () => {
+
+  });
 });

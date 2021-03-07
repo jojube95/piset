@@ -97,8 +97,6 @@ describe('HistoryComponent', () => {
     fixture.detectChanges();
 
     //Check list
-    console.log(historyStorageService._userHistory.getValue());
-    console.log(mockHistories);
     expect(historyStorageService._userHistory.getValue()).toEqual(mockHistories);
   })
 });

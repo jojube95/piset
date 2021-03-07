@@ -12,6 +12,7 @@ import tasks from "../../testData/tasks.json";
 import subtasks from "../../testData/subtasks.json";
 import invitations from "../../testData/invitations.json";
 import histories from "../../testData/histories.json";
+import {User} from '../model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -62,24 +63,28 @@ export class TestService {
 
     }
 
-    getUserByMail(mail: String){
+    getUserByMail(mail: string){
         return users.find(user => user.mail === mail);
     }
 
-    getGroupByName(groupName: String){
+    getGroupByName(groupName: string){
         return groups.find(group => group.name === groupName);
     }
 
     getUsersByGroupId(groupId: string){
-        return users.filter(user => user.groupId === groupId);
+        return users.filter(user => user.groupId === groupId) as User[];
     }
 
     getTasksByGroupId(groupId: string){
         return tasks.filter(task => task.groupId === groupId);
     }
 
-    getTaskByName(taskName: String){
+    getTaskByName(taskName: string){
         return tasks.find(task => task.name === taskName);
+    }
+
+    getTaskByUserId(userId: string){
+        return tasks.find(task => task.userId === userId);
     }
 
     getSubtasksByTaskId(taskId: string){

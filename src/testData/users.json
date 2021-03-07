@@ -5,7 +5,6 @@
   "name": "Admin",
   "secondName": "Admin",
   "admin": true,
-  "__v": 0,
   "groupId": null
 },{
   "_id": "5fde50609e491a29eca14547",
@@ -14,11 +13,10 @@
   "name": "User1",
   "secondName": "User1",
   "admin": false,
-  "__v": 0,
   "groupId": "5fde502a9e491a29eca14528",
   "groupName": "Group1",
-  "groupAdmin": false,
-  "groupDealer": false
+  "groupAdmin": true,
+  "groupDealer": true
 },{
   "_id": "5fde50609e491a29eca14548",
   "mail": "user2@user.com",
@@ -26,7 +24,6 @@
   "name": "User2",
   "secondName": "User2",
   "admin": false,
-  "__v": 0,
   "groupId": "5fde502a9e491a29eca14528",
   "groupName": "Group1",
   "groupAdmin": false,
@@ -38,7 +35,6 @@
   "name": "User3",
   "secondName": "User3",
   "admin": false,
-  "__v": 0,
   "groupId": "5fde502a9e491a29eca14528",
   "groupName": "Group1",
   "groupAdmin": false,
@@ -50,7 +46,6 @@
   "name": "User4",
   "secondName": "User4",
   "admin": false,
-  "__v": 0,
   "groupId": "5fde502a9e491a29eca14528",
   "groupName": "Group1",
   "groupAdmin": false,
@@ -62,11 +57,10 @@
   "name": "User5",
   "secondName": "User5",
   "admin": false,
-  "__v": 0,
   "groupId": "5fde502a9e491a29eca1452a",
   "groupName": "Group2",
-  "groupAdmin": false,
-  "groupDealer": false
+  "groupAdmin": true,
+  "groupDealer": true
 },{
   "_id": "5fde50609e491a29eca1454c",
   "mail": "user6@user.com",
@@ -74,7 +68,6 @@
   "name": "User6",
   "secondName": "User6",
   "admin": false,
-  "__v": 0,
   "groupId": "5fde502a9e491a29eca1452a",
   "groupName": "Group2",
   "groupAdmin": false,
@@ -86,7 +79,6 @@
   "name": "User7",
   "secondName": "User7",
   "admin": false,
-  "__v": 0,
   "groupId": "5fde502a9e491a29eca1452a",
   "groupName": "Group2",
   "groupAdmin": false,
