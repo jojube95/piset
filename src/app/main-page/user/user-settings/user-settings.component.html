@@ -6,7 +6,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <form (ngSubmit)="update()" [formGroup]="form">
+        <form id="userForm" (ngSubmit)="update()" [formGroup]="form">
           <ion-item>
             <ion-label for="name">Name</ion-label>
             <ion-input [(ngModel)]="userLogged.name" type="name" id="name" name="name" formControlName="name"></ion-input>
@@ -17,7 +17,7 @@
             <ion-input [(ngModel)]="userLogged.secondName" type="secondName" id="secondName" formControlName="secondName"></ion-input>
           </ion-item>
 
-          <ion-button type="submit" [disabled]="!form.valid || !form.dirty">Update profile</ion-button>
+          <ion-button id="updateButton" type="submit" [disabled]="!form.valid || !form.dirty">Update profile</ion-button>
         </form>
       </ion-col>
     </ion-row>
