@@ -28,7 +28,7 @@ describe('TasksComponent', () => {
   let getCurrentUserSpy: any;
   let getUsersGroupSpy: any;
 
-  beforeEach(async(() => {
+  beforeEach(async() => {
     TestBed.configureTestingModule({
       declarations: [ TasksComponent ],
       imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
@@ -54,7 +54,8 @@ describe('TasksComponent', () => {
     });
 
 
-  }));
+
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
@@ -95,7 +96,7 @@ describe('TasksComponent', () => {
 
     //userStorageService.getUsersGroup(new Group(component.loggedUser.groupId, null, null));
 
-    expect(getUsersGroupSpy).toHaveBeenCalledWith(new Group(component.loggedUser.groupId, null, null));
+    expect(getUsersGroupSpy).toHaveBeenCalledWith(new Group(component.loggedUser.groupId, null));
     expect(getUsersGroupSpy).toHaveBeenCalled();
 
     //Mock http request

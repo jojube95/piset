@@ -10,7 +10,6 @@ import users from "../../testData/users.json";
 import groups from "../../testData/groups.json";
 import tasks from "../../testData/tasks.json";
 import subtasks from "../../testData/subtasks.json";
-import invitations from "../../testData/invitations.json";
 import histories from "../../testData/histories.json";
 import {User} from '../model/user';
 
@@ -67,12 +66,19 @@ export class TestService {
         return users.find(user => user.mail === mail);
     }
 
+    getGroups(){
+        return groups;
+    }
     getGroupByName(groupName: string){
         return groups.find(group => group.name === groupName);
     }
 
     getUsersByGroupId(groupId: string){
         return users.filter(user => user.groupId === groupId) as User[];
+    }
+
+    getUsersWithoutGroup(){
+        return users.filter(user => user.groupId === null) as User[];
     }
 
     getTasksByGroupId(groupId: string){

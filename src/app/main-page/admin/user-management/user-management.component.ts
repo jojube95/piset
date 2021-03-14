@@ -10,7 +10,7 @@ import {User} from '../../../model/user';
   styleUrls: ['./user-management.component.scss'],
 })
 export class UserManagementComponent implements OnInit {
-  currentGroup: Group = new Group(null, 'Selecciona grupo', []);
+  currentGroup: Group = new Group(null, 'Selecciona grupo');
   currentUser: User = new User('', '', 'Selecciona usuario', '', false, false, false);
 
   userSelected: boolean;

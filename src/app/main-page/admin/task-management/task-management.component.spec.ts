@@ -56,7 +56,7 @@ describe('TaskManagementComponent', () => {
   it('at start no group is selected', () => {
     let groupSelect =  el.query(By.css('#selectGroup'));
 
-    let currentGroup = new Group(null, 'Selecciona grupo', []);
+    let currentGroup = new Group(null, 'Selecciona grupo');
     expect(component.currentGroup).toEqual(currentGroup);
 
     expect(groupSelect.nativeElement.value).toBe('unselect');

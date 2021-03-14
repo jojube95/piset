@@ -38,7 +38,7 @@ export class TasksComponent implements OnInit {
     else {
       this.isUserInGroup = true;
 
-      this.userStorage.getUsersGroup(new Group(this.loggedUser.groupId, null, null));
+      this.userStorage.getUsersGroup(new Group(this.loggedUser.groupId, null));
       this.userStorage._usersGroup.subscribe((users) =>{
         let matchedUser = users.find(user => user._id === this.loggedUser._id);
         if(matchedUser != undefined){
@@ -74,7 +74,7 @@ export class TasksComponent implements OnInit {
   }
 
   reasignTasks(){
-    let groupAux = new Group(null, null, null);
+    let groupAux = new Group(null, null);
     groupAux._id = this.loggedUser.groupId;
     this.taskStorage.reasignTasks(groupAux);
   }

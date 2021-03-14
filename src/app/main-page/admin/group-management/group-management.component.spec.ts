@@ -195,7 +195,7 @@ describe('GroupManagementComponent', () => {
     let deleteGroupSpy = spyOn(groupStorageService, 'deleteGroup').and.callThrough();
 
     //Create mock group
-    let groupMock = new Group(null, 'TestGroup', null);
+    let groupMock = new Group(null, 'TestGroup');
 
     //Push mock group to gorup list
     groupStorageService._groups.next(groupStorageService._groups.getValue().push(groupMock));

@@ -38,7 +38,7 @@ export class GroupManagementComponent implements OnInit {
 
   addGroup(){
     if(this.form.valid){
-      let group = new Group(null, this.form.value.name, []);
+      let group = new Group(null, this.form.value.name);
       this.groupStorage.createGroup(group);
     }
   }

@@ -12,20 +12,16 @@ export class GroupStorageService {
   private API_URL = environment.API_URL;
   public _groups: BehaviorSubject<List<Group>> = new BehaviorSubject(List([]));
 
-  constructor(private http: HttpClient) {
-    this.loadGroups();
-  }
+  constructor(private http: HttpClient) {}
 
   get groups(){
     return new Observable(fn => this._groups.subscribe(fn));
   }
 
   loadGroups() {
-
-    return this.http.get<{message: string, groups: any}>(this.API_URL + '/api/groups/get').subscribe(
-      res => {
+    this.http.get<{message: string, groups: any}>(this.API_URL + '/api/groups/get').subscribe(res => {
         let groups = (<Object[]>res.groups).map((group: any) =>
-          new Group(group._id, group.name, group.users));
+          new Group(group._id, group.name));
 
         this._groups.next(List(groups));
       },

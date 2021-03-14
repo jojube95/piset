@@ -20,7 +20,7 @@ export class UserStorageService {
 
 
   updateUserProfile(user: User) {
-    return this.http.post(this.API_URL + '/api/users/update', user).subscribe(response => {
+    return this.http.post(this.API_URL + '/api/users/update', {user: user}).subscribe(response => {
       console.log(response);
     });
   }
@@ -83,7 +83,7 @@ export class UserStorageService {
   }
 
   public getCurrentGroup(){
-    return new Group(this.authService.getCurrentUser().groupId, this.authService.getCurrentUser().groupName, null);
+    return new Group(this.authService.getCurrentUser().groupId, this.authService.getCurrentUser().groupName);
   }
 
 }

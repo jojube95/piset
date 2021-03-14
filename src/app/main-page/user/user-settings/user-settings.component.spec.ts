@@ -54,9 +54,6 @@ describe('UserSettingsComponent', () => {
     let nameInput = el.query(By.css('#name'));
     let secondNameInput = el.query(By.css('#secondName'));
 
-    console.log(nameInput);
-    console.log(secondNameInput);
-
     let name = component.form.controls['name'];
     let secondName = component.form.controls['secondName'];
 
