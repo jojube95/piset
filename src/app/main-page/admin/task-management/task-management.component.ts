@@ -93,7 +93,7 @@ export class TaskManagementComponent implements OnInit {
 
   onClickUpdateTask(){
     this.updateTask = true;
-    this.currentEditTask = new Task(this.currentTask.name, this.currentTask.subtasks, this.currentTask._id);
+    this.currentEditTask = new Task(this.currentTask.name, this.currentTask._id);
   }
 
   onClickCancelSubtask(){
@@ -120,7 +120,7 @@ export class TaskManagementComponent implements OnInit {
 
   addUpdateTask(){
     if(this.formAddTask.valid){
-      let task = new Task(this.formAddTask.value.name, this.currentTask.subtasks, this.currentTask._id);
+      let task = new Task(this.formAddTask.value.name, this.currentTask._id);
       this.taskStorage.updateTask(this.currentGroup, task);
       this.selectGroup(this.currentGroup);
     }
@@ -180,7 +180,7 @@ export class TaskManagementComponent implements OnInit {
 
   addTask(){
     if(this.formAddTask.valid){
-      let task = new Task(this.formAddTask.value.taskName, []);
+      let task = new Task(this.formAddTask.value.taskName);
       this.taskStorage.addTaskToGroup(this.currentGroup, task);
       this.subtaskAdd = false;
     }

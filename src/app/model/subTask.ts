@@ -20,8 +20,4 @@ export class SubTask{
     this.userId = userId || null;
     this.userName = userId || null;
   }
-
-  updateDone(){
-    this.done = !this.done;
-  }
 }

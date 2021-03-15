@@ -60,7 +60,7 @@ export class TasksComponent implements OnInit {
   }
 
   onChangeSubtask(subtask: SubTask){
-    subtask.updateDone();
+    subtask.done = !subtask.done;
     this.subtaskStorage.updateSubtask(subtask);
   }
 

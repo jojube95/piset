@@ -12,6 +12,7 @@ import tasks from "../../testData/tasks.json";
 import subtasks from "../../testData/subtasks.json";
 import histories from "../../testData/histories.json";
 import {User} from '../model/user';
+import {SubTask} from '../model/subTask';
 
 @Injectable({
   providedIn: 'root'
@@ -62,39 +63,47 @@ export class TestService {
 
     }
 
-    getUserByMail(mail: string){
-        return users.find(user => user.mail === mail);
+    getUserByMail(mail: string): User{
+        return users.find(user => user.mail === mail) as User;
     }
 
-    getGroups(){
-        return groups;
+    getGroups(): Group[]{
+        return groups as Group[];
     }
-    getGroupByName(groupName: string){
-        return groups.find(group => group.name === groupName);
+    getGroupByName(groupName: string): Group{
+        return groups.find(group => group.name === groupName) as Group;
     }
 
-    getUsersByGroupId(groupId: string){
+    getUsersByGroupId(groupId: string): User[]{
         return users.filter(user => user.groupId === groupId) as User[];
     }
 
-    getUsersWithoutGroup(){
+    getUsersWithoutGroup(): User[]{
         return users.filter(user => user.groupId === null) as User[];
     }
 
-    getTasksByGroupId(groupId: string){
-        return tasks.filter(task => task.groupId === groupId);
+    getTasksByGroupId(groupId: string): Task[]{
+        return tasks.filter(task => task.groupId === groupId) as Task[];
     }
 
-    getTaskByName(taskName: string){
-        return tasks.find(task => task.name === taskName);
+    getTaskByName(taskName: string): Task{
+        return tasks.find(task => task.name === taskName) as Task;
     }
 
-    getTaskByUserId(userId: string){
-        return tasks.find(task => task.userId === userId);
+    getTaskByUserId(userId: string): Task{
+        return tasks.find(task => task.userId === userId) as Task;
     }
 
-    getSubtasksByTaskId(taskId: string){
-        return subtasks.filter(subtask => subtask.taskId === taskId);
+    getSubtasksByTaskId(taskId: string): SubTask[]{
+        return subtasks.filter(subtask => subtask.taskId === taskId) as SubTask[];
+    }
+
+    getSubtasksByGroupId(groupId: string): SubTask[]{
+        return subtasks.filter(subtask => subtask.groupId === groupId) as SubTask[];
+    }
+
+    getSubtasksByUserId(userId: string): SubTask[]{
+        return subtasks.filter(subtask => subtask.userId === userId) as SubTask[];
     }
 
     getHistoriesByUserId(userId: string){

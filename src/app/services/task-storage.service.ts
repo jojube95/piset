@@ -21,7 +21,7 @@ export class TaskStorageService {
     return this.http.get<{message: string, tasks: any}>(this.API_URL + '/api/tasks/getByGroup' + group._id).subscribe(
       res => {
         let tasks = (<Object[]>res.tasks).map((task: any) =>
-          new Task(task.name, task.subtasks, task._id));
+          new Task(task.name, task._id));
 
         this._tasksGroup.next(List(tasks));
       },
