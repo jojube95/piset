@@ -7,11 +7,13 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {Group} from '../model/group';
 import {User} from '../model/user';
 import {List} from 'immutable';
+import {AuthService} from '../auth/auth.service';
 
 describe('UserStorageService', () => {
   let service: UserStorageService;
 
   let testService: TestService;
+  let authService: any;
   let httpTestingController: HttpTestingController;
 
   let updateUserProfileSpy: any;
@@ -21,14 +23,21 @@ describe('UserStorageService', () => {
   let deleteUserFromGroupSpy: any;
   let getUserByMailSpy: any;
 
+  let getCurrentUserSpy: any;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
-      providers: [TestService]
+      providers: [TestService, AuthService]
     });
     service = TestBed.inject(UserStorageService);
     testService = TestBed.inject(TestService);
     httpTestingController = TestBed.get(HttpTestingController);
+    authService = TestBed.get(AuthService);
+
+    getCurrentUserSpy = spyOn(authService, 'getCurrentUser').and.callFake(() => {
+      return testService.getUserByMail('user1@user.com');
+    });
 
     updateUserProfileSpy = spyOn(service, 'updateUserProfile').and.callThrough();
     getUsersGroupSpy = spyOn(service, 'getUsersGroup').and.callThrough();

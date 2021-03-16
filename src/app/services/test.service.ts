@@ -13,6 +13,7 @@ import subtasks from "../../testData/subtasks.json";
 import histories from "../../testData/histories.json";
 import {User} from '../model/user';
 import {SubTask} from '../model/subTask';
+import {History} from '../model/history';
 
 @Injectable({
   providedIn: 'root'
@@ -106,7 +107,11 @@ export class TestService {
         return subtasks.filter(subtask => subtask.userId === userId) as SubTask[];
     }
 
-    getHistoriesByUserId(userId: string){
-        return histories.filter(history => history.userId === userId);
+    getHistoriesByUserId(userId: string): History[]{
+        return histories.filter(history => history.userId === userId) as unknown as History[];
+    }
+
+    getHistoriesByGroupId(groupId: string): History[]{
+        return histories.filter(history => history.groupId === groupId) as unknown as History[];
     }
 }

@@ -28,7 +28,7 @@ export class HistoryStorageService {
         );
     }
 
-    getFilteredHistories(group: Group) {
+    getGroupHistories(group: Group) {
         return this.http.get<{message: string, histories: any}>(this.API_URL + '/api/histories/getByGroup' + group._id).subscribe(
             res => {
                 let histories = (<Object[]>res.histories).map((history: any) =>

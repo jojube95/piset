@@ -10,6 +10,7 @@ import {By} from '@angular/platform-browser';
 import {DebugElement} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {UserStorageService} from '../../../services/user-storage.service';
+import {User} from '../../../model/user';
 
 describe('UserSettingsComponent', () => {
   let component: UserSettingsComponent;
@@ -107,5 +108,9 @@ describe('UserSettingsComponent', () => {
 
     //Check if update user service is called with parameters
     expect(updateUserProfileSpy).toHaveBeenCalledWith(component.userLogged);
+  });
+
+  afterAll(() => {
+    component.userLogged = new User('user1@user.com', null, 'User1', 'User1', false, true, false, null, null, null);
   });
 });

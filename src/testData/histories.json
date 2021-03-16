@@ -8,12 +8,8 @@
   "userName": "User1",
   "groupId": "5fde502a9e491a29eca14528",
   "groupName": "Group1",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 },{
   "_id": "5fde50459e491a29eca1452d",
@@ -25,12 +21,8 @@
   "userName": "User1",
   "groupId": "5fde502a9e491a29eca14528",
   "groupName": "Group1",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 },{
   "_id": "5fde50459e491a29eca1452e",
@@ -42,12 +34,8 @@
   "userName": "User2",
   "groupId": "5fde502a9e491a29eca14528",
   "groupName": "Group1",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 },{
   "_id": "5fde50459e491a29eca1452f",
@@ -59,12 +47,8 @@
   "userName": "User2",
   "groupId": "5fde502a9e491a29eca14528",
   "groupName": "Group1",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 },{
   "_id": "5fdf743e0eb4dc2bc464355f",
@@ -76,12 +60,8 @@
   "userName": "User3",
   "groupId": "5fde502a9e491a29eca14528",
   "groupName": "Group1",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 },{
   "_id": "5fdf74420eb4dc2bc4643560",
@@ -93,12 +73,8 @@
   "userName": "User3",
   "groupId": "5fde502a9e491a29eca14528",
   "groupName": "Group1",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 },{
   "_id": "5fdf74430eb4dc2bc4643561",
@@ -110,12 +86,8 @@
   "userName": "User4",
   "groupId": "5fde502a9e491a29eca14528",
   "groupName": "Group1",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 },{
   "_id": "5fdf74450eb4dc2bc4643562",
@@ -127,12 +99,8 @@
   "userName": "User4",
   "groupId": "5fde502a9e491a29eca14528",
   "groupName": "Group1",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 },{
   "_id": "5fdf744c0eb4dc2bc4643563",
@@ -144,12 +112,8 @@
   "userName": "User5",
   "groupId": "5fde502a9e491a29eca1452a",
   "groupName": "Group2",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 },{
   "_id": "5fdf744d0eb4dc2bc4643564",
@@ -161,12 +125,8 @@
   "userName": "User5",
   "groupId": "5fde502a9e491a29eca1452a",
   "groupName": "Group2",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 },{
   "_id": "5fdf744f0eb4dc2bc4643565",
@@ -178,12 +138,8 @@
   "userName": "User6",
   "groupId": "5fde502a9e491a29eca1452a",
   "groupName": "Group2",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 },{
   "_id": "5fdf74510eb4dc2bc4643566",
@@ -195,12 +151,8 @@
   "userName": "User6",
   "groupId": "5fde502a9e491a29eca1452a",
   "groupName": "Group2",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 },{
   "_id": "5fdf74520eb4dc2bc4643567",
@@ -212,12 +164,8 @@
   "userName": "User7",
   "groupId": "5fde502a9e491a29eca1452a",
   "groupName": "Group2",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 },{
   "_id": "5fdf74540eb4dc2bc4643568",
@@ -229,11 +177,7 @@
   "userName": "User7",
   "groupId": "5fde502a9e491a29eca1452a",
   "groupName": "Group2",
-  "dateIni": {
-    "$date": "2020-11-30T16:35:19Z"
-  },
-  "dateFin": {
-    "$date": "2020-12-06T16:35:19Z"
-  },
+  "dateIni": "2020-11-30T16:35:19Z",
+  "dateFin": "2020-12-06T16:35:19Z",
   "__v": 0
 }]
