@@ -217,9 +217,7 @@ describe('UserStorageService', () => {
     let userMock = testService.getUserByMail('user1@user.com');
 
     //Call service method
-    service.getUserByMail('user1@user.com').subscribe(res => {
-      console.log(res);
-    });
+    service.getUserByMail('user1@user.com').subscribe(res => {});
 
     //Create the mockCall
     const reqUser = httpTestingController.expectOne(service['API_URL'] + '/api/users/getByEmail' + userMock.mail);

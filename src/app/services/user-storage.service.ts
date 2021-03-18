@@ -20,9 +20,7 @@ export class UserStorageService {
 
 
   updateUserProfile(user: User) {
-    return this.http.post(this.API_URL + '/api/users/update', {user: user}).subscribe(response => {
-      console.log(response);
-    });
+    return this.http.post(this.API_URL + '/api/users/update', {user: user}).subscribe(response => {});
   }
 
   getUsersGroup(group: Group) {

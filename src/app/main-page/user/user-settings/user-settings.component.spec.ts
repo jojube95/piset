@@ -111,6 +111,10 @@ describe('UserSettingsComponent', () => {
   });
 
   afterAll(() => {
-    component.userLogged = new User('user1@user.com', null, 'User1', 'User1', false, true, false, null, null, null);
+    //Click update button
+    let name = component.form.controls['name'];
+    let secondName = component.form.controls['secondName'];
+    name.setValue('User1');
+    secondName.setValue('User1');
   });
 });

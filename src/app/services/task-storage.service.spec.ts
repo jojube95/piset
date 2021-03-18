@@ -166,9 +166,7 @@ describe('TaskStorageService', () => {
     let mockTasks = testService.getTaskByUserId(mockUser._id);
 
     //Call service method
-    service.getTaskByUser(mockUser).subscribe(res => {
-      console.log(res);
-    });
+    service.getTaskByUser(mockUser).subscribe(res => {});
 
     //Create the mockCall
     const reqTasks = httpTestingController.expectOne(service['API_URL'] + '/api/tasks/getByUser' + mockUser._id);

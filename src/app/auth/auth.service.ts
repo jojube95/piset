@@ -22,9 +22,7 @@ export class AuthService {
   }
 
   signupUser(userObj: User) {
-    this.http.post(this.API_URL + '/api/users/signup', userObj).subscribe(response => {
-      console.log(response);
-    });
+    this.http.post(this.API_URL + '/api/users/signup', userObj).subscribe(response => {});
   }
 
   signinUser(mail: string, password: string) {
@@ -42,7 +40,7 @@ export class AuthService {
     this.currentUser = this.getAuthData().currentUser;
   }
 
-  private getAuthData(){
+  getAuthData(){
     const token = localStorage.getItem('token');
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if(token && currentUser){
@@ -56,12 +54,12 @@ export class AuthService {
     }
   }
 
-  private saveAuthData(token: string, currentUser: User){
+  saveAuthData(token: string, currentUser: User){
     localStorage.setItem('token', token);
     localStorage.setItem('currentUser', JSON.stringify(currentUser));
   }
 
-  private clearAuthData(){
+  clearAuthData(){
     localStorage.removeItem('token');
     localStorage.removeItem('currentUser');
   }

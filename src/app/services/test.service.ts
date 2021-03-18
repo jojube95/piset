@@ -46,7 +46,6 @@ export class TestService {
     restoreDatabase(database) {
         return this.http.get<{message: string, tasks: any}>(this.API_URL + '/api/test/restoreDatabase' + database).subscribe(
             res => {
-              console.log(res);
             },
             err => console.log("Error retrieving Todos")
         );
@@ -56,7 +55,6 @@ export class TestService {
 
         return this.http.get<{message: string, tasks: any}>(this.API_URL + '/api/test/exportDatabase' + database).subscribe(
             res => {
-                console.log(res);
             },
             err => console.log("Error retrieving Todos")
         );
