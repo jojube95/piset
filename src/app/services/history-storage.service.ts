@@ -32,7 +32,7 @@ export class HistoryStorageService {
         return this.http.get<{message: string, histories: any}>(this.API_URL + '/api/histories/getByGroup' + group._id).subscribe(
             res => {
                 let histories = (<Object[]>res.histories).map((history: any) =>
-                    new History(history.subtaskId, history.subtaskName, history.subtaskPenalty, history.subtaskDone, history.userId, history.dateIni, history.dateFin, history._id, history.groupId, history.groupName));
+                    new History(history.taskId, history.taskName, history.userId, history.dateIni, history.dateFin, history._id, history.groupId, history.groupName));
                 this._histories.next(List(histories));
             },
             err => console.log("Error retrieving Todos")

@@ -1,5 +1,3 @@
-import { SubTask } from './subTask';
-
 export class Task{
   _id: string;
   name: string;

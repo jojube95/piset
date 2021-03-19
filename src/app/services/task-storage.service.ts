@@ -4,7 +4,6 @@ import { Task } from '../model/task';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {HttpClient} from "@angular/common/http";
 import {List} from "immutable";
-import {SubTask} from "../model/subTask";
 import {User} from '../model/user';
 import { environment } from '../../environments/environment';
 
@@ -40,7 +39,7 @@ export class TaskStorageService {
     this.http.post(this.API_URL + '/api/tasks/deleteFromGroup', {groupId: group._id, taskId: deletedTask._id}).subscribe(response => {
 
       let tasks: List<Task> = this._tasksGroup.getValue();
-      let index = tasks.findIndex((subtask) => subtask._id === deletedTask._id);
+      let index = tasks.findIndex((task) => task._id === deletedTask._id);
       this._tasksGroup.next(tasks.delete(index));
     });
   }

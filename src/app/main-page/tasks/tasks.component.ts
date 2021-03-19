@@ -3,9 +3,6 @@ import {Group} from '../../model/group';
 import {User} from '../../model/user';
 import {UserStorageService} from '../../services/user-storage.service';
 import {Task} from '../../model/task';
-import {SubTask} from '../../model/subTask';
-import {Observable} from 'rxjs';
-import {SubtaskStorageService} from '../../services/subtask-storage.service';
 import {TaskStorageService} from '../../services/task-storage.service';
 
 @Component({
@@ -23,8 +20,7 @@ export class TasksComponent implements OnInit {
 
   loading = true;
 
-  constructor(private userStorage: UserStorageService,
-              private subtaskStorage: SubtaskStorageService, private taskStorage: TaskStorageService) {
+  constructor(private userStorage: UserStorageService, private taskStorage: TaskStorageService) {
 
   }
 
@@ -55,13 +51,7 @@ export class TasksComponent implements OnInit {
     //Get task user
     this.taskStorage.getTaskByUser(user).subscribe(res => {
       this.selectedTask = res.task;
-      this.subtaskStorage.getTaskSubtasks(this.selectedTask);
     });
-  }
-
-  onChangeSubtask(subtask: SubTask){
-    subtask.done = !subtask.done;
-    this.subtaskStorage.updateSubtask(subtask);
   }
 
   selectUser(user: User){
@@ -69,7 +59,6 @@ export class TasksComponent implements OnInit {
     //Get task user
     this.taskStorage.getTaskByUser(user).subscribe(res => {
       this.selectedTask = res.task;
-      this.subtaskStorage.getTaskSubtasks(this.selectedTask);
     });
   }
 

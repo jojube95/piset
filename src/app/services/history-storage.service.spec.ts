@@ -59,8 +59,8 @@ describe('HistoryStorageService', () => {
     expect(reqHistories.request.params.keys().length).toBe(0);
     //Expect the returned data
     expect(service._userHistory.getValue().size).toEqual(2);
-    expect(service._userHistory.getValue().get(0).subtaskName).toEqual('Subtask1');
-    expect(service._userHistory.getValue().get(1).subtaskName).toEqual('Subtask2');
+    expect(service._userHistory.getValue().get(0).taskName).toEqual('Task1');
+    expect(service._userHistory.getValue().get(1).taskName).toEqual('Task2');
   });
 
   it('getGroupHistories', () => {
@@ -84,14 +84,14 @@ describe('HistoryStorageService', () => {
     expect(reqHistories.request.params.keys().length).toBe(0);
     //Expect the returned data
     expect(service._histories.getValue().size).toEqual(8);
-    expect(service._histories.getValue().get(0).subtaskName).toEqual('Subtask1');
-    expect(service._histories.getValue().get(1).subtaskName).toEqual('Subtask2');
-    expect(service._histories.getValue().get(2).subtaskName).toEqual('Subtask3');
-    expect(service._histories.getValue().get(3).subtaskName).toEqual('Subtask4');
-    expect(service._histories.getValue().get(4).subtaskName).toEqual('Subtask5');
-    expect(service._histories.getValue().get(5).subtaskName).toEqual('Subtask6');
-    expect(service._histories.getValue().get(6).subtaskName).toEqual('Subtask7');
-    expect(service._histories.getValue().get(7).subtaskName).toEqual('Subtask8');
+    expect(service._histories.getValue().get(0).taskName).toEqual('Task1');
+    expect(service._histories.getValue().get(1).taskName).toEqual('Task2');
+    expect(service._histories.getValue().get(2).taskName).toEqual('Task3');
+    expect(service._histories.getValue().get(3).taskName).toEqual('Task4');
+    expect(service._histories.getValue().get(4).taskName).toEqual('Task5');
+    expect(service._histories.getValue().get(5).taskName).toEqual('Task6');
+    expect(service._histories.getValue().get(6).taskName).toEqual('Task7');
+    expect(service._histories.getValue().get(7).taskName).toEqual('Task8');
   });
 
   it('createHistory', () => {
@@ -115,7 +115,7 @@ describe('HistoryStorageService', () => {
     expect(reqHistory.request.params.keys().length).toBe(0);
     //Expect the returned data
     expect(service._histories.getValue().size).toEqual(1);
-    expect(service._histories.getValue().get(0).subtaskName).toEqual('Subtask1');
+    expect(service._histories.getValue().get(0).taskName).toEqual('Task1');
   });
 
 });

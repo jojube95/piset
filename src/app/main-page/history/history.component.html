@@ -22,15 +22,11 @@
             <ion-col>Date start</ion-col>
             <ion-col>Date end</ion-col>
             <ion-col>Subtask</ion-col>
-            <ion-col>Done</ion-col>
-            <ion-col>Penalty</ion-col>
           </ion-row>
           <ion-row *ngFor="let history of (historyStorage._userHistory | async | dateFilter : [currentDate]); index as i">
             <ion-col>{{ history.dateIni.toString() | date:'dd/MM/yyyy'}}</ion-col>
             <ion-col>{{ history.dateFin.toString() | date:'dd/MM/yyyy' }}</ion-col>
-            <ion-col>{{ history.subtaskName }}</ion-col>
-            <ion-col>{{ history.subtaskDone }}</ion-col>
-            <ion-col>{{ history.subtaskPenalty }}</ion-col>
+            <ion-col>{{ history.taskName }}</ion-col>
           </ion-row>
         </ion-grid>
       </ion-col>

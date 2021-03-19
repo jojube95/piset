@@ -1,9 +1,7 @@
 export class History{
     _id: string;
-    subtaskId: string;
-    subtaskName: string;
-    subtaskPenalty: number;
-    subtaskDone: boolean;
+    taskId: string;
+    taskName: string;
     userId: string;
     userName: string;
     groupId: string;
@@ -11,12 +9,10 @@ export class History{
     dateIni: Date;
     dateFin: Date;
 
-    constructor(subtaskId: string, subtaskName: string, subtaskPenalty: number, subtaskDone: boolean, userId: string, userName: string,
+    constructor(taskId: string, taskName: string, userId: string, userName: string,
                 dateIni: Date, dateFin: Date, _id?: string, groupId?: string, groupName?: string){
-        this.subtaskId = subtaskId;
-        this.subtaskName = subtaskName;
-        this.subtaskPenalty = subtaskPenalty;
-        this.subtaskDone = subtaskDone;
+        this.taskId = taskId;
+        this.taskName = taskName;
         this.userId = userId;
         this.userName = userName;
         this.dateIni = dateIni;

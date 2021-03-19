@@ -22,17 +22,6 @@
         </ion-col>
       </ion-row>
       <ion-row id="userTask" *ngIf="selectedTask != null">{{selectedTask.name}}</ion-row>
-      <ion-row *ngIf="selectedTask != null">
-        <ion-col>
-          <ion-list id="userSubtasks">
-            <ion-item *ngFor="let subtask of (subtaskStorage._subtasksTask | async)">
-              <ion-label>{{ subtask.name }}</ion-label>
-              <ion-label>{{ subtask.description }}</ion-label>
-              <ion-checkbox [checked]="subtask.done" [disabled]="(loggedUser._id != selectedUser._id) && !loggedUser.groupDealer" (ionChange)="onChangeSubtask(subtask)"></ion-checkbox>
-            </ion-item>
-          </ion-list>
-        </ion-col>
-      </ion-row>
     </ion-grid>
   </div>
 

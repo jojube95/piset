@@ -12,7 +12,6 @@ import tasks from "../../testData/tasks.json";
 import subtasks from "../../testData/subtasks.json";
 import histories from "../../testData/histories.json";
 import {User} from '../model/user';
-import {SubTask} from '../model/subTask';
 import {History} from '../model/history';
 
 @Injectable({
@@ -91,18 +90,6 @@ export class TestService {
 
     getTaskByUserId(userId: string): Task{
         return tasks.find(task => task.userId === userId) as Task;
-    }
-
-    getSubtasksByTaskId(taskId: string): SubTask[]{
-        return subtasks.filter(subtask => subtask.taskId === taskId) as SubTask[];
-    }
-
-    getSubtasksByGroupId(groupId: string): SubTask[]{
-        return subtasks.filter(subtask => subtask.groupId === groupId) as SubTask[];
-    }
-
-    getSubtasksByUserId(userId: string): SubTask[]{
-        return subtasks.filter(subtask => subtask.userId === userId) as SubTask[];
     }
 
     getHistoriesByUserId(userId: string): History[]{
