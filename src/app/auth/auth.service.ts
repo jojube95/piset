@@ -28,7 +28,7 @@ export class AuthService {
   signinUser(mail: string, password: string) {
     this.http.post<{token: string, user: User}>(this.API_URL + '/api/users/signin', {mail: mail, password: password}).subscribe(response => {
       this.token = response.token;
-      this.currentUser = new User(response.user.mail, response.user.password, response.user.name, response.user.secondName, response.user.admin, response.user.groupAdmin, response.user.groupDealer, response.user.groupName, response.user._id, response.user.groupId)
+      this.currentUser = new User(response.user.mail, response.user.password, response.user.name, response.user.secondName, response.user.admin, response.user.groups, response.user.achivements, response.user._id)
       this.saveAuthData(response.token, this.currentUser);
       this.router.navigate(['/main']);
     });

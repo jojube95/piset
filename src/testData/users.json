@@ -1,86 +1,201 @@
 [{
-  "_id": "5fde50609e491a29eca14546",
+  "_id": {
+    "$oid": "5fde50609e491a29eca14546"
+  },
   "mail": "admin@admin.com",
   "password": "$2b$10$bSDt0f9x8ktE7PYdPdtsk.cj/koxxFlN/RGilbR6KD1JN3LUh3XN2",
   "name": "Admin",
   "secondName": "Admin",
   "admin": true,
-  "groupId": null
+  "__v": 0,
+  "groups": [],
+  "achivements": []
 },{
-  "_id": "5fde50609e491a29eca14547",
+  "_id": {
+    "$oid": "5fde50609e491a29eca14547"
+  },
   "mail": "user1@user.com",
   "password": "$2b$10$0HqHTbfG6lSlwpFjXIfj0eQCge7EZDUA77cEj4/kWMqZiIpiXCwdi",
   "name": "User1",
   "secondName": "User1",
   "admin": false,
-  "groupId": "5fde502a9e491a29eca14528",
-  "groupName": "Group1",
-  "groupAdmin": true,
-  "groupDealer": true
+  "__v": 0,
+  "groups": [{
+    "groupId": "5fde502a9e491a29eca14528",
+    "groupName": "Group1",
+    "groupAdmin": true
+  },
+    {"groupId": "5fde502a9e491a29eca1452a",
+      "groupName": "Group2",
+      "groupAdmin": false
+    }],
+  "achivements": [{
+    "achivementId": "5fde502a9e491a29eca20004",
+    "achivementName": "Create group",
+    "achivementDescription": "Create group",
+    "achivementCompletePoints": 1,
+    "currentPoints": 1
+  }]
 },{
-  "_id": "5fde50609e491a29eca14548",
+  "_id": {
+    "$oid": "5fde50609e491a29eca14548"
+  },
   "mail": "user2@user.com",
   "password": "$2b$10$HX7y6VRdrrg36cxULkXJmelRLwhK2/MkIF9Lhu6KuWXZaRcodc8dS",
   "name": "User2",
   "secondName": "User2",
   "admin": false,
-  "groupId": "5fde502a9e491a29eca14528",
-  "groupName": "Group1",
-  "groupAdmin": false,
-  "groupDealer": false
+  "__v": 0,
+  "groups": [{
+    "groupId": "5fde502a9e491a29eca14528",
+    "groupName": "Group1",
+    "groupAdmin": false
+  }],
+  "achivements": [{
+    "achivementId": "5fde502a9e491a29eca20001",
+    "achivementName": "Task Completer 10",
+    "achivementDescription": "Complete 10 Tasks",
+    "achivementCompletePoints": 10,
+    "currentPoints": 9
+  }, {
+    "achivementId": "5fde502a9e491a29eca20002",
+    "achivementName": "Task Completer 100",
+    "achivementDescription": "Complete 100 Tasks",
+    "achivementCompletePoints": 100,
+    "currentPoints": 9
+  }]
 },{
-  "_id": "5fde50609e491a29eca14549",
+  "_id": {
+    "$oid": "5fde50609e491a29eca14549"
+  },
   "mail": "user3@user.com",
   "password": "$2b$10$seZlCzm9ikwvkQs/6xLH7eojNY2vMT/5IcPeqxj95.gqP/.OB6qca",
   "name": "User3",
   "secondName": "User3",
   "admin": false,
-  "groupId": "5fde502a9e491a29eca14528",
-  "groupName": "Group1",
-  "groupAdmin": false,
-  "groupDealer": false
+  "__v": 0,
+  "groups": [{
+    "groupId": "5fde502a9e491a29eca14528",
+    "groupName": "Group1",
+    "groupAdmin": false
+  }],
+  "achivements": [{
+    "achivementId": "5fde502a9e491a29eca20001",
+    "achivementName": "Task Completer 10",
+    "achivementDescription": "Complete 10 Tasks",
+    "achivementCompletePoints": 10,
+    "currentPoints": 10
+  }, {
+    "achivementId": "5fde502a9e491a29eca20002",
+    "achivementName": "Task Completer 100",
+    "achivementDescription": "Complete 100 Tasks",
+    "achivementCompletePoints": 100,
+    "currentPoints": 10
+  }]
 },{
-  "_id": "5fde50609e491a29eca1454a",
+  "_id": {
+    "$oid": "5fde50609e491a29eca1454a"
+  },
   "mail": "user4@user.com",
   "password": "$2b$10$moCoPvFUlqL2Yv9uNcg7m.MHSr4fk5vwFjwY0exzz0ehUmU5u9bP6",
   "name": "User4",
   "secondName": "User4",
   "admin": false,
-  "groupId": "5fde502a9e491a29eca14528",
-  "groupName": "Group1",
-  "groupAdmin": false,
-  "groupDealer": false
+  "__v": 0,
+  "groups": [{
+    "groupId": "5fde502a9e491a29eca14528",
+    "groupName": "Group1",
+    "groupAdmin": false
+  }],
+  "achivements": [{
+    "achivementId": "5fde502a9e491a29eca20001",
+    "achivementName": "Task Completer 10",
+    "achivementDescription": "Complete 10 Tasks",
+    "achivementCompletePoints": 10,
+    "currentPoints": 10
+  }, {
+    "achivementId": "5fde502a9e491a29eca20002",
+    "achivementName": "Task Completer 100",
+    "achivementDescription": "Complete 100 Tasks",
+    "achivementCompletePoints": 100,
+    "currentPoints": 20
+  }]
 },{
-  "_id": "5fde50609e491a29eca1454b",
+  "_id": {
+    "$oid": "5fde50609e491a29eca1454b"
+  },
   "mail": "user5@user.com",
   "password": "$2b$10$moCoPvFUlqL2Yv9uNcg7m.MHSr4fk5vwFjwY0exzz0ehUmU5u9bP6",
   "name": "User5",
   "secondName": "User5",
   "admin": false,
-  "groupId": "5fde502a9e491a29eca1452a",
-  "groupName": "Group2",
-  "groupAdmin": true,
-  "groupDealer": true
+  "__v": 0,
+  "groups": [{
+    "groupId": "5fde502a9e491a29eca1452a",
+    "groupName": "Group2",
+    "groupAdmin": true
+  }],
+  "achivements": [{
+    "achivementId": "5fde502a9e491a29eca20001",
+    "achivementName": "Task Completer 10",
+    "achivementDescription": "Complete 10 Tasks",
+    "achivementCompletePoints": 10,
+    "currentPoints": 10
+  }, {
+    "achivementId": "5fde502a9e491a29eca20002",
+    "achivementName": "Task Completer 100",
+    "achivementDescription": "Complete 100 Tasks",
+    "achivementCompletePoints": 100,
+    "currentPoints": 20
+  }]
 },{
-  "_id": "5fde50609e491a29eca1454c",
+  "_id": {
+    "$oid": "5fde50609e491a29eca1454c"
+  },
   "mail": "user6@user.com",
   "password": "$2b$10$moCoPvFUlqL2Yv9uNcg7m.MHSr4fk5vwFjwY0exzz0ehUmU5u9bP6",
   "name": "User6",
   "secondName": "User6",
   "admin": false,
-  "groupId": "5fde502a9e491a29eca1452a",
-  "groupName": "Group2",
-  "groupAdmin": false,
-  "groupDealer": false
+  "__v": 0,
+  "groups": [{
+    "groupId": "5fde502a9e491a29eca1452a",
+    "groupName": "Group2",
+    "groupAdmin": false
+  }],
+  "achivements": [{
+    "achivementId": "5fde502a9e491a29eca20003",
+    "achivementName": "Accept invitation",
+    "achivementDescription": "Accept group invitation",
+    "achivementCompletePoints": 1,
+    "currentPoints": 1
+  }]
 },{
-  "_id": "5fde50609e491a29eca1454d",
+  "_id": {
+    "$oid": "5fde50609e491a29eca1454d"
+  },
   "mail": "user7@user.com",
   "password": "$2b$10$moCoPvFUlqL2Yv9uNcg7m.MHSr4fk5vwFjwY0exzz0ehUmU5u9bP6",
   "name": "User7",
   "secondName": "User7",
   "admin": false,
-  "groupId": "5fde502a9e491a29eca1452a",
-  "groupName": "Group2",
-  "groupAdmin": false,
-  "groupDealer": false
+  "__v": 0,
+  "groups": [{
+    "groupId": "5fde502a9e491a29eca1452a",
+    "groupName": "Group2",
+    "groupAdmin": false
+  }],
+  "achivements": [{
+    "achivementId": "5fde502a9e491a29eca20001",
+    "achivementName": "Task Completer 10",
+    "achivementDescription": "Complete 10 Tasks",
+    "achivementCompletePoints": 10,
+    "currentPoints": 10
+  }, {
+    "achivementId": "5fde502a9e491a29eca20002",
+    "achivementName": "Task Completer 100",
+    "achivementDescription": "Complete 100 Tasks",
+    "achivementCompletePoints": 100,
+    "currentPoints": 20
+  }]
 }]

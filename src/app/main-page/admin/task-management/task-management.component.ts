@@ -33,11 +33,17 @@ export class TaskManagementComponent implements OnInit {
     this.formAddTask = this.fb.group({
       taskName: ['', [
         Validators.required
+      ]],
+      taskDescription: ['', [
+        Validators.required
       ]]
     });
 
     this.formUpdateTask = this.fb.group({
       taskName: ['', [
+        Validators.required
+      ]],
+      taskDescription: ['', [
         Validators.required
       ]]
     });
@@ -59,7 +65,7 @@ export class TaskManagementComponent implements OnInit {
 
   onClickUpdateTask(){
     this.updateTask = true;
-    this.currentEditTask = new Task(this.currentTask.name, this.currentTask._id);
+    this.currentEditTask = this.currentTask;
   }
 
   onClickCancelUpdateTask(){
@@ -68,7 +74,7 @@ export class TaskManagementComponent implements OnInit {
 
   addUpdateTask(){
     if(this.formAddTask.valid){
-      let task = new Task(this.formAddTask.value.name, this.currentTask._id);
+      let task = new Task(this.formAddTask.value.taskName, this.formAddTask.value.taskDescription, this.currentTask._id);
       this.taskStorage.updateTask(this.currentGroup, task);
       this.selectGroup(this.currentGroup);
     }
@@ -100,7 +106,7 @@ export class TaskManagementComponent implements OnInit {
 
   addTask(){
     if(this.formAddTask.valid){
-      let task = new Task(this.formAddTask.value.taskName);
+      let task = new Task(this.formAddTask.value.taskName, this.formAddTask.value.taskDescription, this.currentGroup._id);
       this.taskStorage.addTaskToGroup(this.currentGroup, task);
     }
   }

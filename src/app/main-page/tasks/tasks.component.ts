@@ -13,6 +13,7 @@ import {TaskStorageService} from '../../services/task-storage.service';
 export class TasksComponent implements OnInit {
   selectedUser: User;
   selectedTask: Task;
+  selectedGroup: Group;
 
   loggedUser: User;
 
@@ -28,13 +29,13 @@ export class TasksComponent implements OnInit {
     this.loggedUser = this.userStorage.getCurrentUser();
     this.loading = false;
 
-    if(this.loggedUser.groupId == null || this.loggedUser.groupId.length == 0){
+    if(this.loggedUser.groups == null){
       this.isUserInGroup = false;
     }
     else {
       this.isUserInGroup = true;
 
-      this.userStorage.getUsersGroup(new Group(this.loggedUser.groupId, null));
+      this.userStorage.getUsersGroup(this.selectedGroup);
       this.userStorage._usersGroup.subscribe((users) =>{
         let matchedUser = users.find(user => user._id === this.loggedUser._id);
         if(matchedUser != undefined){
@@ -63,8 +64,6 @@ export class TasksComponent implements OnInit {
   }
 
   reasignTasks(){
-    let groupAux = new Group(null, null);
-    groupAux._id = this.loggedUser.groupId;
-    this.taskStorage.reasignTasks(groupAux);
+    this.taskStorage.reasignTasks(this.selectedGroup);
   }
 }

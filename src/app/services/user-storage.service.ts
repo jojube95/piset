@@ -27,7 +27,7 @@ export class UserStorageService {
     return this.http.get<{message: string, users: any}>(this.API_URL + '/api/users/getByGroup' + group._id).subscribe(
       res => {
         let users = (<Object[]>res.users).map((user: any) =>
-          new User(user.mail, user.password, user.name, user.secondName, user.admin, user.groupAdmin, user.groupDealer, user.groupName, user._id, user.groupId)
+          new User(user.mail, user.password, user.name, user.secondName, user.admin, user.groups, user.achivements, user._id)
         );
 
         this._usersGroup.next(List(users));
@@ -40,7 +40,7 @@ export class UserStorageService {
     return this.http.get<{message: string, users: any}>(this.API_URL + '/api/users/getWithoutGroup').subscribe(
       res => {
         let users = (<Object[]>res.users).map((user: any) =>
-            new User(user.mail, user.password, user.name, user.secondName, user.admin, user.groupAdmin, user.groupDealer, user.groupName, user._id, user.groupId)
+            new User(user.mail, user.password, user.name, user.secondName, user.admin, user.groups, user.achivements, user._id)
         );
         this._usersWithoutGroup.next(List(users));
       },
@@ -80,8 +80,8 @@ export class UserStorageService {
     return this.authService.getCurrentUser();
   }
 
-  public getCurrentGroup(){
-    return new Group(this.authService.getCurrentUser().groupId, this.authService.getCurrentUser().groupName);
+  public getCurrentsGroups(){
+    return this.authService.getCurrentUser().groups;
   }
 
 }

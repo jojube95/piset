@@ -4,6 +4,10 @@
   "groupId": "5fde502a9e491a29eca14528",
   "userId": "5fde50609e491a29eca14547",
   "userName": "User1",
+  "dateIni": "2020-09-29T16:35:19Z",
+  "dateEnd": "2020-10-02T16:35:19Z",
+  "state": "Pending",
+  "estimatedTime": 120,
   "__v": 0
 },{
   "_id": "5fde50579e491a29eca14540",
@@ -11,6 +15,10 @@
   "groupId": "5fde502a9e491a29eca14528",
   "userId": "5fde50609e491a29eca14548",
   "userName": "User2",
+  "dateIni": "2020-11-29T16:35:19Z",
+  "dateEnd": "2020-12-01T16:35:19Z",
+  "state": "Delivered",
+  "estimatedTime": 125,
   "__v": 0
 },{
   "_id": "5fde50579e491a29eca14541",
@@ -18,6 +26,10 @@
   "groupId": "5fde502a9e491a29eca14528",
   "userId": "5fde50609e491a29eca14549",
   "userName": "User3",
+  "dateIni": "2020-11-10T16:35:19Z",
+  "dateEnd": "2020-11-15T16:35:19Z",
+  "state": "Pending",
+  "estimatedTime": 220,
   "__v": 0
 },{
   "_id": "5fde50579e491a29eca14542",
@@ -25,6 +37,10 @@
   "groupId": "5fde502a9e491a29eca14528",
   "userId": "5fde50609e491a29eca1454a",
   "userName": "User4",
+  "dateIni": "2020-10-28T16:35:19Z",
+  "dateEnd": "2020-11-01T16:35:19Z",
+  "state": "Pending",
+  "estimatedTime": 130,
   "__v": 0
 },{
   "_id": "5fde50579e491a29eca14543",
@@ -32,6 +48,10 @@
   "groupId": "5fde502a9e491a29eca1452a",
   "userId": "5fde50609e491a29eca1454b",
   "userName": "User5",
+  "dateIni": "2020-10-30T16:35:19Z",
+  "dateEnd": "2020-11-06T16:35:19Z",
+  "state": "Doing",
+  "estimatedTime": 60,
   "__v": 0
 },{
   "_id": "5fde50579e491a29eca14544",
@@ -39,6 +59,10 @@
   "groupId": "5fde502a9e491a29eca1452a",
   "userId": "5fde50609e491a29eca1454c",
   "userName": "User6",
+  "dateIni": "2020-11-26T16:35:19Z",
+  "dateEnd": "2020-12-05T16:35:19Z",
+  "state": "Doing",
+  "estimatedTime": 150,
   "__v": 0
 },{
   "_id": "5fde50579e491a29eca14545",
@@ -46,5 +70,9 @@
   "groupId": "5fde502a9e491a29eca1452a",
   "userId": "5fde50609e491a29eca1454d",
   "userName": "User7",
+  "dateIni": "2020-11-28T16:35:19Z",
+  "dateEnd": "2020-12-06T16:35:19Z",
+  "state": "Finished",
+  "estimatedTime": 320,
   "__v": 0
 }]

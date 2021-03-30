@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Group} from '../model/group';
 import {Task} from '../model/task';
-import {List} from 'immutable';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {BehaviorSubject} from 'rxjs';
@@ -9,7 +8,6 @@ import {BehaviorSubject} from 'rxjs';
 import users from "../../testData/users.json";
 import groups from "../../testData/groups.json";
 import tasks from "../../testData/tasks.json";
-import subtasks from "../../testData/subtasks.json";
 import histories from "../../testData/histories.json";
 import {User} from '../model/user';
 import {History} from '../model/history';
@@ -62,7 +60,7 @@ export class TestService {
     }
 
     getUserByMail(mail: string): User{
-        return users.find(user => user.mail === mail) as User;
+        return users.find(user => user.mail === mail) as unknown as User;
     }
 
     getGroups(): Group[]{
@@ -72,24 +70,25 @@ export class TestService {
         return groups.find(group => group.name === groupName) as Group;
     }
 
+    //To implement
     getUsersByGroupId(groupId: string): User[]{
-        return users.filter(user => user.groupId === groupId) as User[];
+        return users.filter(user => user.groups[0].groupId === groupId) as unknown as User[];
     }
 
     getUsersWithoutGroup(): User[]{
-        return users.filter(user => user.groupId === null) as User[];
+        return users.filter(user => user.groups === null) as unknown as User[];
     }
 
     getTasksByGroupId(groupId: string): Task[]{
-        return tasks.filter(task => task.groupId === groupId) as Task[];
+        return tasks.filter(task => task.groupId === groupId) as unknown as Task[];
     }
 
     getTaskByName(taskName: string): Task{
-        return tasks.find(task => task.name === taskName) as Task;
+        return tasks.find(task => task.name === taskName) as unknown as Task;
     }
 
     getTaskByUserId(userId: string): Task{
-        return tasks.find(task => task.userId === userId) as Task;
+        return tasks.find(task => task.userId === userId) as unknown as Task;
     }
 
     getHistoriesByUserId(userId: string): History[]{

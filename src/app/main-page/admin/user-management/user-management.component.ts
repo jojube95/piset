@@ -3,6 +3,8 @@ import {UserStorageService} from '../../../services/user-storage.service';
 import {GroupStorageService} from '../../../services/group-storage.service';
 import {Group} from '../../../model/group';
 import {User} from '../../../model/user';
+import {UserGroup} from '../../../model/userGroup';
+import {UserAchivement} from '../../../model/userAchivement';
 
 @Component({
   selector: 'app-user-management',
@@ -11,7 +13,7 @@ import {User} from '../../../model/user';
 })
 export class UserManagementComponent implements OnInit {
   currentGroup: Group = new Group(null, 'Selecciona grupo');
-  currentUser: User = new User('', '', 'Selecciona usuario', '', false, false, false);
+  currentUser: User = new User('', '', 'Selecciona usuario', '', false, null, null);
 
   userSelected: boolean;
   groupSelected: boolean;
@@ -28,7 +30,7 @@ export class UserManagementComponent implements OnInit {
     let group = event.detail.value;
     this.currentGroup = group;
     this.userStorage.getUsersGroup(group);
-    this.currentUser = new User('', '', 'Selecciona usuario', '', false, false, false);
+    this.currentUser = new User('', '', 'Selecciona usuario', '', false, null, null);
     this.userStorage.getUsersWithoutGroup();
     this.groupSelected = true;
     this.userSelected = false;
@@ -47,7 +49,7 @@ export class UserManagementComponent implements OnInit {
 
   onAddUser(){
     this.userStorage.addUserToGroup(this.currentUser, this.currentGroup);
-    this.currentUser = new User('', '', 'Selecciona usuario', '', false, false, false);
+    this.currentUser = new User('', '', 'Selecciona usuario', '', false, null, null);
     this.userSelected = false;
   }
 
