@@ -1,3 +1,5 @@
+import {State} from './state';
+
 export class Task{
   _id: string;
   name: string;
@@ -8,10 +10,10 @@ export class Task{
   dateIni: Date;
   dateEnd: Date;
   estimatedTime: number;
-  state: string;
+  state: State;
 
   constructor(name: string, description: string, groupId: string, userId?: string, userName?: string, dateIni?: Date, dateEnd?: Date,
-              estimatedTime?: number, state?: string, _id?: string){
+              estimatedTime?: number, state?: State, _id?: string){
     this.name = name;
     this.description = description;
     this.groupId = groupId;

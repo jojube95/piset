@@ -29,10 +29,7 @@ export class TasksComponent implements OnInit {
     this.loggedUser = this.userStorage.getCurrentUser();
     this.loading = false;
 
-    if(this.loggedUser.groups == null){
-      this.isUserInGroup = false;
-    }
-    else {
+    if(this.loggedUser.groups.length != 0 && this.loggedUser.groups != null){
       this.isUserInGroup = true;
 
       this.userStorage.getUsersGroup(this.selectedGroup);
@@ -41,8 +38,10 @@ export class TasksComponent implements OnInit {
         if(matchedUser != undefined){
           this.selectUser(matchedUser);
         }
-
-      })
+      });
+    }
+    else {
+      this.isUserInGroup = false;
     }
   }
 

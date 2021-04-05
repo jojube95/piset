@@ -8,10 +8,10 @@ export class User {
   name: string;
   secondName: string;
   admin: boolean;
-  groups: [UserGroup];
-  achivements: [UserAchivement]
+  groups: UserGroup[];
+  achivements: UserAchivement[]
 
-  constructor(mail: string, password: string, name: string, secondName: string, admin: boolean, groups: [UserGroup], achivements: [UserAchivement], _id?: string) {
+  constructor(mail: string, password: string, name: string, secondName: string, admin: boolean, groups: UserGroup[], achivements: UserAchivement[], _id?: string) {
     this.mail = mail;
     this.password = password;
     this.name = name;

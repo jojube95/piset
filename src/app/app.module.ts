@@ -22,25 +22,27 @@ import {TasksComponent} from './main-page/tasks/tasks.component';
 import {HistoryComponent} from './main-page/history/history.component';
 import {TestComponent} from './main-page/admin/test/test.component';
 import {UserInvitationsComponent} from './main-page/user/user-invitations/user-invitations.component';
+import {TaskDetailComponent} from './main-page/tasks/task-detail/task-detail.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    SignInComponent,
-    SignUpComponent,
-    MainPageComponent,
-    TaskManagementComponent,
-    UserManagementComponent,
-    GroupManagementComponent,
-    LoadingSpinerComponent,
-    UserInfoComponent,
-    UserSettingsComponent,
-    UserInvitationsComponent,
-    TestComponent,
-    DateFilterPipe,
-    TasksComponent,
-    HistoryComponent,
-  ],
+    declarations: [
+        AppComponent,
+        SignInComponent,
+        SignUpComponent,
+        MainPageComponent,
+        TaskManagementComponent,
+        UserManagementComponent,
+        GroupManagementComponent,
+        LoadingSpinerComponent,
+        UserInfoComponent,
+        UserSettingsComponent,
+        UserInvitationsComponent,
+        TestComponent,
+        DateFilterPipe,
+        TasksComponent,
+        HistoryComponent,
+        TaskDetailComponent,
+    ],
   entryComponents: [],
   imports: [
     BrowserModule,
