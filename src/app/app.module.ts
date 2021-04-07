@@ -22,7 +22,8 @@ import {TasksComponent} from './main-page/tasks/tasks.component';
 import {HistoryComponent} from './main-page/history/history.component';
 import {TestComponent} from './main-page/admin/test/test.component';
 import {UserInvitationsComponent} from './main-page/user/user-invitations/user-invitations.component';
-import {TaskDetailComponent} from './main-page/tasks/task-detail/task-detail.component';
+import {TaskUpdateComponent} from './main-page/tasks/task-update/task-update.component';
+import {TaskAddComponent} from './main-page/tasks/task-add/task-add.component';
 
 @NgModule({
     declarations: [
@@ -41,7 +42,8 @@ import {TaskDetailComponent} from './main-page/tasks/task-detail/task-detail.com
         DateFilterPipe,
         TasksComponent,
         HistoryComponent,
-        TaskDetailComponent,
+        TaskUpdateComponent,
+        TaskAddComponent
     ],
   entryComponents: [],
   imports: [

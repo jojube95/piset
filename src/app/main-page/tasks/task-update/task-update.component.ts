@@ -1,14 +1,14 @@
-import {Component, Input, OnDestroy, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Task} from '../../../model/task';
 import {TaskStorageService} from '../../../services/task-storage.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-  selector: 'app-task-detail',
-  templateUrl: './task-detail.component.html',
-  styleUrls: ['./task-detail.component.scss'],
+  selector: 'app-task-update',
+  templateUrl: './task-update.component.html',
+  styleUrls: ['./task-update.component.scss'],
 })
-export class TaskDetailComponent implements OnInit {
+export class TaskUpdateComponent implements OnInit {
   @Input() task: Task;
 
   formUpdateTask: FormGroup;
@@ -53,6 +53,7 @@ export class TaskDetailComponent implements OnInit {
     this.task.dateIni = this.formUpdateTask.controls['dateIni'].value;
     this.task.dateEnd = this.formUpdateTask.controls['dateEnd'].value;
     this.task.estimatedTime = this.formUpdateTask.controls['estimatedTime'].value;
+    this.task.state.name = this.formUpdateTask.controls['state'].value;
 
     this.taskStorage.updateTask(this.task);
   }

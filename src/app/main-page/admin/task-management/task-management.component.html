@@ -18,11 +18,12 @@
             <ion-label (click)="onClickDeleteTask(task)">x</ion-label>
           </ion-item>
         </ion-list>
-        <ion-button *ngIf="groupSelected" (click)="onClickAdd()">Add Task</ion-button>
+        <ion-button *ngIf="groupSelected" (click)="onClickAdd()" id="addTask">Add Task</ion-button>
       </ion-col>
 
       <ion-col>
-        <app-task-detail *ngIf="taskSelected" [task]="currentTask"></app-task-detail>
+        <app-task-update *ngIf="taskSelected" [task]="currentTask" id="updateTaskComponent"></app-task-update>
+        <app-task-add *ngIf="addTask" [group]="currentGroup" id="addTaskComponent"></app-task-add>
       </ion-col>
 
 

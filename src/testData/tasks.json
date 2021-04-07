@@ -6,7 +6,9 @@
   "userName": "User1",
   "dateIni": "2020-09-29T16:35:19Z",
   "dateEnd": "2020-10-02T16:35:19Z",
-  "state": "Pending",
+  "state": {
+    "name": "Pending"
+  },
   "estimatedTime": 120,
   "__v": 0
 },{
@@ -17,7 +19,9 @@
   "userName": "User2",
   "dateIni": "2020-11-29T16:35:19Z",
   "dateEnd": "2020-12-01T16:35:19Z",
-  "state": "Delivered",
+  "state": {
+    "name": "Delivered"
+  },
   "estimatedTime": 125,
   "__v": 0
 },{
@@ -28,7 +32,9 @@
   "userName": "User3",
   "dateIni": "2020-11-10T16:35:19Z",
   "dateEnd": "2020-11-15T16:35:19Z",
-  "state": "Pending",
+  "state": {
+    "name": "Pending"
+  },
   "estimatedTime": 220,
   "__v": 0
 },{
@@ -39,7 +45,9 @@
   "userName": "User4",
   "dateIni": "2020-10-28T16:35:19Z",
   "dateEnd": "2020-11-01T16:35:19Z",
-  "state": "Pending",
+  "state": {
+    "name": "Pending"
+  },
   "estimatedTime": 130,
   "__v": 0
 },{
@@ -50,7 +58,9 @@
   "userName": "User5",
   "dateIni": "2020-10-30T16:35:19Z",
   "dateEnd": "2020-11-06T16:35:19Z",
-  "state": "Doing",
+  "state": {
+    "name": "Doing"
+  },
   "estimatedTime": 60,
   "__v": 0
 },{
@@ -61,7 +71,9 @@
   "userName": "User6",
   "dateIni": "2020-11-26T16:35:19Z",
   "dateEnd": "2020-12-05T16:35:19Z",
-  "state": "Doing",
+  "state": {
+    "name": "Doing"
+  },
   "estimatedTime": 150,
   "__v": 0
 },{
@@ -72,7 +84,9 @@
   "userName": "User7",
   "dateIni": "2020-11-28T16:35:19Z",
   "dateEnd": "2020-12-06T16:35:19Z",
-  "state": "Finished",
+  "state": {
+    "name": "Finished"
+  },
   "estimatedTime": 320,
   "__v": 0
 }]

@@ -59,7 +59,7 @@ describe('UserManagementComponent', () => {
   it('at start no users in select user list', () => {
     let userSelect = el.query(By.css('#selectUser'));
 
-    let currentUser = new User('', '', 'Selecciona usuario', '', false, false, false);
+    let currentUser = new User('', '', 'Selecciona usuario', '', false, [], []);
 
     expect(component.currentUser).toEqual(currentUser);
 
@@ -166,7 +166,7 @@ describe('UserManagementComponent', () => {
     expect(component.currentGroup).toEqual(group);
     expect(spyGetUsersGroup).toHaveBeenCalled();
     expect(spyGetUsersWithoutGroup).toHaveBeenCalled();
-    expect(component.currentUser).toEqual(new User('', '', 'Selecciona usuario', '', false, false, false));
+    expect(component.currentUser).toEqual(new User('', '', 'Selecciona usuario', '', false, [], []));
     expect(component.groupSelected).toBeTruthy();
     expect(component.userSelected).toBeFalsy();
 
@@ -198,7 +198,7 @@ describe('UserManagementComponent', () => {
     expect(component.currentGroup).toEqual(group);
     expect(spyGetUsersGroup).toHaveBeenCalled();
     expect(spyGetUsersWithoutGroup).toHaveBeenCalled();
-    expect(component.currentUser).toEqual(new User('', '', 'Selecciona usuario', '', false, false, false));
+    expect(component.currentUser).toEqual(new User('', '', 'Selecciona usuario', '', false, [], []));
     expect(component.groupSelected).toBeTruthy();
     expect(component.userSelected).toBeFalsy();
 
@@ -209,7 +209,7 @@ describe('UserManagementComponent', () => {
     expect(addUserButton.nativeElement.disabled).toBeTruthy();
 
     let userSelect = el.query(By.css('#selectUser'));
-    let currentUser = new User('', '', 'Selecciona usuario', '', false, false, false);
+    let currentUser = new User('', '', 'Selecciona usuario', '', false, [], []);
     expect(userSelect.nativeElement.value).toEqual(currentUser);
   });
 });

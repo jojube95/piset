@@ -2,8 +2,8 @@ export class State {
     _id: string;
     name: string;
 
-    constructor(_id: string, name: string){
-        this._id = _id;
+    constructor(name: string, _id?: string){
         this.name = name;
+        this._id = _id || null;
     }
 }

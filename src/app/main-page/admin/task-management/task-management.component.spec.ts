@@ -10,7 +10,6 @@ import {By} from '@angular/platform-browser';
 import {Group} from '../../../model/group';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TestService} from '../../../services/test.service';
-import {List} from 'immutable';
 
 describe('TaskManagementComponent', () => {
   let component: TaskManagementComponent;
@@ -19,7 +18,6 @@ describe('TaskManagementComponent', () => {
 
   let groupStorageService: any;
   let taskStorageService: any;
-  let subtaskStorageService: any;
   let testService: any;
 
   let httpTestingController: HttpTestingController;
@@ -76,9 +74,7 @@ describe('TaskManagementComponent', () => {
     }
     component.onGroupSelect(event);
     //Check component variables
-    expect(component.updateSubtaskBoolean).toBeFalsy();
-    expect(component.updateSubtaskClicked).toBeFalsy();
-    expect(component.add).toBeFalsy();
+    expect(component.addTask).toBeFalsy();
     expect(component.taskSelected).toBeFalsy();
     expect(component.groupSelected).toBeTruthy();
     expect(component.currentGroup).toEqual(group);
@@ -102,7 +98,7 @@ describe('TaskManagementComponent', () => {
     expect(tasksList.nativeElement.children.length).toBe(4);
   });
 
-  xit('delete task and delete from list', () => {
+  it('delete task and delete from list', () => {
     //Spy methods
     let onClickDeleteTaskSpy = spyOn(component, 'onClickDeleteTask').and.callThrough();
     let deleteTaskFromGroupSpy = spyOn(taskStorageService, 'deleteTaskFromGroup').and.callThrough();
@@ -112,8 +108,20 @@ describe('TaskManagementComponent', () => {
     let tasks = testService.getTasksByGroupId(group._id);
     let deleteTask = tasks[0];
 
-    //Call component.onClickTask
-    component.selectGroup(group);
+    //Call component.selectGroup
+    let event = {
+      detail : {
+        value: group
+      }
+    }
+    component.onGroupSelect(event);
+    //Mock getGroupTaks http call service with tasks
+    //Mock the http request
+    const reqTasks = httpTestingController.expectOne(taskStorageService.API_URL + '/api/tasks/getByGroup' + group._id);
+    reqTasks.flush({
+      message: "Success",
+      tasks: tasks
+    });
 
     fixture.detectChanges();
 
@@ -124,15 +132,15 @@ describe('TaskManagementComponent', () => {
     component.onClickDeleteTask(deleteTask)
 
     //Check component variables
-    expect(component.updateSubtaskBoolean).toBeFalsy();
-    expect(component.updateSubtaskClicked).toBeFalsy();
-    expect(component.add).toBeFalsy();
+    expect(component.addTask).toBeFalsy();
     expect(component.taskSelected).toBeFalsy();
     expect(component.groupSelected).toBeTruthy();
 
     expect(onClickDeleteTaskSpy).toHaveBeenCalled();
     expect(deleteTaskFromGroupSpy).toHaveBeenCalled();
+
     fixture.detectChanges();
+
     //Mock deleteSubtask with mock data
     const reqUsers = httpTestingController.expectOne(taskStorageService.API_URL + '/api/tasks/deleteFromGroup');
     reqUsers.flush({
@@ -141,230 +149,99 @@ describe('TaskManagementComponent', () => {
     });
 
     fixture.detectChanges();
+
     //Check list and observable
     let tasksList = el.query(By.css('#tasksList'));
+
     expect(taskStorageService._tasksGroup.getValue()).not.toContain(deleteTask);
     expect(tasksList.nativeElement.children.length).toBe(3);
 
   });
 
-  it('update task button dont show until task is clicked', () => {
-    //Spy method onClickTask
-    let onClickTaskSpy = spyOn(component, 'onClickTask').and.callThrough();
-    let getTaskSubtasksSpy = spyOn(subtaskStorageService, 'getTaskSubtasks');
+  it('select group should enable add task button', () => {
     //Get mock data
     let group = testService.getGroupByName('Group1');
-    let tasks = testService.getTasksByGroupId(group._id);
 
-    expect(onClickTaskSpy).not.toHaveBeenCalled();
+    expect(el.query(By.css('#addTask'))).toBeNull();
 
-    //Push tasks to tasklist using service observable
-    taskStorageService._tasksGroup.next(List(tasks));
-
-    //Check component.variables
-    expect(component.updateSubtaskClicked).toBeFalsy();
-    expect(component.updateSubtaskBoolean).toBeFalsy();
+    //Call component.selectGroup
+    let event = {
+      detail : {
+        value: group
+      }
+    }
+    component.onGroupSelect(event);
+    //Check component variables
+    expect(component.addTask).toBeFalsy();
     expect(component.taskSelected).toBeFalsy();
-    expect(component.add).toBeFalsy();
-    expect(component.currentTask).toBeFalsy()
-    expect(getTaskSubtasksSpy).not.toHaveBeenCalled();
-    //Check button doesnt exist
-    expect(el.query(By.css('#updateTaskButton'))).toBeFalsy();
+    expect(component.groupSelected).toBeTruthy();
+    expect(component.currentGroup).toEqual(group);
 
-    //Click on task
-    component.onClickTask(tasks[0]);
     fixture.detectChanges();
 
-    //Check component.variables
-    expect(component.updateSubtaskClicked).toBeFalsy();
-    expect(component.updateSubtaskBoolean).toBeFalsy();
-    expect(component.taskSelected).toBeTruthy();
-    expect(component.add).toBeFalsy();
-    expect(component.currentTask).toEqual(tasks[0])
-    expect(getTaskSubtasksSpy).toHaveBeenCalled();
-
-    //Check button doesnt exist
-    expect(el.query(By.css('#updateTaskButton'))).toBeTruthy();
+    expect(el.query(By.css('#addTask'))).toBeTruthy();
   });
 
-  xit('update task should open update task form with clicked task data', () => {
-    //Spy method onClickTask
-    let onClickTaskSpy = spyOn(component, 'onClickTask').and.callThrough();
-    let onClickUpdateTask = spyOn(component, 'onClickUpdateTask').and.callThrough();
-    let getTaskSubtasksSpy = spyOn(subtaskStorageService, 'getTaskSubtasks');
+  it('click on add task should open add task component', () => {
+    //Get mock data
+    let group = testService.getGroupByName('Group1');
 
+    //Call component.selectGroup
+    let event = {
+      detail : {
+        value: group
+      }
+    }
+    component.onGroupSelect(event);
+
+    fixture.detectChanges();
+
+    expect(component.addTask).toBeFalsy();
+
+    let addButton = el.query(By.css('#addTask'));
+
+    addButton.nativeElement.click();
+
+    fixture.detectChanges();
+
+    expect(component.addTask).toBeTruthy();
+
+    expect(el.query(By.css('#addTaskComponent'))).toBeTruthy();
+  });
+
+  it('click on task should open update task component', () => {
     //Get mock data
     let group = testService.getGroupByName('Group1');
     let tasks = testService.getTasksByGroupId(group._id);
+    let updateTask = tasks[0];
 
-    expect(onClickUpdateTask).not.toHaveBeenCalled();
-
-    //Push tasks to tasklist using service observable
-    taskStorageService._tasksGroup.next(List(tasks));
-
-    //Click on task
-    component.onClickTask(tasks[0]);
-    fixture.detectChanges();
-
-    //Check button doesnt exist
-    let updateTask = el.query(By.css('#updateTaskButton'))
-
-    expect(component.updateTask).toBeFalsy();
-    expect(component.currentEditTask).toBeFalsy();
-    expect(el.query(By.css('#updateTaskForm'))).toBeFalsy();
-    updateTask.nativeElement.click();
-
-    fixture.detectChanges();
-
-    expect(onClickUpdateTask).toHaveBeenCalled();
-
-    expect(component.updateTask).toBeTruthy();
-    expect(component.currentEditTask).toEqual(tasks[0])
-    expect(el.query(By.css('#updateTaskForm'))).toBeTruthy();
-
-    //Check update task name
-    expect(el.query(By.css('#updateTaskForm')).children[0].children[1].nativeElement.value).toBe(tasks[0].name);
-  });
-
-  it('update task form validation and button enabled/disabled', () => {
-    //Get mock data
-    let group = testService.getGroupByName('Group1');
-    let tasks = testService.getTasksByGroupId(group._id);
-
-    //Push tasks to tasklist using service observable
-    taskStorageService._tasksGroup.next(List(tasks));
-
-    //Click on task
-    component.onClickTask(tasks[0]);
-    fixture.detectChanges();
-
-    component.onClickUpdateTask();
-    fixture.detectChanges();
-
-    //Check form validation
-    let submitUpdateTask = el.query(By.css('#submitUpdateTask'));
-    let taskName = component.formUpdateTask.controls['taskName'];
-
-    taskName.setValue('');
-    fixture.detectChanges();
-    expect(taskName.hasError('required')).toBe(true);
-    expect(submitUpdateTask.nativeElement.disabled).toBeTruthy();
-
-    taskName.setValue('Test');
-    fixture.detectChanges();
-
-    expect(taskName.hasError('required')).toBe(false);
-    expect(submitUpdateTask.nativeElement.disabled).toBeFalsy();
-  });
-
-  it('add task form validation and button enabled/disabled', () => {
-    //Get mock data
-    let group = testService.getGroupByName('Group1');
-
-    component.onClickAdd();
-
-    fixture.detectChanges();
-
-    //Check form validation
-    let submitAddTask = el.query(By.css('#submitAddTask'));
-    let taskName = component.formAddTask.controls['taskName'];
-
-    taskName.setValue('');
-    fixture.detectChanges();
-    expect(taskName.hasError('required')).toBe(true);
-    expect(submitAddTask.nativeElement.disabled).toBeTruthy();
-
-    taskName.setValue('Test');
-    fixture.detectChanges();
-
-    expect(taskName.hasError('required')).toBe(false);
-    expect(submitAddTask.nativeElement.disabled).toBeFalsy();
-  });
-
-  it('update task update task on list', () => {
-
-  });
-
-  it('click back on add task should hide form', () => {
-    //Get mock data
-    let group = testService.getGroupByName('Group1');
-
-    component.onClickAdd();
-
-    fixture.detectChanges();
-
-    //Check back button
-
-  });
-
-  it('click back on update task should hide form', () => {
-    //Get mock data
-    let group = testService.getGroupByName('Group1');
-    let tasks = testService.getTasksByGroupId(group._id);
-
-    //Push tasks to tasklist using service observable
-    taskStorageService._tasksGroup.next(List(tasks));
-
-    //Click on task
-    component.onClickTask(tasks[0]);
-    fixture.detectChanges();
-
-    component.onClickUpdateTask();
-    fixture.detectChanges();
-
-    //Check back button
-  });
-
-  it('add task should add task on list', () => {
-    //Spy methods
-    let onSelectGroupSpy = spyOn(component, 'onGroupSelect');
-    let addTaskSubtasksSpy = spyOn(taskStorageService, 'addTaskToGroup').and.callThrough();
-
-    //Get group mock data
-    let group = testService.getGroupByName('Group1');
-
-    //Get tasks mock data
-    let tasks = testService.getTasksByGroupId(group._id);
-
-    //Set taskName mock data
-    let mockTaskName = 'TestTask';
-
-    //Click select group and spy the service
-    component.onGroupSelect({detail: {value: group}});
-    expect(onSelectGroupSpy).toHaveBeenCalled();
-
-    //Push the tasks to the _taskGroup on the service
-    taskStorageService._tasksGroup.next(List(tasks));
-
-    //Click add task
-    component.onClickAdd();
-    fixture.detectChanges();
-
-    //Set form addTask
-    let submitAddTask = el.query(By.css('#submitAddTask'));
-    let taskName = component.formAddTask.controls['taskName'];
-
-    taskName.setValue(mockTaskName);
-    fixture.detectChanges();
-
-    //Call addTask service
-    expect(addTaskSubtasksSpy).not.toHaveBeenCalled();
-    component.addTask();
-    expect(component.subtaskAdd).toBeFalsy();
-
-    expect(addTaskSubtasksSpy).toHaveBeenCalled();
-
-    //Mock the http call with the taskAdd mock data
-    const reqUsers = httpTestingController.expectOne(taskStorageService.API_URL + '/api/tasks/addToGroup');
-    reqUsers.flush({
-      message: "Success"
+    //Call component.selectGroup
+    let event = {
+      detail : {
+        value: group
+      }
+    }
+    component.onGroupSelect(event);
+    //Mock getGroupTaks http call service with tasks
+    //Mock the http request
+    const reqTasks = httpTestingController.expectOne(taskStorageService.API_URL + '/api/tasks/getByGroup' + group._id);
+    reqTasks.flush({
+      message: "Success",
+      tasks: tasks
     });
 
     fixture.detectChanges();
 
-    //Check the data is added to the observable and list
-    expect(taskStorageService._tasksGroup.getValue().size).toBe(5)
-    let tasksList = el.query(By.css('#tasksList'));
-    expect(tasksList.nativeElement.children.length).toBe(5);
+    expect(el.query(By.css('#updateTaskComponent'))).toBeFalsy();
+    expect(component.taskSelected).toBeFalsy();
+
+    component.onClickTask(updateTask);
+
+    fixture.detectChanges();
+
+    expect(component.taskSelected).toBeTruthy();
+    expect(component.currentTask).toEqual(updateTask);
+
+    expect(el.query(By.css('#updateTaskComponent'))).toBeTruthy();
   });
 });

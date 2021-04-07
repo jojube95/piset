@@ -155,7 +155,7 @@ describe('SignUpComponent', () => {
     component.signUp();
 
     let user = new User(component.form.value.mail,
-        component.form.value.password, component.form.value.name, component.form.value.secondName, false, false, false);
+        component.form.value.password, component.form.value.name, component.form.value.secondName, false, [], []);
 
     expect(authServiceSignUpSpy).toHaveBeenCalledWith(user);
   });

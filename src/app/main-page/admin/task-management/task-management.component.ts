@@ -14,7 +14,7 @@ export class TaskManagementComponent implements OnInit {
   currentGroup: Group = new Group(null, 'Selecciona grupo');
   currentTask: Task;
   currentEditTask: Task;
-  add: boolean = false;
+  addTask: boolean = false;
   updateTask: boolean = false;
   subtaskAdd: boolean = false;
   loadingGroup: boolean = true;
@@ -52,17 +52,12 @@ export class TaskManagementComponent implements OnInit {
 
   onClickTask(task: Task){
     this.taskSelected = true;
-    this.add = false;
+    this.addTask = false;
     this.currentTask = task;
   }
 
   onUpdateTask(){
     this.taskStorage.updateTask(this.currentTask);
-  }
-
-  onClickUpdateTask(){
-    this.updateTask = true;
-    this.currentEditTask = this.currentTask;
   }
 
   onClickCancelUpdateTask(){
@@ -71,14 +66,14 @@ export class TaskManagementComponent implements OnInit {
 
   onClickDeleteTask(task: Task){
     this.taskStorage.deleteTaskFromGroup(this.currentGroup, task);
-    this.add = false;
+    this.addTask = false;
     this.taskSelected = false;
     this.groupSelected = true;
   }
 
   onGroupSelect(event){
     let group = event.detail.value;
-    this.add = false;
+    this.addTask = false;
     this.taskSelected = false;
     this.groupSelected = true;
     this.currentGroup = group;
@@ -86,22 +81,16 @@ export class TaskManagementComponent implements OnInit {
   }
 
   selectGroup(group: Group){
-    this.add = false;
+    this.addTask = false;
     this.taskSelected = false;
     this.groupSelected = true;
     this.currentGroup = group;
     this.taskStorage.getGroupTasks(group);
   }
 
-  addTask(){
-    if(this.formAddTask.valid){
-      let task = new Task(this.formAddTask.value.taskName, this.formAddTask.value.taskDescription, this.currentGroup._id);
-      this.taskStorage.addTaskToGroup(this.currentGroup, task);
-    }
-  }
-
   onClickAdd() {
-    this.add = true;
+    this.addTask = true;
+    this.taskSelected = false;
   }
 
 }

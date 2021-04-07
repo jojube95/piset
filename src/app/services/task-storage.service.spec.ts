@@ -77,10 +77,10 @@ describe('TaskStorageService', () => {
   it('addTaskToGroup', () => {
     //Get mock data
     let mockGroup = testService.getGroupByName('Group1');
-    let mockTask = new Task('Task5', null);
+    let mockTask = new Task('Task5', null, mockGroup._id);
 
     //Call service method
-    service.addTaskToGroup(mockGroup, mockTask);
+    service.addTaskToGroup(mockTask);
 
     //Create the mockCall
     const reqTasks = httpTestingController.expectOne(service['API_URL'] + '/api/tasks/addToGroup');
@@ -142,7 +142,7 @@ describe('TaskStorageService', () => {
     let mockTask = testService.getTaskByName('Task1');
 
     //Call service method
-    service.updateTask(mockGroup, mockTask);
+    service.updateTask(mockTask);
 
     //Create the mockCall
     const reqTasks = httpTestingController.expectOne(service['API_URL'] + '/api/tasks/update');

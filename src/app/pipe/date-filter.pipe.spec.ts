@@ -18,10 +18,10 @@ describe('DateFilterPipe', () => {
     datefilter4 = new Date(Date.UTC(2020, 3, 1));
     datefilter5 = new Date(Date.UTC(2021, 0, 1));
 
-    history1 = new History('1', 'Subtask1', 1, true, '1', 'User1', new Date(Date.UTC(2020, 0, 1)), new Date(Date.UTC(2020, 0, 28)));
-    history2 = new History('2', 'Subtask2', 1, true, '2', 'User2', new Date(Date.UTC(2020, 1, 1)), new Date(Date.UTC(2020, 1, 28)));
-    history3 = new History('3', 'Subtask3', 1, true, '3', 'User3', new Date(Date.UTC(2020, 2, 3)), new Date(Date.UTC(2020, 2, 25)));
-    history4 = new History('4', 'Subtask4', 1, true, '4', 'User4', new Date(Date.UTC(2020, 0, 28)), new Date(Date.UTC(2020, 1, 1)));
+    history1 = new History('1', 'Subtask1', '1', 'UserName', '1', 'User1', new Date(Date.UTC(2020, 0, 1)), 'Action', 10);
+    history2 = new History('2', 'Subtask2', '1', 'UserName', '2', 'User2', new Date(Date.UTC(2020, 1, 1)), 'Action', 10);
+    history3 = new History('3', 'Subtask3', '1', 'UserName', '3', 'User3', new Date(Date.UTC(2020, 2, 3)), 'Action', 10);
+    history4 = new History('4', 'Subtask4', '1', 'UserName', '4', 'User4', new Date(Date.UTC(2020, 0, 28)), 'Action', 10);
 
     list1 = [];
 

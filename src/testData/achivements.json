@@ -1,0 +1,29 @@
+[{
+  "_id": "5fde502a9e491a29eca20001",
+  "name": "Task Completer 10",
+  "description": "Complete 10 Tasks",
+  "completePoints": 10,
+  "__v": 0
+},
+{
+  "_id": "5fde502a9e491a29eca20002",
+  "name": "Task Completer 100",
+  "description": "Complete 100 Tasks",
+  "completePoints": 100,
+  "__v": 0
+},
+{
+  "_id": "5fde502a9e491a29eca20003",
+  "name": "Accept invitation",
+  "description": "Accept group invitation",
+  "completePoints": 1,
+  "__v": 0
+},
+{
+  "_id": "5fde502a9e491a29eca20004",
+  "name": "Create group",
+  "description": "Create group",
+  "completePoints": 1,
+  "__v": 0
+}
+]

@@ -29,8 +29,8 @@ export class TaskStorageService {
     );
   }
 
-  addTaskToGroup(group: Group, task: Task){
-    this.http.post(this.API_URL + '/api/tasks/addToGroup', {task: task, groupId: group._id}).subscribe(response => {
+  addTaskToGroup(task: Task){
+    this.http.post(this.API_URL + '/api/tasks/addToGroup', {task: task}).subscribe(response => {
       //Add task to _tasksGroup and push
       this._tasksGroup.next(this._tasksGroup.getValue().push(task));
     });

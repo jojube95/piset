@@ -1,0 +1,37 @@
+
+<form (ngSubmit)="onAdd()" [formGroup]="formAddTask">
+  <ion-item>
+    <ion-label for="name">Name</ion-label>
+    <ion-input class="ion-text-right" type="name" id="name" name="name" formControlName="name"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label for="description">Description</ion-label>
+    <ion-input class="ion-text-right" type="description" id="description" name="description" formControlName="description"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>Initial date</ion-label>
+    <ion-datetime type="dateIni" id="dateIni" name="dateIni" formControlName="dateIni"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>End date</ion-label>
+    <ion-datetime type="dateEnd" id="dateEnd" name="dateEnd" formControlName="dateEnd"></ion-datetime>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>EstimatedTime</ion-label>
+    <ion-input class="ion-text-right" type="estimatedTime" id="estimatedTime" name="estimatedTime" formControlName="estimatedTime"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>State</ion-label>
+    <ion-input class="ion-text-right" type="state" id="state" name="state" formControlName="state"></ion-input>
+  </ion-item>
+
+  <ion-button id="addButton" type="submit" [disabled]="!formAddTask.valid">Add</ion-button>
+</form>
+
+
+
