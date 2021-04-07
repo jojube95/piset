@@ -41,6 +41,10 @@ describe('MainPageComponent', () => {
 
   });
 
+  xit('test options visibility if/not admin user and test environment', () => {
+
+  });
+
   it('logOut should navigate to logIn and call logOut service', () => {
     const logOut = spyOn(component, 'logOut').and.callThrough();
     const authServiceLogOutSpy = spyOn(authService, 'signOut').and.callThrough();
@@ -135,9 +139,5 @@ describe('MainPageComponent', () => {
     fixture.detectChanges();
     expect(onClickUserInvitations).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalledWith(['/main/user/invitations']);
-  });
-
-  xit('show total month penalty', () => {
-
   });
 });

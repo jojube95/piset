@@ -13,7 +13,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TaskManagementComponent} from './main-page/admin/task-management/task-management.component';
 import {UserManagementComponent} from './main-page/admin/user-management/user-management.component';
-import {GroupManagementComponent} from './main-page/admin/group-management/group-management.component';
 import {DateFilterPipe} from './pipe/date-filter.pipe';
 import {UserSettingsComponent} from './main-page/user/user-settings/user-settings.component';
 import {UserInfoComponent} from './main-page/user/user-info/user-info.component';
@@ -24,6 +23,8 @@ import {TestComponent} from './main-page/admin/test/test.component';
 import {UserInvitationsComponent} from './main-page/user/user-invitations/user-invitations.component';
 import {TaskUpdateComponent} from './main-page/tasks/task-update/task-update.component';
 import {TaskAddComponent} from './main-page/tasks/task-add/task-add.component';
+import {GroupAddComponent} from './main-page/groups/group-add/group-add.component';
+import {GroupUpdateComponent} from './main-page/groups/group-update/group-update.component';
 
 @NgModule({
     declarations: [
@@ -33,7 +34,6 @@ import {TaskAddComponent} from './main-page/tasks/task-add/task-add.component';
         MainPageComponent,
         TaskManagementComponent,
         UserManagementComponent,
-        GroupManagementComponent,
         LoadingSpinerComponent,
         UserInfoComponent,
         UserSettingsComponent,
@@ -43,7 +43,9 @@ import {TaskAddComponent} from './main-page/tasks/task-add/task-add.component';
         TasksComponent,
         HistoryComponent,
         TaskUpdateComponent,
-        TaskAddComponent
+        TaskAddComponent,
+        GroupAddComponent,
+        GroupUpdateComponent
     ],
   entryComponents: [],
   imports: [

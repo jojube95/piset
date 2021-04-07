@@ -6,5 +6,5 @@ Historial: https://wireframe.cc/JQ5zwA
 Ges.Tareas: https://wireframe.cc/U95jgn
 Ges.Usuarios: https://wireframe.cc/wqaJPy
 Ges.Multas: https://wireframe.cc/a4HuUS
-Ges.Grupos: https://wireframe.cc/KazOCS
+Ges.PORDEFINIR: https://wireframe.cc/KazOCS
 Ajust.usuario: https://wireframe.cc/L9HD77

@@ -11,7 +11,7 @@ import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
   styleUrls: ['./task-management.component.scss'],
 })
 export class TaskManagementComponent implements OnInit {
-  currentGroup: Group = new Group(null, 'Selecciona grupo');
+  currentGroup: Group = new Group('Selecciona grupo');
   currentTask: Task;
   currentEditTask: Task;
   addTask: boolean = false;

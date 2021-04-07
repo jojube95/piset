@@ -1,0 +1,12 @@
+
+<form (ngSubmit)="onAdd()" [formGroup]="formAddGroup">
+  <ion-item>
+    <ion-label for="name">Name</ion-label>
+    <ion-input class="ion-text-right" type="name" id="name" name="name" formControlName="name"></ion-input>
+  </ion-item>
+
+  <ion-button id="addButton" type="submit" [disabled]="!formAddGroup.valid">Add</ion-button>
+</form>
+
+
+

@@ -57,11 +57,6 @@ export class MainPageComponent implements OnInit {
     this.menu.close('custom')
   }
 
-  onClickGroupManagement(){
-    this.router.navigate(['/main/admin/groupManagement']);
-    this.menu.close('custom')
-  }
-
   onClickTest(){
     this.router.navigate(['/main/admin/test']);
     this.menu.close('custom')

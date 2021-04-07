@@ -3,8 +3,6 @@ import {UserStorageService} from '../../../services/user-storage.service';
 import {GroupStorageService} from '../../../services/group-storage.service';
 import {Group} from '../../../model/group';
 import {User} from '../../../model/user';
-import {UserGroup} from '../../../model/userGroup';
-import {UserAchivement} from '../../../model/userAchivement';
 
 @Component({
   selector: 'app-user-management',
@@ -12,11 +10,14 @@ import {UserAchivement} from '../../../model/userAchivement';
   styleUrls: ['./user-management.component.scss'],
 })
 export class UserManagementComponent implements OnInit {
-  currentGroup: Group = new Group(null, 'Selecciona grupo');
+  currentGroup: Group = new Group('Selecciona grupo');
   currentUser: User = new User('', '', 'Selecciona usuario', '', false, null, null);
 
   userSelected: boolean;
   groupSelected: boolean;
+
+  addGroupClicked: boolean;
+  updateGroupClicked: boolean;
 
   constructor(public groupStorage: GroupStorageService, public userStorage: UserStorageService) { }
 
@@ -24,6 +25,8 @@ export class UserManagementComponent implements OnInit {
     //Set control variables
     this.userSelected = false;
     this.groupSelected = false;
+    this.addGroupClicked = false;
+    this.updateGroupClicked = false;
   }
 
   onGroupSelect(event){
@@ -33,6 +36,8 @@ export class UserManagementComponent implements OnInit {
     this.currentUser = new User('', '', 'Selecciona usuario', '', false, null, null);
     this.userStorage.getUsersWithoutGroup();
     this.groupSelected = true;
+    this.addGroupClicked = false;
+    this.updateGroupClicked = false;
     this.userSelected = false;
   }
 
@@ -57,4 +62,26 @@ export class UserManagementComponent implements OnInit {
     this.userStorage.deleteUserFromGroup(user, this.currentGroup);
   }
 
+  onClickAddGroup(){
+    this.addGroupClicked = true;
+    this.updateGroupClicked = false;
+  }
+
+  onClickUpdateGroup(){
+    this.addGroupClicked = false;
+    this.updateGroupClicked = true;
+  }
+
+  onClickDeleteGroup(){
+    if(this.currentGroup._id != null){
+      this.groupStorage.deleteGroup(this.currentGroup);
+
+      this.currentGroup = new Group('Selecciona grupo');
+      this.userSelected = false;
+      this.groupSelected = false;
+      this.addGroupClicked = false;
+      this.updateGroupClicked = false;
+
+    }
+  }
 }

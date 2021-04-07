@@ -93,7 +93,7 @@ describe('TasksComponent', () => {
 
     //userStorageService.getUsersGroup(new Group(component.loggedUser.groupId, null, null));
 
-    expect(getUsersGroupSpy).toHaveBeenCalledWith(new Group(component.loggedUser.groups[0].groupId, null));
+    expect(getUsersGroupSpy).toHaveBeenCalledWith(new Group('', component.loggedUser.groups[0].groupId));
     expect(getUsersGroupSpy).toHaveBeenCalled();
 
     //Mock http request

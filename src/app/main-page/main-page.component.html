@@ -5,9 +5,6 @@
       <ion-col>
         <ion-title id="pisetTitle" (click)="openMenu('custom')">Piset</ion-title>
       </ion-col>
-      <ion-col>
-        <ion-label>Total month penalty: </ion-label>
-      </ion-col>
     </ion-row>
 
 
@@ -32,11 +29,13 @@
         <ion-label>History</ion-label>
         <ion-item id="clickHistory" (click)="onClickHistory()">History</ion-item>
 
-        <ion-label>Admin</ion-label>
-        <ion-item id="clickTaskManagement" (click)="onClickTaskManagement()">Admin-Tasks</ion-item>
-        <ion-item id="clickUserManagement" (click)="onClickUserManagement()">Admin-Users</ion-item>
-        <ion-item id="clickGroupManagement" (click)="onClickGroupManagement()">Admin-Groups</ion-item>
-        <ion-item *ngIf="!getEnvironment()" id="clickTest" (click)="onClickTest()">Admin-Test</ion-item>
+        <div *ngIf="userLogged.admin">
+          <ion-label>Admin</ion-label>
+          <ion-item id="clickTaskManagement" (click)="onClickTaskManagement()">Admin-Tasks</ion-item>
+          <ion-item id="clickUserManagement" (click)="onClickUserManagement()">Admin-Users</ion-item>
+          <ion-item *ngIf="!getEnvironment()" id="clickTest" (click)="onClickTest()">Admin-Test</ion-item>
+        </div>
+
 
         <ion-label>Account</ion-label>
         <ion-item id="clickUserInfo" (click)="onClickUserInfo()">Account-Info</ion-item>

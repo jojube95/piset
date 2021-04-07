@@ -23,8 +23,8 @@ export class GroupStorageService {
   loadGroups() {
     this.http.get<{message: string, groups: any}>(this.API_URL + '/api/groups/get').subscribe(res => {
         let groups = (<Object[]>res.groups).map((group: any) =>
-          new Group(group._id, group.name));
-
+          new Group(group.name, group._id));
+          console.log(groups);
         this._groups.next(List(groups));
       },
       err => console.log("Error retrieving Todos")
@@ -42,6 +42,14 @@ export class GroupStorageService {
       let groups: List<Group> = this._groups.getValue();
       let index = groups.findIndex((group) => group._id === deletedGroup._id);
       this._groups.next(groups.delete(index));
+    });
+  }
+
+  updateGroup(group: Group){
+    this.http.post(this.API_URL + '/api/groups/update', {group: group}).subscribe(response => {
+      let groups: List<Group> = this._groups.getValue();
+      let index = groups.findIndex((task) => task._id === group._id);
+      this._groups.next(groups.set(index, group));
     });
   }
 }

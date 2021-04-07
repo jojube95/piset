@@ -1,0 +1,12 @@
+<form (ngSubmit)="onUpdate()" [formGroup]="formUpdateGroup">
+  <ion-item>
+    <ion-label for="name">Name</ion-label>
+    <ion-input class="ion-text-right" type="name" id="name" name="name" formControlName="name" [value]="group.name"></ion-input>
+  </ion-item>
+
+
+  <ion-button id="registerButton" type="submit" [disabled]="!formUpdateGroup.valid">Update</ion-button>
+</form>
+
+
+

@@ -77,7 +77,7 @@ describe('GroupStorageService', () => {
   });
 
   it('createGroup', () => {
-      let mockGroup = new Group('', 'Group3');
+      let mockGroup = new Group('Group3');
 
       //Call service method
       service.createGroup(mockGroup);

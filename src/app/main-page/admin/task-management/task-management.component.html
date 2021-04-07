@@ -15,7 +15,9 @@
         <ion-list id="tasksList">
           <ion-item *ngFor="let task of (taskStorage._tasksGroup | async)" (click)="onClickTask(task)" [ngClass]="{'active': currentTask == task}">
             <ion-label>{{ task.name }}</ion-label>
-            <ion-label (click)="onClickDeleteTask(task)">x</ion-label>
+            <ion-button type="button" class="close" data-dismiss="alert" (click)="onClickDeleteTask(task)">
+              <ion-label aria-hidden="true">×</ion-label>
+            </ion-button>
           </ion-item>
         </ion-list>
         <ion-button *ngIf="groupSelected" (click)="onClickAdd()" id="addTask">Add Task</ion-button>
@@ -25,7 +27,6 @@
         <app-task-update *ngIf="taskSelected" [task]="currentTask" id="updateTaskComponent"></app-task-update>
         <app-task-add *ngIf="addTask" [group]="currentGroup" id="addTaskComponent"></app-task-add>
       </ion-col>
-
 
     </ion-row>
   </ion-grid>
