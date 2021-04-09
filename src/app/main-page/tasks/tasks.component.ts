@@ -4,6 +4,7 @@ import {User} from '../../model/user';
 import {UserStorageService} from '../../services/user-storage.service';
 import {Task} from '../../model/task';
 import {TaskStorageService} from '../../services/task-storage.service';
+import {GroupStorageService} from '../../services/group-storage.service';
 
 @Component({
   selector: 'app-tasks',
@@ -21,7 +22,7 @@ export class TasksComponent implements OnInit {
 
   loading = true;
 
-  constructor(private userStorage: UserStorageService, private taskStorage: TaskStorageService) {
+  constructor(private groupStorage: GroupStorageService, private userStorage: UserStorageService, private taskStorage: TaskStorageService) {
 
   }
 
@@ -29,37 +30,28 @@ export class TasksComponent implements OnInit {
     this.loggedUser = this.userStorage.getCurrentUser();
     this.loading = false;
 
-    if(this.loggedUser.groups.length != 0 && this.loggedUser.groups != null){
+    if(this.loggedUser.groups.length > 0 && this.loggedUser.groups != null){
       this.isUserInGroup = true;
+      //Select first group??
+      //Retrieve all user tasks??
 
-      this.userStorage.getUsersGroup(this.selectedGroup);
-      this.userStorage._usersGroup.subscribe((users) =>{
-        let matchedUser = users.find(user => user._id === this.loggedUser._id);
-        if(matchedUser != undefined){
-          this.selectUser(matchedUser);
-        }
-      });
     }
     else {
       this.isUserInGroup = false;
     }
   }
 
+  onGroupSelect(event){
+    let group = event.detail.value;
+    this.userStorage.getUsersGroup(group);
+
+  }
+
   onUserSelect(event){
     let user = event.detail.value;
     this.selectedUser = user;
-    //Get task user
-    this.taskStorage.getTaskByUser(user).subscribe(res => {
-      this.selectedTask = res.task;
-    });
-  }
-
-  selectUser(user: User){
-    this.selectedUser = user;
-    //Get task user
-    this.taskStorage.getTaskByUser(user).subscribe(res => {
-      this.selectedTask = res.task;
-    });
+    //Get tasks user
+    
   }
 
   reasignTasks(){

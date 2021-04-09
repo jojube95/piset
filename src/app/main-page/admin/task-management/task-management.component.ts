@@ -65,7 +65,7 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onClickDeleteTask(task: Task){
-    this.taskStorage.deleteTaskFromGroup(this.currentGroup, task);
+    this.taskStorage.deleteTaskFromGroup(task);
     this.addTask = false;
     this.taskSelected = false;
     this.groupSelected = true;

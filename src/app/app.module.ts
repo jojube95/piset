@@ -26,6 +26,10 @@ import {TaskAddComponent} from './main-page/tasks/task-add/task-add.component';
 import {GroupAddComponent} from './main-page/groups/group-add/group-add.component';
 import {GroupUpdateComponent} from './main-page/groups/group-update/group-update.component';
 import {UserSettingsComponent} from './main-page/user/user-settings/user-settings.component';
+import {TaskComponent} from './main-page/tasks/board/column/task/task.component';
+import {ColumnComponent} from './main-page/tasks/board/column/column.component';
+import {BoardComponent} from './main-page/tasks/board/board.component';
+import {TaskDetailComponent} from './main-page/tasks/board/column/task-detail/task-detail.component';
 
 @NgModule({
     declarations: [
@@ -47,7 +51,11 @@ import {UserSettingsComponent} from './main-page/user/user-settings/user-setting
         TaskUpdateComponent,
         TaskAddComponent,
         GroupAddComponent,
-        GroupUpdateComponent
+        GroupUpdateComponent,
+        TaskComponent,
+        ColumnComponent,
+        BoardComponent,
+        TaskDetailComponent
     ],
   entryComponents: [],
   imports: [

@@ -36,8 +36,8 @@ export class TaskStorageService {
     });
   }
 
-  deleteTaskFromGroup(group: Group, deletedTask: Task){
-    this.http.post(this.API_URL + '/api/tasks/deleteFromGroup', {groupId: group._id, taskId: deletedTask._id}).subscribe(response => {
+  deleteTaskFromGroup(deletedTask: Task){
+    this.http.post(this.API_URL + '/api/tasks/deleteFromGroup', {taskId: deletedTask._id}).subscribe(response => {
 
       let tasks: List<Task> = this._tasksGroup.getValue();
       let index = tasks.findIndex((task) => task._id === deletedTask._id);

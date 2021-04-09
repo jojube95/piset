@@ -1,17 +1,20 @@
-<ion-header>
-  Tasks
-</ion-header>
-
-
 <ion-content *ngIf="!loading" class="ion-padding">
   <div *ngIf="!isUserInGroup">
     <ion-label id="withoutGroupLabel">User don't have a group</ion-label>
   </div>
 
   <div *ngIf="isUserInGroup">
-    <ion-label id="withGroupLabel">Group: {{ loggedUser.groupName }}</ion-label>
     <ion-grid>
       <ion-row>
+        <ion-col>
+          <ion-item>
+            <ion-label>Groups</ion-label>
+            <ion-select id="groupSelect" value="unselected" okText="Okay" cancelText="Dismiss" (ionChange)="onGroupSelect($event)">
+              <ion-select-option *ngFor="let group of (groupStorage._groups | async)" [value]="group" >{{group.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+
         <ion-col>
           <ion-item>
             <ion-label>Users</ion-label>
@@ -20,8 +23,12 @@
             </ion-select>
           </ion-item>
         </ion-col>
+
       </ion-row>
-      <ion-row id="userTask" *ngIf="selectedTask != null">{{selectedTask.name}}</ion-row>
+
+      <ion-row>
+        <app-board></app-board>
+      </ion-row>
     </ion-grid>
   </div>
 

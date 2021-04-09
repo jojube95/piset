@@ -1,0 +1,8 @@
+<div *ngIf="project | async as project">
+  <div class="task" id="{{task._id}}" [style.backgroundColor]="project.color">
+    <span class="projectName">{{project.name}}</span>
+    <span class="taskName">{{task.name}}</span>
+  </div>
+</div>
+
+

@@ -1,0 +1,17 @@
+  <div class="root">
+
+    <div class="board">
+
+      <div class="board-wrapper">
+        <div class="board-columns" cdkDropListGroup><!-- cdkDropListGroup-->
+          <app-column class="board-column" *ngFor="let state of (stateStorage._states | async)" [state]="state"></app-column>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
