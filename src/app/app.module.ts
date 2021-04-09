@@ -14,7 +14,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {TaskManagementComponent} from './main-page/admin/task-management/task-management.component';
 import {UserManagementComponent} from './main-page/admin/user-management/user-management.component';
 import {DateFilterPipe} from './pipe/date-filter.pipe';
-import {UserSettingsComponent} from './main-page/user/user-settings/user-settings.component';
+import {UserUpdateComponent} from './main-page/user/user-settings/user-update/user-update.component';
 import {UserInfoComponent} from './main-page/user/user-info/user-info.component';
 import {LoadingSpinerComponent} from './ui/loading-spiner/loading-spiner.component';
 import {TasksComponent} from './main-page/tasks/tasks.component';
@@ -25,6 +25,7 @@ import {TaskUpdateComponent} from './main-page/tasks/task-update/task-update.com
 import {TaskAddComponent} from './main-page/tasks/task-add/task-add.component';
 import {GroupAddComponent} from './main-page/groups/group-add/group-add.component';
 import {GroupUpdateComponent} from './main-page/groups/group-update/group-update.component';
+import {UserSettingsComponent} from './main-page/user/user-settings/user-settings.component';
 
 @NgModule({
     declarations: [
@@ -37,6 +38,7 @@ import {GroupUpdateComponent} from './main-page/groups/group-update/group-update
         LoadingSpinerComponent,
         UserInfoComponent,
         UserSettingsComponent,
+        UserUpdateComponent,
         UserInvitationsComponent,
         TestComponent,
         DateFilterPipe,

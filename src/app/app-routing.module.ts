@@ -6,12 +6,13 @@ import {SignInComponent} from './auth/sign-in/sign-in.component';
 import {SignUpComponent} from './auth/sign-up/sign-up.component';
 import {TaskManagementComponent} from './main-page/admin/task-management/task-management.component';
 import {UserManagementComponent} from './main-page/admin/user-management/user-management.component';
-import {UserSettingsComponent} from './main-page/user/user-settings/user-settings.component';
+
 import {UserInfoComponent} from './main-page/user/user-info/user-info.component';
 import {TasksComponent} from './main-page/tasks/tasks.component';
 import {HistoryComponent} from './main-page/history/history.component';
 import {TestComponent} from './main-page/admin/test/test.component';
 import {UserInvitationsComponent} from './main-page/user/user-invitations/user-invitations.component';
+import {UserSettingsComponent} from './main-page/user/user-settings/user-settings.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/signIn', pathMatch: 'full'},

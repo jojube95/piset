@@ -23,7 +23,10 @@ export class GroupUpdateComponent implements OnInit {
       ]]
     });
 
-    this.formUpdateGroup.controls['name'].setValue(this.group.name);
+    if(this.group != undefined){
+      this.formUpdateGroup.controls['name'].setValue(this.group.name);
+    }
+
   }
 
   onUpdate(){

@@ -75,6 +75,62 @@ describe('UserManagementComponent', () => {
 
   });
 
+  it('add group button is enabled', () => {
+    let addGroupButton = el.query(By.css('#addGroup'));
+
+    expect(component.groupSelected).toBeFalsy();
+
+    expect(addGroupButton.nativeElement.disabled).toBeFalsy();
+
+  });
+
+  it('at start update group button is disabled', () => {
+    let updateGroupButton = el.query(By.css('#updateGroup'));
+
+    expect(component.groupSelected).toBeFalsy();
+
+    expect(updateGroupButton.nativeElement.disabled).toBeTruthy();
+
+  });
+
+  it('at start delte group button is disabled', () => {
+    let deleteGroupButton = el.query(By.css('#deleteGroup'));
+
+    expect(component.groupSelected).toBeFalsy();
+
+    expect(deleteGroupButton.nativeElement.disabled).toBeTruthy();
+
+  });
+
+  it('when group is selected, update group and delete group buttons are enabled',   () => {
+    //Get group test data
+    let group = testService.getGroupByName('Group1');
+
+    let spyOnGroupSelect = spyOn(component, 'onGroupSelect').and.callThrough();
+
+    expect(spyOnGroupSelect).not.toHaveBeenCalled();
+
+    let event = {
+      detail : {
+        value: group
+      }
+    }
+
+    component.onGroupSelect(event);
+
+    fixture.detectChanges();
+
+    expect(spyOnGroupSelect).toHaveBeenCalled();
+    expect(component.groupSelected).toBeTruthy();
+
+    //Expects
+    let updateGroupButton = el.query(By.css('#updateGroup'));
+    let deleteGroupButton = el.query(By.css('#deleteGroup'));
+
+    expect(updateGroupButton.nativeElement.disabled).toBeFalsy();
+    expect(deleteGroupButton.nativeElement.disabled).toBeFalsy();
+  });
+
   it('when group is selected, users group should apear in list',   () => {
     //Get group test data
     let group = testService.getGroupByName('Group1');
@@ -106,9 +162,18 @@ describe('UserManagementComponent', () => {
 
     //Check if users retrive correctly
     let usersList = el.query(By.css('#usersList'));
+
     expect(userStorageService._usersGroup.getValue().size).toBe(4);
+    //Ver filas
     expect(usersList.nativeElement.children.length).toBe(5);
+    //Ver columnas
+    expect(usersList.nativeElement.children[1].children.length).toBe(4);
+    expect(usersList.nativeElement.children[2].children.length).toBe(4);
+    expect(usersList.nativeElement.children[3].children.length).toBe(4);
+    expect(usersList.nativeElement.children[4].children.length).toBe(4);
   });
+
+
 
   it('delete user should delete user from list', () => {
     let spyOnClickDelete = spyOn(component, 'onClickDelete').and.callThrough();
@@ -173,6 +238,7 @@ describe('UserManagementComponent', () => {
     //Add users to addUserList
     let users = testService.getUsersByGroupId(group._id);
     let user =  users[0];
+
     userStorageService._usersWithoutGroup.next(userStorageService._usersWithoutGroup.getValue().push(user));
 
     //Select user to add
@@ -213,158 +279,38 @@ describe('UserManagementComponent', () => {
     expect(userSelect.nativeElement.value).toEqual(currentUser);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-
-  it('at start no group is selected', () => {
-    let groupSelect =  el.query(By.css('#selectGroup'));
-    expect(component.currentGroup).toBeNull();
-
-    expect(groupSelect.nativeElement.value).toBeNull();
-
-
-
-  });
-
-  it('at start delete group button is disabled', () => {
-    let addGroup = el.query(By.css('#addGroup'));
-
-    expect(addGroup.properties['disabled']).toBeFalsy();
-  });
-
-  it('at start add group button is enabled', () => {
-    let deleteGroup = el.query(By.css('#deleteGroup'));
-
-    expect(deleteGroup.properties['disabled']).toBeTruthy();
-  });
-
-  it('when group is selected, users group should apear in list',   () => {
-    //Get group test data
-    let group = testService.getGroupByName('Group1');
-
-    let users = testService.getUsersByGroupId(group._id);
-
-    let spyOnGroupSelect = spyOn(component, 'onGroupSelect').and.callThrough();
-
-    expect(spyOnGroupSelect).not.toHaveBeenCalled();
-
-    let event = {
-      detail : {
-        value: group
-      }
-    }
-
-    component.onGroupSelect(event);
-
-    expect(spyOnGroupSelect).toHaveBeenCalled();
-
-    //Mock the http request
-    const reqUsers = httpTestingController.expectOne(userStorageService.API_URL + '/api/users/getByGroup' + group._id);
-    reqUsers.flush({
-      message: "Success",
-      users: users
-    });
-
-    fixture.detectChanges();
-
-    //Check if users retrive correctly
-    let usersList = el.query(By.css('#usersList'));
-    expect(userStorageService._usersGroup.getValue().size).toBe(4);
-    expect(usersList.nativeElement.children.length).toBe(4);
-  });
 
   it('add group show add group form', () => {
-    let addGroup = el.query(By.css('#addGroup'));
+    let addGroupButton = el.query(By.css('#addGroup'));
 
-    expect(el.query(By.css('#newGroupForm'))).toBeFalsy();
-    expect(component.add).toBeFalsy();
+    expect(el.query(By.css('#addGroupComponent'))).toBeFalsy();
+    expect(component.addGroupClicked).toBeFalsy();
 
-    addGroup.nativeElement.click();
+    addGroupButton.nativeElement.click();
 
-    expect(el.query(By.css('#newGroupForm'))).toBeTruthy();
-    expect(component.add).toBeTruthy();
+    expect(el.query(By.css('#addGroupComponent'))).toBeTruthy();
+    expect(component.addGroupClicked).toBeTruthy();
+    expect(component.updateGroupClicked).toBeFalsy();
   });
 
-  it('validations and enabled/disabled buttons of new group form', () => {
-    let addGroup = el.query(By.css('#addGroup'));
-    let name = component.form.controls['name'];
+  it('update group show update group form', () => {
+    let updateGroupButton = el.query(By.css('#updateGroup'));
 
-    addGroup.nativeElement.click();
+    expect(el.query(By.css('#updateGroupComponent'))).toBeFalsy();
+    expect(component.updateGroupClicked).toBeFalsy();
 
-    let addGroupButton = el.query(By.css('#addGroupButton'));
+    updateGroupButton.nativeElement.click();
 
-    expect(addGroupButton.nativeElement.disabled).toBeTruthy();
-
-    name.setValue('');
-    fixture.detectChanges();
-    expect(name.hasError('required')).toBe(true);
-
-    expect(addGroupButton.nativeElement.disabled).toBeTruthy();
-
-    name.setValue('Test');
-    fixture.detectChanges();
-
-    expect(addGroupButton.nativeElement.disabled).toBeFalsy();
-  });
-
-  it('back button should hide group form', () => {
-    let addGroup = el.query(By.css('#addGroup'));
-
-    addGroup.nativeElement.click();
-
-    let backGroupButton = el.query(By.css('#backGroupButton'));
-
-    expect(backGroupButton.nativeElement.disabled).toBeFalsy();
-
-    backGroupButton.nativeElement.click();
-
-    expect(el.query(By.css('#newGroupForm'))).toBeFalsy();
-    expect(el.query(By.css('#addGroupButton'))).toBeFalsy();
-    expect(el.query(By.css('#backGroupButton'))).toBeFalsy();
-  });
-
-  it('add group should add group to list', () => {
-    //Get the form field
-    let name = component.form.controls['name'];
-
-    //Spy functions, should call through because we are going to spy the http call and the observable with mock data
-    let addGroupSpy = spyOn(component, 'addGroup').and.callThrough();
-    let createGroupSpy = spyOn(groupStorageService, 'createGroup').and.callThrough();
-
-    //Define mock data
-    let groupMockName = 'TestGroup';
-
-    //Complete form
-    name.setValue(groupMockName);
-
-    //SpyMethods to not have been colled yet
-    expect(addGroupSpy).not.toHaveBeenCalled();
-    expect(createGroupSpy).not.toHaveBeenCalled();
-
-    //Call spy method addGroup
-    component.addGroup();
-
-    //SpyMethods should have been called
-    expect(addGroupSpy).toHaveBeenCalled();
-    expect(createGroupSpy).toHaveBeenCalled();
-
-    //Mock the http request
-    const reqUsers = httpTestingController.expectOne(groupStorageService.API_URL + '/api/groups/add');
-
-    reqUsers.flush({
-      message: "Success"
-    });
-
-    //Check if groups retrive correctly
-    expect(groupStorageService._groups.getValue().get(0).name).toBe(groupMockName);
+    expect(el.query(By.css('#updateGroupComponent'))).toBeTruthy();
+    expect(component.addGroupClicked).toBeFalsy();
+    expect(component.updateGroupClicked).toBeTruthy();
   });
 
   it('delete group should delete group from list', () => {
     let deleteGroupSpy = spyOn(groupStorageService, 'deleteGroup').and.callThrough();
 
     //Create mock group
-    let groupMock = new Group('TestGroup');
+    let groupMock = testService.getGroupByName('Group1');
 
     //Push mock group to gorup list
     groupStorageService._groups.next(groupStorageService._groups.getValue().push(groupMock));
@@ -374,7 +320,7 @@ describe('UserManagementComponent', () => {
 
     //Call delete group
     component.currentGroup = groupMock;
-    component.onClickDelete();
+    component.onClickDeleteGroup();
 
     expect(deleteGroupSpy).toHaveBeenCalled();
 

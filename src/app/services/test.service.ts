@@ -70,13 +70,40 @@ export class TestService {
         return groups.find(group => group.name === groupName) as Group;
     }
 
-    //To implement
     getUsersByGroupId(groupId: string): User[]{
-        return users.filter(user => user.groups[0].groupId === groupId) as unknown as User[];
+        let resUsers : User[] = [];
+
+        users.forEach(user => {
+            let groupFind = false;
+            user.groups.forEach(group => {
+                if(group.groupId === groupId){
+                    groupFind = true;
+                }
+            });
+
+            if(groupFind){
+                resUsers.push(user as unknown as User);
+            }
+        });
+
+        return resUsers;
     }
 
-    getUsersWithoutGroup(): User[]{
-        return users.filter(user => user.groups === null) as unknown as User[];
+    getUsersWithoutGroup(groupId: string): User[]{
+        let resUsers : User[] = [];
+        users.forEach(user => {
+            let groupFind = false;
+            user.groups.forEach(group => {
+                if(group.groupId === groupId){
+                    groupFind = true;
+                }
+            });
+
+            if(!groupFind){
+                resUsers.push(user as unknown as User);
+            }
+        });
+        return resUsers;
     }
 
     getTasksByGroupId(groupId: string): Task[]{

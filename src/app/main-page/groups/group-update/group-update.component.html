@@ -5,7 +5,7 @@
   </ion-item>
 
 
-  <ion-button id="registerButton" type="submit" [disabled]="!formUpdateGroup.valid">Update</ion-button>
+  <ion-button id="updateButton" type="submit" [disabled]="!formUpdateGroup.valid || !formUpdateGroup.dirty">Update</ion-button>
 </form>
 
 

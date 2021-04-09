@@ -30,7 +30,7 @@
               <ion-col>Delete</ion-col>
             </ion-row>
 
-            <ion-row *ngFor="let user of (userStorage._usersGroup | async); index as i">
+            <ion-row *ngFor="let user of (userStorage._usersGroup | async); index as i" (click)="onUserSelect(user)">
               <ion-col>{{ user.name }}</ion-col>
               <ion-col>{{ user.secondName }}</ion-col>
               <ion-col>{{ user.mail }}</ion-col>
@@ -49,7 +49,7 @@
           <ion-col>
             <ion-item>
               <ion-label>{{currentUser.name}}</ion-label>
-              <ion-select id="selectUser" okText="Okay" cancelText="Dismiss" (ionChange)="onUserSelect($event)" [value]="currentUser">
+              <ion-select id="selectUser" okText="Okay" cancelText="Dismiss" (ionChange)="onAddUserSelect($event)" [value]="currentUser">
                 <ion-select-option *ngFor="let user of (userStorage._usersWithoutGroup | async)" [value]="user">{{user.name}}</ion-select-option>
               </ion-select>
             </ion-item>
@@ -63,6 +63,7 @@
       <ion-col>
         <app-group-update *ngIf="updateGroupClicked" [group]="currentGroup" id="updateGroupComponent"></app-group-update>
         <app-group-add *ngIf="addGroupClicked" id="addGroupComponent"></app-group-add>
+        <app-user-update *ngIf="userSelected" [user]="currentUser" id="updateUserComponent"></app-user-update>
       </ion-col>
 
     </ion-row>

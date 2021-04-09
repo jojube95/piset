@@ -69,7 +69,6 @@ describe('MainPageComponent', () => {
     const onClickHistory = spyOn(component, 'onClickHistory').and.callThrough();
     const onClickTaskManagement = spyOn(component, 'onClickTaskManagement').and.callThrough();
     const onClickUserManagement = spyOn(component, 'onClickUserManagement').and.callThrough();
-    const onClickGroupManagement = spyOn(component, 'onClickGroupManagement').and.callThrough();
     const onClickTest = spyOn(component, 'onClickTest').and.callThrough();
     const onClickUserInfo = spyOn(component, 'onClickUserInfo').and.callThrough();
     const onClickUserSettings = spyOn(component, 'onClickUserSettings').and.callThrough();
@@ -89,7 +88,6 @@ describe('MainPageComponent', () => {
     expect(onClickHistory).not.toHaveBeenCalled();
     expect(onClickTaskManagement).not.toHaveBeenCalled();
     expect(onClickUserManagement).not.toHaveBeenCalled();
-    expect(onClickGroupManagement).not.toHaveBeenCalled();
     expect(onClickTest).not.toHaveBeenCalled();
     expect(onClickUserInfo).not.toHaveBeenCalled();
     expect(onClickUserSettings).not.toHaveBeenCalled();
@@ -114,11 +112,6 @@ describe('MainPageComponent', () => {
     fixture.detectChanges();
     expect(onClickUserManagement).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalledWith(['/main/admin/userManagement']);
-
-    clickGroupManagement.nativeElement.click();
-    fixture.detectChanges();
-    expect(onClickGroupManagement).toHaveBeenCalled();
-    expect(router.navigate).toHaveBeenCalledWith(['/main/admin/groupManagement']);
 
     clickTest.nativeElement.click();
     fixture.detectChanges();

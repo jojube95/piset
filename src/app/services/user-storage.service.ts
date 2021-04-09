@@ -36,8 +36,8 @@ export class UserStorageService {
     );
   }
 
-  getUsersWithoutGroup() {
-    return this.http.get<{message: string, users: any}>(this.API_URL + '/api/users/getWithoutGroup').subscribe(
+  getUsersWithoutGroup(group: Group) {
+    return this.http.get<{message: string, users: any}>(this.API_URL + '/api/users/getWithoutGroup' + group._id).subscribe(
       res => {
         let users = (<Object[]>res.users).map((user: any) =>
             new User(user.mail, user.password, user.name, user.secondName, user.admin, user.groups, user.achivements, user._id)
