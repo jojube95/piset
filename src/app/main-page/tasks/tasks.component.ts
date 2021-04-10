@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {Group} from '../../model/group';
 import {User} from '../../model/user';
 import {UserStorageService} from '../../services/user-storage.service';
-import {Task} from '../../model/task';
 import {TaskStorageService} from '../../services/task-storage.service';
 import {GroupStorageService} from '../../services/group-storage.service';
+import {StateStorageService} from '../../services/state-storage.service';
 
 @Component({
   selector: 'app-tasks',
@@ -13,7 +13,6 @@ import {GroupStorageService} from '../../services/group-storage.service';
 })
 export class TasksComponent implements OnInit {
   selectedUser: User;
-  selectedTask: Task;
   selectedGroup: Group;
 
   loggedUser: User;
@@ -22,7 +21,8 @@ export class TasksComponent implements OnInit {
 
   loading = true;
 
-  constructor(private groupStorage: GroupStorageService, private userStorage: UserStorageService, private taskStorage: TaskStorageService) {
+  constructor(private groupStorage: GroupStorageService, private userStorage: UserStorageService, private taskStorage: TaskStorageService,
+              private stateStorage : StateStorageService) {
 
   }
 
@@ -32,8 +32,8 @@ export class TasksComponent implements OnInit {
 
     if(this.loggedUser.groups.length > 0 && this.loggedUser.groups != null){
       this.isUserInGroup = true;
-      //Select first group??
-      //Retrieve all user tasks??
+      //Get all tasks group
+      this.taskStorage.getUserGroupsTasks(this.loggedUser.groups);
 
     }
     else {
@@ -42,9 +42,10 @@ export class TasksComponent implements OnInit {
   }
 
   onGroupSelect(event){
-    let group = event.detail.value;
+    let group = event.detail.value.group;
+    this.selectedGroup = group;
+    this.selectedUser = undefined;
     this.userStorage.getUsersGroup(group);
-
   }
 
   onUserSelect(event){

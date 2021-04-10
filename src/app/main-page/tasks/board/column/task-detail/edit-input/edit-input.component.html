@@ -1,2 +1,0 @@
-<div *ngIf='!editMode' (dblclick)='doubleClick()' class='cell'>{{ data }}</div>
-<input *ngIf='editMode' #input (focusout)="onFocusOut()" [(ngModel)]='data' class='cellInput' appAutofocus (focusout)="editMode=false">

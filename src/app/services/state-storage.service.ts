@@ -13,7 +13,9 @@ export class StateStorageService {
   private API_URL = environment.API_URL;
   public _states: BehaviorSubject<List<State>> = new BehaviorSubject(List([]));
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+      this.getStates();
+  }
 
 
   getStates() {

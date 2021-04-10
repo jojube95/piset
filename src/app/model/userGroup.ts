@@ -1,11 +1,11 @@
+import {Group} from './group';
+
 export class UserGroup {
-    groupId: string;
-    groupName: string;
+    group: Group;
     groupAdmin: boolean;
 
-    constructor(groupId: string, groupName: string, groupAdmin: boolean) {
-        this.groupId = groupId;
-        this.groupName = groupName;
+    constructor(group: Group, groupAdmin: boolean) {
+        this.group = group;
         this.groupAdmin = groupAdmin;
     }
 }

@@ -4,6 +4,7 @@ import {Group} from '../model/group';
 import {List} from 'immutable';
 import {HttpClient} from "@angular/common/http";
 import { environment } from '../../environments/environment';
+import {UserStorageService} from './user-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,18 +14,18 @@ export class GroupStorageService {
   public _groups: BehaviorSubject<List<Group>> = new BehaviorSubject(List([]));
 
   constructor(private http: HttpClient) {
-    this.loadGroups();
+    this.getGroups();
   }
 
   get groups(){
     return new Observable(fn => this._groups.subscribe(fn));
   }
 
-  loadGroups() {
+  getGroups() {
     this.http.get<{message: string, groups: any}>(this.API_URL + '/api/groups/get').subscribe(res => {
         let groups = (<Object[]>res.groups).map((group: any) =>
           new Group(group.name, group._id));
-          console.log(groups);
+
         this._groups.next(List(groups));
       },
       err => console.log("Error retrieving Todos")

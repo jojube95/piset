@@ -45,7 +45,7 @@ export class TaskAddComponent implements OnInit {
   onAdd(){
     if(this.formAddTask.valid){
       let task = new Task(this.formAddTask.controls['name'].value, this.formAddTask.controls['description'].value, this.group._id,
-          null, null, this.formAddTask.controls['dateIni'].value, this.formAddTask.controls['dateEnd'].value,
+          this.group.name, null, null, this.formAddTask.controls['dateIni'].value, this.formAddTask.controls['dateEnd'].value,
           this.formAddTask.controls['estimatedTime'].value, new State(this.formAddTask.controls['state'].value));
 
       this.taskStorage.addTaskToGroup(task);

@@ -10,7 +10,7 @@
           <ion-item>
             <ion-label>Groups</ion-label>
             <ion-select id="groupSelect" value="unselected" okText="Okay" cancelText="Dismiss" (ionChange)="onGroupSelect($event)">
-              <ion-select-option *ngFor="let group of (groupStorage._groups | async)" [value]="group" >{{group.name}}</ion-select-option>
+              <ion-select-option *ngFor="let userGroup of (userStorage.getCurrentUser().groups)" [value]="userGroup" >{{userGroup.group.name}}</ion-select-option>
             </ion-select>
           </ion-item>
         </ion-col>
@@ -27,7 +27,16 @@
       </ion-row>
 
       <ion-row>
-        <app-board></app-board>
+        <div class="board">
+
+          <div class="board-wrapper">
+            <div class="board-columns" cdkDropListGroup><!-- cdkDropListGroup-->
+              <app-column class="board-column" *ngFor="let state of (stateStorage._states | async)" [state]="state" [group]="selectedGroup" [user]="selectedUser"></app-column>
+            </div>
+
+          </div>
+
+        </div>
       </ion-row>
     </ion-grid>
   </div>

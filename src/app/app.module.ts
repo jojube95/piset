@@ -26,10 +26,12 @@ import {TaskAddComponent} from './main-page/tasks/task-add/task-add.component';
 import {GroupAddComponent} from './main-page/groups/group-add/group-add.component';
 import {GroupUpdateComponent} from './main-page/groups/group-update/group-update.component';
 import {UserSettingsComponent} from './main-page/user/user-settings/user-settings.component';
-import {TaskComponent} from './main-page/tasks/board/column/task/task.component';
-import {ColumnComponent} from './main-page/tasks/board/column/column.component';
-import {BoardComponent} from './main-page/tasks/board/board.component';
-import {TaskDetailComponent} from './main-page/tasks/board/column/task-detail/task-detail.component';
+import {ColumnComponent} from './main-page/tasks/column/column.component';
+import { DragDropModule} from '@angular/cdk/drag-drop';
+import { TaskFilterPipe } from './pipe/task-filter.pipe';
+import {TaskComponent} from './main-page/tasks/column/task/task.component';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
 
 @NgModule({
     declarations: [
@@ -52,25 +54,31 @@ import {TaskDetailComponent} from './main-page/tasks/board/column/task-detail/ta
         TaskAddComponent,
         GroupAddComponent,
         GroupUpdateComponent,
-        TaskComponent,
         ColumnComponent,
-        BoardComponent,
-        TaskDetailComponent
+        TaskFilterPipe,
+        TaskComponent
     ],
   entryComponents: [],
   imports: [
     BrowserModule,
     FormsModule,
+    MatDialogModule,
+    NoopAnimationsModule,
     ReactiveFormsModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    DragDropModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule {}
