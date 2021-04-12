@@ -4,6 +4,7 @@ import {TaskStorageService} from '../../../services/task-storage.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Group} from '../../../model/group';
 import {State} from '../../../model/state';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-task-add',
@@ -15,7 +16,7 @@ export class TaskAddComponent implements OnInit {
 
   @Input() group: Group;
 
-  constructor(public taskStorage: TaskStorageService, private fb: FormBuilder) {}
+  constructor(public taskStorage: TaskStorageService, public dialogRef: MatDialogRef<TaskAddComponent>, private fb: FormBuilder) {}
 
 
   ngOnInit() {
@@ -50,5 +51,9 @@ export class TaskAddComponent implements OnInit {
 
       this.taskStorage.addTaskToGroup(task);
     }
+  }
+
+  onClickClose() {
+    this.dialogRef.close();
   }
 }

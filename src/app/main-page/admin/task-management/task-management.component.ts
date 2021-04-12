@@ -4,6 +4,9 @@ import {Task} from '../../../model/task';
 import {GroupStorageService} from '../../../services/group-storage.service';
 import {TaskStorageService} from '../../../services/task-storage.service';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {TaskUpdateComponent} from '../../tasks/task-update/task-update.component';
+import {TaskAddComponent} from '../../tasks/task-add/task-add.component';
 
 @Component({
   selector: 'app-task-management',
@@ -24,7 +27,7 @@ export class TaskManagementComponent implements OnInit {
   formAddTask: FormGroup;
   formUpdateTask: FormGroup;
 
-  constructor(public groupStorage: GroupStorageService, public taskStorage: TaskStorageService, private fb: FormBuilder) { }
+  constructor(public groupStorage: GroupStorageService, public taskStorage: TaskStorageService, private matDialog: MatDialog, private fb: FormBuilder) { }
 
   ngOnInit() {
     //Set control variables
@@ -54,6 +57,7 @@ export class TaskManagementComponent implements OnInit {
     this.taskSelected = true;
     this.addTask = false;
     this.currentTask = task;
+    this.openModalTaskUpdate(task);
   }
 
   onUpdateTask(){
@@ -91,6 +95,29 @@ export class TaskManagementComponent implements OnInit {
   onClickAdd() {
     this.addTask = true;
     this.taskSelected = false;
+    this.openModalTaskAdd();
+  }
+
+  openModalTaskUpdate(task: Task) {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = true;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "400px";
+    dialogConfig.width = "600px";
+    dialogConfig.data = task;
+
+    this.matDialog.open(TaskUpdateComponent, dialogConfig);
+  }
+
+  openModalTaskAdd() {
+    const dialogConfig = new MatDialogConfig();
+    // The user can't close the dialog by clicking outside its body
+    dialogConfig.disableClose = true;
+    dialogConfig.id = "modal-component";
+    dialogConfig.height = "400px";
+    dialogConfig.width = "600px";
+    this.matDialog.open(TaskAddComponent, dialogConfig);
   }
 
 }

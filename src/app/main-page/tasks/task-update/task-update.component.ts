@@ -1,7 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {Task} from '../../../model/task';
 import {TaskStorageService} from '../../../services/task-storage.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-task-update',
@@ -9,11 +10,9 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./task-update.component.scss'],
 })
 export class TaskUpdateComponent implements OnInit {
-  @Input() task: Task;
-
   formUpdateTask: FormGroup;
 
-  constructor(public taskStorage: TaskStorageService, private fb: FormBuilder) {}
+  constructor(public taskStorage: TaskStorageService, private fb: FormBuilder, public dialogRef: MatDialogRef<TaskUpdateComponent>, @Inject(MAT_DIALOG_DATA) public task: any) {}
 
 
   ngOnInit() {
@@ -56,5 +55,9 @@ export class TaskUpdateComponent implements OnInit {
     this.task.state.name = this.formUpdateTask.controls['state'].value;
 
     this.taskStorage.updateTask(this.task);
+  }
+
+  onClickClose() {
+    this.dialogRef.close();
   }
 }

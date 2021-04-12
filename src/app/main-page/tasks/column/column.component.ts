@@ -25,12 +25,12 @@ export class ColumnComponent implements OnInit {
 
   }
 
-  openModalTaskDetail(task: Task) {
+  openModalTaskUpdate(task: Task) {
     const dialogConfig = new MatDialogConfig();
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = true;
     dialogConfig.id = "modal-component";
-    dialogConfig.height = "300px";
+    dialogConfig.height = "400px";
     dialogConfig.width = "600px";
     dialogConfig.data = task;
 
@@ -42,9 +42,8 @@ export class ColumnComponent implements OnInit {
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = true;
     dialogConfig.id = "modal-component";
-    dialogConfig.height = "300px";
+    dialogConfig.height = "400px";
     dialogConfig.width = "600px";
-    dialogConfig.data = this.state;
     this.matDialog.open(TaskAddComponent, dialogConfig);
   }
 
