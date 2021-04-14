@@ -3,9 +3,11 @@ import {BehaviorSubject} from 'rxjs';
 import {List} from 'immutable';
 import {Group} from '../model/group';
 import {History} from '../model/history';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {User} from '../model/user';
 import { environment } from '../../environments/environment';
+import {UserGroup} from '../model/userGroup';
+import {Task} from '../model/task';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +15,30 @@ import { environment } from '../../environments/environment';
 export class HistoryStorageService {
     private API_URL = environment.API_URL;
     public _histories: BehaviorSubject<List<History>> = new BehaviorSubject(List([]));
+    public _historiesGroups: BehaviorSubject<List<History>> = new BehaviorSubject(List([]));
     public _userHistory: BehaviorSubject<List<History>> = new BehaviorSubject(List([]));
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
+
+    getUserGroupsHistories(userGroups: UserGroup[]) {
+        let params = new HttpParams().set('userGroups', JSON.stringify(userGroups));
+
+        return this.http.get<{message: string, histories: any}>(this.API_URL + '/api/histories/getByUserGroups', {params: params}).subscribe(
+            res => {
+                let histories = (<Object[]>res.histories).map((history: any) =>
+                    new History(history.taskId, history.taskName, history.userId, history.userName, history.groupId, history.groupName, history.date, history.action, history.time, history._id));
+                this._historiesGroups.next(List(histories));
+
+            },
+            err => console.log("Error retrieving Todos")
+        );
+    }
 
     getUserHistories(user: User) {
         return this.http.get<{message: string, histories: any}>(this.API_URL + '/api/histories/getByUser' + user._id).subscribe(
             res => {
               let histories = (<Object[]>res.histories).map((history: any) =>
-                  new History(history.taskId, history.taskName, history.userId, history.userName, history.groupId, history.groupName, history.date, history.action, history._id));
+                  new History(history.taskId, history.taskName, history.userId, history.userName, history.groupId, history.groupName, history.date, history.action, history.time, history._id));
               this._userHistory.next(List(histories));
             },
             err => console.log("Error retrieving histories")
@@ -32,7 +49,7 @@ export class HistoryStorageService {
         return this.http.get<{message: string, histories: any}>(this.API_URL + '/api/histories/getByGroup' + group._id).subscribe(
             res => {
                 let histories = (<Object[]>res.histories).map((history: any) =>
-                    new History(history.taskId, history.taskName, history.userId, history.userName, history.groupId, history.groupName, history.date, history.action, history._id));
+                    new History(history.taskId, history.taskName, history.userId, history.userName, history.groupId, history.groupName, history.date, history.action, history.time, history._id));
                 this._histories.next(List(histories));
             },
             err => console.log("Error retrieving Todos")

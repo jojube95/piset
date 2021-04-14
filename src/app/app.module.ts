@@ -32,6 +32,7 @@ import { TaskFilterPipe } from './pipe/task-filter.pipe';
 import {TaskComponent} from './main-page/tasks/column/task/task.component';
 import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { HistoryFilterPipe } from './pipe/history-filter.pipe';
 
 @NgModule({
     declarations: [
@@ -56,7 +57,9 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-b
         GroupUpdateComponent,
         ColumnComponent,
         TaskFilterPipe,
-        TaskComponent
+        HistoryFilterPipe,
+        TaskComponent,
+        HistoryFilterPipe
     ],
   entryComponents: [],
   imports: [
@@ -69,7 +72,7 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-b
     AppRoutingModule,
     HttpClientModule,
     DragDropModule,
-    BrowserAnimationsModule,
+    BrowserAnimationsModule
   ],
   providers: [
     StatusBar,

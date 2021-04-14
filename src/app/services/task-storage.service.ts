@@ -61,7 +61,6 @@ export class TaskStorageService {
   }
 
   updateTask(updatedTask: Task){
-    console.log(updatedTask);
     this.http.post(this.API_URL + '/api/tasks/update', {task: updatedTask}).subscribe(response => {
       let tasks: List<Task> = this._tasksGroups.getValue();
       let index = tasks.findIndex((task) => task._id === updatedTask._id);

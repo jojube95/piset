@@ -20,6 +20,7 @@ export class History{
         this.groupName = groupName;
         this.date = date;
         this.action = action;
+        this.time = time;
         this._id = _id || null;
     }
 }

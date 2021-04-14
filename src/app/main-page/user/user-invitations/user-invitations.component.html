@@ -1,17 +1,9 @@
-<ion-header>
-  Invitations
-</ion-header>
-
-
 <ion-content *ngIf="!loading" class="ion-padding">
 
     <ion-grid>
       <ion-row>
         <ion-col>
           <ion-label>Group invited</ion-label>
-        </ion-col>
-        <ion-col>
-          <ion-label>User invited</ion-label>
         </ion-col>
         <ion-col>
           <ion-label>Accept</ion-label>
@@ -23,10 +15,7 @@
 
       <ion-row *ngFor="let invitation of (invitationStorage._userInvitations | async)">
         <ion-col>
-          <ion-label>{{ invitation.invitedGroupName }}</ion-label>
-        </ion-col>
-        <ion-col>
-          <ion-label>{{ invitation.senderMail }}</ion-label>
+          <ion-label>{{ invitation.groupName }}</ion-label>
         </ion-col>
         <ion-col>
           <ion-button (click)="acceptInvitation(invitation)">Accept</ion-button>

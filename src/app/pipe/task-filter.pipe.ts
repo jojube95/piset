@@ -15,7 +15,7 @@ export class TaskFilterPipe implements PipeTransform {
 
 
     value.forEach(element => {
-      if((element.state._id == state._id) && ((group == undefined) || (element.groupId == group._id)) && ((user == undefined) || (element.userId == user._id)))
+      if(((state == undefined) || (element.state._id == state._id)) && ((group == undefined) || (element.groupId == group._id)) && ((user == undefined) || (element.userId == user._id)))
 
         filtered.push(element);
 

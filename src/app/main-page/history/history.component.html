@@ -1,36 +1,78 @@
-<ion-header>
-  History
-</ion-header>
+<ion-content *ngIf="!loading" class="ion-padding">
+  <div *ngIf="!isUserInGroup">
+    <ion-label id="withoutGroupLabel">User don't have a group</ion-label>
+  </div>
 
-<ion-content class="ion-padding">
-  <ion-grid>
-    <ion-row>
+  <div *ngIf="isUserInGroup">
 
-      <ion-col>
-        <ion-item>
-          <ion-datetime displayFormat="MMMM YYYY" [min]="minDate.toISOString()" [max]="maxDate.toISOString()" [value]="currentDate.toISOString()" (ionChange)="onDateFilterChange($event)"></ion-datetime>
-        </ion-item>
-      </ion-col>
+      <ion-grid>
+        <ion-row>
 
-    </ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Group</ion-label>
+              <ion-select id="groupSelect" placeholder="Select group" value="unselected" okText="Okay" cancelText="Dismiss" (ionChange)="onGroupSelect($event)">
+                <ion-select-option value="any">Any</ion-select-option>
+                <ion-select-option *ngFor="let userGroup of (userStorage.getCurrentUser().groups)" [value]="userGroup" >{{userGroup.group.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
 
-    <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>Task</ion-label>
+              <ion-select id="taskSelect" placeholder="Select task" value="unselected" okText="Okay" cancelText="Dismiss" (ionChange)="onTaskSelect($event)">
+                <ion-select-option value="any">Any</ion-select-option>
+                <ion-select-option *ngFor="let taskGroup of (taskStorage._tasksGroups | async | taskFilter : undefined:selectedGroup:selectedUser)" [value]="taskGroup" >{{taskGroup.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
 
-      <ion-col>
-        <ion-grid>
-          <ion-row>
-            <ion-col>Date start</ion-col>
-            <ion-col>Date end</ion-col>
-            <ion-col>Subtask</ion-col>
-          </ion-row>
-          <ion-row *ngFor="let history of (historyStorage._userHistory | async | dateFilter : [currentDate]); index as i">
-            <ion-col>{{ history.dateIni.toString() | date:'dd/MM/yyyy'}}</ion-col>
-            <ion-col>{{ history.dateFin.toString() | date:'dd/MM/yyyy' }}</ion-col>
-            <ion-col>{{ history.taskName }}</ion-col>
-          </ion-row>
-        </ion-grid>
-      </ion-col>
-    </ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label>User</ion-label>
+              <ion-select id="userSelect" placeholder="Select user" [value]="selectedUser" okText="Okay" cancelText="Dismiss" (ionChange)="onUserSelect($event)">
+                <ion-select-option value="any">Any</ion-select-option>
+                <ion-select-option *ngFor="let user of (userStorage._usersGroup | async)" [value]="user" >{{user.name}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
 
-  </ion-grid>
+          <ion-col>
+            <ion-item>
+              <ion-datetime displayFormat="MMMM YYYY" placeholder="Date" (ionChange)="onDateFilterChange($event)"></ion-datetime>
+            </ion-item>
+          </ion-col>
+
+        </ion-row>
+
+        <ion-row>
+
+          <ion-col>
+            <ion-grid>
+              <ion-row>
+                <ion-col>Task</ion-col>
+                <ion-col>User</ion-col>
+                <ion-col>Date</ion-col>
+                <ion-col>Action</ion-col>
+                <ion-col>Time</ion-col>
+              </ion-row>
+              <ion-row *ngFor="let history of (historyStorage._historiesGroups | async| historyFilter : selectedGroup:selectedUser:selectedTask:selectedDate); index as i">
+                <ion-col>{{ history.taskName }}</ion-col>
+                <ion-col>{{ history.userName }}</ion-col>
+                <ion-col>{{ history.date.toString() | date:'dd/MM/yyyy'}}</ion-col>
+                <ion-col>{{ history.action }}</ion-col>
+                <ion-col>{{ history.time }}</ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-col>
+        </ion-row>
+
+      </ion-grid>
+  </div>
 </ion-content>
+
+<ion-content *ngIf="loading" class="ion-padding">
+  <app-loading-spiner></app-loading-spiner>
+</ion-content>
+

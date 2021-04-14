@@ -19,10 +19,10 @@ export class InvitationStorageService {
   }
 
   loadInvitations(user: User) {
-    return this.http.get<{message: string, invitations: any}>(this.API_URL + '/api/invitations/getInvitations' + user._id).subscribe(
+    return this.http.get<{message: string, invitations: any}>(this.API_URL + '/api/invitations/getByUser' + user._id).subscribe(
         res => {
           let invitations = (<Object[]>res.invitations).map((invitation: any) =>
-              new Invitation(invitation._id, invitation.userId, invitation.groupId, invitation.groupName));
+              new Invitation(invitation.groupId, invitation.groupName, invitation.userId, invitation.userName, invitation._id));
           this._userInvitations.next(List(invitations));
         },
         err => console.log("Error retrieving Invitations")
