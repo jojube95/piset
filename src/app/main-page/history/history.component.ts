@@ -23,7 +23,7 @@ export class HistoryComponent implements OnInit {
 
   loading = true;
 
-  constructor(public userStorage: UserStorageService, public historyStorage: HistoryStorageService, private taskStorage: TaskStorageService) {
+  constructor(public userStorage: UserStorageService, public historyStorage: HistoryStorageService, public taskStorage: TaskStorageService) {
 
   }
 

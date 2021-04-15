@@ -21,8 +21,8 @@ export class TasksComponent implements OnInit {
 
   loading = true;
 
-  constructor(private groupStorage: GroupStorageService, private userStorage: UserStorageService, private taskStorage: TaskStorageService,
-              private stateStorage : StateStorageService) {
+  constructor(private groupStorage: GroupStorageService, public userStorage: UserStorageService, private taskStorage: TaskStorageService,
+              public stateStorage : StateStorageService) {
 
   }
 

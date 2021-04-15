@@ -8,7 +8,7 @@ import {environment} from '../../../../environments/environment';
   styleUrls: ['./test.component.scss'],
 })
 export class TestComponent implements OnInit {
-  constructor(private testService: TestService) { }
+  constructor(public testService: TestService) { }
 
   ngOnInit() {}
 

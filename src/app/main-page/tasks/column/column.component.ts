@@ -19,7 +19,7 @@ export class ColumnComponent implements OnInit {
   @Input() group: Group;
   @Input() user: User;
 
-  constructor(private matDialog: MatDialog, private taskStorageService: TaskStorageService) { }
+  constructor(private matDialog: MatDialog, public taskStorageService: TaskStorageService) { }
 
   ngOnInit(): void {
 

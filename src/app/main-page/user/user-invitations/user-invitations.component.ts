@@ -15,7 +15,7 @@ export class UserInvitationsComponent implements OnInit {
   form: FormGroup;
   selectedGroup: Group;
 
-  constructor(private invitationStorage: InvitationStorageService, private userStorage: UserStorageService, private fb: FormBuilder) { }
+  constructor(public invitationStorage: InvitationStorageService, private userStorage: UserStorageService, private fb: FormBuilder) { }
 
   ngOnInit() {
     this.form = this.fb.group({
