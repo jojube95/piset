@@ -9,8 +9,7 @@
     "build": "ng build --configuration=${environment}",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build --aot --prod --configuration=${environment}"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
