@@ -1,5 +1,5 @@
 export const environment = {
-  environment: 'test',
+  environment: 'prod',
   production: true,
   API_URL: 'https://piset.herokuapp.com'
 };
