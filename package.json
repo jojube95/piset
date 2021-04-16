@@ -6,8 +6,9 @@
   "scripts": {
     "ng": "ng",
     "start": "node server.js",
-    "build": "ng build --configuration=${environment} --build-optimizer=false",
+    "build": "ng build --configuration=${environment}",
     "test": "ng test",
+    "test:gitHubActions": "ng test --browsers=ChromeHeadless --watch=false --code-coverage",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
