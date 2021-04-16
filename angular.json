@@ -104,6 +104,9 @@
             "production": {
               "browserTarget": "app:build:production"
             },
+            "test": {
+              "browserTarget": "app:build:test"
+            },
             "ci": {
               "progress": false
             }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, NgForm, Validators} from '@angular/forms';
 import {AuthService} from '../auth.service';
 import {Router} from '@angular/router';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-sign-in',
@@ -10,6 +11,7 @@ import {Router} from '@angular/router';
 })
 export class SignInComponent implements OnInit {
   form: FormGroup;
+  environment = environment;
 
   constructor(private authService: AuthService, private router: Router, private fb: FormBuilder) { }
 
