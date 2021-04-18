@@ -5,6 +5,7 @@ import {TestService} from './test.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Task} from '../model/task';
+import {State} from '../model/state';
 
 describe('TaskStorageService', () => {
   let service: TaskStorageService;
@@ -77,7 +78,8 @@ describe('TaskStorageService', () => {
   it('addTaskToGroup', () => {
     //Get mock data
     let mockGroup = testService.getGroupByName('Group1');
-    let mockTask = new Task('Task5', null, mockGroup._id);
+
+    let mockTask = new Task('Task5', 'Task5Desc', mockGroup._id, mockGroup.name);
 
     //Call service method
     service.addTaskToGroup(mockTask);
@@ -114,7 +116,7 @@ describe('TaskStorageService', () => {
     service._tasksGroup.next(service._tasksGroup.getValue().push(mockTasks[3]));
 
     //Call service method
-    service.deleteTaskFromGroup(mockGroup, mockTaskDeleted);
+    service.deleteTaskFromGroup(mockTaskDeleted);
 
     //Create the mockCall
     const reqTasks = httpTestingController.expectOne(service['API_URL'] + '/api/tasks/deleteFromGroup');

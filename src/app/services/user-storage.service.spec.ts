@@ -114,7 +114,7 @@ describe('UserStorageService', () => {
     let mockUsers = testService.getUsersWithoutGroup(mockGroup._id);
     let mockGroups = mockUsers[0].groups[0];
     //Call service method
-    service.getUsersWithoutGroup(new Group(mockGroups.groupName, mockGroups.groupId) );
+    service.getUsersWithoutGroup(new Group(mockGroups.group.name, mockGroups.group._id) );
 
     //Create the mockCall
     const reqUsers = httpTestingController.expectOne(service['API_URL'] + '/api/users/getWithoutGroup');

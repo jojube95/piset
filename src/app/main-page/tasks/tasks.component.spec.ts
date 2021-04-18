@@ -82,22 +82,22 @@ describe('TasksComponent', () => {
 
   it('show user current group', () => {
     //Initialy user logged is user1@user.com
-    expect(component.loggedUser.groups[0].groupName).toBe('Group1');
+    expect(component.loggedUser.groups[0].group.name).toBe('Group1');
     expect(el.query(By.css('#withGroupLabel')).nativeElement.textContent).toBe("Group: Group1");
     });
 
   it('show user list of current user group', () => {
     //Initialy user logged is user1@user.com
     //Get users group mock data
-    let mockUsersGroup = testService.getUsersByGroupId(component.loggedUser.groups[0].groupId);
+    let mockUsersGroup = testService.getUsersByGroupId(component.loggedUser.groups[0].group._id);
 
     //userStorageService.getUsersGroup(new Group(component.loggedUser.groupId, null, null));
 
-    expect(getUsersGroupSpy).toHaveBeenCalledWith(new Group('', component.loggedUser.groups[0].groupId));
+    expect(getUsersGroupSpy).toHaveBeenCalledWith(new Group('', component.loggedUser.groups[0].group._id));
     expect(getUsersGroupSpy).toHaveBeenCalled();
 
     //Mock http request
-    const reqUsers = httpTestingController.expectOne(userStorageService.API_URL + '/api/users/getByGroup' + component.loggedUser.groups[0].groupId);
+    const reqUsers = httpTestingController.expectOne(userStorageService.API_URL + '/api/users/getByGroup' + component.loggedUser.groups[0].group._id);
     reqUsers.flush({
       message: "Success",
       users: mockUsersGroup
@@ -121,8 +121,13 @@ describe('TasksComponent', () => {
     let mockUser = testService.getUserByMail('user1@user.com');
     let mockTask = testService.getTaskByUserId(mockUser._id);
 
+    let event = {
+      detail : {
+        value: mockUser
+      }
+    }
     //Call method
-    component.selectUser(mockUser);
+    component.onUserSelect(event);
 
     //Mock http request
     const reqTask = httpTestingController.expectOne(taskStorageService.API_URL + '/api/tasks/getByUser' + mockUser._id);

@@ -63,16 +63,7 @@ describe('HistoryComponent', () => {
   });
 
   it('should create with initial variables', () => {
-    expect(getCurrentUserSpy).toHaveBeenCalled();
-    expect(component.loggedUser.mail).toBe('user1@user.com');
 
-    expect(component.currentDate.getFullYear()).toEqual(currentDate.getFullYear());
-    expect(component.currentDate.getMonth()).toEqual(currentDate.getMonth());
-    expect(component.currentDate.getDay()).toEqual(currentDate.getDay());
-
-    expect(component.maxDate).toEqual(new Date(currentDate.getFullYear() + 5, 0, 0));
-    expect(component.minDate).toEqual(new Date(currentDate.getFullYear() - 5, 0, 1));
-    expect(getUserHistoriesSpy).toHaveBeenCalled();
   });
 
   xit('should populate list at start', () => {

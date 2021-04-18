@@ -38,7 +38,7 @@ describe('GroupStorageService', () => {
       service = TestBed.inject(GroupStorageService);
       testService = TestBed.inject(TestService);
       httpTestingController = TestBed.get(HttpTestingController);
-      loadGroupsSpy = spyOn(service, 'loadGroups').and.callThrough();
+      loadGroupsSpy = spyOn(service, 'getGroups').and.callThrough();
       createGroupSpy = spyOn(service, 'createGroup').and.callThrough();
       deleteGroup = spyOn(service, 'deleteGroup').and.callThrough();
 
@@ -57,7 +57,7 @@ describe('GroupStorageService', () => {
       let mockGroups = testService.getGroups();
 
       //Call service method
-      service.loadGroups();
+      service.getGroups();
 
       //Create the mockCall
       const reqGroups = httpTestingController.expectOne(service['API_URL'] + '/api/groups/get');
