@@ -1,13 +1,9 @@
 import { TestBed } from '@angular/core/testing';
-
 import { AuthService } from './auth.service';
-import {IonicModule} from '@ionic/angular';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
-import {ReactiveFormsModule} from '@angular/forms';
 import {TestService} from '../services/test.service';
 import {Router} from '@angular/router';
-import {User} from '../model/user';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -21,8 +17,11 @@ describe('AuthService', () => {
       imports: [HttpClientTestingModule, RouterTestingModule],
       providers: [TestService]
     });
-    service = TestBed.inject(AuthService);
     testService = TestBed.inject(TestService);
+
+    service = TestBed.inject(AuthService);
+    service['currentUser'] = testService.getUserByMail('user1@user.com');
+
     httpTestingController = TestBed.get(HttpTestingController);
     router = TestBed.get(Router);
     spyOn(router, 'navigate');
@@ -32,7 +31,7 @@ describe('AuthService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('signOut', () => {
+  it('signOut should cleans tokens and navigaes to signIn', () => {
     const clearAuthDataSpy = spyOn(service, 'clearAuthData');
 
     //Call signOut
@@ -103,23 +102,54 @@ describe('AuthService', () => {
     expect(router.navigate).toHaveBeenCalledWith(['/main']);
   });
 
-  it('autoAuthUser', () => {
-
-  });
-
   it('getAuthData', () => {
+    //Set mock data
+    let token = '12345';
+    let user = service['currentUser'];
 
+    localStorage.setItem('token', token);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+
+    let res = service.getAuthData();
+
+    expect(res).toEqual({token: token, currentUser: user});
+
+    localStorage.clear();
+
+    res = service.getAuthData();
+
+    expect(res).toBeUndefined();
   });
 
   it('saveAuthData', () => {
+    //Set mock data
+    let token = '12345';
+    let user = service['currentUser'];
 
+    service.saveAuthData(token, user);
+
+    expect(localStorage.getItem('token')).toEqual(token);
+    expect(localStorage.getItem('currentUser')).toEqual(JSON.stringify(user));
   });
 
   it('getCurrentUser', () => {
+    let res = service.getCurrentUser();
+
+    expect(res).toEqual(service['currentUser']);
 
   });
 
   it('isAuthenticated', () => {
+    service['token'] = '12345';
 
+    let res = service.isAuthenticated();
+
+    expect(res).toBeTruthy();
+
+    service['token'] = null;
+
+    res = service.isAuthenticated();
+
+    expect(res).toBeFalse();
   });
 });

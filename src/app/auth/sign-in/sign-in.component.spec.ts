@@ -1,6 +1,5 @@
 import {async, ComponentFixture, fakeAsync, TestBed} from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
 import { SignInComponent } from './sign-in.component';
 import {AuthService} from '../auth.service';
 import {DebugElement} from '@angular/core';
@@ -21,14 +20,10 @@ describe('SignInComponent', () => {
 
   beforeEach(async(() => {
 
-    const authServiceSpy = jasmine.createSpyObj('AuthService', ['signinUser']);
-
     TestBed.configureTestingModule({
       declarations: [ SignInComponent],
       imports: [IonicModule.forRoot(), RouterTestingModule, HttpClientTestingModule, ReactiveFormsModule],
-      providers: [
-        { provie: AuthService, useValue: authServiceSpy}
-      ]
+      providers: [AuthService]
     }).compileComponents().then(()=> {
       fixture = TestBed.createComponent(SignInComponent);
       component = fixture.componentInstance;
@@ -36,11 +31,12 @@ describe('SignInComponent', () => {
       authService = TestBed.get(AuthService);
       router = TestBed.get(Router);
       spyOn(router, 'navigate');
+      spyOn(authService, 'signinUser').and.callFake(() => {
+        router.navigate(['/main']);
+      })
       component.ngOnInit();
+      fixture.detectChanges();
     });
-
-
-
   }));
 
   it('should create', () => {
@@ -48,60 +44,89 @@ describe('SignInComponent', () => {
   });
 
   it('form invalid when empty', () => {
+    //Form shuld be invalid at start
     expect(component.form.valid).toBeFalsy();
+
+    fixture.detectChanges();
+
+    //Sign in button should be disabled
+    let signInButton = el.query(By.css('#signInButton'));
+    expect(signInButton.nativeElement.disabled).toBeTruthy();
   });
 
-  it('email field validity', ()=>{
+  it('form field validity', ()=>{
+    //Test email field validity
     let email = component.form.controls['email'];
     expect(email.valid).toBeFalsy();
 
     let errors = {};
     errors = email.errors || {};
     expect(errors['required']).toBeTruthy();
+    expect(component.form.valid).toBeFalsy();
 
     email.setValue('test');
     errors = email.errors || {};
     expect(errors['pattern']).toBeTruthy();
     expect(errors['required']).toBeFalsy();
+    expect(component.form.valid).toBeFalsy();
 
     email.setValue('test@test.com');
     errors = email.errors || {};
     expect(errors['pattern']).toBeFalsy();
     expect(errors['required']).toBeFalsy();
+    expect(component.form.valid).toBeFalsy();
 
+    //Test password field validity
+    let password = component.form.controls['password'];
+    expect(password.valid).toBeFalsy();
+    expect(component.form.valid).toBeFalsy();
+
+    let errors2 = {};
+    errors2 = password.errors || {};
+    expect(errors2['required']).toBeTruthy();
+    expect(component.form.valid).toBeFalsy();
+
+    password.setValue('test');
+    errors2 = password.errors || {};
+    expect(errors2['minlength']).toBeTruthy();
+    expect(errors2['required']).toBeFalsy();
+    expect(component.form.valid).toBeFalsy();
+
+    password.setValue('testtest');
+    errors2 = password.errors || {};
+    expect(errors2['minlength']).toBeFalsy();
+    expect(errors2['required']).toBeFalsy();
+    expect(component.form.valid).toBeTruthy();
   });
 
   it('should execute logIn service when click on signIn with user', () => {
-    // set up spies, could also call a fake method in case you don't want the API call to go through
+   // set up spies, could also call a fake method in case you don't want the API call to go through
     const signinSpy = spyOn(fixture.componentInstance, 'signIn').and.callThrough();
-    const authServiceSignInSpy = spyOn(authService, 'signinUser');
-
-    fixture.detectChanges();
 
     // make sure they haven't been called yet
     expect(signinSpy).not.toHaveBeenCalled();
-    expect(component.form.valid).toBeFalsy();
+    expect(authService.signinUser).not.toHaveBeenCalled();
 
     component.form.controls['email'].setValue('user1@user.com');
-    component.form.controls['password'].setValue('useruser')
+    component.form.controls['password'].setValue('useruser');
 
     fixture.detectChanges();
+
+    expect(component.form.valid).toBeTruthy();
+    expect(el.query(By.css('#signInButton')).nativeElement.disabled).toBeFalsy();
 
     component.signIn();
 
     fixture.detectChanges();
 
-    expect(component.form.valid).toBeTruthy();
-    expect(component.form.controls['email'].value).toBe('user1@user.com');
-    expect(component.form.controls['password'].value).toBe('useruser');
-    expect(authServiceSignInSpy).toHaveBeenCalledWith('user1@user.com', 'useruser');
+    expect(authService.signinUser).toHaveBeenCalledWith('user1@user.com', 'useruser');
+    expect(router.navigate).toHaveBeenCalledWith(['/main']);
    });
 
   it('should open register page when click sign up', () => {
     let signUpButton = el.query(By.css('#signUpButton'));
 
     signUpButton.nativeElement.click();
-    fixture.detectChanges();
 
     expect(router.navigate).toHaveBeenCalledWith(['/signUp']);
   })

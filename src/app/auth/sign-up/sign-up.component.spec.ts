@@ -1,6 +1,5 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
 import { SignUpComponent } from '../sign-up/sign-up.component';
 import {AuthService} from '../auth.service';
 import {ReactiveFormsModule} from '@angular/forms';
@@ -10,7 +9,6 @@ import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 import {By} from '@angular/platform-browser';
 import {User} from '../../model/user';
-import * as confirmedValidator from '../../ui/confirmed.validator';
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
@@ -33,6 +31,7 @@ describe('SignUpComponent', () => {
       authService = TestBed.get(AuthService);
       router = TestBed.get(Router);
       spyOn(router, 'navigate');
+      spyOn(authService, 'signupUser');
       component.ngOnInit();
       fixture.detectChanges();
     });
@@ -104,37 +103,12 @@ describe('SignUpComponent', () => {
 
     secondName.setValue('secondName');
     expect(secondName.hasError('required')).toBe(false);
-  });
 
-  it('register should be disabled when form is invalid', () => {
-    let registerButton = el.query(By.css('#registerButton'));
-
-    expect(registerButton.nativeElement.disabled).toBeTruthy();
-  });
-
-  it('register button should be enablen when form is valid', () => {
-    let registerButton = el.query(By.css('#registerButton'));
-
-    let email = component.form.controls['email'];
-    let password = component.form.controls['password'];
-    let confPassword = component.form.controls['confPassword'];
-    let name = component.form.controls['name'];
-    let secondName = component.form.controls['secondName'];
-
-    email.setValue('test@test.com');
-    password.setValue('testtest');
-    confPassword.setValue('testtest');
-    name.setValue('test');
-    secondName.setValue('test');
-
-    fixture.detectChanges();
-
-    expect(registerButton.nativeElement.disabled).toBeFalsy();
+    expect(el.query(By.css('#registerButton')).nativeElement.disabled).toBeTruthy();
   });
 
   it('click on register should call service method', () => {
     const signupSpy = spyOn(fixture.componentInstance, 'signUp').and.callThrough();
-    const authServiceSignUpSpy = spyOn(authService, 'signupUser');
 
     let registerButton = el.query(By.css('#registerButton'));
 
@@ -152,12 +126,13 @@ describe('SignUpComponent', () => {
 
     fixture.detectChanges();
 
-    component.signUp();
+    registerButton.nativeElement.click();
 
     let user = new User(component.form.value.mail,
         component.form.value.password, component.form.value.name, component.form.value.secondName, false, [], []);
 
-    expect(authServiceSignUpSpy).toHaveBeenCalledWith(user);
+    expect(signupSpy).toHaveBeenCalled();
+    expect(authService.signupUser).toHaveBeenCalledWith(user);
   });
 
   it('back button should be enabled', () => {

@@ -9,8 +9,10 @@ import users from "../../testData/users.json";
 import groups from "../../testData/groups.json";
 import tasks from "../../testData/tasks.json";
 import histories from "../../testData/histories.json";
+import invitations from "../../testData/invitations.json";
 import {User} from '../model/user';
 import {History} from '../model/history';
+import {Invitation} from '../model/invitation';
 
 @Injectable({
   providedIn: 'root'
@@ -124,5 +126,9 @@ export class TestService {
 
     getHistoriesByGroupId(groupId: string): History[]{
         return histories.filter(history => history.groupId === groupId) as unknown as History[];
+    }
+
+    getInvitationsByUserId(userId: string): Invitation[]{
+        return invitations.filter(invitation => invitation.userId === userId) as unknown as Invitation[];
     }
 }

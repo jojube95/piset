@@ -4,9 +4,7 @@ import { UserStorageService } from './user-storage.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {TestService} from './test.service';
 import {RouterTestingModule} from '@angular/router/testing';
-import {Group} from '../model/group';
 import {User} from '../model/user';
-import {List} from 'immutable';
 import {AuthService} from '../auth/auth.service';
 
 describe('UserStorageService', () => {
@@ -61,7 +59,6 @@ describe('UserStorageService', () => {
   it('updateUserProfile', () => {
     let mockUser = testService.getUserByMail('user1@user.com');
 
-
     //Call service method
     service.updateUserProfile(mockUser as User);
 
@@ -112,12 +109,12 @@ describe('UserStorageService', () => {
     //Get mock data
     let mockGroup = testService.getGroupByName('Group1');
     let mockUsers = testService.getUsersWithoutGroup(mockGroup._id);
-    let mockGroups = mockUsers[0].groups[0];
+
     //Call service method
-    service.getUsersWithoutGroup(new Group(mockGroups.group.name, mockGroups.group._id) );
+    service.getUsersWithoutGroup(mockGroup);
 
     //Create the mockCall
-    const reqUsers = httpTestingController.expectOne(service['API_URL'] + '/api/users/getWithoutGroup');
+    const reqUsers = httpTestingController.expectOne(service['API_URL'] + '/api/users/getWithoutGroup' + mockGroup._id);
 
     reqUsers.flush({
       users: mockUsers
@@ -128,7 +125,7 @@ describe('UserStorageService', () => {
     //Expect request parameters
     expect(reqUsers.request.params.keys().length).toBe(0);
     //Expect the returned data
-    expect(service._usersWithoutGroup.getValue().size).toEqual(1);
+    expect(service._usersWithoutGroup.getValue().size).toEqual(4);
     expect(service._usersWithoutGroup.getValue().get(0).mail).toEqual('admin@admin.com');
   });
 

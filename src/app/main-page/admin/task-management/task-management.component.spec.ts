@@ -10,6 +10,9 @@ import {By} from '@angular/platform-browser';
 import {Group} from '../../../model/group';
 import {ReactiveFormsModule} from '@angular/forms';
 import {TestService} from '../../../services/test.service';
+import {List} from 'immutable';
+import {MatDialogModule} from '@angular/material/dialog';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 describe('TaskManagementComponent', () => {
   let component: TaskManagementComponent;
@@ -19,13 +22,14 @@ describe('TaskManagementComponent', () => {
   let groupStorageService: any;
   let taskStorageService: any;
   let testService: any;
+  let matDialogModule: any;
 
   let httpTestingController: HttpTestingController;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ TaskManagementComponent ],
-      imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule],
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule, MatDialogModule, BrowserAnimationsModule],
       providers: [GroupStorageService, TaskStorageService, TestService]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(TaskManagementComponent);
@@ -35,6 +39,18 @@ describe('TaskManagementComponent', () => {
       taskStorageService = TestBed.get(TaskStorageService);
       httpTestingController = TestBed.get(HttpTestingController);
       testService = TestBed.get(TestService);
+      matDialogModule = TestBed.get(MatDialogModule);
+
+      spyOn(taskStorageService, 'getGroupTasks').and.callFake((group) => {
+        let gorupMock = testService.getGroupByName('Group1');
+        taskStorageService._tasksGroup.next(List(testService.getTasksByGroupId(gorupMock._id)));
+      });
+
+      spyOn(taskStorageService, 'deleteTaskFromGroup').and.callFake((deletedTask) => {
+        let gorupMock = testService.getGroupByName('Group1');
+        taskStorageService._tasksGroup.next(List(testService.getTasksByGroupId(gorupMock._id)).shift());
+      });
+
       fixture.autoDetectChanges()
       component.ngOnInit();
     });
@@ -58,14 +74,13 @@ describe('TaskManagementComponent', () => {
   it('display tasks on select group from list', () => {
     //Spy methods
     let onGroupSelectSpy = spyOn(component, 'onGroupSelect').and.callThrough();
-    let getGroupTasksSpy = spyOn(taskStorageService, 'getGroupTasks').and.callThrough();
 
     //Get mock data
     let group = testService.getGroupByName('Group1');
-    let tasks = testService.getTasksByGroupId(group._id);
 
     expect(onGroupSelectSpy).not.toHaveBeenCalled();
-    expect(getGroupTasksSpy).not.toHaveBeenCalled();
+    expect(taskStorageService.getGroupTasks).not.toHaveBeenCalled();
+
     //Call component.selectGroup
     let event = {
       detail : {
@@ -73,6 +88,7 @@ describe('TaskManagementComponent', () => {
       }
     }
     component.onGroupSelect(event);
+
     //Check component variables
     expect(component.addTask).toBeFalsy();
     expect(component.taskSelected).toBeFalsy();
@@ -81,14 +97,7 @@ describe('TaskManagementComponent', () => {
 
 
     expect(onGroupSelectSpy).toHaveBeenCalledWith(event)
-    expect(getGroupTasksSpy).toHaveBeenCalledWith(group);
-    //Mock getGroupTaks http call service with tasks
-    //Mock the http request
-    const reqUsers = httpTestingController.expectOne(taskStorageService.API_URL + '/api/tasks/getByGroup' + group._id);
-    reqUsers.flush({
-      message: "Success",
-      tasks: tasks
-    });
+    expect(taskStorageService.getGroupTasks).toHaveBeenCalledWith(group);
 
     fixture.detectChanges();
 
@@ -100,14 +109,15 @@ describe('TaskManagementComponent', () => {
 
   it('delete task and delete from list', () => {
     //Spy methods
+    let onGroupSelectSpy = spyOn(component, 'onGroupSelect').and.callThrough();
     let onClickDeleteTaskSpy = spyOn(component, 'onClickDeleteTask').and.callThrough();
-    let deleteTaskFromGroupSpy = spyOn(taskStorageService, 'deleteTaskFromGroup').and.callThrough();
 
     //Get mock data
     let group = testService.getGroupByName('Group1');
     let tasks = testService.getTasksByGroupId(group._id);
     let deleteTask = tasks[0];
 
+    //console.log(deleteTask);
     //Call component.selectGroup
     let event = {
       detail : {
@@ -115,18 +125,11 @@ describe('TaskManagementComponent', () => {
       }
     }
     component.onGroupSelect(event);
-    //Mock getGroupTaks http call service with tasks
-    //Mock the http request
-    const reqTasks = httpTestingController.expectOne(taskStorageService.API_URL + '/api/tasks/getByGroup' + group._id);
-    reqTasks.flush({
-      message: "Success",
-      tasks: tasks
-    });
 
     fixture.detectChanges();
 
     expect(onClickDeleteTaskSpy).not.toHaveBeenCalled();
-    expect(deleteTaskFromGroupSpy).not.toHaveBeenCalled();
+    expect(taskStorageService.deleteTaskFromGroup).not.toHaveBeenCalled();
 
     //Call component.deleteTask
     component.onClickDeleteTask(deleteTask)
@@ -137,16 +140,7 @@ describe('TaskManagementComponent', () => {
     expect(component.groupSelected).toBeTruthy();
 
     expect(onClickDeleteTaskSpy).toHaveBeenCalled();
-    expect(deleteTaskFromGroupSpy).toHaveBeenCalled();
-
-    fixture.detectChanges();
-
-    //Mock deleteSubtask with mock data
-    const reqUsers = httpTestingController.expectOne(taskStorageService.API_URL + '/api/tasks/deleteFromGroup');
-    reqUsers.flush({
-      message: "Success",
-      tasks: tasks
-    });
+    expect(taskStorageService.deleteTaskFromGroup).toHaveBeenCalledWith(deleteTask);
 
     fixture.detectChanges();
 
@@ -155,7 +149,6 @@ describe('TaskManagementComponent', () => {
 
     expect(taskStorageService._tasksGroup.getValue()).not.toContain(deleteTask);
     expect(tasksList.nativeElement.children.length).toBe(3);
-
   });
 
   it('select group should enable add task button', () => {
@@ -183,6 +176,8 @@ describe('TaskManagementComponent', () => {
   });
 
   it('click on add task should open add task component', () => {
+    console.log(matDialogModule);
+    let spyOnDialog = spyOn(matDialogModule, 'open');
     //Get mock data
     let group = testService.getGroupByName('Group1');
 
@@ -206,7 +201,8 @@ describe('TaskManagementComponent', () => {
 
     expect(component.addTask).toBeTruthy();
 
-    expect(el.query(By.css('#addTaskComponent'))).toBeTruthy();
+    expect(spyOnDialog).toHaveBeenCalled();
+
   });
 
   it('click on task should open update task component', () => {

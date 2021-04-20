@@ -30,7 +30,7 @@ export class TasksComponent implements OnInit {
     this.loggedUser = this.userStorage.getCurrentUser();
     this.loading = false;
 
-    if(this.loggedUser.groups.length > 0 && this.loggedUser.groups != null){
+    if(this.loggedUser.groups != null && this.loggedUser.groups.length > 0 && this.loggedUser.groups != null){
       this.isUserInGroup = true;
       //Get all tasks group
       this.taskStorage.getUserGroupsTasks(this.loggedUser.groups);

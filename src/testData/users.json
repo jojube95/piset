@@ -1,7 +1,5 @@
 [{
-  "_id": {
-    "$oid": "5fde50609e491a29eca14546"
-  },
+  "_id": "5fde50609e491a29eca14546",
   "mail": "admin@admin.com",
   "password": "$2b$10$bSDt0f9x8ktE7PYdPdtsk.cj/koxxFlN/RGilbR6KD1JN3LUh3XN2",
   "name": "Admin",
@@ -11,9 +9,7 @@
   "groups": [],
   "achivements": []
 },{
-  "_id": {
-    "$oid": "5fde50609e491a29eca14547"
-  },
+  "_id": "5fde50609e491a29eca14547",
   "mail": "user1@user.com",
   "password": "$2b$10$0HqHTbfG6lSlwpFjXIfj0eQCge7EZDUA77cEj4/kWMqZiIpiXCwdi",
   "name": "User1",
@@ -37,9 +33,7 @@
     "currentPoints": 1
   }]
 },{
-  "_id": {
-    "$oid": "5fde50609e491a29eca14548"
-  },
+  "_id": "5fde50609e491a29eca14548",
   "mail": "user2@user.com",
   "password": "$2b$10$HX7y6VRdrrg36cxULkXJmelRLwhK2/MkIF9Lhu6KuWXZaRcodc8dS",
   "name": "User2",
@@ -65,9 +59,7 @@
     "currentPoints": 9
   }]
 },{
-  "_id": {
-    "$oid": "5fde50609e491a29eca14549"
-  },
+  "_id": "5fde50609e491a29eca14549",
   "mail": "user3@user.com",
   "password": "$2b$10$seZlCzm9ikwvkQs/6xLH7eojNY2vMT/5IcPeqxj95.gqP/.OB6qca",
   "name": "User3",
@@ -93,9 +85,7 @@
     "currentPoints": 10
   }]
 },{
-  "_id": {
-    "$oid": "5fde50609e491a29eca1454a"
-  },
+  "_id": "5fde50609e491a29eca1454a",
   "mail": "user4@user.com",
   "password": "$2b$10$moCoPvFUlqL2Yv9uNcg7m.MHSr4fk5vwFjwY0exzz0ehUmU5u9bP6",
   "name": "User4",
@@ -121,9 +111,7 @@
     "currentPoints": 20
   }]
 },{
-  "_id": {
-    "$oid": "5fde50609e491a29eca1454b"
-  },
+  "_id": "5fde50609e491a29eca1454b",
   "mail": "user5@user.com",
   "password": "$2b$10$moCoPvFUlqL2Yv9uNcg7m.MHSr4fk5vwFjwY0exzz0ehUmU5u9bP6",
   "name": "User5",
@@ -149,9 +137,7 @@
     "currentPoints": 20
   }]
 },{
-  "_id": {
-    "$oid": "5fde50609e491a29eca1454c"
-  },
+  "_id": "5fde50609e491a29eca1454c",
   "mail": "user6@user.com",
   "password": "$2b$10$moCoPvFUlqL2Yv9uNcg7m.MHSr4fk5vwFjwY0exzz0ehUmU5u9bP6",
   "name": "User6",
@@ -171,9 +157,7 @@
     "currentPoints": 1
   }]
 },{
-  "_id": {
-    "$oid": "5fde50609e491a29eca1454d"
-  },
+  "_id": "5fde50609e491a29eca1454d",
   "mail": "user7@user.com",
   "password": "$2b$10$moCoPvFUlqL2Yv9uNcg7m.MHSr4fk5vwFjwY0exzz0ehUmU5u9bP6",
   "name": "User7",

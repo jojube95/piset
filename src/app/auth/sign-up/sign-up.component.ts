@@ -43,7 +43,7 @@ export class SignUpComponent implements OnInit {
   signUp() {
     if(this.form.valid){
       const user = new User(this.form.value.mail,
-          this.form.value.password, this.form.value.name, this.form.value.secondName, false, null, null);
+          this.form.value.password, this.form.value.name, this.form.value.secondName, false, [], []);
 
       this.authService.signupUser(user);
     }

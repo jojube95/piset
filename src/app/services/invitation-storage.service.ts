@@ -4,7 +4,6 @@ import {Invitation} from '../model/invitation';
 import {List} from 'immutable';
 import {HttpClient} from "@angular/common/http";
 import { environment } from '../../environments/environment';
-import {UserStorageService} from './user-storage.service';
 import {User} from '../model/user';
 
 @Injectable({
@@ -14,9 +13,7 @@ export class InvitationStorageService {
   private API_URL = environment.API_URL;
   public _userInvitations: BehaviorSubject<List<Invitation>> = new BehaviorSubject(List([]));
 
-  constructor(private http: HttpClient, private userStorageService: UserStorageService) {
-    this.loadInvitations(this.userStorageService.getCurrentUser());
-  }
+  constructor(private http: HttpClient) {}
 
   loadInvitations(user: User) {
     return this.http.get<{message: string, invitations: any}>(this.API_URL + '/api/invitations/getByUser' + user._id).subscribe(

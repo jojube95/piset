@@ -1,5 +1,4 @@
-import {fakeAsync, TestBed, tick} from '@angular/core/testing';
-
+import {TestBed} from '@angular/core/testing';
 import { HistoryStorageService } from './history-storage.service';
 import {TestService} from './test.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
@@ -58,9 +57,8 @@ describe('HistoryStorageService', () => {
     //Expect request parameters
     expect(reqHistories.request.params.keys().length).toBe(0);
     //Expect the returned data
-    expect(service._userHistory.getValue().size).toEqual(2);
+    expect(service._userHistory.getValue().size).toEqual(1);
     expect(service._userHistory.getValue().get(0).taskName).toEqual('Task1');
-    expect(service._userHistory.getValue().get(1).taskName).toEqual('Task2');
   });
 
   it('getGroupHistories', () => {
@@ -83,15 +81,11 @@ describe('HistoryStorageService', () => {
     //Expect request parameters
     expect(reqHistories.request.params.keys().length).toBe(0);
     //Expect the returned data
-    expect(service._histories.getValue().size).toEqual(8);
+    expect(service._histories.getValue().size).toEqual(4);
     expect(service._histories.getValue().get(0).taskName).toEqual('Task1');
     expect(service._histories.getValue().get(1).taskName).toEqual('Task2');
     expect(service._histories.getValue().get(2).taskName).toEqual('Task3');
     expect(service._histories.getValue().get(3).taskName).toEqual('Task4');
-    expect(service._histories.getValue().get(4).taskName).toEqual('Task5');
-    expect(service._histories.getValue().get(5).taskName).toEqual('Task6');
-    expect(service._histories.getValue().get(6).taskName).toEqual('Task7');
-    expect(service._histories.getValue().get(7).taskName).toEqual('Task8');
   });
 
   it('createHistory', () => {
@@ -101,7 +95,7 @@ describe('HistoryStorageService', () => {
     service.createHistory(mockHistory as unknown as History);
 
     //Create the mockCall
-    const reqHistory = httpTestingController.expectOne(service['API_URL'] + '/api/penalties/addPenalty');
+    const reqHistory = httpTestingController.expectOne(service['API_URL'] + '/api/histories/addPenalty');
 
     reqHistory.flush({
       message: 'Succes'
@@ -117,5 +111,9 @@ describe('HistoryStorageService', () => {
     expect(service._histories.getValue().size).toEqual(1);
     expect(service._histories.getValue().get(0).taskName).toEqual('Task1');
   });
+
+  afterEach(() => {
+    httpTestingController.verify();
+  })
 
 });

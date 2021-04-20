@@ -5,7 +5,6 @@ import {TestService} from './test.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Task} from '../model/task';
-import {State} from '../model/state';
 
 describe('TaskStorageService', () => {
   let service: TaskStorageService;
@@ -78,7 +77,6 @@ describe('TaskStorageService', () => {
   it('addTaskToGroup', () => {
     //Get mock data
     let mockGroup = testService.getGroupByName('Group1');
-
     let mockTask = new Task('Task5', 'Task5Desc', mockGroup._id, mockGroup.name);
 
     //Call service method
@@ -95,12 +93,11 @@ describe('TaskStorageService', () => {
     expect(reqTasks.request.method).toEqual('POST');
     //Expect request body
     expect(reqTasks.request.body.task).toEqual(mockTask);
-    expect(reqTasks.request.body.groupId).toEqual(mockGroup._id);
     //Expect request parameters
     expect(reqTasks.request.params.keys().length).toBe(0);
     //Expect the returned data
-    expect(service._tasksGroup.getValue().size).toEqual(1);
-    expect(service._tasksGroup.getValue().get(0).name).toEqual('Task5');
+    expect(service._tasksGroups.getValue().size).toEqual(1);
+    expect(service._tasksGroups.getValue().get(0).name).toEqual('Task5');
   });
 
   it('deleteTaskFromGroup', () => {
@@ -110,10 +107,10 @@ describe('TaskStorageService', () => {
     let mockTaskDeleted = mockTasks[0];
 
     //Populate initial list with mock data
-    service._tasksGroup.next(service._tasksGroup.getValue().push(mockTasks[0]));
-    service._tasksGroup.next(service._tasksGroup.getValue().push(mockTasks[1]));
-    service._tasksGroup.next(service._tasksGroup.getValue().push(mockTasks[2]));
-    service._tasksGroup.next(service._tasksGroup.getValue().push(mockTasks[3]));
+    service._tasksGroups.next(service._tasksGroups.getValue().push(mockTasks[0]));
+    service._tasksGroups.next(service._tasksGroups.getValue().push(mockTasks[1]));
+    service._tasksGroups.next(service._tasksGroups.getValue().push(mockTasks[2]));
+    service._tasksGroups.next(service._tasksGroups.getValue().push(mockTasks[3]));
 
     //Call service method
     service.deleteTaskFromGroup(mockTaskDeleted);
@@ -128,15 +125,14 @@ describe('TaskStorageService', () => {
     //Expect request method
     expect(reqTasks.request.method).toEqual('POST');
     //Expect request body
-    expect(reqTasks.request.body.groupId).toEqual(mockGroup._id);
     expect(reqTasks.request.body.taskId).toEqual(mockTaskDeleted._id);
     //Expect request parameters
     expect(reqTasks.request.params.keys().length).toBe(0);
     //Expect the returned data
-    expect(service._tasksGroup.getValue().size).toEqual(3);
-    expect(service._tasksGroup.getValue().get(0).name).toEqual('Task2');
-    expect(service._tasksGroup.getValue().get(1).name).toEqual('Task3');
-    expect(service._tasksGroup.getValue().get(2).name).toEqual('Task4');
+    expect(service._tasksGroups.getValue().size).toEqual(3);
+    expect(service._tasksGroups.getValue().get(0).name).toEqual('Task2');
+    expect(service._tasksGroups.getValue().get(1).name).toEqual('Task3');
+    expect(service._tasksGroups.getValue().get(2).name).toEqual('Task4');
   });
 
   it('updateTask', () => {
@@ -157,7 +153,6 @@ describe('TaskStorageService', () => {
     expect(reqTasks.request.method).toEqual('POST');
     //Expect request body
     expect(reqTasks.request.body.task).toEqual(mockTask);
-    expect(reqTasks.request.body.groupId).toEqual(mockGroup._id);
     //Expect request parameters
     expect(reqTasks.request.params.keys().length).toBe(0);
   });

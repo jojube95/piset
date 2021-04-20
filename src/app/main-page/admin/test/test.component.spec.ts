@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
 import { TestComponent} from './test.component';
 import {DebugElement} from '@angular/core';
 import {TestService} from '../../../services/test.service';
@@ -60,8 +59,8 @@ describe('TestComponent', () => {
 
     restoreDesa.nativeElement.click();
 
-    expect(componentRestoreDatabaseSpy).toHaveBeenCalledWith('desa');
-    expect(serviceRestoreDatabaseSpy).toHaveBeenCalledWith('desa');
+    expect(componentRestoreDatabaseSpy).toHaveBeenCalledWith('piset-desa');
+    expect(serviceRestoreDatabaseSpy).toHaveBeenCalledWith('piset-desa');
   });
 
   it('restore test database', () => {
@@ -72,15 +71,15 @@ describe('TestComponent', () => {
 
     restoreTest.nativeElement.click();
 
-    expect(componentRestoreDatabaseSpy).toHaveBeenCalledWith('test');
-    expect(serviceRestoreDatabaseSpy).toHaveBeenCalledWith('test');
+    expect(componentRestoreDatabaseSpy).toHaveBeenCalledWith('piset-test');
+    expect(serviceRestoreDatabaseSpy).toHaveBeenCalledWith('piset-test');
 
 
   });
 
   it('export desa database', () => {
     let componentExportDatabaseSpy = spyOn(component, 'exportDatabase').and.callFake(() => {
-      testService.exportDatabase('desa');
+      testService.exportDatabase('piset-desa');
     });
 
     let serviceExportDatabaseSpy = spyOn(testService, 'exportDatabase');
@@ -89,14 +88,14 @@ describe('TestComponent', () => {
 
     exportDesa.nativeElement.click();
 
-    expect(componentExportDatabaseSpy).toHaveBeenCalledWith('desa');
-    expect(serviceExportDatabaseSpy).toHaveBeenCalledWith('desa');
+    expect(componentExportDatabaseSpy).toHaveBeenCalledWith('piset-desa');
+    expect(serviceExportDatabaseSpy).toHaveBeenCalledWith('piset-desa');
 
   });
 
   it('export test database', () => {
     let componentExportDatabaseSpy = spyOn(component, 'exportDatabase').and.callFake(() => {
-      testService.exportDatabase('test');
+      testService.exportDatabase('piset-test');
     });
 
     let serviceExportDatabaseSpy = spyOn(testService, 'exportDatabase');
@@ -105,8 +104,8 @@ describe('TestComponent', () => {
 
     exportTest.nativeElement.click();
 
-    expect(componentExportDatabaseSpy).toHaveBeenCalledWith('test');
-    expect(serviceExportDatabaseSpy).toHaveBeenCalledWith('test');
+    expect(componentExportDatabaseSpy).toHaveBeenCalledWith('piset-test');
+    expect(serviceExportDatabaseSpy).toHaveBeenCalledWith('piset-test');
   });
 
   it('next week', () => {

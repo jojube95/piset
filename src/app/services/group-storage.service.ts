@@ -4,7 +4,6 @@ import {Group} from '../model/group';
 import {List} from 'immutable';
 import {HttpClient} from "@angular/common/http";
 import { environment } from '../../environments/environment';
-import {UserStorageService} from './user-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,9 +12,7 @@ export class GroupStorageService {
   private API_URL = environment.API_URL;
   public _groups: BehaviorSubject<List<Group>> = new BehaviorSubject(List([]));
 
-  constructor(private http: HttpClient) {
-    this.getGroups();
-  }
+  constructor(private http: HttpClient) { }
 
   get groups(){
     return new Observable(fn => this._groups.subscribe(fn));
