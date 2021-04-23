@@ -58,7 +58,7 @@ export class HistoryStorageService {
 
 
     createHistory(history: History) {
-        this.http.post(this.API_URL + '/api/penalties/addPenalty', {history: history}).subscribe(response => {
+        this.http.post(this.API_URL + '/api/histories/addHistory', {history: history}).subscribe(response => {
             this._histories.next(this._histories.getValue().push(history));
         });
     }

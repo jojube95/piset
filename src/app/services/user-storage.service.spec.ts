@@ -21,8 +21,6 @@ describe('UserStorageService', () => {
   let deleteUserFromGroupSpy: any;
   let getUserByMailSpy: any;
 
-  let getCurrentUserSpy: any;
-
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule, RouterTestingModule],
@@ -32,10 +30,6 @@ describe('UserStorageService', () => {
     testService = TestBed.inject(TestService);
     httpTestingController = TestBed.get(HttpTestingController);
     authService = TestBed.get(AuthService);
-
-    getCurrentUserSpy = spyOn(authService, 'getCurrentUser').and.callFake(() => {
-      return testService.getUserByMail('user1@user.com');
-    });
 
     updateUserProfileSpy = spyOn(service, 'updateUserProfile').and.callThrough();
     getUsersGroupSpy = spyOn(service, 'getUsersGroup').and.callThrough();

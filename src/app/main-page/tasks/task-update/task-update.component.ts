@@ -12,7 +12,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 export class TaskUpdateComponent implements OnInit {
   formUpdateTask: FormGroup;
 
-  constructor(public taskStorage: TaskStorageService, private fb: FormBuilder, public dialogRef: MatDialogRef<TaskUpdateComponent>, @Inject(MAT_DIALOG_DATA) public task: any) {}
+  constructor(public taskStorage: TaskStorageService, private fb: FormBuilder,
+              public dialogRef: MatDialogRef<TaskUpdateComponent>, @Inject(MAT_DIALOG_DATA) public task: any) {}
 
 
   ngOnInit() {

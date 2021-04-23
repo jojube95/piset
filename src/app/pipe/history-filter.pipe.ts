@@ -13,16 +13,18 @@ export class HistoryFilterPipe implements PipeTransform {
     let selectedTask = args[2];
     let selectedDate = args[3];
 
-
-
     value.forEach(element => {
-      console.log('element.date: ' + element.date);
-      console.log('selectedDate: ' + selectedDate);
+      if(((selectedGroup == undefined) || (element.groupId == selectedGroup._id))
+          && ((selectedUser == undefined) || (element.userId == selectedUser._id))
+          && ((selectedTask == undefined) || (element.taskId == selectedTask._id))
+          && ((selectedDate == undefined) || (new Date(element.date).getMonth() == selectedDate.getMonth() && new Date(element.date).getFullYear() == selectedDate.getFullYear()))){
 
-      if(((selectedGroup == undefined) || (element.groupId == selectedGroup._id)) && ((selectedUser == undefined) || (element.userId == selectedUser._id))
-          && ((selectedTask == undefined) || (element.taskId == selectedTask._id)) && ((selectedDate == undefined) || (element.date == selectedDate)))
 
         filtered.push(element);
+      }
+
+
+
 
     });
 

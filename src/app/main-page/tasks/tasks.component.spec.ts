@@ -10,9 +10,8 @@ import {TestService} from '../../services/test.service';
 import {TaskStorageService} from '../../services/task-storage.service';
 import {By} from '@angular/platform-browser';
 import {Group} from '../../model/group';
-import {User} from '../../model/user';
 
-describe('TasksComponent', () => {
+xdescribe('TasksComponent', () => {
   let component: TasksComponent;
   let fixture: ComponentFixture<TasksComponent>;
   let el: DebugElement;

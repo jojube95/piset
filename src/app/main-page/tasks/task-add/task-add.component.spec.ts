@@ -3,15 +3,13 @@ import { IonicModule } from '@ionic/angular';
 
 import { TaskAddComponent } from './task-add.component';
 import {By} from '@angular/platform-browser';
-import {List} from 'immutable';
 import {DebugElement} from '@angular/core';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {ReactiveFormsModule} from '@angular/forms';
-import {GroupStorageService} from '../../../services/group-storage.service';
 import {TaskStorageService} from '../../../services/task-storage.service';
 import {TestService} from '../../../services/test.service';
-import {TaskManagementComponent} from '../../admin/task-management/task-management.component';
+import {MatDialogModule, MatDialogRef} from '@angular/material/dialog';
 
 describe('TaskAddComponent', () => {
   let component: TaskAddComponent;
@@ -22,22 +20,30 @@ describe('TaskAddComponent', () => {
   let taskStorageService: any;
   let testService: any;
 
-  let httpTestingController: HttpTestingController;
+
+  const mockDialogRef = {
+    close: jasmine.createSpy('close'),
+    open: jasmine.createSpy('open')
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ TaskAddComponent ],
-      imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule],
-      providers: [TaskStorageService, TestService]
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule, ReactiveFormsModule, MatDialogModule],
+      providers: [TaskStorageService, TestService, {
+        provide: MatDialogRef,
+        useValue: mockDialogRef
+      }]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(TaskAddComponent);
-      component = fixture.componentInstance;
-      el = fixture.debugElement;
-      taskStorageService = TestBed.get(TaskStorageService);
-      httpTestingController = TestBed.get(HttpTestingController);
       testService = TestBed.get(TestService);
-      fixture.autoDetectChanges()
-      component.ngOnInit();
+      taskStorageService = TestBed.get(TaskStorageService);
+
+      component = fixture.componentInstance;
+      component.group = testService.getGroupByName('Group1');
+
+      el = fixture.debugElement;
+      fixture.detectChanges();
     });
 
 
@@ -47,72 +53,120 @@ describe('TaskAddComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('add task form validation and button enabled/disabled', () => {
-    //Get mock data
-    let group = testService.getGroupByName('Group1');
-
+  it('form validation and button enabled/disabled', () => {
+    let mockTask = testService.getTaskByUserId(testService.getUserByMail('user1@user.com')._id);
 
     //Check form validation
-    let submitAddTask = el.query(By.css('#submitAddTask'));
-    let taskName = component.formAddTask.controls['taskName'];
+    let name = component.formAddTask.controls['name'];
+    let description = component.formAddTask.controls['description'];
+    let dateIni = component.formAddTask.controls['dateIni'];
+    let dateEnd = component.formAddTask.controls['dateEnd'];
+    let estimatedTime = component.formAddTask.controls['estimatedTime'];
+    let state = component.formAddTask.controls['state'];
 
-    taskName.setValue('');
+    name.setValue('');
     fixture.detectChanges();
-    expect(taskName.hasError('required')).toBe(true);
-    expect(submitAddTask.nativeElement.disabled).toBeTruthy();
 
-    taskName.setValue('Test');
+    expect(name.hasError('required')).toBe(true);
+
+    expect(el.query(By.css('#addButton')).nativeElement.disabled).toBeTruthy();
+
+    name.setValue(mockTask.name);
     fixture.detectChanges();
 
-    expect(taskName.hasError('required')).toBe(false);
-    expect(submitAddTask.nativeElement.disabled).toBeFalsy();
+    expect(name.hasError('required')).toBe(false);
+    expect(el.query(By.css('#addButton')).nativeElement.disabled).toBeTruthy();
+
+
+    description.setValue('');
+    fixture.detectChanges();
+
+    expect(description.hasError('required')).toBe(true);
+    expect(el.query(By.css('#addButton')).nativeElement.disabled).toBeTruthy();
+
+    description.setValue(mockTask.description);
+    fixture.detectChanges();
+
+    expect(description.hasError('required')).toBe(false);
+    expect(el.query(By.css('#addButton')).nativeElement.disabled).toBeTruthy();
+
+
+
+    dateIni.setValue('');
+    fixture.detectChanges();
+
+    expect(dateIni.hasError('required')).toBe(true);
+    expect(el.query(By.css('#addButton')).nativeElement.disabled).toBeTruthy();
+
+    dateIni.setValue(mockTask.dateIni);
+    fixture.detectChanges();
+
+    expect(dateIni.hasError('required')).toBe(false);
+    expect(el.query(By.css('#addButton')).nativeElement.disabled).toBeTruthy();
+
+
+    dateEnd.setValue('');
+    fixture.detectChanges();
+
+    expect(dateEnd.hasError('required')).toBe(true);
+    expect(el.query(By.css('#addButton')).nativeElement.disabled).toBeTruthy();
+
+    dateEnd.setValue(mockTask.dateEnd);
+    fixture.detectChanges();
+
+    expect(dateEnd.hasError('required')).toBe(false);
+    expect(el.query(By.css('#addButton')).nativeElement.disabled).toBeTruthy();
+
+
+    estimatedTime.setValue('');
+    fixture.detectChanges();
+
+    expect(estimatedTime.hasError('required')).toBe(true);
+    expect(el.query(By.css('#addButton')).nativeElement.disabled).toBeTruthy();
+
+    estimatedTime.setValue(mockTask.estimatedTime);
+    fixture.detectChanges();
+
+    expect(estimatedTime.hasError('required')).toBe(false);
+    expect(el.query(By.css('#addButton')).nativeElement.disabled).toBeTruthy();
+
+
+    state.setValue('');
+    fixture.detectChanges();
+
+    expect(state.hasError('required')).toBe(true);
+    expect(el.query(By.css('#addButton')).nativeElement.disabled).toBeTruthy();
+
+    state.setValue(mockTask.state.name);
+    fixture.detectChanges();
+
+    expect(state.hasError('required')).toBe(false);
+    expect(el.query(By.css('#addButton')).nativeElement.disabled).toBeFalsy();
   });
 
 
 
 
   it('add task should add task on list', () => {
-    //Spy methods
-    let addTaskSubtasksSpy = spyOn(taskStorageService, 'addTaskToGroup').and.callThrough();
+    let onAddSpy = spyOn(component, 'onAdd').and.callThrough();
+    let addTaskToGroupSpy = spyOn(taskStorageService, 'addTaskToGroup');
 
-    //Get group mock data
-    let group = testService.getGroupByName('Group1');
+    //Set form data
+    let mockTask = testService.getTaskByUserId(testService.getUserByMail('user1@user.com')._id);
 
-    //Get tasks mock data
-    let tasks = testService.getTasksByGroupId(group._id);
+    component.formAddTask.controls['name'].setValue(mockTask.name);
+    component.formAddTask.controls['description'].setValue(mockTask.description);
+    component.formAddTask.controls['dateIni'].setValue(mockTask.dateIni);
+    component.formAddTask.controls['dateEnd'].setValue(mockTask.dateEnd);
+    component.formAddTask.controls['estimatedTime'].setValue(mockTask.estimatedTime);
+    component.formAddTask.controls['state'].setValue(mockTask.state.name);
 
-    //Set taskName mock data
-    let mockTaskName = 'TestTask';
+    expect(onAddSpy).not.toHaveBeenCalled();
+    expect(addTaskToGroupSpy).not.toHaveBeenCalled();
 
-    //Push the tasks to the _taskGroup on the service
-    taskStorageService._tasksGroup.next(List(tasks));
+    component.onAdd();
 
-    //Click add task
-    fixture.detectChanges();
-
-    //Set form addTask
-    let submitAddTask = el.query(By.css('#submitAddTask'));
-    let taskName = component.formAddTask.controls['taskName'];
-
-    taskName.setValue(mockTaskName);
-    fixture.detectChanges();
-
-    //Call addTask service
-    expect(addTaskSubtasksSpy).not.toHaveBeenCalled();
-
-    expect(addTaskSubtasksSpy).toHaveBeenCalled();
-
-    //Mock the http call with the taskAdd mock data
-    const reqUsers = httpTestingController.expectOne(taskStorageService.API_URL + '/api/tasks/addToGroup');
-    reqUsers.flush({
-      message: "Success"
-    });
-
-    fixture.detectChanges();
-
-    //Check the data is added to the observable and list
-    expect(taskStorageService._tasksGroup.getValue().size).toBe(5)
-    let tasksList = el.query(By.css('#tasksList'));
-    expect(tasksList.nativeElement.children.length).toBe(5);
+    expect(onAddSpy).toHaveBeenCalled();
+    expect(addTaskToGroupSpy).toHaveBeenCalled();
   });
 });

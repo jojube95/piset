@@ -95,7 +95,7 @@ describe('HistoryStorageService', () => {
     service.createHistory(mockHistory as unknown as History);
 
     //Create the mockCall
-    const reqHistory = httpTestingController.expectOne(service['API_URL'] + '/api/histories/addPenalty');
+    const reqHistory = httpTestingController.expectOne(service['API_URL'] + '/api/histories/addHistory');
 
     reqHistory.flush({
       message: 'Succes'

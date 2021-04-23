@@ -16,15 +16,23 @@
   "secondName": "User1",
   "admin": false,
   "__v": 0,
-  "groups": [{
-    "groupId": "5fde502a9e491a29eca14528",
-    "groupName": "Group1",
-    "groupAdmin": true
-  },
-    {"groupId": "5fde502a9e491a29eca1452a",
-      "groupName": "Group2",
-      "groupAdmin": false
-    }],
+  "groups": [
+    {
+      "groupAdmin": true,
+      "group": {
+        "_id": "5fde502a9e491a29eca14528",
+        "name": "Group1"
+      }
+    },
+    {
+      "groupAdmin": false,
+      "group": {
+        "_id": "5fde502a9e491a29eca1452a",
+        "name": "Group2"
+      }
+    }
+  ]
+  ,
   "achivements": [{
     "achivementId": "5fde502a9e491a29eca20004",
     "achivementName": "Create group",
@@ -41,9 +49,11 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "groupId": "5fde502a9e491a29eca14528",
-    "groupName": "Group1",
-    "groupAdmin": false
+    "groupAdmin": false,
+    "group": {
+      "_id": "5fde502a9e491a29eca14528",
+      "name": "Group1"
+    }
   }],
   "achivements": [{
     "achivementId": "5fde502a9e491a29eca20001",
@@ -67,9 +77,11 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "groupId": "5fde502a9e491a29eca14528",
-    "groupName": "Group1",
-    "groupAdmin": false
+    "groupAdmin": false,
+    "group": {
+      "_id": "5fde502a9e491a29eca14528",
+      "name": "Group1"
+    }
   }],
   "achivements": [{
     "achivementId": "5fde502a9e491a29eca20001",
@@ -93,9 +105,11 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "groupId": "5fde502a9e491a29eca14528",
-    "groupName": "Group1",
-    "groupAdmin": false
+    "groupAdmin": false,
+    "group": {
+      "_id": "5fde502a9e491a29eca14528",
+      "name": "Group1"
+    }
   }],
   "achivements": [{
     "achivementId": "5fde502a9e491a29eca20001",
@@ -119,9 +133,11 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "groupId": "5fde502a9e491a29eca1452a",
-    "groupName": "Group2",
-    "groupAdmin": true
+    "groupAdmin": true,
+    "group": {
+      "_id": "5fde502a9e491a29eca1452a",
+      "name": "Group2"
+    }
   }],
   "achivements": [{
     "achivementId": "5fde502a9e491a29eca20001",
@@ -145,9 +161,11 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "groupId": "5fde502a9e491a29eca1452a",
-    "groupName": "Group2",
-    "groupAdmin": false
+    "groupAdmin": false,
+    "group": {
+      "_id": "5fde502a9e491a29eca1452a",
+      "name": "Group2"
+    }
   }],
   "achivements": [{
     "achivementId": "5fde502a9e491a29eca20003",
@@ -165,9 +183,11 @@
   "admin": false,
   "__v": 0,
   "groups": [{
-    "groupId": "5fde502a9e491a29eca1452a",
-    "groupName": "Group2",
-    "groupAdmin": false
+    "groupAdmin": false,
+    "group": {
+      "_id": "5fde502a9e491a29eca1452a",
+      "name": "Group2"
+    }
   }],
   "achivements": [{
     "achivementId": "5fde502a9e491a29eca20001",

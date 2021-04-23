@@ -46,11 +46,13 @@ describe('UserUpdateComponent', () => {
   });
 
   it('should show user data', () =>  {
+    fixture.detectChanges();
+
     let nameInput = el.query(By.css('#name'));
     let secondNameInput = el.query(By.css('#secondName'));
 
-    expect(nameInput.nativeElement.value).toEqual('User1');
-    expect(secondNameInput.nativeElement.value).toEqual('User1');
+    expect(nameInput.nativeElement.value).toEqual(component.user.name);
+    expect(secondNameInput.nativeElement.value).toEqual(component.user.secondName);
   });
 
   it('form validation and button enable/diabled', () => {
@@ -82,40 +84,30 @@ describe('UserUpdateComponent', () => {
     expect(component.form.valid).toBeTruthy();
   });
 
-  it('change name and second name', () => {
-    //Spy updateUserProfile
+  it('click update user should call service funtion', () => {
     let onUpdateSpy = spyOn(component, 'update').and.callThrough();
-    //Spy update with callThrough
-    let updateUserProfileSpy = spyOn(userStorageService, 'updateUserProfile');
+    let updateUserSpy = spyOn(userStorageService, 'updateUserProfile');
 
-    //Click update button
-    let name = component.form.controls['name'];
-    let secondName = component.form.controls['secondName'];
-    name.setValue('name2');
-    secondName.setValue('secondName2');
-    fixture.detectChanges();
 
-    el.query(By.css('#userForm')).triggerEventHandler('ngSubmit', null);
+    expect(onUpdateSpy).not.toHaveBeenCalled();
+    expect(updateUserSpy).not.toHaveBeenCalled();
 
-    //Check if update method is called
+    component.update();
+
     expect(onUpdateSpy).toHaveBeenCalled();
-
-    //Check loggedUser variables
-    expect(component.user.name).toBe('name2');
-    expect(component.user.secondName).toBe('secondName2');
-
-    //Check if update user service is called with parameters
-    expect(updateUserProfileSpy).toHaveBeenCalledWith(component.user);
+    expect(updateUserSpy).toHaveBeenCalledWith(component.user);
   });
 
 
   afterAll(() => {
+    let onUpdateSpy = spyOn(component, 'update').and.callThrough();
     //Click update button
     let name = component.form.controls['name'];
     let secondName = component.form.controls['secondName'];
     name.setValue('User1');
     secondName.setValue('User1');
+    fixture.detectChanges();
+
+    component.update();
   });
-
-
 });

@@ -1,12 +1,11 @@
 import { TestBed } from '@angular/core/testing';
-
 import { AuthGuard } from './auth.guard';
 import { Router} from '@angular/router';
 import {RouterTestingModule} from '@angular/router/testing';
 import {AuthService} from './auth.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
 
-xdescribe('AuthGuard', () => {
+describe('AuthGuard', () => {
   let guard: AuthGuard;
 
   let authService: any;
@@ -14,9 +13,7 @@ xdescribe('AuthGuard', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [RouterTestingModule, HttpClientTestingModule],
-      providers: [
-        { AuthService}
-      ]
+      providers: [AuthService]
     });
     guard = TestBed.inject(AuthGuard);
     authService = TestBed.get(AuthService);
@@ -37,8 +34,11 @@ xdescribe('AuthGuard', () => {
   it('should navigate to login page when user not authenticated', () => {
     const authServiceIsAuthenticatedSpy = spyOn(authService, 'isAuthenticated').and.returnValue(false);
 
+    expect(authServiceIsAuthenticatedSpy).not.toHaveBeenCalled();
+
     guard.canActivate(null, null);
 
+    expect(authServiceIsAuthenticatedSpy).toHaveBeenCalled();
     expect (router.navigate).toHaveBeenCalledWith(['']);
   });
 
@@ -46,8 +46,13 @@ xdescribe('AuthGuard', () => {
     const authServiceIsAuthenticatedSpy = spyOn(authService, 'isAuthenticated').and.returnValue(true);
     const guardSpy = spyOn(guard, 'canActivate').and.callThrough();
 
-    guard.canActivate(null, null);
+    expect(authServiceIsAuthenticatedSpy).not.toHaveBeenCalled();
+    expect(guardSpy).not.toHaveBeenCalled();
 
-    expect(guardSpy).toBe(true);
+    let res = guard.canActivate(null, null);
+
+    expect(authServiceIsAuthenticatedSpy).toHaveBeenCalled();
+    expect(guardSpy).toHaveBeenCalled();
+    expect(res).toBe(true);
   });
 });

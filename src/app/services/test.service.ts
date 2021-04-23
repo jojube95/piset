@@ -78,7 +78,7 @@ export class TestService {
         users.forEach(user => {
             let groupFind = false;
             user.groups.forEach(group => {
-                if(group.groupId === groupId){
+                if(group.group._id === groupId){
                     groupFind = true;
                 }
             });
@@ -96,7 +96,7 @@ export class TestService {
         users.forEach(user => {
             let groupFind = false;
             user.groups.forEach(group => {
-                if(group.groupId === groupId){
+                if(group.group._id === groupId){
                     groupFind = true;
                 }
             });

@@ -3,7 +3,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { LoadingSpinerComponent} from './loading-spiner.component';
 
-xdescribe('LoadingSpinerComponent', () => {
+describe('LoadingSpinerComponent', () => {
   let component: LoadingSpinerComponent;
   let fixture: ComponentFixture<LoadingSpinerComponent>;
 

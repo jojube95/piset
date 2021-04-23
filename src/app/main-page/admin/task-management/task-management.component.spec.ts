@@ -117,7 +117,6 @@ describe('TaskManagementComponent', () => {
     let tasks = testService.getTasksByGroupId(group._id);
     let deleteTask = tasks[0];
 
-    //console.log(deleteTask);
     //Call component.selectGroup
     let event = {
       detail : {
@@ -175,8 +174,7 @@ describe('TaskManagementComponent', () => {
     expect(el.query(By.css('#addTask'))).toBeTruthy();
   });
 
-  it('click on add task should open add task component', () => {
-    console.log(matDialogModule);
+  xit('click on add task should open add task component', () => {
     let spyOnDialog = spyOn(matDialogModule, 'open');
     //Get mock data
     let group = testService.getGroupByName('Group1');
@@ -205,7 +203,7 @@ describe('TaskManagementComponent', () => {
 
   });
 
-  it('click on task should open update task component', () => {
+  xit('click on task should open update task component', () => {
     //Get mock data
     let group = testService.getGroupByName('Group1');
     let tasks = testService.getTasksByGroupId(group._id);
