@@ -21,44 +21,47 @@ export class HistoryStorageService {
     constructor(private http: HttpClient) { }
 
     getUserGroupsHistories(userGroups: UserGroup[]) {
-        let params = new HttpParams().set('userGroups', JSON.stringify(userGroups));
+        const params = new HttpParams().set('userGroups', JSON.stringify(userGroups));
 
-        return this.http.get<{message: string, histories: any}>(this.API_URL + '/api/histories/getByUserGroups', {params: params}).subscribe(
+        return this.http.get<{message: string, histories: any}>(this.API_URL + '/api/histories/getByUserGroups', {params}).subscribe(
             res => {
-                let histories = (<Object[]>res.histories).map((history: any) =>
-                    new History(history.taskId, history.taskName, history.userId, history.userName, history.groupId, history.groupName, history.date, history.action, history.time, history._id));
+                const histories = (res.histories as History[]).map((history: any) =>
+                    new History(history.taskId, history.taskName, history.userId, history.userName, history.groupId, history.groupName,
+                        history.date, history.action, history.time, history._id));
                 this._historiesGroups.next(List(histories));
 
             },
-            err => console.log("Error retrieving Todos")
+            err => console.log('Error retrieving Todos')
         );
     }
 
     getUserHistories(user: User) {
         return this.http.get<{message: string, histories: any}>(this.API_URL + '/api/histories/getByUser' + user._id).subscribe(
             res => {
-              let histories = (<Object[]>res.histories).map((history: any) =>
-                  new History(history.taskId, history.taskName, history.userId, history.userName, history.groupId, history.groupName, history.date, history.action, history.time, history._id));
-              this._userHistory.next(List(histories));
+                const histories = (res.histories as History[]).map((history: any) =>
+                  new History(history.taskId, history.taskName, history.userId, history.userName, history.groupId, history.groupName,
+                      history.date, history.action, history.time, history._id));
+                this._userHistory.next(List(histories));
             },
-            err => console.log("Error retrieving histories")
+            err => console.log('Error retrieving histories')
         );
     }
 
     getGroupHistories(group: Group) {
         return this.http.get<{message: string, histories: any}>(this.API_URL + '/api/histories/getByGroup' + group._id).subscribe(
             res => {
-                let histories = (<Object[]>res.histories).map((history: any) =>
-                    new History(history.taskId, history.taskName, history.userId, history.userName, history.groupId, history.groupName, history.date, history.action, history.time, history._id));
+                const histories = (res.histories as History[]).map((history: any) =>
+                    new History(history.taskId, history.taskName, history.userId, history.userName, history.groupId, history.groupName,
+                        history.date, history.action, history.time, history._id));
                 this._histories.next(List(histories));
             },
-            err => console.log("Error retrieving Todos")
+            err => console.log('Error retrieving Todos')
         );
     }
 
 
     createHistory(history: History) {
-        this.http.post(this.API_URL + '/api/penalties/addPenalty', {history: history}).subscribe(response => {
+        this.http.post(this.API_URL + '/api/histories/addHistory', {history}).subscribe(response => {
             this._histories.next(this._histories.getValue().push(history));
         });
     }

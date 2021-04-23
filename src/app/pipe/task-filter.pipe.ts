@@ -7,18 +7,19 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TaskFilterPipe implements PipeTransform {
 
   transform(value: any, ...args: any[]): any {
-    let filtered = [];
+    const filtered = [];
 
-    let state = args[0];
-    let group = args[1];
-    let user = args[2];
+    const state = args[0];
+    const group = args[1];
+    const user = args[2];
 
 
     value.forEach(element => {
-      if(((state == undefined) || (element.state._id == state._id)) && ((group == undefined) || (element.groupId == group._id)) && ((user == undefined) || (element.userId == user._id)))
+      if (((state === undefined) || (element.state._id === state._id)) && ((group === undefined)
+          || (element.groupId === group._id)) && ((user === undefined) || (element.userId === user._id))) {
 
         filtered.push(element);
-
+      }
     });
 
     return filtered;

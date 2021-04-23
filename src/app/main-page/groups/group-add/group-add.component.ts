@@ -1,10 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Group} from '../../../model/group';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {TaskStorageService} from '../../../services/task-storage.service';
 import {GroupStorageService} from '../../../services/group-storage.service';
-import {Task} from '../../../model/task';
-import {State} from '../../../model/state';
 
 @Component({
   selector: 'app-group-add',
@@ -25,8 +22,8 @@ export class GroupAddComponent implements OnInit {
   }
 
   onAdd(){
-    if(this.formAddGroup.valid){
-      let group = new Group(this.formAddGroup.controls['name'].value);
+    if (this.formAddGroup.valid){
+      const group = new Group(this.formAddGroup.controls['name'].value);
 
       this.groupStorage.createGroup(group);
     }

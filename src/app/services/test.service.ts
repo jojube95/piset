@@ -5,19 +5,21 @@ import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 import {BehaviorSubject} from 'rxjs';
 
-import users from "../../testData/users.json";
-import groups from "../../testData/groups.json";
-import tasks from "../../testData/tasks.json";
-import histories from "../../testData/histories.json";
+import users from '../../testData/users.json';
+import groups from '../../testData/groups.json';
+import tasks from '../../testData/tasks.json';
+import histories from '../../testData/histories.json';
+import invitations from '../../testData/invitations.json';
 import {User} from '../model/user';
 import {History} from '../model/history';
+import {Invitation} from '../model/invitation';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TestService {
     private API_URL = environment.API_URL;
-    public _currentDate: BehaviorSubject<Date> = new BehaviorSubject(new Date);
+    public _currentDate: BehaviorSubject<Date> = new BehaviorSubject(new Date());
 
     constructor(private http: HttpClient) { }
 
@@ -27,7 +29,7 @@ export class TestService {
             res => {
                 this._currentDate.next(res.currentDate);
             },
-            err => console.log("Error retrieving Todos")
+            err => console.log('Error retrieving Todos')
         );
     }
 
@@ -36,7 +38,7 @@ export class TestService {
             res => {
                 this._currentDate.next(res.currentDate);
             },
-            err => console.log("Error retrieving Todos")
+            err => console.log('Error retrieving Todos')
         );
     }
 
@@ -44,7 +46,7 @@ export class TestService {
         return this.http.get<{message: string, tasks: any}>(this.API_URL + '/api/test/restoreDatabase' + database).subscribe(
             res => {
             },
-            err => console.log("Error retrieving Todos")
+            err => console.log('Error retrieving Todos')
         );
       }
 
@@ -53,7 +55,7 @@ export class TestService {
         return this.http.get<{message: string, tasks: any}>(this.API_URL + '/api/test/exportDatabase' + database).subscribe(
             res => {
             },
-            err => console.log("Error retrieving Todos")
+            err => console.log('Error retrieving Todos')
         );
 
 
@@ -71,17 +73,17 @@ export class TestService {
     }
 
     getUsersByGroupId(groupId: string): User[]{
-        let resUsers : User[] = [];
+        const resUsers: User[] = [];
 
         users.forEach(user => {
             let groupFind = false;
             user.groups.forEach(group => {
-                if(group.groupId === groupId){
+                if (group.group._id === groupId){
                     groupFind = true;
                 }
             });
 
-            if(groupFind){
+            if (groupFind){
                 resUsers.push(user as unknown as User);
             }
         });
@@ -90,16 +92,16 @@ export class TestService {
     }
 
     getUsersWithoutGroup(groupId: string): User[]{
-        let resUsers : User[] = [];
+        const resUsers: User[] = [];
         users.forEach(user => {
             let groupFind = false;
             user.groups.forEach(group => {
-                if(group.groupId === groupId){
+                if (group.group._id === groupId){
                     groupFind = true;
                 }
             });
 
-            if(!groupFind){
+            if (!groupFind){
                 resUsers.push(user as unknown as User);
             }
         });
@@ -124,5 +126,9 @@ export class TestService {
 
     getHistoriesByGroupId(groupId: string): History[]{
         return histories.filter(history => history.groupId === groupId) as unknown as History[];
+    }
+
+    getInvitationsByUserId(userId: string): Invitation[]{
+        return invitations.filter(invitation => invitation.userId === userId) as unknown as Invitation[];
     }
 }

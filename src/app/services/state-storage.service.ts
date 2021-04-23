@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import {Group} from '../model/group';
 import {List} from 'immutable';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../environments/environment';
@@ -20,11 +19,11 @@ export class StateStorageService {
 
   getStates() {
     this.http.get<{message: string, states: any}>(this.API_URL + '/api/states/get').subscribe(res => {
-          let states = (<Object[]>res.states).map((state: any) =>
-              new State(state.name, state._id));
-          this._states.next(List(states));
+        const states = (res.states as State[]).map((state: any) =>
+            new State(state.name, state._id));
+        this._states.next(List(states));
         },
-        err => console.log("Error retrieving Todos")
+        err => console.log('Error retrieving Todos')
     );
   }
 }

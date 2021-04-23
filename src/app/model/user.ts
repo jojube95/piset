@@ -9,7 +9,7 @@ export class User {
   secondName: string;
   admin: boolean;
   groups: UserGroup[];
-  achivements: UserAchivement[]
+  achivements: UserAchivement[];
 
   constructor(mail: string, password: string, name: string, secondName: string, admin: boolean, groups: UserGroup[], achivements: UserAchivement[], _id?: string) {
     this.mail = mail;

@@ -24,13 +24,13 @@ export class UserUpdateComponent implements OnInit {
       secondName: ['', [
         Validators.required
       ]]
-    })
+    });
   }
 
   update() {
-    if(this.form.valid){
-      this.user.name = this.form.value.name;
-      this.user.secondName = this.form.value.secondName;
+    if (this.form.valid){
+      this.user.name = this.form.controls['name'].value;
+      this.user.secondName = this.form.controls['secondName'].value;
 
       this.userStorage.updateUserProfile(this.user);
     }

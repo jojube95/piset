@@ -1,14 +1,15 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
 import { TaskUpdateComponent } from './task-update.component';
-import {List} from 'immutable';
 import {By} from '@angular/platform-browser';
 import {DebugElement} from '@angular/core';
-import {GroupStorageService} from '../../../services/group-storage.service';
 import {TaskStorageService} from '../../../services/task-storage.service';
 import {TestService} from '../../../services/test.service';
-import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
+import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {ReactiveFormsModule} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogModule, MatDialogRef} from '@angular/material/dialog';
+import {Task} from '../../../model/task';
+import {State} from '../../../model/state';
 
 describe('TaskUpdateComponent', () => {
   let component: TaskUpdateComponent;
@@ -18,20 +19,32 @@ describe('TaskUpdateComponent', () => {
   let taskStorageService: any;
   let testService: any;
 
-  let httpTestingController: HttpTestingController;
+  const mockDialogRef = {
+    close: jasmine.createSpy('close'),
+    open: jasmine.createSpy('open')
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskUpdateComponent, HttpClientTestingModule ],
-      providers: [TaskStorageService, TestService],
-      imports: [IonicModule.forRoot()]
+      declarations: [ TaskUpdateComponent],
+      imports: [IonicModule.forRoot(), HttpClientTestingModule, ReactiveFormsModule, MatDialogModule],
+      providers: [TaskStorageService, TestService, {
+        provide: MatDialogRef,
+        useValue: mockDialogRef
+      },
+        {
+        provide: MAT_DIALOG_DATA,
+        useValue: new Task('Task1', 'Task1Des', 'g1', 'Group1', 'u1', 'User1',
+            new Date(Date.UTC(2020, 0, 1)), new Date(Date.UTC(2020, 2, 1)), 12,
+            new State('State1', 's1'), 't1')
+      }]
     }).compileComponents().then(() => {
       fixture = TestBed.createComponent(TaskUpdateComponent);
+      testService = TestBed.get(TestService);
+      taskStorageService = TestBed.get(TaskStorageService);
+
       component = fixture.componentInstance;
       el = fixture.debugElement;
-      taskStorageService = TestBed.get(TaskStorageService);
-      httpTestingController = TestBed.get(HttpTestingController);
-      testService = TestBed.get(TestService);
       fixture.detectChanges();
     });
 
@@ -42,28 +55,122 @@ describe('TaskUpdateComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('update task form validation and button enabled/disabled', () => {
-    //Get mock data
-    let group = testService.getGroupByName('Group1');
-    let task = testService.getTasksByGroupId(group._id)[0];
+  it('test form init data', () => {
+    const name = component.formUpdateTask.controls['name'];
+    const description = component.formUpdateTask.controls['description'];
+    const dateIni = component.formUpdateTask.controls['dateIni'];
+    const dateEnd = component.formUpdateTask.controls['dateEnd'];
+    const estimatedTime = component.formUpdateTask.controls['estimatedTime'];
+    const state = component.formUpdateTask.controls['state'];
 
-    //Check form validation
-    let submitUpdateTask = el.query(By.css('#submitUpdateTask'));
-    let taskName = component.formUpdateTask.controls['taskName'];
+    expect(name.value).toEqual(component.task.name);
+    expect(description.value).toEqual(component.task.description);
+    expect(dateIni.value).toEqual(component.task.dateIni);
+    expect(dateEnd.value).toEqual(component.task.dateEnd);
+    expect(estimatedTime.value).toEqual(component.task.estimatedTime);
+    expect(state.value).toEqual(component.task.state.name);
 
-    taskName.setValue('');
-    fixture.detectChanges();
-    expect(taskName.hasError('required')).toBe(true);
-    expect(submitUpdateTask.nativeElement.disabled).toBeTruthy();
-
-    taskName.setValue('Test');
-    fixture.detectChanges();
-
-    expect(taskName.hasError('required')).toBe(false);
-    expect(submitUpdateTask.nativeElement.disabled).toBeFalsy();
   });
 
-  it('click update task', () => {
+  it('task form validations and button enabled/disabled', () => {
+    // Check form validation
+    const name = component.formUpdateTask.controls['name'];
+    const description = component.formUpdateTask.controls['description'];
+    const dateIni = component.formUpdateTask.controls['dateIni'];
+    const dateEnd = component.formUpdateTask.controls['dateEnd'];
+    const estimatedTime = component.formUpdateTask.controls['estimatedTime'];
+    const state = component.formUpdateTask.controls['state'];
 
+    name.setValue('');
+    fixture.detectChanges();
+
+    expect(name.hasError('required')).toBe(true);
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeTruthy();
+
+    name.setValue(component.task.name);
+    fixture.detectChanges();
+
+    expect(name.hasError('required')).toBe(false);
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeFalsy();
+
+
+    description.setValue('');
+    fixture.detectChanges();
+
+    expect(description.hasError('required')).toBe(true);
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeTruthy();
+
+    description.setValue(component.task.description);
+    fixture.detectChanges();
+
+    expect(description.hasError('required')).toBe(false);
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeFalsy();
+
+
+
+    dateIni.setValue('');
+    fixture.detectChanges();
+
+    expect(dateIni.hasError('required')).toBe(true);
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeTruthy();
+
+    dateIni.setValue(component.task.dateIni);
+    fixture.detectChanges();
+
+    expect(dateIni.hasError('required')).toBe(false);
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeFalsy();
+
+
+    dateEnd.setValue('');
+    fixture.detectChanges();
+
+    expect(dateEnd.hasError('required')).toBe(true);
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeTruthy();
+
+    dateEnd.setValue(component.task.dateEnd);
+    fixture.detectChanges();
+
+    expect(dateEnd.hasError('required')).toBe(false);
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeFalsy();
+
+
+    estimatedTime.setValue('');
+    fixture.detectChanges();
+
+    expect(estimatedTime.hasError('required')).toBe(true);
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeTruthy();
+
+    estimatedTime.setValue(component.task.estimatedTime);
+    fixture.detectChanges();
+
+    expect(estimatedTime.hasError('required')).toBe(false);
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeFalsy();
+
+
+    state.setValue('');
+    fixture.detectChanges();
+
+    expect(state.hasError('required')).toBe(true);
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeTruthy();
+
+    state.setValue(component.task.state.name);
+    fixture.detectChanges();
+
+    expect(state.hasError('required')).toBe(false);
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeFalsy();
+  });
+
+  it('click update task should call service funtion', () => {
+    const onUpdateSpy = spyOn(component, 'onUpdate').and.callThrough();
+    const updateTaskSpy = spyOn(taskStorageService, 'updateTask');
+
+
+    expect(onUpdateSpy).not.toHaveBeenCalled();
+    expect(updateTaskSpy).not.toHaveBeenCalled();
+
+    component.onUpdate();
+
+    expect(onUpdateSpy).toHaveBeenCalled();
+    expect(updateTaskSpy).toHaveBeenCalledWith(component.task);
   });
 });

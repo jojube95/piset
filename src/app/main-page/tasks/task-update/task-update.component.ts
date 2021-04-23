@@ -1,5 +1,4 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
-import {Task} from '../../../model/task';
 import {TaskStorageService} from '../../../services/task-storage.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
@@ -12,7 +11,8 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 export class TaskUpdateComponent implements OnInit {
   formUpdateTask: FormGroup;
 
-  constructor(public taskStorage: TaskStorageService, private fb: FormBuilder, public dialogRef: MatDialogRef<TaskUpdateComponent>, @Inject(MAT_DIALOG_DATA) public task: any) {}
+  constructor(public taskStorage: TaskStorageService, private fb: FormBuilder,
+              public dialogRef: MatDialogRef<TaskUpdateComponent>, @Inject(MAT_DIALOG_DATA) public task: any) {}
 
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class TaskUpdateComponent implements OnInit {
         Validators.required
       ]],
       estimatedTime: ['', [
-        Validators.required, Validators.pattern("^[0-9]*$"),
+        Validators.required, Validators.pattern('^[0-9]*$'),
       ]],
       state: ['', [
         Validators.required

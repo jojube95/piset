@@ -5,13 +5,13 @@ export class History{
     userId: string;
     userName: string;
     groupId: string;
-    groupName: string
+    groupName: string;
     date: Date;
-    action: String;
+    action: string;
     time: number;
 
     constructor(taskId: string, taskName: string, userId: string, userName: string, groupId: string, groupName: string,
-                date: Date, action: String, time: number, _id?: string){
+                date: Date, action: string, time: number, _id?: string){
         this.taskId = taskId;
         this.taskName = taskName;
         this.userId = userId;

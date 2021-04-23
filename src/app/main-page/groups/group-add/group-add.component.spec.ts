@@ -39,9 +39,9 @@ describe('GroupAddComponent', () => {
   });
 
   it('validations and enabled/disabled buttons of new group form', () => {
-    let name = component.formAddGroup.controls['name'];
+    const name = component.formAddGroup.controls['name'];
 
-    let addButton = el.query(By.css('#addButton'));
+    const addButton = el.query(By.css('#addButton'));
 
     expect(addButton.nativeElement.disabled).toBeTruthy();
 
@@ -58,38 +58,38 @@ describe('GroupAddComponent', () => {
   });
 
   it('add group should add group to list', () => {
-    //Get the form field
-    let name = component.formAddGroup.controls['name'];
+    // Get the form field
+    const name = component.formAddGroup.controls['name'];
 
-    //Spy functions, should call through because we are going to spy the http call and the observable with mock data
-    let addGroupSpy = spyOn(component, 'onAdd').and.callThrough();
-    let createGroupSpy = spyOn(groupStorageService, 'createGroup').and.callThrough();
+    // Spy functions, should call through because we are going to spy the http call and the observable with mock data
+    const addGroupSpy = spyOn(component, 'onAdd').and.callThrough();
+    const createGroupSpy = spyOn(groupStorageService, 'createGroup').and.callThrough();
 
-    //Define mock data
-    let groupMockName = 'TestGroup';
+    // Define mock data
+    const groupMockName = 'TestGroup';
 
-    //Complete form
+    // Complete form
     name.setValue(groupMockName);
 
-    //SpyMethods to not have been colled yet
+    // SpyMethods to not have been colled yet
     expect(addGroupSpy).not.toHaveBeenCalled();
     expect(createGroupSpy).not.toHaveBeenCalled();
 
-    //Call spy method addGroup
+    // Call spy method addGroup
     component.onAdd();
 
-    //SpyMethods should have been called
+    // SpyMethods should have been called
     expect(addGroupSpy).toHaveBeenCalled();
     expect(createGroupSpy).toHaveBeenCalled();
 
-    //Mock the http request
+    // Mock the http request
     const reqUsers = httpTestingController.expectOne(groupStorageService.API_URL + '/api/groups/add');
 
     reqUsers.flush({
-      message: "Success"
+      message: 'Success'
     });
 
-    //Check if groups retrive correctly
+    // Check if groups retrive correctly
     expect(groupStorageService._groups.getValue().get(0).name).toBe(groupMockName);
   });
 });

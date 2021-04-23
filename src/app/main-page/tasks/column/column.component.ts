@@ -1,4 +1,4 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {State} from '../../../model/state';
 import {Task} from '../../../model/task';
 import {TaskStorageService} from '../../../services/task-storage.service';
@@ -6,7 +6,7 @@ import {TaskAddComponent} from '../task-add/task-add.component';
 import {Group} from '../../../model/group';
 import {User} from '../../../model/user';
 import {TaskUpdateComponent} from '../task-update/task-update.component';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDragDrop} from '@angular/cdk/drag-drop';
 import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 
 @Component({
@@ -29,9 +29,9 @@ export class ColumnComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = true;
-    dialogConfig.id = "modal-component";
-    dialogConfig.height = "400px";
-    dialogConfig.width = "600px";
+    dialogConfig.id = 'modal-component';
+    dialogConfig.height = '400px';
+    dialogConfig.width = '600px';
     dialogConfig.data = task;
 
     this.matDialog.open(TaskUpdateComponent, dialogConfig);
@@ -41,15 +41,15 @@ export class ColumnComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = true;
-    dialogConfig.id = "modal-component";
-    dialogConfig.height = "400px";
-    dialogConfig.width = "600px";
+    dialogConfig.id = 'modal-component';
+    dialogConfig.height = '400px';
+    dialogConfig.width = '600px';
     this.matDialog.open(TaskAddComponent, dialogConfig);
   }
 
   drop(event: CdkDragDrop<string[]>) {
 
-    let task = event.item.data;
+    const task = event.item.data;
 
     task.state = this.state;
 

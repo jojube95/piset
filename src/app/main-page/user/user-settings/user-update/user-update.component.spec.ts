@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
 import { UserUpdateComponent} from './user-update.component';
 import {AuthService} from '../../../../auth/auth.service';
 import {TestService} from '../../../../services/test.service';
@@ -11,14 +10,13 @@ import {DebugElement} from '@angular/core';
 import {ReactiveFormsModule} from '@angular/forms';
 import {UserStorageService} from '../../../../services/user-storage.service';
 
-xdescribe('UserUpdateComponent', () => {
+describe('UserUpdateComponent', () => {
   let component: UserUpdateComponent;
   let fixture: ComponentFixture<UserUpdateComponent>;
   let el: DebugElement;
 
   let userStorageService: any;
   let authService: any;
-  let getCurrentUserSpy: any;
   let testService: any;
 
   beforeEach(async(() => {
@@ -31,12 +29,11 @@ xdescribe('UserUpdateComponent', () => {
       testService = TestBed.get(TestService);
       userStorageService = TestBed.get(UserStorageService);
 
-      getCurrentUserSpy = spyOn(authService, 'getCurrentUser').and.callFake(() => {
-        return testService.getUserByMail('user1@user.com');
-      });
-
       fixture = TestBed.createComponent(UserUpdateComponent);
       component = fixture.componentInstance;
+
+      component.user = testService.getUserByMail('user1@user.com');
+
       el = fixture.debugElement;
       fixture.detectChanges();
     });
@@ -48,19 +45,24 @@ xdescribe('UserUpdateComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('initial data and form validation', () =>  {
-    let userMock = testService.getUserByMail('user1@user.com');
+  it('should show user data', () =>  {
+    fixture.detectChanges();
 
-    let nameInput = el.query(By.css('#name'));
-    let secondNameInput = el.query(By.css('#secondName'));
+    const nameInput = el.query(By.css('#name'));
+    const secondNameInput = el.query(By.css('#secondName'));
 
-    let name = component.form.controls['name'];
-    let secondName = component.form.controls['secondName'];
+    expect(nameInput.nativeElement.value).toEqual(component.user.name);
+    expect(secondNameInput.nativeElement.value).toEqual(component.user.secondName);
+  });
 
+  it('form validation and button enable/diabled', () => {
+    const name = component.form.controls['name'];
+    const secondName = component.form.controls['secondName'];
 
-    //Form has to be dirty
+    // Form initial validation
     expect(component.form.valid).toBeTruthy();
     expect(component.form.dirty).toBeFalsy();
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeTruthy();
 
     name.setValue('');
     secondName.setValue('');
@@ -70,6 +72,7 @@ xdescribe('UserUpdateComponent', () => {
     expect(name.hasError('required')).toBe(true);
     expect(secondName.hasError('required')).toBe(true);
     expect(component.form.valid).toBeFalsy();
+    expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeTruthy();
 
     name.setValue('name2');
     secondName.setValue('secondName2');
@@ -81,39 +84,30 @@ xdescribe('UserUpdateComponent', () => {
     expect(component.form.valid).toBeTruthy();
   });
 
-  it('change name and second name', () => {
-    //Change name calls updateUserService with the new user name data
+  it('click update user should call service funtion', () => {
+    const onUpdateSpy = spyOn(component, 'update').and.callThrough();
+    const updateUserSpy = spyOn(userStorageService, 'updateUserProfile');
 
-    //Spy updateUserProfile
-    let onUpdateSpy = spyOn(component, 'update').and.callThrough();
-    //Spy update with callThrough
-    let updateUserProfileSpy = spyOn(userStorageService, 'updateUserProfile');
 
-    //Click update button
-    let name = component.form.controls['name'];
-    let secondName = component.form.controls['secondName'];
-    name.setValue('name2');
-    secondName.setValue('secondName2');
-    fixture.detectChanges();
+    expect(onUpdateSpy).not.toHaveBeenCalled();
+    expect(updateUserSpy).not.toHaveBeenCalled();
 
-    el.query(By.css('#userForm')).triggerEventHandler('ngSubmit', null);
+    component.update();
 
-    //Check if update method is called
     expect(onUpdateSpy).toHaveBeenCalled();
-
-    //Check loggedUser variables
-    expect(component.user.name).toBe('name2');
-    expect(component.user.secondName).toBe('secondName2');
-
-    //Check if update user service is called with parameters
-    expect(updateUserProfileSpy).toHaveBeenCalledWith(component.user);
+    expect(updateUserSpy).toHaveBeenCalledWith(component.user);
   });
 
+
   afterAll(() => {
-    //Click update button
-    let name = component.form.controls['name'];
-    let secondName = component.form.controls['secondName'];
+    const onUpdateSpy = spyOn(component, 'update').and.callThrough();
+    // Click update button
+    const name = component.form.controls['name'];
+    const secondName = component.form.controls['secondName'];
     name.setValue('User1');
     secondName.setValue('User1');
+    fixture.detectChanges();
+
+    component.update();
   });
 });

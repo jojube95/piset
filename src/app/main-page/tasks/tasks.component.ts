@@ -17,12 +17,12 @@ export class TasksComponent implements OnInit {
 
   loggedUser: User;
 
-  isUserInGroup: boolean = false;
+  isUserInGroup = false;
 
   loading = true;
 
   constructor(private groupStorage: GroupStorageService, public userStorage: UserStorageService, private taskStorage: TaskStorageService,
-              public stateStorage : StateStorageService) {
+              public stateStorage: StateStorageService) {
 
   }
 
@@ -30,9 +30,9 @@ export class TasksComponent implements OnInit {
     this.loggedUser = this.userStorage.getCurrentUser();
     this.loading = false;
 
-    if(this.loggedUser.groups.length > 0 && this.loggedUser.groups != null){
+    if (this.loggedUser.groups != null && this.loggedUser.groups.length > 0 && this.loggedUser.groups != null){
       this.isUserInGroup = true;
-      //Get all tasks group
+      // Get all tasks group
       this.taskStorage.getUserGroupsTasks(this.loggedUser.groups);
 
     }
@@ -42,17 +42,16 @@ export class TasksComponent implements OnInit {
   }
 
   onGroupSelect(event){
-    let group = event.detail.value.group;
+    const group = event.detail.value.group;
     this.selectedGroup = group;
     this.selectedUser = undefined;
     this.userStorage.getUsersGroup(group);
   }
 
   onUserSelect(event){
-    let user = event.detail.value;
+    const user = event.detail.value;
     this.selectedUser = user;
-    //Get tasks user
-    
+    // Get tasks user
   }
 
   reasignTasks(){

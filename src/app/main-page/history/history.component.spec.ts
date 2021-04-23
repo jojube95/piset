@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
-
 import {HistoryComponent} from './history.component';
 import {DebugElement} from '@angular/core';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
@@ -9,14 +8,13 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {TestService} from '../../services/test.service';
 import {UserStorageService} from '../../services/user-storage.service';
 import {HistoryStorageService} from '../../services/history-storage.service';
-import { DateFilterPipe } from '../../pipe/date-filter.pipe';
+import {TaskFilterPipe} from '../../pipe/task-filter.pipe';
+import {HistoryFilterPipe} from '../../pipe/history-filter.pipe';
 
 describe('HistoryComponent', () => {
   let component: HistoryComponent;
   let fixture: ComponentFixture<HistoryComponent>;
   let el: DebugElement;
-
-  let currentDate = new Date();
 
   let userStorageService: any;
   let historyStorageService: any;
@@ -29,7 +27,7 @@ describe('HistoryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HistoryComponent, DateFilterPipe ],
+      declarations: [ HistoryComponent, TaskFilterPipe, HistoryFilterPipe ],
       imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
       providers: [UserStorageService, HistoryStorageService, ReactiveFormsModule, TestService]
     }).compileComponents().then(() => {
@@ -67,27 +65,27 @@ describe('HistoryComponent', () => {
   });
 
   xit('should populate list at start', () => {
-    let loggedMockUser = component.loggedUser = testService.getUserByMail('user1@user.com');
+    const loggedMockUser = component.loggedUser = testService.getUserByMail('user1@user.com');
 
-    //Spy methods
-    //getUserHistoriesSpy.and.callThrough();
-    //getUserHistoriesSpy.and.callThrough();
+    // Spy methods
+    // getUserHistoriesSpy.and.callThrough();
+    // getUserHistoriesSpy.and.callThrough();
 
-    //Get mock data
-    let mockHistories = testService.getHistoriesByUserId(component.loggedUser._id);
+    // Get mock data
+    const mockHistories = testService.getHistoriesByUserId(component.loggedUser._id);
 
     expect(getUserHistoriesSpy).toHaveBeenCalled();
 
-    //Mock http request
+    // Mock http request
     const reqUsers = httpTestingController.expectOne(historyStorageService.API_URL + '/api/histories/getByUser' + component.loggedUser._id);
     reqUsers.flush({
-      message: "Success",
+      message: 'Success',
       histories: mockHistories
     });
 
     fixture.detectChanges();
 
-    //Check list
+    // Check list
     expect(historyStorageService._userHistory.getValue()).toEqual(mockHistories);
-  })
+  });
 });

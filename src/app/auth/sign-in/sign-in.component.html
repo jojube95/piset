@@ -16,7 +16,7 @@
           <ion-label for="password">Password</ion-label>
           <ion-input id="password" type="password" formControlName="password"></ion-input>
         </ion-item>
-        <ion-button id="signInButton" type="submit" block>Sign In</ion-button>
+        <ion-button id="signInButton" type="submit" block [disabled]="!form.valid">Sign In</ion-button>
         <ion-button id="signUpButton" type="button" (click)="signUp()">Sign Up</ion-button>
 
       </form>

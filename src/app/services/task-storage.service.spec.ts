@@ -5,7 +5,6 @@ import {TestService} from './test.service';
 import {HttpClientTestingModule, HttpTestingController} from '@angular/common/http/testing';
 import {RouterTestingModule} from '@angular/router/testing';
 import {Task} from '../model/task';
-import {State} from '../model/state';
 
 describe('TaskStorageService', () => {
   let service: TaskStorageService;
@@ -49,25 +48,25 @@ describe('TaskStorageService', () => {
   });
 
   it('getGroupTasks', () => {
-    //Get mock data
-    let mockGroup = testService.getGroupByName('Group1');
-    let mockTasks = testService.getTasksByGroupId(mockGroup._id);
+    // Get mock data
+    const mockGroup = testService.getGroupByName('Group1');
+    const mockTasks = testService.getTasksByGroupId(mockGroup._id);
 
-    //Call service method
+    // Call service method
     service.getGroupTasks(mockGroup);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqTasks = httpTestingController.expectOne(service['API_URL'] + '/api/tasks/getByGroup' + mockGroup._id);
 
     reqTasks.flush({
       tasks: mockTasks
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqTasks.request.method).toEqual('GET');
-    //Expect request parameters
+    // Expect request parameters
     expect(reqTasks.request.params.keys().length).toBe(0);
-    //Expect the returned data
+    // Expect the returned data
     expect(service._tasksGroup.getValue().size).toEqual(4);
     expect(service._tasksGroup.getValue().get(0).name).toEqual('Task1');
     expect(service._tasksGroup.getValue().get(1).name).toEqual('Task2');
@@ -76,132 +75,128 @@ describe('TaskStorageService', () => {
   });
 
   it('addTaskToGroup', () => {
-    //Get mock data
-    let mockGroup = testService.getGroupByName('Group1');
+    // Get mock data
+    const mockGroup = testService.getGroupByName('Group1');
+    const mockTask = new Task('Task5', 'Task5Desc', mockGroup._id, mockGroup.name);
 
-    let mockTask = new Task('Task5', 'Task5Desc', mockGroup._id, mockGroup.name);
-
-    //Call service method
+    // Call service method
     service.addTaskToGroup(mockTask);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqTasks = httpTestingController.expectOne(service['API_URL'] + '/api/tasks/addToGroup');
 
     reqTasks.flush({
       message: 'Succes'
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqTasks.request.method).toEqual('POST');
-    //Expect request body
+    // Expect request body
     expect(reqTasks.request.body.task).toEqual(mockTask);
-    expect(reqTasks.request.body.groupId).toEqual(mockGroup._id);
-    //Expect request parameters
+    // Expect request parameters
     expect(reqTasks.request.params.keys().length).toBe(0);
-    //Expect the returned data
-    expect(service._tasksGroup.getValue().size).toEqual(1);
-    expect(service._tasksGroup.getValue().get(0).name).toEqual('Task5');
+    // Expect the returned data
+    expect(service._tasksGroups.getValue().size).toEqual(1);
+    expect(service._tasksGroups.getValue().get(0).name).toEqual('Task5');
   });
 
   it('deleteTaskFromGroup', () => {
-    //Get mock data
-    let mockGroup = testService.getGroupByName('Group1');
-    let mockTasks = testService.getTasksByGroupId(mockGroup._id)
-    let mockTaskDeleted = mockTasks[0];
+    // Get mock data
+    const mockGroup = testService.getGroupByName('Group1');
+    const mockTasks = testService.getTasksByGroupId(mockGroup._id);
+    const mockTaskDeleted = mockTasks[0];
 
-    //Populate initial list with mock data
-    service._tasksGroup.next(service._tasksGroup.getValue().push(mockTasks[0]));
-    service._tasksGroup.next(service._tasksGroup.getValue().push(mockTasks[1]));
-    service._tasksGroup.next(service._tasksGroup.getValue().push(mockTasks[2]));
-    service._tasksGroup.next(service._tasksGroup.getValue().push(mockTasks[3]));
+    // Populate initial list with mock data
+    service._tasksGroups.next(service._tasksGroups.getValue().push(mockTasks[0]));
+    service._tasksGroups.next(service._tasksGroups.getValue().push(mockTasks[1]));
+    service._tasksGroups.next(service._tasksGroups.getValue().push(mockTasks[2]));
+    service._tasksGroups.next(service._tasksGroups.getValue().push(mockTasks[3]));
 
-    //Call service method
+    // Call service method
     service.deleteTaskFromGroup(mockTaskDeleted);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqTasks = httpTestingController.expectOne(service['API_URL'] + '/api/tasks/deleteFromGroup');
 
     reqTasks.flush({
       message: 'Succes'
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqTasks.request.method).toEqual('POST');
-    //Expect request body
-    expect(reqTasks.request.body.groupId).toEqual(mockGroup._id);
+    // Expect request body
     expect(reqTasks.request.body.taskId).toEqual(mockTaskDeleted._id);
-    //Expect request parameters
+    // Expect request parameters
     expect(reqTasks.request.params.keys().length).toBe(0);
-    //Expect the returned data
-    expect(service._tasksGroup.getValue().size).toEqual(3);
-    expect(service._tasksGroup.getValue().get(0).name).toEqual('Task2');
-    expect(service._tasksGroup.getValue().get(1).name).toEqual('Task3');
-    expect(service._tasksGroup.getValue().get(2).name).toEqual('Task4');
+    // Expect the returned data
+    expect(service._tasksGroups.getValue().size).toEqual(3);
+    expect(service._tasksGroups.getValue().get(0).name).toEqual('Task2');
+    expect(service._tasksGroups.getValue().get(1).name).toEqual('Task3');
+    expect(service._tasksGroups.getValue().get(2).name).toEqual('Task4');
   });
 
   it('updateTask', () => {
-    let mockGroup = testService.getGroupByName('Group1');
-    let mockTask = testService.getTaskByName('Task1');
+    const mockGroup = testService.getGroupByName('Group1');
+    const mockTask = testService.getTaskByName('Task1');
 
-    //Call service method
+    // Call service method
     service.updateTask(mockTask);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqTasks = httpTestingController.expectOne(service['API_URL'] + '/api/tasks/update');
 
     reqTasks.flush({
       message: 'Succes'
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqTasks.request.method).toEqual('POST');
-    //Expect request body
+    // Expect request body
     expect(reqTasks.request.body.task).toEqual(mockTask);
-    expect(reqTasks.request.body.groupId).toEqual(mockGroup._id);
-    //Expect request parameters
+    // Expect request parameters
     expect(reqTasks.request.params.keys().length).toBe(0);
   });
 
   it('getTaskByUser', () => {
-    //Get mock data
-    let mockUser = testService.getUserByMail('user1@user.com');
-    let mockTasks = testService.getTaskByUserId(mockUser._id);
+    // Get mock data
+    const mockUser = testService.getUserByMail('user1@user.com');
+    const mockTasks = testService.getTaskByUserId(mockUser._id);
 
-    //Call service method
+    // Call service method
     service.getTaskByUser(mockUser).subscribe(res => {});
 
-    //Create the mockCall
+    // Create the mockCall
     const reqTasks = httpTestingController.expectOne(service['API_URL'] + '/api/tasks/getByUser' + mockUser._id);
 
     reqTasks.flush({
-      message: "Success",
+      message: 'Success',
       tasks: mockTasks
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqTasks.request.method).toEqual('GET');
-    //Expect request parameters
+    // Expect request parameters
     expect(reqTasks.request.params.keys().length).toBe(0);
   });
 
   it('reasignTasks', () => {
-    let mockGroup = testService.getGroupByName('Group1');
+    const mockGroup = testService.getGroupByName('Group1');
 
-    //Call service method
+    // Call service method
     service.reasignTasks(mockGroup);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqTasks = httpTestingController.expectOne(service['API_URL'] + '/api/tasks/reasign');
 
     reqTasks.flush({
       message: 'Succes'
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqTasks.request.method).toEqual('POST');
-    //Expect request body
+    // Expect request body
     expect(reqTasks.request.body.groupId).toEqual(mockGroup._id);
-    //Expect request parameters
+    // Expect request parameters
     expect(reqTasks.request.params.keys().length).toBe(0);
   });
 

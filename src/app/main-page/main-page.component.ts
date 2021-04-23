@@ -39,42 +39,42 @@ export class MainPageComponent implements OnInit {
 
   onClickTasks(){
     this.router.navigate(['/main/tasks']);
-    this.menu.close('custom')
+    this.menu.close('custom');
   }
 
   onClickHistory(){
     this.router.navigate(['/main/history']);
-    this.menu.close('custom')
+    this.menu.close('custom');
   }
 
   onClickTaskManagement(){
     this.router.navigate(['/main/admin/taskManagement']);
-    this.menu.close('custom')
+    this.menu.close('custom');
   }
 
   onClickUserManagement(){
     this.router.navigate(['/main/admin/userManagement']);
-    this.menu.close('custom')
+    this.menu.close('custom');
   }
 
   onClickTest(){
     this.router.navigate(['/main/admin/test']);
-    this.menu.close('custom')
+    this.menu.close('custom');
   }
 
   onClickUserInfo(){
     this.router.navigate(['/main/user/info']);
-    this.menu.close('custom')
+    this.menu.close('custom');
   }
 
   onClickUserSettings(){
     this.router.navigate(['/main/user/settings']);
-    this.menu.close('custom')
+    this.menu.close('custom');
   }
 
   onClickUserInvitations(){
     this.router.navigate(['/main/user/invitations']);
-    this.menu.close('custom')
+    this.menu.close('custom');
   }
 
   getEnvironment() {

@@ -35,7 +35,7 @@ export class TaskAddComponent implements OnInit {
         Validators.required
       ]],
       estimatedTime: ['', [
-        Validators.required, Validators.pattern("^[0-9]*$"),
+        Validators.required, Validators.pattern('^[0-9]*$'),
       ]],
       state: ['', [
         Validators.required
@@ -44,8 +44,8 @@ export class TaskAddComponent implements OnInit {
   }
 
   onAdd(){
-    if(this.formAddTask.valid){
-      let task = new Task(this.formAddTask.controls['name'].value, this.formAddTask.controls['description'].value, this.group._id,
+    if (this.formAddTask.valid){
+      const task = new Task(this.formAddTask.controls['name'].value, this.formAddTask.controls['description'].value, this.group._id,
           this.group.name, null, null, this.formAddTask.controls['dateIni'].value, this.formAddTask.controls['dateEnd'].value,
           this.formAddTask.controls['estimatedTime'].value, new State(this.formAddTask.controls['state'].value));
 
