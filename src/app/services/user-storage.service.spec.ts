@@ -51,47 +51,47 @@ describe('UserStorageService', () => {
   });
 
   it('updateUserProfile', () => {
-    let mockUser = testService.getUserByMail('user1@user.com');
+    const mockUser = testService.getUserByMail('user1@user.com');
 
-    //Call service method
+    // Call service method
     service.updateUserProfile(mockUser as User);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqUsers = httpTestingController.expectOne(service['API_URL'] + '/api/users/update');
 
     reqUsers.flush({
       message: 'Succes'
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqUsers.request.method).toEqual('POST');
-    //Expect request body
+    // Expect request body
     expect(reqUsers.request.body.user).toEqual(mockUser);
-    //Expect request parameters
+    // Expect request parameters
     expect(reqUsers.request.params.keys().length).toBe(0);
-    //Expect the returned data
+    // Expect the returned data
   });
 
   it('getUsersGroup', () => {
-    //Get mock data
-    let mockGroup = testService.getGroupByName('Group1');
-    let mockUsers = testService.getUsersByGroupId(testService.getGroupByName('Group1')._id);
+    // Get mock data
+    const mockGroup = testService.getGroupByName('Group1');
+    const mockUsers = testService.getUsersByGroupId(testService.getGroupByName('Group1')._id);
 
-    //Call service method
+    // Call service method
     service.getUsersGroup(mockGroup);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqUsers = httpTestingController.expectOne(service['API_URL'] + '/api/users/getByGroup' + mockGroup._id);
 
     reqUsers.flush({
       users: mockUsers
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqUsers.request.method).toEqual('GET');
-    //Expect request parameters
+    // Expect request parameters
     expect(reqUsers.request.params.keys().length).toBe(0);
-    //Expect the returned data
+    // Expect the returned data
     expect(service._usersGroup.getValue().size).toEqual(4);
     expect(service._usersGroup.getValue().get(0).name).toEqual('User1');
     expect(service._usersGroup.getValue().get(1).name).toEqual('User2');
@@ -100,61 +100,61 @@ describe('UserStorageService', () => {
   });
 
   it('getUsersWithoutGroup', () => {
-    //Get mock data
-    let mockGroup = testService.getGroupByName('Group1');
-    let mockUsers = testService.getUsersWithoutGroup(mockGroup._id);
+    // Get mock data
+    const mockGroup = testService.getGroupByName('Group1');
+    const mockUsers = testService.getUsersWithoutGroup(mockGroup._id);
 
-    //Call service method
+    // Call service method
     service.getUsersWithoutGroup(mockGroup);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqUsers = httpTestingController.expectOne(service['API_URL'] + '/api/users/getWithoutGroup' + mockGroup._id);
 
     reqUsers.flush({
       users: mockUsers
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqUsers.request.method).toEqual('GET');
-    //Expect request parameters
+    // Expect request parameters
     expect(reqUsers.request.params.keys().length).toBe(0);
-    //Expect the returned data
+    // Expect the returned data
     expect(service._usersWithoutGroup.getValue().size).toEqual(4);
     expect(service._usersWithoutGroup.getValue().get(0).mail).toEqual('admin@admin.com');
   });
 
   it('addUserToGroup', () => {
-    //Get mock data
-    let mockGroup = testService.getGroupByName('Group1');
-    let usersGroup = testService.getUsersByGroupId(mockGroup._id);
-    let mockUserWithoutGroup = testService.getUsersWithoutGroup(mockGroup._id)[0];
+    // Get mock data
+    const mockGroup = testService.getGroupByName('Group1');
+    const usersGroup = testService.getUsersByGroupId(mockGroup._id);
+    const mockUserWithoutGroup = testService.getUsersWithoutGroup(mockGroup._id)[0];
 
-    //Populate initial list with mock data
+    // Populate initial list with mock data
     service._usersWithoutGroup.next(service._usersWithoutGroup.getValue().push(mockUserWithoutGroup));
     service._usersGroup.next(service._usersGroup.getValue().push(usersGroup[0]));
     service._usersGroup.next(service._usersGroup.getValue().push(usersGroup[1]));
     service._usersGroup.next(service._usersGroup.getValue().push(usersGroup[2]));
     service._usersGroup.next(service._usersGroup.getValue().push(usersGroup[3]));
 
-    //Call service method
+    // Call service method
     service.addUserToGroup(mockUserWithoutGroup, mockGroup);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqUsers = httpTestingController.expectOne(service['API_URL'] + '/api/users/addUserToGroup');
 
     reqUsers.flush({
       message: 'Succes'
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqUsers.request.method).toEqual('POST');
-    //Expect request body
+    // Expect request body
     expect(reqUsers.request.body.userId).toEqual(mockUserWithoutGroup._id);
     expect(reqUsers.request.body.groupId).toEqual(mockGroup._id);
     expect(reqUsers.request.body.groupName).toEqual(mockGroup.name);
-    //Expect request parameters
+    // Expect request parameters
     expect(reqUsers.request.params.keys().length).toBe(0);
-    //Expect the returned data
+    // Expect the returned data
     expect(service._usersGroup.getValue().size).toEqual(5);
     expect(service._usersGroup.getValue().get(0).name).toEqual('User1');
     expect(service._usersGroup.getValue().get(1).name).toEqual('User2');
@@ -166,35 +166,35 @@ describe('UserStorageService', () => {
   });
 
   it('deleteUserFromGroup', () => {
-    //Get mock data
-    let mockGroup = testService.getGroupByName('Group1');
-    let usersGroup = testService.getUsersByGroupId(mockGroup._id);
-    let mockUserDeleted = usersGroup[0];
+    // Get mock data
+    const mockGroup = testService.getGroupByName('Group1');
+    const usersGroup = testService.getUsersByGroupId(mockGroup._id);
+    const mockUserDeleted = usersGroup[0];
 
-    //Populate initial list with mock data
+    // Populate initial list with mock data
     service._usersGroup.next(service._usersGroup.getValue().push(usersGroup[0]));
     service._usersGroup.next(service._usersGroup.getValue().push(usersGroup[1]));
     service._usersGroup.next(service._usersGroup.getValue().push(usersGroup[2]));
     service._usersGroup.next(service._usersGroup.getValue().push(usersGroup[3]));
 
-    //Call service method
+    // Call service method
     service.deleteUserFromGroup(mockUserDeleted, mockGroup);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqUsers = httpTestingController.expectOne(service['API_URL'] + '/api/users/deleteUserFromGroup');
 
     reqUsers.flush({
       message: 'Succes'
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqUsers.request.method).toEqual('POST');
-    //Expect request body
+    // Expect request body
     expect(reqUsers.request.body.userId).toEqual(mockUserDeleted._id);
     expect(reqUsers.request.body.groupId).toEqual(mockGroup._id);
-    //Expect request parameters
+    // Expect request parameters
     expect(reqUsers.request.params.keys().length).toBe(0);
-    //Expect the returned data
+    // Expect the returned data
     expect(service._usersGroup.getValue().size).toEqual(3);
     expect(service._usersGroup.getValue().get(0).name).toEqual('User2');
     expect(service._usersGroup.getValue().get(1).name).toEqual('User3');
@@ -205,27 +205,27 @@ describe('UserStorageService', () => {
   });
 
   it('getUserByMail', () => {
-    //Get mock data
-    let userMock = testService.getUserByMail('user1@user.com');
+    // Get mock data
+    const userMock = testService.getUserByMail('user1@user.com');
 
-    //Call service method
+    // Call service method
     service.getUserByMail('user1@user.com').subscribe(res => {});
 
-    //Create the mockCall
+    // Create the mockCall
     const reqUser = httpTestingController.expectOne(service['API_URL'] + '/api/users/getByEmail' + userMock.mail);
 
     reqUser.flush({
-      message: "Success",
+      message: 'Success',
       users: [userMock]
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqUser.request.method).toEqual('GET');
-    //Expect request parameters
+    // Expect request parameters
     expect(reqUser.request.params.keys().length).toBe(0);
   });
 
   afterEach(() => {
     httpTestingController.verify();
-  })
+  });
 });

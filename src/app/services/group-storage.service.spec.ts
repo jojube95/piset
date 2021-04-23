@@ -37,77 +37,77 @@ describe('GroupStorageService', () => {
   });
 
   it('getGroups', () => {
-      //Get mock data
-      let mockGroups = testService.getGroups();
+      // Get mock data
+      const mockGroups = testService.getGroups();
 
-      //Call service
+      // Call service
       service.getGroups();
 
-      //Create the mockCall
+      // Create the mockCall
       const reqGroups = httpTestingController.expectOne(service['API_URL'] + '/api/groups/get');
 
       reqGroups.flush({
         groups: mockGroups
       });
 
-      //Expect request method
+      // Expect request method
       expect(reqGroups.request.method).toEqual('GET');
-      //Expect request parameters
+      // Expect request parameters
       expect(reqGroups.request.params.keys().length).toBe(0);
-      //Expect the returned data
+      // Expect the returned data
       expect(service._groups.getValue().size).toEqual(2);
       expect(service._groups.getValue().get(0).name).toEqual('Group1');
       expect(service._groups.getValue().get(1).name).toEqual('Group2');
   });
 
   it('createGroup', () => {
-      let mockGroup = new Group('Group3');
+      const mockGroup = new Group('Group3');
 
-      //Call service method
+      // Call service method
       service.createGroup(mockGroup);
 
-      //Create the mockCall
+      // Create the mockCall
       const reqGroups = httpTestingController.expectOne(service['API_URL'] + '/api/groups/add');
 
       reqGroups.flush({
           message: 'Succes'
       });
 
-      //Expect request method
+      // Expect request method
       expect(reqGroups.request.method).toEqual('POST');
-      //Expect request body
+      // Expect request body
       expect(reqGroups.request.body.group).toEqual(mockGroup);
-      //Expect request parameters
+      // Expect request parameters
       expect(reqGroups.request.params.keys().length).toBe(0);
-      //Expect the returned data
+      // Expect the returned data
       expect(service._groups.getValue().size).toEqual(1);
       expect(service._groups.getValue().get(0).name).toEqual(mockGroup.name);
   });
 
   it('deleteGroup', () => {
-      let deletedGroup = testService.getGroupByName('Group1');
-      let mockGroups = testService.getGroups();
+      const deletedGroup = testService.getGroupByName('Group1');
+      const mockGroups = testService.getGroups();
 
-      //Populate the list with groups
+      // Populate the list with groups
       service._groups.next(service._groups.getValue().push(mockGroups[0]));
       service._groups.next(service._groups.getValue().push(mockGroups[1]));
-      //Call service method
+      // Call service method
       service.deleteGroup(deletedGroup);
 
-      //Create the mockCall
+      // Create the mockCall
       const reqGroups = httpTestingController.expectOne(service['API_URL'] + '/api/groups/delete');
 
       reqGroups.flush({
           message: 'Succes'
       });
 
-      //Expect request method
+      // Expect request method
       expect(reqGroups.request.method).toEqual('POST');
-      //Expect request body
+      // Expect request body
       expect(reqGroups.request.body.groupId).toEqual(deletedGroup._id);
-      //Expect request parameters
+      // Expect request parameters
       expect(reqGroups.request.params.keys().length).toBe(0);
-      //Expect the returned data
+      // Expect the returned data
       expect(service._groups.getValue().size).toEqual(1);
       expect(service._groups.getValue().get(0).name).toEqual(mockGroups[1].name);
   });
@@ -118,5 +118,5 @@ describe('GroupStorageService', () => {
 
   afterEach(() => {
       httpTestingController.verify();
-  })
+  });
 });

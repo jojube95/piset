@@ -56,12 +56,12 @@ describe('TaskUpdateComponent', () => {
   });
 
   it('test form init data', () => {
-    let name = component.formUpdateTask.controls['name'];
-    let description = component.formUpdateTask.controls['description'];
-    let dateIni = component.formUpdateTask.controls['dateIni'];
-    let dateEnd = component.formUpdateTask.controls['dateEnd'];
-    let estimatedTime = component.formUpdateTask.controls['estimatedTime'];
-    let state = component.formUpdateTask.controls['state'];
+    const name = component.formUpdateTask.controls['name'];
+    const description = component.formUpdateTask.controls['description'];
+    const dateIni = component.formUpdateTask.controls['dateIni'];
+    const dateEnd = component.formUpdateTask.controls['dateEnd'];
+    const estimatedTime = component.formUpdateTask.controls['estimatedTime'];
+    const state = component.formUpdateTask.controls['state'];
 
     expect(name.value).toEqual(component.task.name);
     expect(description.value).toEqual(component.task.description);
@@ -73,13 +73,13 @@ describe('TaskUpdateComponent', () => {
   });
 
   it('task form validations and button enabled/disabled', () => {
-    //Check form validation
-    let name = component.formUpdateTask.controls['name'];
-    let description = component.formUpdateTask.controls['description'];
-    let dateIni = component.formUpdateTask.controls['dateIni'];
-    let dateEnd = component.formUpdateTask.controls['dateEnd'];
-    let estimatedTime = component.formUpdateTask.controls['estimatedTime'];
-    let state = component.formUpdateTask.controls['state'];
+    // Check form validation
+    const name = component.formUpdateTask.controls['name'];
+    const description = component.formUpdateTask.controls['description'];
+    const dateIni = component.formUpdateTask.controls['dateIni'];
+    const dateEnd = component.formUpdateTask.controls['dateEnd'];
+    const estimatedTime = component.formUpdateTask.controls['estimatedTime'];
+    const state = component.formUpdateTask.controls['state'];
 
     name.setValue('');
     fixture.detectChanges();
@@ -161,8 +161,8 @@ describe('TaskUpdateComponent', () => {
   });
 
   it('click update task should call service funtion', () => {
-    let onUpdateSpy = spyOn(component, 'onUpdate').and.callThrough();
-    let updateTaskSpy = spyOn(taskStorageService, 'updateTask');
+    const onUpdateSpy = spyOn(component, 'onUpdate').and.callThrough();
+    const updateTaskSpy = spyOn(taskStorageService, 'updateTask');
 
 
     expect(onUpdateSpy).not.toHaveBeenCalled();

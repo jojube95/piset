@@ -42,16 +42,16 @@ describe('TaskManagementComponent', () => {
       matDialogModule = TestBed.get(MatDialogModule);
 
       spyOn(taskStorageService, 'getGroupTasks').and.callFake((group) => {
-        let gorupMock = testService.getGroupByName('Group1');
+        const gorupMock = testService.getGroupByName('Group1');
         taskStorageService._tasksGroup.next(List(testService.getTasksByGroupId(gorupMock._id)));
       });
 
       spyOn(taskStorageService, 'deleteTaskFromGroup').and.callFake((deletedTask) => {
-        let gorupMock = testService.getGroupByName('Group1');
+        const gorupMock = testService.getGroupByName('Group1');
         taskStorageService._tasksGroup.next(List(testService.getTasksByGroupId(gorupMock._id)).shift());
       });
 
-      fixture.autoDetectChanges()
+      fixture.autoDetectChanges();
       component.ngOnInit();
     });
 
@@ -63,66 +63,66 @@ describe('TaskManagementComponent', () => {
   });
 
   it('at start no group is selected', () => {
-    let groupSelect =  el.query(By.css('#selectGroup'));
+    const groupSelect =  el.query(By.css('#selectGroup'));
 
-    let currentGroup = new Group('Selecciona grupo');
+    const currentGroup = new Group('Selecciona grupo');
     expect(component.currentGroup).toEqual(currentGroup);
 
     expect(groupSelect.nativeElement.value).toBe('unselect');
   });
 
   it('display tasks on select group from list', () => {
-    //Spy methods
-    let onGroupSelectSpy = spyOn(component, 'onGroupSelect').and.callThrough();
+    // Spy methods
+    const onGroupSelectSpy = spyOn(component, 'onGroupSelect').and.callThrough();
 
-    //Get mock data
-    let group = testService.getGroupByName('Group1');
+    // Get mock data
+    const group = testService.getGroupByName('Group1');
 
     expect(onGroupSelectSpy).not.toHaveBeenCalled();
     expect(taskStorageService.getGroupTasks).not.toHaveBeenCalled();
 
-    //Call component.selectGroup
-    let event = {
+    // Call component.selectGroup
+    const event = {
       detail : {
         value: group
       }
-    }
+    };
     component.onGroupSelect(event);
 
-    //Check component variables
+    // Check component variables
     expect(component.addTask).toBeFalsy();
     expect(component.taskSelected).toBeFalsy();
     expect(component.groupSelected).toBeTruthy();
     expect(component.currentGroup).toEqual(group);
 
 
-    expect(onGroupSelectSpy).toHaveBeenCalledWith(event)
+    expect(onGroupSelectSpy).toHaveBeenCalledWith(event);
     expect(taskStorageService.getGroupTasks).toHaveBeenCalledWith(group);
 
     fixture.detectChanges();
 
-    //Check list and observable
-    let tasksList = el.query(By.css('#tasksList'));
+    // Check list and observable
+    const tasksList = el.query(By.css('#tasksList'));
     expect(taskStorageService._tasksGroup.getValue().size).toBe(4);
     expect(tasksList.nativeElement.children.length).toBe(4);
   });
 
   it('delete task and delete from list', () => {
-    //Spy methods
-    let onGroupSelectSpy = spyOn(component, 'onGroupSelect').and.callThrough();
-    let onClickDeleteTaskSpy = spyOn(component, 'onClickDeleteTask').and.callThrough();
+    // Spy methods
+    const onGroupSelectSpy = spyOn(component, 'onGroupSelect').and.callThrough();
+    const onClickDeleteTaskSpy = spyOn(component, 'onClickDeleteTask').and.callThrough();
 
-    //Get mock data
-    let group = testService.getGroupByName('Group1');
-    let tasks = testService.getTasksByGroupId(group._id);
-    let deleteTask = tasks[0];
+    // Get mock data
+    const group = testService.getGroupByName('Group1');
+    const tasks = testService.getTasksByGroupId(group._id);
+    const deleteTask = tasks[0];
 
-    //Call component.selectGroup
-    let event = {
+    // Call component.selectGroup
+    const event = {
       detail : {
         value: group
       }
-    }
+    };
     component.onGroupSelect(event);
 
     fixture.detectChanges();
@@ -130,10 +130,10 @@ describe('TaskManagementComponent', () => {
     expect(onClickDeleteTaskSpy).not.toHaveBeenCalled();
     expect(taskStorageService.deleteTaskFromGroup).not.toHaveBeenCalled();
 
-    //Call component.deleteTask
-    component.onClickDeleteTask(deleteTask)
+    // Call component.deleteTask
+    component.onClickDeleteTask(deleteTask);
 
-    //Check component variables
+    // Check component variables
     expect(component.addTask).toBeFalsy();
     expect(component.taskSelected).toBeFalsy();
     expect(component.groupSelected).toBeTruthy();
@@ -143,27 +143,27 @@ describe('TaskManagementComponent', () => {
 
     fixture.detectChanges();
 
-    //Check list and observable
-    let tasksList = el.query(By.css('#tasksList'));
+    // Check list and observable
+    const tasksList = el.query(By.css('#tasksList'));
 
     expect(taskStorageService._tasksGroup.getValue()).not.toContain(deleteTask);
     expect(tasksList.nativeElement.children.length).toBe(3);
   });
 
   it('select group should enable add task button', () => {
-    //Get mock data
-    let group = testService.getGroupByName('Group1');
+    // Get mock data
+    const group = testService.getGroupByName('Group1');
 
     expect(el.query(By.css('#addTask'))).toBeNull();
 
-    //Call component.selectGroup
-    let event = {
+    // Call component.selectGroup
+    const event = {
       detail : {
         value: group
       }
-    }
+    };
     component.onGroupSelect(event);
-    //Check component variables
+    // Check component variables
     expect(component.addTask).toBeFalsy();
     expect(component.taskSelected).toBeFalsy();
     expect(component.groupSelected).toBeTruthy();
@@ -175,23 +175,23 @@ describe('TaskManagementComponent', () => {
   });
 
   xit('click on add task should open add task component', () => {
-    let spyOnDialog = spyOn(matDialogModule, 'open');
-    //Get mock data
-    let group = testService.getGroupByName('Group1');
+    const spyOnDialog = spyOn(matDialogModule, 'open');
+    // Get mock data
+    const group = testService.getGroupByName('Group1');
 
-    //Call component.selectGroup
-    let event = {
+    // Call component.selectGroup
+    const event = {
       detail : {
         value: group
       }
-    }
+    };
     component.onGroupSelect(event);
 
     fixture.detectChanges();
 
     expect(component.addTask).toBeFalsy();
 
-    let addButton = el.query(By.css('#addTask'));
+    const addButton = el.query(By.css('#addTask'));
 
     addButton.nativeElement.click();
 
@@ -204,24 +204,24 @@ describe('TaskManagementComponent', () => {
   });
 
   xit('click on task should open update task component', () => {
-    //Get mock data
-    let group = testService.getGroupByName('Group1');
-    let tasks = testService.getTasksByGroupId(group._id);
-    let updateTask = tasks[0];
+    // Get mock data
+    const group = testService.getGroupByName('Group1');
+    const tasks = testService.getTasksByGroupId(group._id);
+    const updateTask = tasks[0];
 
-    //Call component.selectGroup
-    let event = {
+    // Call component.selectGroup
+    const event = {
       detail : {
         value: group
       }
-    }
+    };
     component.onGroupSelect(event);
-    //Mock getGroupTaks http call service with tasks
-    //Mock the http request
+    // Mock getGroupTaks http call service with tasks
+    // Mock the http request
     const reqTasks = httpTestingController.expectOne(taskStorageService.API_URL + '/api/tasks/getByGroup' + group._id);
     reqTasks.flush({
-      message: "Success",
-      tasks: tasks
+      message: 'Success',
+      tasks
     });
 
     fixture.detectChanges();

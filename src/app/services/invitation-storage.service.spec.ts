@@ -36,63 +36,63 @@ describe('InvitationStorageService', () => {
   });
 
   it('loadInvitations', () => {
-    //Get mock data
-    let mockUser = testService.getUserByMail('user1@user.com');
-    let mockInvitations = testService.getInvitationsByUserId(mockUser._id);
+    // Get mock data
+    const mockUser = testService.getUserByMail('user1@user.com');
+    const mockInvitations = testService.getInvitationsByUserId(mockUser._id);
 
-    //Call service method
+    // Call service method
     service.loadInvitations(mockUser);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqInvitations = httpTestingController.expectOne(service['API_URL'] + '/api/invitations/getByUser' + mockUser._id);
 
     reqInvitations.flush({
       invitations: mockInvitations
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqInvitations.request.method).toEqual('GET');
-    //Expect request parameters
+    // Expect request parameters
     expect(reqInvitations.request.params.keys().length).toBe(0);
-    //Expect the returned data
+    // Expect the returned data
     expect(service._userInvitations.getValue().size).toEqual(1);
     expect(service._userInvitations.getValue().get(0).groupName).toEqual('Group1');
   });
 
   it('inviteUser', () => {
-    let mockInvitation = testService.getInvitationsByUserId(testService.getUserByMail('user1@user.com')._id)[0];
+    const mockInvitation = testService.getInvitationsByUserId(testService.getUserByMail('user1@user.com')._id)[0];
 
-    //Call service method
+    // Call service method
     service.inviteUser(mockInvitation as unknown as Invitation);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqInvitations = httpTestingController.expectOne(service['API_URL'] + '/api/invitations/invite');
 
     reqInvitations.flush({
       message: 'Succes'
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqInvitations.request.method).toEqual('POST');
-    //Expect request body
+    // Expect request body
     expect(reqInvitations.request.body.invitation).toEqual(mockInvitation);
-    //Expect request parameters
+    // Expect request parameters
     expect(reqInvitations.request.params.keys().length).toBe(0);
-    //Expect the returned data
+    // Expect the returned data
     expect(service._userInvitations.getValue().size).toEqual(1);
     expect(service._userInvitations.getValue().get(0).groupName).toEqual('Group1');
   });
 
   it('acceptInvitation', () => {
-    //Mock _userInvitation list with mock data
-    let mockInvitation = testService.getInvitationsByUserId(testService.getUserByMail('user1@user.com')._id)[0];
+    // Mock _userInvitation list with mock data
+    const mockInvitation = testService.getInvitationsByUserId(testService.getUserByMail('user1@user.com')._id)[0];
     service._userInvitations.next(service._userInvitations.getValue().push(mockInvitation));
 
 
-    //Call service method
+    // Call service method
     service.acceptInvitation(mockInvitation as unknown as Invitation);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqInvitations = httpTestingController.expectOne(service['API_URL'] + '/api/invitations/accept');
 
     reqInvitations.flush({
@@ -100,26 +100,26 @@ describe('InvitationStorageService', () => {
       message: 'Succes'
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqInvitations.request.method).toEqual('POST');
-    //Expect request body
+    // Expect request body
     expect(reqInvitations.request.body.invitation).toEqual(mockInvitation);
-    //Expect request parameters
+    // Expect request parameters
     expect(reqInvitations.request.params.keys().length).toBe(0);
-    //Expect the returned data
+    // Expect the returned data
     expect(service._userInvitations.getValue().size).toEqual(0);
   });
 
   it('declineInvitation', () => {
-    //Mock _userInvitation list with mock data
-    let mockInvitation = testService.getInvitationsByUserId(testService.getUserByMail('user1@user.com')._id)[0];
+    // Mock _userInvitation list with mock data
+    const mockInvitation = testService.getInvitationsByUserId(testService.getUserByMail('user1@user.com')._id)[0];
     service._userInvitations.next(service._userInvitations.getValue().push(mockInvitation));
 
 
-    //Call service method
+    // Call service method
     service.declineInvitation(mockInvitation as unknown as Invitation);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqInvitations = httpTestingController.expectOne(service['API_URL'] + '/api/invitations/decline');
 
     reqInvitations.flush({
@@ -127,17 +127,17 @@ describe('InvitationStorageService', () => {
       message: 'Succes'
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqInvitations.request.method).toEqual('POST');
-    //Expect request body
+    // Expect request body
     expect(reqInvitations.request.body.invitation).toEqual(mockInvitation);
-    //Expect request parameters
+    // Expect request parameters
     expect(reqInvitations.request.params.keys().length).toBe(0);
-    //Expect the returned data
+    // Expect the returned data
     expect(service._userInvitations.getValue().size).toEqual(0);
   });
 
   afterEach(() => {
     httpTestingController.verify();
-  })
+  });
 });

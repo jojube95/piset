@@ -48,18 +48,18 @@ describe('UserUpdateComponent', () => {
   it('should show user data', () =>  {
     fixture.detectChanges();
 
-    let nameInput = el.query(By.css('#name'));
-    let secondNameInput = el.query(By.css('#secondName'));
+    const nameInput = el.query(By.css('#name'));
+    const secondNameInput = el.query(By.css('#secondName'));
 
     expect(nameInput.nativeElement.value).toEqual(component.user.name);
     expect(secondNameInput.nativeElement.value).toEqual(component.user.secondName);
   });
 
   it('form validation and button enable/diabled', () => {
-    let name = component.form.controls['name'];
-    let secondName = component.form.controls['secondName'];
+    const name = component.form.controls['name'];
+    const secondName = component.form.controls['secondName'];
 
-    //Form initial validation
+    // Form initial validation
     expect(component.form.valid).toBeTruthy();
     expect(component.form.dirty).toBeFalsy();
     expect(el.query(By.css('#updateButton')).nativeElement.disabled).toBeTruthy();
@@ -85,8 +85,8 @@ describe('UserUpdateComponent', () => {
   });
 
   it('click update user should call service funtion', () => {
-    let onUpdateSpy = spyOn(component, 'update').and.callThrough();
-    let updateUserSpy = spyOn(userStorageService, 'updateUserProfile');
+    const onUpdateSpy = spyOn(component, 'update').and.callThrough();
+    const updateUserSpy = spyOn(userStorageService, 'updateUserProfile');
 
 
     expect(onUpdateSpy).not.toHaveBeenCalled();
@@ -100,10 +100,10 @@ describe('UserUpdateComponent', () => {
 
 
   afterAll(() => {
-    let onUpdateSpy = spyOn(component, 'update').and.callThrough();
-    //Click update button
-    let name = component.form.controls['name'];
-    let secondName = component.form.controls['secondName'];
+    const onUpdateSpy = spyOn(component, 'update').and.callThrough();
+    // Click update button
+    const name = component.form.controls['name'];
+    const secondName = component.form.controls['secondName'];
     name.setValue('User1');
     secondName.setValue('User1');
     fixture.detectChanges();

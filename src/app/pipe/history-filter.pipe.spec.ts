@@ -2,9 +2,16 @@ import { HistoryFilterPipe } from './history-filter.pipe';
 import {History} from '../model/history';
 
 describe('HistoryFilterPipe', () => {
-  let list
-  let history1, history2, history3, history4, history5, history6, history7, history8;
-  let pipe = new HistoryFilterPipe();
+  let list;
+  let history1;
+  let history2;
+  let history3;
+  let history4;
+  let history5;
+  let history6;
+  let history7;
+  let history8;
+  const pipe = new HistoryFilterPipe();
 
   it('create an instance', () => {
     expect(pipe).toBeTruthy();

@@ -19,7 +19,7 @@ export class SignUpComponent implements OnInit {
     this.form = this.fb.group({
       email: ['', [
         Validators.required,
-        Validators.pattern("[^ @]*@[^ @]*")
+        Validators.pattern('[^ @]*@[^ @]*')
       ]],
       password: ['', [
         Validators.required,
@@ -35,13 +35,13 @@ export class SignUpComponent implements OnInit {
       secondName: ['', [
         Validators.required
       ]]
-    },{
+    }, {
       validator: ConfirmedValidator('password', 'confPassword')
     });
   }
 
   signUp() {
-    if(this.form.valid){
+    if (this.form.valid){
       const user = new User(this.form.value.mail,
           this.form.value.password, this.form.value.name, this.form.value.secondName, false, [], []);
 

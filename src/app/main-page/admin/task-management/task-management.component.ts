@@ -17,20 +17,21 @@ export class TaskManagementComponent implements OnInit {
   currentGroup: Group = new Group('Selecciona grupo');
   currentTask: Task;
   currentEditTask: Task;
-  addTask: boolean = false;
-  updateTask: boolean = false;
-  subtaskAdd: boolean = false;
-  loadingGroup: boolean = true;
-  groupSelected: boolean = false;
-  taskSelected: boolean = false;
+  addTask = false;
+  updateTask = false;
+  subtaskAdd = false;
+  loadingGroup = true;
+  groupSelected = false;
+  taskSelected = false;
 
   formAddTask: FormGroup;
   formUpdateTask: FormGroup;
 
-  constructor(public groupStorage: GroupStorageService, public taskStorage: TaskStorageService, private matDialog: MatDialog, private fb: FormBuilder) { }
+  constructor(public groupStorage: GroupStorageService, public taskStorage: TaskStorageService,
+              private matDialog: MatDialog, private fb: FormBuilder) { }
 
   ngOnInit() {
-    //Set control variables
+    // Set control variables
     this.loadingGroup = false;
 
     this.formAddTask = this.fb.group({
@@ -76,7 +77,7 @@ export class TaskManagementComponent implements OnInit {
   }
 
   onGroupSelect(event){
-    let group = event.detail.value;
+    const group = event.detail.value;
     this.addTask = false;
     this.taskSelected = false;
     this.groupSelected = true;
@@ -102,9 +103,9 @@ export class TaskManagementComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = true;
-    dialogConfig.id = "modal-component";
-    dialogConfig.height = "400px";
-    dialogConfig.width = "600px";
+    dialogConfig.id = 'modal-component';
+    dialogConfig.height = '400px';
+    dialogConfig.width = '600px';
     dialogConfig.data = task;
 
     this.matDialog.open(TaskUpdateComponent, dialogConfig);
@@ -114,9 +115,9 @@ export class TaskManagementComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
     // The user can't close the dialog by clicking outside its body
     dialogConfig.disableClose = true;
-    dialogConfig.id = "modal-component";
-    dialogConfig.height = "400px";
-    dialogConfig.width = "600px";
+    dialogConfig.id = 'modal-component';
+    dialogConfig.height = '400px';
+    dialogConfig.width = '600px';
     this.matDialog.open(TaskAddComponent, dialogConfig);
   }
 

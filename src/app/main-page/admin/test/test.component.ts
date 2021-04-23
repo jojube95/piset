@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {TestService} from '../../../services/test.service';
-import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-test',
@@ -21,7 +20,7 @@ export class TestComponent implements OnInit {
   }
 
   exportDatabase(database){
-    if(confirm('Are you sure?')){
+    if (confirm('Are you sure?')){
       this.testService.exportDatabase(database);
     }
   }

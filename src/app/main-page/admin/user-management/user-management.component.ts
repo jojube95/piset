@@ -24,7 +24,7 @@ export class UserManagementComponent implements OnInit {
   constructor(public groupStorage: GroupStorageService, public userStorage: UserStorageService) { }
 
   ngOnInit() {
-    //Set control variables
+    // Set control variables
     this.addUserSelected = false;
     this.userSelected = false;
     this.groupSelected = false;
@@ -33,7 +33,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   onGroupSelect(event){
-    let group = event.detail.value;
+    const group = event.detail.value;
     this.currentGroup = group;
     this.userStorage.getUsersGroup(group);
     this.currentUser = new User('', '', 'Selecciona usuario', '', false, [], []);
@@ -48,7 +48,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   onUserSelect(event){
-    if(this.currentUser == event.detail.value){
+    if (this.currentUser === event.detail.value){
       this.userSelected = false;
     }
     else{
@@ -58,8 +58,8 @@ export class UserManagementComponent implements OnInit {
   }
 
   onAddUserSelect(event){
-    let user = event.detail.value;
-    if(this.currentAddUser == user){
+    const user = event.detail.value;
+    if (this.currentAddUser === user){
       this.addUserSelected = false;
     }
     else{
@@ -89,7 +89,7 @@ export class UserManagementComponent implements OnInit {
   }
 
   onClickDeleteGroup(){
-    if(this.currentGroup._id != null){
+    if (this.currentGroup._id != null){
       this.groupStorage.deleteGroup(this.currentGroup);
       this.currentGroup = new Group('Selecciona grupo');
       this.addUserSelected = false;

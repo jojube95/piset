@@ -54,15 +54,15 @@ describe('TaskAddComponent', () => {
   });
 
   it('form validation and button enabled/disabled', () => {
-    let mockTask = testService.getTaskByUserId(testService.getUserByMail('user1@user.com')._id);
+    const mockTask = testService.getTaskByUserId(testService.getUserByMail('user1@user.com')._id);
 
-    //Check form validation
-    let name = component.formAddTask.controls['name'];
-    let description = component.formAddTask.controls['description'];
-    let dateIni = component.formAddTask.controls['dateIni'];
-    let dateEnd = component.formAddTask.controls['dateEnd'];
-    let estimatedTime = component.formAddTask.controls['estimatedTime'];
-    let state = component.formAddTask.controls['state'];
+    // Check form validation
+    const name = component.formAddTask.controls['name'];
+    const description = component.formAddTask.controls['description'];
+    const dateIni = component.formAddTask.controls['dateIni'];
+    const dateEnd = component.formAddTask.controls['dateEnd'];
+    const estimatedTime = component.formAddTask.controls['estimatedTime'];
+    const state = component.formAddTask.controls['state'];
 
     name.setValue('');
     fixture.detectChanges();
@@ -148,11 +148,11 @@ describe('TaskAddComponent', () => {
 
 
   it('add task should add task on list', () => {
-    let onAddSpy = spyOn(component, 'onAdd').and.callThrough();
-    let addTaskToGroupSpy = spyOn(taskStorageService, 'addTaskToGroup');
+    const onAddSpy = spyOn(component, 'onAdd').and.callThrough();
+    const addTaskToGroupSpy = spyOn(taskStorageService, 'addTaskToGroup');
 
-    //Set form data
-    let mockTask = testService.getTaskByUserId(testService.getUserByMail('user1@user.com')._id);
+    // Set form data
+    const mockTask = testService.getTaskByUserId(testService.getUserByMail('user1@user.com')._id);
 
     component.formAddTask.controls['name'].setValue(mockTask.name);
     component.formAddTask.controls['description'].setValue(mockTask.description);

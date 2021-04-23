@@ -65,27 +65,27 @@ describe('HistoryComponent', () => {
   });
 
   xit('should populate list at start', () => {
-    let loggedMockUser = component.loggedUser = testService.getUserByMail('user1@user.com');
+    const loggedMockUser = component.loggedUser = testService.getUserByMail('user1@user.com');
 
-    //Spy methods
-    //getUserHistoriesSpy.and.callThrough();
-    //getUserHistoriesSpy.and.callThrough();
+    // Spy methods
+    // getUserHistoriesSpy.and.callThrough();
+    // getUserHistoriesSpy.and.callThrough();
 
-    //Get mock data
-    let mockHistories = testService.getHistoriesByUserId(component.loggedUser._id);
+    // Get mock data
+    const mockHistories = testService.getHistoriesByUserId(component.loggedUser._id);
 
     expect(getUserHistoriesSpy).toHaveBeenCalled();
 
-    //Mock http request
+    // Mock http request
     const reqUsers = httpTestingController.expectOne(historyStorageService.API_URL + '/api/histories/getByUser' + component.loggedUser._id);
     reqUsers.flush({
-      message: "Success",
+      message: 'Success',
       histories: mockHistories
     });
 
     fixture.detectChanges();
 
-    //Check list
+    // Check list
     expect(historyStorageService._userHistory.getValue()).toEqual(mockHistories);
-  })
+  });
 });

@@ -35,89 +35,89 @@ describe('TestService', () => {
   });
 
   it('getCurrentDate', () => {
-    //Get mock data
-    let mockDate = new Date('2020-11-30T16:35:19Z');
+    // Get mock data
+    const mockDate = new Date('2020-11-30T16:35:19Z');
 
-    //Call service method
+    // Call service method
     service.getCurrentDate();
 
-    //Create the mockCall
+    // Create the mockCall
     const reqTest = httpTestingController.expectOne(service['API_URL'] + '/api/test/getCurrentDate');
 
     reqTest.flush({
       currentDate: mockDate
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqTest.request.method).toEqual('GET');
-    //Expect request parameters
+    // Expect request parameters
     expect(reqTest.request.params.keys().length).toBe(0);
-    //Expect the returned data
+    // Expect the returned data
     expect(service._currentDate.getValue()).toEqual(mockDate);
   });
 
   it('nextWeek', () => {
-    //Get mock data
-    let mockDate = new Date('2020-11-30T16:35:19Z');
+    // Get mock data
+    const mockDate = new Date('2020-11-30T16:35:19Z');
 
-    //Call service method
+    // Call service method
     service.nextWeek();
 
-    //Create the mockCall
+    // Create the mockCall
     const reqTest = httpTestingController.expectOne(service['API_URL'] + '/api/test/nextWeek');
 
     reqTest.flush({
       currentDate: mockDate
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqTest.request.method).toEqual('GET');
-    //Expect request parameters
+    // Expect request parameters
     expect(reqTest.request.params.keys().length).toBe(0);
-    //Expect the returned data
+    // Expect the returned data
     expect(service._currentDate.getValue()).toEqual(mockDate);
   });
 
   it('restoreDatabase', () => {
-    let mockDatabase = 'test';
+    const mockDatabase = 'test';
 
-    //Call service method
+    // Call service method
     service.restoreDatabase(mockDatabase);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqTest = httpTestingController.expectOne(service['API_URL'] + '/api/test/restoreDatabase' + mockDatabase);
 
     reqTest.flush({
       message: 'Success'
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqTest.request.method).toEqual('GET');
-    //Expect request parameters
+    // Expect request parameters
     expect(reqTest.request.params.keys().length).toBe(0);
   });
 
   it('exportDatabase', () => {
-    let mockDatabase = 'test';
+    const mockDatabase = 'test';
 
-    //Call service method
+    // Call service method
     service.exportDatabase(mockDatabase);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqTest = httpTestingController.expectOne(service['API_URL'] + '/api/test/exportDatabase' + mockDatabase);
 
     reqTest.flush({
       message: 'Success'
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqTest.request.method).toEqual('GET');
-    //Expect request parameters
+    // Expect request parameters
     expect(reqTest.request.params.keys().length).toBe(0);
   });
 
   afterEach(() => {
     httpTestingController.verify();
-  })
+  });
 
 });

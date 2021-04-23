@@ -56,15 +56,15 @@ describe('GroupUpdateComponent', () => {
   });
 
   it('group form init date', () => {
-    let name = component.formUpdateGroup.controls['name'];
+    const name = component.formUpdateGroup.controls['name'];
 
     expect(name.value).toEqual(component.group.name);
 
-  })
+  });
 
   it('validations and enabled/disabled buttons of update group form', () => {
-    //Check form validation
-    let name = component.formUpdateGroup.controls['name'];
+    // Check form validation
+    const name = component.formUpdateGroup.controls['name'];
 
 
     name.setValue('');
@@ -81,8 +81,8 @@ describe('GroupUpdateComponent', () => {
   });
 
   it('click update group should call service funtion', () => {
-    let onUpdateSpy = spyOn(component, 'onUpdate').and.callThrough();
-    let updateGroupSpy = spyOn(groupStorageService, 'updateGroup');
+    const onUpdateSpy = spyOn(component, 'onUpdate').and.callThrough();
+    const updateGroupSpy = spyOn(groupStorageService, 'updateGroup');
 
 
     expect(onUpdateSpy).not.toHaveBeenCalled();

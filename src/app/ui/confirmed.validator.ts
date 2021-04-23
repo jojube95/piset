@@ -26,6 +26,6 @@ export function ConfirmedValidator(controlName: string, matchingControlName: str
 
         }
 
-    }
+    };
 
 }

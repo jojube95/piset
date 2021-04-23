@@ -24,7 +24,7 @@ describe('SignInComponent', () => {
       declarations: [ SignInComponent],
       imports: [IonicModule.forRoot(), RouterTestingModule, HttpClientTestingModule, ReactiveFormsModule],
       providers: [AuthService]
-    }).compileComponents().then(()=> {
+    }).compileComponents().then(() => {
       fixture = TestBed.createComponent(SignInComponent);
       component = fixture.componentInstance;
       el = fixture.debugElement;
@@ -33,7 +33,7 @@ describe('SignInComponent', () => {
       spyOn(router, 'navigate');
       spyOn(authService, 'signinUser').and.callFake(() => {
         router.navigate(['/main']);
-      })
+      });
       component.ngOnInit();
       fixture.detectChanges();
     });
@@ -44,19 +44,19 @@ describe('SignInComponent', () => {
   });
 
   it('form invalid when empty', () => {
-    //Form shuld be invalid at start
+    // Form shuld be invalid at start
     expect(component.form.valid).toBeFalsy();
 
     fixture.detectChanges();
 
-    //Sign in button should be disabled
-    let signInButton = el.query(By.css('#signInButton'));
+    // Sign in button should be disabled
+    const signInButton = el.query(By.css('#signInButton'));
     expect(signInButton.nativeElement.disabled).toBeTruthy();
   });
 
-  it('form field validity', ()=>{
-    //Test email field validity
-    let email = component.form.controls['email'];
+  it('form field validity', () => {
+    // Test email field validity
+    const email = component.form.controls.email;
     expect(email.valid).toBeFalsy();
 
     let errors = {};
@@ -76,8 +76,8 @@ describe('SignInComponent', () => {
     expect(errors['required']).toBeFalsy();
     expect(component.form.valid).toBeFalsy();
 
-    //Test password field validity
-    let password = component.form.controls['password'];
+    // Test password field validity
+    const password = component.form.controls['password'];
     expect(password.valid).toBeFalsy();
     expect(component.form.valid).toBeFalsy();
 
@@ -124,10 +124,10 @@ describe('SignInComponent', () => {
    });
 
   it('should open register page when click sign up', () => {
-    let signUpButton = el.query(By.css('#signUpButton'));
+    const signUpButton = el.query(By.css('#signUpButton'));
 
     signUpButton.nativeElement.click();
 
     expect(router.navigate).toHaveBeenCalledWith(['/signUp']);
-  })
+  });
 });

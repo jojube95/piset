@@ -35,7 +35,7 @@ describe('MainPageComponent', () => {
       spyOn(authService, 'signOut').and.callFake(() => {
         router.navigate(['/signIn']);
       });
-      fixture.autoDetectChanges()
+      fixture.autoDetectChanges();
       component.ngOnInit();
     });
   }));
@@ -49,9 +49,9 @@ describe('MainPageComponent', () => {
 
     fixture.detectChanges();
 
-    let clickTaskManagement = el.query(By.css('#clickTaskManagement'));
-    let clickUserManagement = el.query(By.css('#clickUserManagement'));
-    let clickTest = el.query(By.css('#clickTest'));
+    const clickTaskManagement = el.query(By.css('#clickTaskManagement'));
+    const clickUserManagement = el.query(By.css('#clickUserManagement'));
+    const clickTest = el.query(By.css('#clickTest'));
 
     expect(clickTaskManagement).toBeNull();
     expect(clickUserManagement).toBeNull();
@@ -63,9 +63,9 @@ describe('MainPageComponent', () => {
 
     fixture.detectChanges();
 
-    let clickTaskManagement = el.query(By.css('#clickTaskManagement'));
-    let clickUserManagement = el.query(By.css('#clickUserManagement'));
-    let clickTest = el.query(By.css('#clickTest'));
+    const clickTaskManagement = el.query(By.css('#clickTaskManagement'));
+    const clickUserManagement = el.query(By.css('#clickUserManagement'));
+    const clickTest = el.query(By.css('#clickTest'));
 
     expect(clickTaskManagement).toBeTruthy();
     expect(clickUserManagement).toBeTruthy();
@@ -94,7 +94,7 @@ describe('MainPageComponent', () => {
     expect(authService.signOut).not.toHaveBeenCalled();
     expect(router.navigate).not.toHaveBeenCalledWith(['/signIn']);
 
-    let titleButton = el.query(By.css('#logOut'));
+    const titleButton = el.query(By.css('#logOut'));
 
     titleButton.nativeElement.click();
 
@@ -120,14 +120,14 @@ describe('MainPageComponent', () => {
     const onClickUserSettings = spyOn(component, 'onClickUserSettings').and.callThrough();
     const onClickUserInvitations = spyOn(component, 'onClickUserInvitations').and.callThrough();
 
-    let clickTasks = el.query(By.css('#clickTasks'));
-    let clickHistory = el.query(By.css('#clickHistory'));
-    let clickTaskManagement = el.query(By.css('#clickTaskManagement'));
-    let clickUserManagement = el.query(By.css('#clickUserManagement'));
-    let clickTest = el.query(By.css('#clickTest'));
-    let clickUserInfo = el.query(By.css('#clickUserInfo'));
-    let clickUserSettings = el.query(By.css('#clickUserSettings'));
-    let clickUserInvitations = el.query(By.css('#clickUserInvitations'));
+    const clickTasks = el.query(By.css('#clickTasks'));
+    const clickHistory = el.query(By.css('#clickHistory'));
+    const clickTaskManagement = el.query(By.css('#clickTaskManagement'));
+    const clickUserManagement = el.query(By.css('#clickUserManagement'));
+    const clickTest = el.query(By.css('#clickTest'));
+    const clickUserInfo = el.query(By.css('#clickUserInfo'));
+    const clickUserSettings = el.query(By.css('#clickUserSettings'));
+    const clickUserInvitations = el.query(By.css('#clickUserInvitations'));
 
     expect(onClickTasks).not.toHaveBeenCalled();
     expect(onClickHistory).not.toHaveBeenCalled();

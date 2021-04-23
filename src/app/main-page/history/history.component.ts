@@ -19,7 +19,7 @@ export class HistoryComponent implements OnInit {
 
   loggedUser: User;
 
-  isUserInGroup: boolean = false;
+  isUserInGroup = false;
 
   loading = true;
 
@@ -31,11 +31,11 @@ export class HistoryComponent implements OnInit {
     this.loggedUser = this.userStorage.getCurrentUser();
     this.loading = false;
 
-    if(this.loggedUser.groups.length > 0 && this.loggedUser.groups != null){
+    if (this.loggedUser.groups.length > 0 && this.loggedUser.groups != null){
       this.isUserInGroup = true;
-      //Get all tasks userGroups
+      // Get all tasks userGroups
       this.taskStorage.getUserGroupsTasks(this.loggedUser.groups);
-      //Get all histories group
+      // Get all histories group
       this.historyStorage.getUserGroupsHistories(this.loggedUser.groups);
 
     }
@@ -47,8 +47,8 @@ export class HistoryComponent implements OnInit {
   }
 
   onGroupSelect(event){
-    if(event.detail.value != 'any'){
-      let group = event.detail.value.group;
+    if (event.detail.value !== 'any'){
+      const group = event.detail.value.group;
       this.selectedGroup = group;
       this.selectedUser = undefined;
       this.userStorage.getUsersGroup(group);
@@ -61,8 +61,8 @@ export class HistoryComponent implements OnInit {
   }
 
   onUserSelect(event){
-    if(event.detail.value != 'any'){
-      let user = event.detail.value;
+    if (event.detail.value !== 'any'){
+      const user = event.detail.value;
       this.selectedUser = user;
     }
     else{
@@ -72,8 +72,8 @@ export class HistoryComponent implements OnInit {
   }
 
   onTaskSelect(event){
-    if(event.detail.value != 'any'){
-      let task = event.detail.value;
+    if (event.detail.value !== 'any'){
+      const task = event.detail.value;
       this.selectedTask = task;
     }
     else{
@@ -83,7 +83,7 @@ export class HistoryComponent implements OnInit {
   }
 
   onDateFilterChange(event){
-    let date = event.detail.value;
+    const date = event.detail.value;
     this.selectedDate = new Date(date);
   }
 

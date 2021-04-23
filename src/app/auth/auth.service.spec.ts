@@ -34,49 +34,49 @@ describe('AuthService', () => {
   it('signOut should cleans tokens and navigaes to signIn', () => {
     const clearAuthDataSpy = spyOn(service, 'clearAuthData');
 
-    //Call signOut
+    // Call signOut
     service.signOut();
 
-    //Expects
+    // Expects
     expect(service['token']).toBeNull();
     expect(clearAuthDataSpy).toHaveBeenCalled();
     expect(router.navigate).toHaveBeenCalledWith(['/signIn']);
   });
 
   it('signupUser', () => {
-    //Get mockUser
-    let mockUser = testService.getUserByMail('user1@user.com');
+    // Get mockUser
+    const mockUser = testService.getUserByMail('user1@user.com');
 
-    //Call service method
+    // Call service method
     service.signupUser(mockUser);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqUser = httpTestingController.expectOne(service['API_URL'] + '/api/users/signup');
 
     reqUser.flush({
       message: 'Success'
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqUser.request.method).toEqual('POST');
-    //Expect request parameters
+    // Expect request parameters
     expect(reqUser.request.params.keys().length).toBe(0);
-    //Expect request body
+    // Expect request body
     expect(reqUser.request.body).toEqual(mockUser);
   });
 
   it('signinUser', () => {
-    //Get mockUser
-    let mockUser = testService.getUserByMail('user1@user.com');
-    let mockToken = '123456789';
+    // Get mockUser
+    const mockUser = testService.getUserByMail('user1@user.com');
+    const mockToken = '123456789';
 
-    //Spy method
+    // Spy method
     const saveAuthDataSpy = spyOn(service, 'saveAuthData');
 
-    //Call service method
+    // Call service method
     service.signinUser(mockUser.mail, mockUser.password);
 
-    //Create the mockCall
+    // Create the mockCall
     const reqUser = httpTestingController.expectOne(service['API_URL'] + '/api/users/signin');
 
     reqUser.flush({
@@ -84,15 +84,15 @@ describe('AuthService', () => {
       token: mockToken
     });
 
-    //Expect request method
+    // Expect request method
     expect(reqUser.request.method).toEqual('POST');
-    //Expect request parameters
+    // Expect request parameters
     expect(reqUser.request.params.keys().length).toBe(0);
-    //Expect request body
+    // Expect request body
     expect(reqUser.request.body.mail).toEqual(mockUser.mail);
     expect(reqUser.request.body.password).toEqual(mockUser.password);
 
-    //Expect after httpcall
+    // Expect after httpcall
     expect(service['token']).toEqual(mockToken);
     expect(service['currentUser'].name).toEqual(mockUser.name);
     expect(service['currentUser'].secondName).toEqual(mockUser.secondName);
@@ -103,16 +103,16 @@ describe('AuthService', () => {
   });
 
   it('getAuthData', () => {
-    //Set mock data
-    let token = '12345';
-    let user = service['currentUser'];
+    // Set mock data
+    const token = '12345';
+    const user = service['currentUser'];
 
     localStorage.setItem('token', token);
     localStorage.setItem('currentUser', JSON.stringify(user));
 
     let res = service.getAuthData();
 
-    expect(res).toEqual({token: token, currentUser: user});
+    expect(res).toEqual({token, currentUser: user});
 
     localStorage.clear();
 
@@ -122,9 +122,9 @@ describe('AuthService', () => {
   });
 
   it('saveAuthData', () => {
-    //Set mock data
-    let token = '12345';
-    let user = service['currentUser'];
+    // Set mock data
+    const token = '12345';
+    const user = service['currentUser'];
 
     service.saveAuthData(token, user);
 
@@ -133,7 +133,7 @@ describe('AuthService', () => {
   });
 
   it('getCurrentUser', () => {
-    let res = service.getCurrentUser();
+    const res = service.getCurrentUser();
 
     expect(res).toEqual(service['currentUser']);
 

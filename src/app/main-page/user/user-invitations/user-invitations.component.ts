@@ -21,9 +21,9 @@ export class UserInvitationsComponent implements OnInit {
     this.form = this.fb.group({
       email: ['', [
         Validators.required,
-        Validators.pattern("[^ @]*@[^ @]*")
+        Validators.pattern('[^ @]*@[^ @]*')
       ]]
-    })
+    });
 
     this.loading = false;
   }
@@ -37,19 +37,19 @@ export class UserInvitationsComponent implements OnInit {
   }
 
   invite(){
-    if(this.form.valid){
-      //Check userMail exist
+    if (this.form.valid){
+      // Check userMail exist
       this.userStorage.getUserByMail(this.form.value.email).subscribe(res => {
 
-        if(res.users.length != 0){
-          let currentUser = this.userStorage.getCurrentUser();
-          let invitedUser = res.users[0];
+        if (res.users.length !== 0){
+          const currentUser = this.userStorage.getCurrentUser();
+          const invitedUser = res.users[0];
 
-          let invitation = new Invitation(currentUser.mail, invitedUser._id, this.selectedGroup._id, this.selectedGroup.name);
+          const invitation = new Invitation(currentUser.mail, invitedUser._id, this.selectedGroup._id, this.selectedGroup.name);
           this.invitationStorage.inviteUser(invitation);
         }
         else{
-          alert("User doesn't exist")
+          alert('User doesn\'t exist');
         }
       });
     }

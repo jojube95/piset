@@ -19,17 +19,17 @@ export class SignInComponent implements OnInit {
     this.form = this.fb.group({
       email: ['', [
           Validators.required,
-          Validators.pattern("[^ @]*@[^ @]*")
+          Validators.pattern('[^ @]*@[^ @]*')
       ]],
       password: ['', [
         Validators.required,
         Validators.minLength(8)
       ]]
-    })
+    });
   }
 
   signIn() {
-    if(this.form.valid){
+    if (this.form.valid){
       this.authService.signinUser(this.form.value.email, this.form.value.password);
     }
   }

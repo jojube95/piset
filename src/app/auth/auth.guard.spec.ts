@@ -49,7 +49,7 @@ describe('AuthGuard', () => {
     expect(authServiceIsAuthenticatedSpy).not.toHaveBeenCalled();
     expect(guardSpy).not.toHaveBeenCalled();
 
-    let res = guard.canActivate(null, null);
+    const res = guard.canActivate(null, null);
 
     expect(authServiceIsAuthenticatedSpy).toHaveBeenCalled();
     expect(guardSpy).toHaveBeenCalled();

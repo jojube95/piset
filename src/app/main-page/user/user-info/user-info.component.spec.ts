@@ -45,9 +45,9 @@ describe('UserInfoComponent', () => {
   });
 
   it('should show logged user account info', () => {
-    let userName = el.query(By.css('#userName'));
-    let userSecondName = el.query(By.css('#userSecondName'));
-    let userMail = el.query(By.css('#userMail'));
+    const userName = el.query(By.css('#userName'));
+    const userSecondName = el.query(By.css('#userSecondName'));
+    const userMail = el.query(By.css('#userMail'));
 
     expect(userName.nativeElement.textContent).toBe('User1');
     expect(userSecondName.nativeElement.textContent).toBe('User1');

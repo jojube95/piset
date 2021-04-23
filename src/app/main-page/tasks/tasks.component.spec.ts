@@ -25,7 +25,7 @@ xdescribe('TasksComponent', () => {
   let getCurrentUserSpy: any;
   let getUsersGroupSpy: any;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     TestBed.configureTestingModule({
       declarations: [ TasksComponent ],
       imports: [IonicModule.forRoot(), HttpClientTestingModule, RouterTestingModule],
@@ -58,7 +58,7 @@ xdescribe('TasksComponent', () => {
   });
 
   it('initial variable and calls', () => {
-    let mockUser = testService.getUserByMail('user1@user.com');
+    const mockUser = testService.getUserByMail('user1@user.com');
 
     expect(component.loggedUser).toEqual(mockUser);
     expect(getCurrentUserSpy).toHaveBeenCalled();
@@ -76,35 +76,35 @@ xdescribe('TasksComponent', () => {
     expect(component.loggedUser.groups).toBeNull();
     expect(component.isUserInGroup).toBeFalsy();
 
-    expect(el.query(By.css('#withoutGroupLabel')).nativeElement.textContent).toBe("User don't have a group");
+    expect(el.query(By.css('#withoutGroupLabel')).nativeElement.textContent).toBe('User don\'t have a group');
   });
 
   it('show user current group', () => {
-    //Initialy user logged is user1@user.com
+    // Initialy user logged is user1@user.com
     expect(component.loggedUser.groups[0].group.name).toBe('Group1');
-    expect(el.query(By.css('#withGroupLabel')).nativeElement.textContent).toBe("Group: Group1");
+    expect(el.query(By.css('#withGroupLabel')).nativeElement.textContent).toBe('Group: Group1');
     });
 
   it('show user list of current user group', () => {
-    //Initialy user logged is user1@user.com
-    //Get users group mock data
-    let mockUsersGroup = testService.getUsersByGroupId(component.loggedUser.groups[0].group._id);
+    // Initialy user logged is user1@user.com
+    // Get users group mock data
+    const mockUsersGroup = testService.getUsersByGroupId(component.loggedUser.groups[0].group._id);
 
-    //userStorageService.getUsersGroup(new Group(component.loggedUser.groupId, null, null));
+    // userStorageService.getUsersGroup(new Group(component.loggedUser.groupId, null, null));
 
     expect(getUsersGroupSpy).toHaveBeenCalledWith(new Group('', component.loggedUser.groups[0].group._id));
     expect(getUsersGroupSpy).toHaveBeenCalled();
 
-    //Mock http request
+    // Mock http request
     const reqUsers = httpTestingController.expectOne(userStorageService.API_URL + '/api/users/getByGroup' + component.loggedUser.groups[0].group._id);
     reqUsers.flush({
-      message: "Success",
+      message: 'Success',
       users: mockUsersGroup
     });
 
     fixture.detectChanges();
 
-    //Check users list
+    // Check users list
     expect(el.query(By.css('#userSelect')).children[0].nativeElement.textContent).toBe('User1');
     expect(el.query(By.css('#userSelect')).children[1].nativeElement.textContent).toBe('User2');
     expect(el.query(By.css('#userSelect')).children[2].nativeElement.textContent).toBe('User3');
@@ -113,33 +113,33 @@ xdescribe('TasksComponent', () => {
   });
 
   it('show selected user task', () => {
-    //Spy methods
-    let getTaskByUserSpy = spyOn(taskStorageService, 'getTaskByUser').and.callThrough();
+    // Spy methods
+    const getTaskByUserSpy = spyOn(taskStorageService, 'getTaskByUser').and.callThrough();
 
-    //Get mock data
-    let mockUser = testService.getUserByMail('user1@user.com');
-    let mockTask = testService.getTaskByUserId(mockUser._id);
+    // Get mock data
+    const mockUser = testService.getUserByMail('user1@user.com');
+    const mockTask = testService.getTaskByUserId(mockUser._id);
 
-    let event = {
+    const event = {
       detail : {
         value: mockUser
       }
-    }
-    //Call method
+    };
+    // Call method
     component.onUserSelect(event);
 
-    //Mock http request
+    // Mock http request
     const reqTask = httpTestingController.expectOne(taskStorageService.API_URL + '/api/tasks/getByUser' + mockUser._id);
     reqTask.flush({
-      message: "Success",
+      message: 'Success',
       task: mockTask
     });
 
 
     fixture.detectChanges();
 
-    //Check task label
-    let taskLabel = el.query(By.css('#userTask'));
+    // Check task label
+    const taskLabel = el.query(By.css('#userTask'));
 
     expect(taskLabel.nativeElement.textContent).toBe('Task1');
   });

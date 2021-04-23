@@ -1,6 +1,7 @@
 {
   "extends": "tslint:recommended",
   "rules": {
+    "no-string-literal": false,
     "align": {
       "options": [
         "parameters",
@@ -8,10 +9,10 @@
       ]
     },
     "array-type": false,
-    "arrow-return-shorthand": true,
+    "arrow-return-shorthand": false,
     "curly": true,
     "deprecation": {
-      "severity": "warning"
+      "severity": "off"
     },
     "component-class-suffix": [true, "Page", "Component"],
     "contextual-lifecycle": true,
@@ -42,7 +43,7 @@
     "max-classes-per-file": false,
     "max-line-length": [
       true,
-      140
+      170
     ],
     "member-ordering": [
       true,
@@ -115,7 +116,6 @@
     "variable-name": {
       "options": [
         "ban-keywords",
-        "check-format",
         "allow-pascal-case"
       ]
     },

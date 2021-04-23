@@ -1,6 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Group} from '../../../model/group';
-import {TaskStorageService} from '../../../services/task-storage.service';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {GroupStorageService} from '../../../services/group-storage.service';
 
@@ -23,7 +22,7 @@ export class GroupUpdateComponent implements OnInit {
       ]]
     });
 
-    if(this.group != undefined){
+    if (this.group !== undefined){
       this.formUpdateGroup.controls['name'].setValue(this.group.name);
     }
 
