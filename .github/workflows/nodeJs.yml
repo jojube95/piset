@@ -13,11 +13,11 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         node-version: [10]
-        
+
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -25,5 +25,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm ci
-      - run: npm run test:gitHubActions
       - run: npm run lint
+      - run: npm run test:gitHubActions
+      - run: ng e2e
