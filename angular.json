@@ -177,18 +177,11 @@
           }
         },
         "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+          "builder": "@nrwl/cypress:cypress",
           "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "app:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "app:serve:production"
-            },
-            "ci": {
-              "devServerTarget": "app:serve:ci"
-            }
+            "devServerTarget": "app:serve:test",
+            "cypressConfig": "./cypress.json",
+            "tsConfig": "./tsconfig.json"
           }
         },
         "ionic-cordova-build": {
