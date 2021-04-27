@@ -1,23 +1,12 @@
-# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
-# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
-
-name: Node.js CI
-
-on:
-  push:
-    branches: [ test ]
-  pull_request:
-    branches: [ test ]
-
 jobs:
   build:
 
     runs-on: ubuntu-latest
-    
+
     strategy:
       matrix:
         node-version: [10]
-        
+
     steps:
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
@@ -27,4 +16,4 @@ jobs:
       - run: npm ci
       - run: npm run lint
       - run: npm run test:gitHubActions
-      - run: ng e2e
+      - run: npm run e2e
