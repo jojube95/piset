@@ -18,8 +18,8 @@ describe('Home Page', () => {
         cy.get('#signInButton').should('not.be.disabled');
         cy.get('#signUpButton').should('not.be.disabled');
 
-        //cy.get('#signInButton').click();
+        cy.get('#signInButton').click();
 
-        //cy.url().should('contain', '/main/tasks');
+        cy.url().should('contain', '/main/tasks');
     });
 });
